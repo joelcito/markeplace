@@ -260,106 +260,110 @@
                 <!--end:Menu sub-->
             </div>  --}}
             <!--end:Menu item-->
+            {{-- @dd(session()->all()) --}}
 
-            <!--begin:Menu item-->
-            <div class="menu-item pt-5">
-                <!--begin:Menu content-->
-                <div class="menu-content">
-                    <span class="text-white">ADMINISTRADOR</span>
+            @if (session('rol') === 1)
+                <!--begin:Menu item-->
+                <div class="menu-item pt-5">
+                    <!--begin:Menu content-->
+                    <div class="menu-content">
+                        <span class="text-white">ADMINISTRADOR</span>
+                    </div>
+                    <!--end:Menu content-->
                 </div>
-                <!--end:Menu content-->
-            </div>
-            <div class="menu-item">
-                <!--begin:Menu link-->
-                <a class="menu-link" href="{{ url('/') }}">
-                    <span class="menu-icon">
-                        <i class="ki-duotone ki-rocket fs-2">
-                            <span class="path1"></span>
-                            <span class="path2"></span>
-                        </i>
-                    </span>
-                    <span class="menu-title">DASHBOARD</span>
-                </a>
-                <!--end:Menu link-->
-            </div>
-            <div class="menu-item">
-                <!--begin:Menu link-->
-                <a class="menu-link" href="{{ url('user/listado') }}">
-                    <span class="menu-icon">
-                        <i class="ki-duotone ki-rocket fs-2">
-                            <span class="path1"></span>
-                            <span class="path2"></span>
-                        </i>
-                    </span>
-                    <span class="menu-title">USUARIOS</span>
-                </a>
-                <!--end:Menu link-->
-            </div>
-            <div class="menu-item">
-                <!--begin:Menu link-->
-                <a class="menu-link" href="{{ url('persona/listado') }}" >
-                    <span class="menu-icon">
-                        <i class="ki-duotone ki-rocket fs-2">
-                            <span class="path1"></span>
-                            <span class="path2"></span>
-                        </i>
-                    </span>
-                    <span class="menu-title">PERSONAS</span>
-                </a>
-                <!--end:Menu link-->
-            </div>
-            <div class="menu-item">
-                <!--begin:Menu link-->
-                <a class="menu-link" href="{{ url('tienda/listado') }}">
-                    <span class="menu-icon">
-                        <i class="ki-duotone ki-rocket fs-2">
-                            <span class="path1"></span>
-                            <span class="path2"></span>
-                        </i>
-                    </span>
-                    <span class="menu-title">TIENDAS</span>
-                </a>
-                <!--end:Menu link-->
-            </div>
-            <div class="menu-item">
-                <!--begin:Menu link-->
-                <a class="menu-link" href="{{ url('categoria/listado') }}">
-                    <span class="menu-icon">
-                        <i class="ki-duotone ki-rocket fs-2">
-                            <span class="path1"></span>
-                            <span class="path2"></span>
-                        </i>
-                    </span>
-                    <span class="menu-title">CATEGORIAS</span>
-                </a>
-                <!--end:Menu link-->
-            </div>
-            <div class="menu-item">
-                <!--begin:Menu link-->
-                <a class="menu-link" href="{{ url('subcategoria/listado') }}">
-                    <span class="menu-icon">
-                        <i class="ki-duotone ki-rocket fs-2">
-                            <span class="path1"></span>
-                            <span class="path2"></span>
-                        </i>
-                    </span>
-                    <span class="menu-title">SUB CATEGORIAS</span>
-                </a>
-                <!--end:Menu link-->
-            </div>
-            <div class="menu-item">
-                <!--begin:Menu link-->
-                <a class="menu-link" href="{{ url('informacion/perfil') }}">
-                    <span class="menu-icon">
-                        <i class="ki-duotone ki-rocket fs-2">
-                            <span class="path1"></span>
-                            <span class="path2"></span>
-                        </i>
-                    </span>
-                    <span class="menu-title">PERFIL</span>
-                </a>
-                <!--end:Menu link-->
-            </div>
+                <div class="menu-item">
+                    <!--begin:Menu link-->
+                    <a class="menu-link" href="{{ url('/') }}">
+                        <span class="menu-icon">
+                            <i class="ki-duotone ki-rocket fs-2">
+                                <span class="path1"></span>
+                                <span class="path2"></span>
+                            </i>
+                        </span>
+                        <span class="menu-title">DASHBOARD</span>
+                    </a>
+                    <!--end:Menu link-->
+                </div>
+                <div class="menu-item">
+                    <!--begin:Menu link-->
+                    <a class="menu-link" href="{{ url('user/listado') }}">
+                        <span class="menu-icon">
+                            <i class="ki-duotone ki-rocket fs-2">
+                                <span class="path1"></span>
+                                <span class="path2"></span>
+                            </i>
+                        </span>
+                        <span class="menu-title">USUARIOS</span>
+                    </a>
+                    <!--end:Menu link-->
+                </div>
+                <div class="menu-item">
+                    <!--begin:Menu link-->
+                    <a class="menu-link" href="{{ url('persona/listado') }}" >
+                        <span class="menu-icon">
+                            <i class="ki-duotone ki-rocket fs-2">
+                                <span class="path1"></span>
+                                <span class="path2"></span>
+                            </i>
+                        </span>
+                        <span class="menu-title">PERSONAS</span>
+                    </a>
+                    <!--end:Menu link-->
+                </div>
+                <div class="menu-item">
+                    <!--begin:Menu link-->
+                    <a class="menu-link" href="{{ url('tienda/listado') }}">
+                        <span class="menu-icon">
+                            <i class="ki-duotone ki-rocket fs-2">
+                                <span class="path1"></span>
+                                <span class="path2"></span>
+                            </i>
+                        </span>
+                        <span class="menu-title">TIENDAS</span>
+                    </a>
+                    <!--end:Menu link-->
+                </div>
+                <div class="menu-item">
+                    <!--begin:Menu link-->
+                    <a class="menu-link" href="{{ url('categoria/listado') }}">
+                        <span class="menu-icon">
+                            <i class="ki-duotone ki-rocket fs-2">
+                                <span class="path1"></span>
+                                <span class="path2"></span>
+                            </i>
+                        </span>
+                        <span class="menu-title">CATEGORIAS</span>
+                    </a>
+                    <!--end:Menu link-->
+                </div>
+                <div class="menu-item">
+                    <!--begin:Menu link-->
+                    <a class="menu-link" href="{{ url('subcategoria/listado') }}">
+                        <span class="menu-icon">
+                            <i class="ki-duotone ki-rocket fs-2">
+                                <span class="path1"></span>
+                                <span class="path2"></span>
+                            </i>
+                        </span>
+                        <span class="menu-title">SUB CATEGORIAS</span>
+                    </a>
+                    <!--end:Menu link-->
+                </div>
+                <div class="menu-item">
+                    <!--begin:Menu link-->
+                    <a class="menu-link" href="{{ url('informacion/perfil') }}">
+                        <span class="menu-icon">
+                            <i class="ki-duotone ki-rocket fs-2">
+                                <span class="path1"></span>
+                                <span class="path2"></span>
+                            </i>
+                        </span>
+                        <span class="menu-title">PERFIL</span>
+                    </a>
+                    <!--end:Menu link-->
+                </div>
+            @endif
+
             {{--  <div class="menu-item">
                 <!--begin:Menu link-->
                 <a class="menu-link" href="{{ url('/proceso') }}">
@@ -388,131 +392,136 @@
             </div>  --}}
             <!--end:Menu item-->
 
-
-            <!--begin:Menu item-->
-            <div class="menu-item pt-5">
-                <!--begin:Menu content-->
-                <div class="menu-content">
-                    <span class="text-white">VENDEDOR</span>
+            @if (session('rol') === 3)
+                <!--begin:Menu item-->
+                <div class="menu-item pt-5">
+                    <!--begin:Menu content-->
+                    <div class="menu-content">
+                        <span class="text-white">VENDEDOR</span>
+                    </div>
+                    <!--end:Menu content-->
                 </div>
-                <!--end:Menu content-->
-            </div>
-            <div class="menu-item">
-                <!--begin:Menu link-->
-                <a class="menu-link" href="{{ url('vendedor/inicio') }}">
-                    <span class="menu-icon">
-                        <i class="ki-duotone ki-rocket fs-2">
-                            <span class="path1"></span>
-                            <span class="path2"></span>
-                        </i>
-                    </span>
-                    <span class="menu-title">DASHBOARD</span>
-                </a>
-                <!--end:Menu link-->
-            </div>
-            <div class="menu-item">
-                <!--begin:Menu link-->
-                <a class="menu-link" href="{{ url('tienda/perfil') }}">
-                    <span class="menu-icon">
-                        <i class="ki-duotone ki-rocket fs-2">
-                            <span class="path1"></span>
-                            <span class="path2"></span>
-                        </i>
-                    </span>
-                    <span class="menu-title">PERFIL DE EMPRESA</span>
-                </a>
-                <!--end:Menu link-->
-            </div>
-            <div class="menu-item">
-                <!--begin:Menu link-->
-                <a class="menu-link" href="{{ url('producto/listado') }}" >
-                    <span class="menu-icon">
-                        <i class="ki-duotone ki-rocket fs-2">
-                            <span class="path1"></span>
-                            <span class="path2"></span>
-                        </i>
-                    </span>
-                    <span class="menu-title">PRODUCTOS</span>
-                </a>
-                <!--end:Menu link-->
-            </div>
-            <div class="menu-item">
-                <!--begin:Menu link-->
-                <a class="menu-link" href="#">
-                    <span class="menu-icon">
-                        <i class="ki-duotone ki-rocket fs-2">
-                            <span class="path1"></span>
-                            <span class="path2"></span>
-                        </i>
-                    </span>
-                    <span class="menu-title">PEDIDOS</span>
-                </a>
-                <!--end:Menu link-->
-            </div>
-            <div class="menu-item">
-                <!--begin:Menu link-->
-                <a class="menu-link" href="{{ url('subcripcion/subcripcion') }}">
-                    <span class="menu-icon">
-                        <i class="ki-duotone ki-rocket fs-2">
-                            <span class="path1"></span>
-                            <span class="path2"></span>
-                        </i>
-                    </span>
-                    <span class="menu-title">SUSCRIPCION</span>
-                </a>
-                <!--end:Menu link-->
-            </div>
-            <div class="menu-item">
-                <!--begin:Menu link-->
-                <a class="menu-link" href="{{ url('/tramite') }}">
-                    <span class="menu-icon">
-                        <i class="ki-duotone ki-rocket fs-2">
-                            <span class="path1"></span>
-                            <span class="path2"></span>
-                        </i>
-                    </span>
-                    <span class="menu-title">AJUSTES ADICIONALES</span>
-                </a>
-                <!--end:Menu link-->
-            </div>
-            <!--end:Menu item-->
-
-
-            <!--begin:Menu item-->
-            <div class="menu-item pt-5">
-                <!--begin:Menu content-->
-                <div class="menu-content">
-                    <span class="text-white">COMPRADOR</span>
+                <div class="menu-item">
+                    <!--begin:Menu link-->
+                    <a class="menu-link" href="{{ url('vendedor/inicio') }}">
+                        <span class="menu-icon">
+                            <i class="ki-duotone ki-rocket fs-2">
+                                <span class="path1"></span>
+                                <span class="path2"></span>
+                            </i>
+                        </span>
+                        <span class="menu-title">DASHBOARD</span>
+                    </a>
+                    <!--end:Menu link-->
                 </div>
-                <!--end:Menu content-->
-            </div>
-            <div class="menu-item">
-                <!--begin:Menu link-->
-                <a class="menu-link" href="{{ url('persona/perfil') }}">
-                    <span class="menu-icon">
-                        <i class="ki-duotone ki-rocket fs-2">
-                            <span class="path1"></span>
-                            <span class="path2"></span>
-                        </i>
-                    </span>
-                    <span class="menu-title">PERFIL</span>
-                </a>
-                <!--end:Menu link-->
-            </div>
-            <div class="menu-item">
-                <!--begin:Menu link-->
-                <a class="menu-link" href="{{ url('persona/pedido') }}">
-                    <span class="menu-icon">
-                        <i class="ki-duotone ki-rocket fs-2">
-                            <span class="path1"></span>
-                            <span class="path2"></span>
-                        </i>
-                    </span>
-                    <span class="menu-title">PEDIDOS</span>
-                </a>
-                <!--end:Menu link-->
-            </div>
-            <!--end:Menu item-->
+                <div class="menu-item">
+                    <!--begin:Menu link-->
+                    <a class="menu-link" href="{{ url('tienda/perfil') }}">
+                        <span class="menu-icon">
+                            <i class="ki-duotone ki-rocket fs-2">
+                                <span class="path1"></span>
+                                <span class="path2"></span>
+                            </i>
+                        </span>
+                        <span class="menu-title">PERFIL DE EMPRESA</span>
+                    </a>
+                    <!--end:Menu link-->
+                </div>
+                <div class="menu-item">
+                    <!--begin:Menu link-->
+                    <a class="menu-link" href="{{ url('producto/listado') }}" >
+                        <span class="menu-icon">
+                            <i class="ki-duotone ki-rocket fs-2">
+                                <span class="path1"></span>
+                                <span class="path2"></span>
+                            </i>
+                        </span>
+                        <span class="menu-title">PRODUCTOS</span>
+                    </a>
+                    <!--end:Menu link-->
+                </div>
+                <div class="menu-item">
+                    <!--begin:Menu link-->
+                    <a class="menu-link" href="{{ url('vendedor/pedido') }}">
+                        <span class="menu-icon">
+                            <i class="ki-duotone ki-rocket fs-2">
+                                <span class="path1"></span>
+                                <span class="path2"></span>
+                            </i>
+                        </span>
+                        <span class="menu-title">PEDIDOS</span>
+                    </a>
+                    <!--end:Menu link-->
+                </div>
+                <div class="menu-item">
+                    <!--begin:Menu link-->
+                    <a class="menu-link" href="{{ url('subcripcion/subcripcion') }}">
+                        <span class="menu-icon">
+                            <i class="ki-duotone ki-rocket fs-2">
+                                <span class="path1"></span>
+                                <span class="path2"></span>
+                            </i>
+                        </span>
+                        <span class="menu-title">SUSCRIPCION</span>
+                    </a>
+                    <!--end:Menu link-->
+                </div>
+                <div class="menu-item">
+                    <!--begin:Menu link-->
+                    <a class="menu-link" href="{{ url('/tramite') }}">
+                        <span class="menu-icon">
+                            <i class="ki-duotone ki-rocket fs-2">
+                                <span class="path1"></span>
+                                <span class="path2"></span>
+                            </i>
+                        </span>
+                        <span class="menu-title">AJUSTES ADICIONALES</span>
+                    </a>
+                    <!--end:Menu link-->
+                </div>
+                <!--end:Menu item-->
+            @endif
+
+            @if (session('rol') === 2)
+                <!--begin:Menu item-->
+                <div class="menu-item pt-5">
+                    <!--begin:Menu content-->
+                    <div class="menu-content">
+                        <span class="text-white">COMPRADOR</span>
+                    </div>
+                    <!--end:Menu content-->
+                </div>
+                <div class="menu-item">
+                    <!--begin:Menu link-->
+                    <a class="menu-link" href="{{ url('persona/perfil') }}">
+                        <span class="menu-icon">
+                            <i class="ki-duotone ki-rocket fs-2">
+                                <span class="path1"></span>
+                                <span class="path2"></span>
+                            </i>
+                        </span>
+                        <span class="menu-title">PERFIL</span>
+                    </a>
+                    <!--end:Menu link-->
+                </div>
+                <div class="menu-item">
+                    <!--begin:Menu link-->
+                    <a class="menu-link" href="{{ url('persona/pedido') }}">
+                        <span class="menu-icon">
+                            <i class="ki-duotone ki-rocket fs-2">
+                                <span class="path1"></span>
+                                <span class="path2"></span>
+                            </i>
+                        </span>
+                        <span class="menu-title">PEDIDOS</span>
+                    </a>
+                    <!--end:Menu link-->
+                </div>
+                <!--end:Menu item-->
+            @endif
+
+
+
 
             {{--  @endif  --}}
             {{--  <div class="menu-item">

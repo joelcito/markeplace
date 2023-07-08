@@ -8,6 +8,7 @@ use App\Http\Controllers\SubcripcionControler;
 use App\Http\Controllers\TiendaController;
 use App\Http\Controllers\VendedorController;
 use App\Http\Controllers\InformacionController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PersonaController;
 use Illuminate\Support\Facades\Route;
 
@@ -60,6 +61,8 @@ Route::post('/tienda/detallePerfil', [TiendaController::class, 'detallePerfil'])
 
 // VENDEDOR
 Route::get('/vendedor/inicio', [VendedorController::class, 'index']);
+Route::get('/vendedor/pedido', [VendedorController::class, 'pedido']);
+Route::post('/vendedor/ajaxListadoPedido', [VendedorController::class, 'ajaxListadoPedido']);
 
 // SUBCRIPCION
 Route::get('/subcripcion/subcripcion', [SubcripcionControler::class, 'subcripcion']);
@@ -68,10 +71,13 @@ Route::get('/subcripcion/subcripcion', [SubcripcionControler::class, 'subcripcio
 Route::get('/informacion/perfil', [InformacionController::class, 'perfil']);
 Route::post('/informacion/guarda', [InformacionController::class, 'guarda']);
 
-
 // COMPRADOR
 Route::get('/persona/perfil', [PersonaController::class, 'perfil']);
 Route::get('/persona/pedido', [PersonaController::class, 'pedido']);
+
+// LOGIN
+Route::get('/login', [LoginController::class, 'login']);
+Route::post('/login/ingresa', [LoginController::class, 'ingresa']);
 
 // // EXTERNOS
 // Route::post('/enviarcorreo', [CorreoController::class, 'enviarCorreo']);

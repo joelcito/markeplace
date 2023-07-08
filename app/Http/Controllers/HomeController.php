@@ -9,6 +9,8 @@ class HomeController extends Controller
 {
     public function index(Request $request){
 
+        // dd("habner");
+
         // PRODUCTOS MAS VENDIDOS
         // $prodyctosTienda = Producto::all();
         $prodyctosTienda = Producto::select('nombre')->where('idTienda', 1)->get();
@@ -24,7 +26,10 @@ class HomeController extends Controller
         arsort($numerosAleatorios);
         $numerosAleatorios = array_values($numerosAleatorios);
 
-        //PEDIDOS POR MES
+        //CANTIDAD DE VENDEDORES Y COMPRADORES
+
+
+
 
 
         return view('home.inicio')->with(compact('productos', 'numerosAleatorios'));

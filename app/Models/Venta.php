@@ -17,4 +17,9 @@ class Venta extends Model
     {
         return $this->belongsTo('App\Models\producto', 'idProducto');
     }
+
+    public function perfil()
+    {
+        return $this->belongsTo('App\Models\perfil', 'idPerfil');
+    }
 }

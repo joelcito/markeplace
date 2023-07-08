@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Producto;
 use App\Models\Vendedor;
+use App\Models\Venta;
 use Illuminate\Http\Request;
 
 class VendedorController extends Controller
@@ -36,9 +37,13 @@ class VendedorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+    public function pedido(Request $request){
+
+        // $ventas = Venta::all();
+
+        // return view('vendedor.pedido')->with(compact('ventas'));
+        return view('vendedor.pedido');
+
     }
 
     /**
@@ -47,9 +52,21 @@ class VendedorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function ajaxListadoPedido(Request $request)
     {
-        //
+        if($request->ajax()){
+            $data['listado'] = $this->listadoArray();
+            $data['estado'] = 'success';
+        }else{
+            $data['estado'] = 'error';
+        }
+        return $data;
+
+    }
+
+    protected function listadoArray(){
+        $ventas = Venta::orderBy('idVenta', 'desc')->get();
+        return view("vendedor.ajaxListadoPedido")->with(compact('ventas'))->render();
     }
 
     /**
