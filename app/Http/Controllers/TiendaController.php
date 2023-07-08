@@ -30,17 +30,32 @@ class TiendaController extends Controller
 
     public function guarda(Request $request){
         if($request->ajax()){
-            $categoria_id = $request->input('categoria_id');
-            if($categoria_id === "0"){
-                $categoria = new Tienda();
+            $tienda_id = $request->input('tienda_id');
+            if($tienda_id === "0"){
+                $tienda = new Tienda();
             }
             else{
-                $categoria = Tienda::where('idCategoria',$categoria_id)->first();
+                $tienda = Tienda::where('idTienda',$tienda_id)->first();
             }
-            $categoria->nombre      = $request->input('nombre');
-            $categoria->descripcion = $request->input('descripcion');
-            $categoria->estado      = 1;
-            $categoria->save();
+
+            $tienda->nombre         = $request->input('nombre');
+            $tienda->nit            = $request->input('nit');
+            $tienda->celular        = $request->input('celular');
+            $tienda->correo         = $request->input('correo');
+            $tienda->descripcion    = $request->input('descripcion');
+
+            if($request->file('archivo')){
+                $archivos           = $request->file('archivo');
+                $archivo            = $archivos;
+                $direccion          = 'imgLogoTienda/';
+                $nombreArchivo      = date('YmdHis').".".$archivo->getClientOriginalExtension();
+                $archivo->move($direccion,$nombreArchivo);
+                $tienda->logo    = $nombreArchivo;
+            }
+
+            $tienda->save();
+
+            $data['detalle'] = view('tienda.detallePerfil')->with(compact('tienda'))->render();
             $data['estado'] = 'success';
         }else{
             $data['estado'] = 'error';
@@ -56,6 +71,28 @@ class TiendaController extends Controller
             $data['estado'] = 'success';
         }else{
             $data['estado'] = 'error';
+        }
+
+        return $data;
+    }
+
+    public function perfil(Request $request){
+
+        $tienda = Tienda::find(1);
+
+        return view('vendedor.perfil')->with(compact('tienda'));
+    }
+
+    public function detallePerfil(Request $request){
+        if($request->ajax()){
+            $tienda_id = 1;
+            $tienda = Tienda::find($tienda_id);
+
+            $data['estado'] = "success";
+            $data['detalle'] = view('tienda.detallePerfil')->with(compact('tienda'))->render();
+
+        }else{
+
         }
 
         return $data;

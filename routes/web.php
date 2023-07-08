@@ -4,9 +4,13 @@ use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\SubCategoriaController;
+use App\Http\Controllers\SubcripcionControler;
 use App\Http\Controllers\TiendaController;
 use App\Http\Controllers\VendedorController;
+use App\Http\Controllers\InformacionController;
+use App\Http\Controllers\PersonaController;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -51,7 +55,25 @@ Route::post('/tienda/ajaxListado', [TiendaController::class, 'ajaxListado']);
 Route::get('/tienda/listado', [TiendaController::class, 'listado']);
 Route::post('/tienda/guarda', [TiendaController::class, 'guarda']);
 Route::post('/tienda/elimina', [TiendaController::class, 'elimina']);
+Route::get('/tienda/perfil', [TiendaController::class, 'perfil']);
+Route::post('/tienda/detallePerfil', [TiendaController::class, 'detallePerfil']);
 
 // VENDEDOR
 Route::get('/vendedor/inicio', [VendedorController::class, 'index']);
+
+// SUBCRIPCION
+Route::get('/subcripcion/subcripcion', [SubcripcionControler::class, 'subcripcion']);
+
+// INFORMACION
+Route::get('/informacion/perfil', [InformacionController::class, 'perfil']);
+Route::post('/informacion/guarda', [InformacionController::class, 'guarda']);
+
+
+// COMPRADOR
+Route::get('/persona/perfil', [PersonaController::class, 'perfil']);
+Route::get('/persona/pedido', [PersonaController::class, 'pedido']);
+
+// // EXTERNOS
+// Route::post('/enviarcorreo', [CorreoController::class, 'enviarCorreo']);
+
 

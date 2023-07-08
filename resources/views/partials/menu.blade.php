@@ -347,6 +347,19 @@
                 </a>
                 <!--end:Menu link-->
             </div>
+            <div class="menu-item">
+                <!--begin:Menu link-->
+                <a class="menu-link" href="{{ url('informacion/perfil') }}">
+                    <span class="menu-icon">
+                        <i class="ki-duotone ki-rocket fs-2">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                        </i>
+                    </span>
+                    <span class="menu-title">PERFIL</span>
+                </a>
+                <!--end:Menu link-->
+            </div>
             {{--  <div class="menu-item">
                 <!--begin:Menu link-->
                 <a class="menu-link" href="{{ url('/proceso') }}">
@@ -399,7 +412,7 @@
             </div>
             <div class="menu-item">
                 <!--begin:Menu link-->
-                <a class="menu-link" href="#">
+                <a class="menu-link" href="{{ url('tienda/perfil') }}">
                     <span class="menu-icon">
                         <i class="ki-duotone ki-rocket fs-2">
                             <span class="path1"></span>
@@ -438,7 +451,7 @@
             </div>
             <div class="menu-item">
                 <!--begin:Menu link-->
-                <a class="menu-link" href="#">
+                <a class="menu-link" href="{{ url('subcripcion/subcripcion') }}">
                     <span class="menu-icon">
                         <i class="ki-duotone ki-rocket fs-2">
                             <span class="path1"></span>
@@ -469,13 +482,13 @@
             <div class="menu-item pt-5">
                 <!--begin:Menu content-->
                 <div class="menu-content">
-                    <span class="text-white">COMPRADORES</span>
+                    <span class="text-white">COMPRADOR</span>
                 </div>
                 <!--end:Menu content-->
             </div>
             <div class="menu-item">
                 <!--begin:Menu link-->
-                <a class="menu-link" href="#">
+                <a class="menu-link" href="{{ url('persona/perfil') }}">
                     <span class="menu-icon">
                         <i class="ki-duotone ki-rocket fs-2">
                             <span class="path1"></span>
@@ -483,6 +496,19 @@
                         </i>
                     </span>
                     <span class="menu-title">PERFIL</span>
+                </a>
+                <!--end:Menu link-->
+            </div>
+            <div class="menu-item">
+                <!--begin:Menu link-->
+                <a class="menu-link" href="{{ url('persona/pedido') }}">
+                    <span class="menu-icon">
+                        <i class="ki-duotone ki-rocket fs-2">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                        </i>
+                    </span>
+                    <span class="menu-title">PEDIDOS</span>
                 </a>
                 <!--end:Menu link-->
             </div>

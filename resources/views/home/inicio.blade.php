@@ -247,6 +247,79 @@
             </div>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-xl-stretch mb-xl-8">
+                <!--begin::Header-->
+                <div class="card-header border-0 pt-5">
+                    <!--begin::Title-->
+                    <h3 class="card-title align-items-start flex-column">
+                        <span class="card-label fw-bold fs-3 mb-1">Cantidad de productos exhibidos por vendedor</span>
+                    </h3>
+                    <!--end::Title-->
+                    <!--begin::Toolbar-->
+                    <div class="card-toolbar">
+                        <!--begin::Menu-->
+                        <button type="button" class="btn btn-sm btn-icon btn-color-primary btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+                            <i class="ki-duotone ki-category fs-6">
+                                <span class="path1"></span>
+                                <span class="path2"></span>
+                                <span class="path3"></span>
+                                <span class="path4"></span>
+                            </i>
+                        </button>
+                        <!--end::Menu 1-->
+                        <!--end::Menu-->
+                    </div>
+                    <!--end::Toolbar-->
+                </div>
+                <!--end::Header-->
+                <!--begin::Body-->
+                <div class="card-body">
+                    <div id="cantidad_exibidos" style="height: 350px"></div>
+                </div>
+                <!--end::Body-->
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-xl-stretch mb-xl-8">
+                <!--begin::Header-->
+                <div class="card-header border-0 pt-5">
+                    <!--begin::Title-->
+                    <h3 class="card-title align-items-start flex-column">
+                        <span class="card-label fw-bold fs-3 mb-1">Catidad de Vendedores por Subcripcion</span>
+                    </h3>
+                    <!--end::Title-->
+                    <!--begin::Toolbar-->
+                    <div class="card-toolbar">
+                        <!--begin::Menu-->
+                        <button type="button" class="btn btn-sm btn-icon btn-color-primary btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+                            <i class="ki-duotone ki-category fs-6">
+                                <span class="path1"></span>
+                                <span class="path2"></span>
+                                <span class="path3"></span>
+                                <span class="path4"></span>
+                            </i>
+                        </button>
+                        <!--end::Menu 1-->
+                        <!--end::Menu-->
+                    </div>
+                    <!--end::Toolbar-->
+                </div>
+                <!--end::Header-->
+                <!--begin::Body-->
+                <div class="card-body">
+                    <center>
+                        <div id="kt_docs_google_chart_column" style="height: 350px"></div>
+                    </center>
+                </div>
+                <!--end::Body-->
+            </div>
+        </div>
+    </div>
     {{--  <div class="row">
         <div class="col-md-12">
             <!--begin::Charts Widget 2-->
@@ -324,6 +397,7 @@
 @stop
 @section('js')
 {{--  <script src="{{ asset('assets/js/custom/widgets.js') }}"></script>  --}}
+<script src="//www.google.com/jsapi"></script>
 <script>
     var e = document.getElementById("cantidad_vendedores_compradores");
     if (e) {
@@ -562,123 +636,6 @@
             });
     }
 
-    var e = document.getElementById("visuallizaciones");
-    if (e) {
-        var t = { self: null, rendered: !1 },
-            a = function () {
-                var a = parseInt(KTUtil.css(e, "height")),
-                    o = KTUtil.getCssVariableValue("--bs-gray-500"),
-                    r = KTUtil.getCssVariableValue("--bs-gray-200"),
-                    s = {
-                        series: [
-                            {
-                                name: ["Cantidad de visualizacion"],
-                                data: [0, 55, 57, 56, 61, 58,0, 55, 57, 56, 61, 58],
-                            },
-                            {
-                                name: "Cantidad de calificacion",
-                                data: [76, 85, 101, 98, 87, 105, 76, 85, 101, 98, 87, 105],
-                            },
-                        ],
-                        chart: {
-                            fontFamily: "inherit",
-                            type: "bar",
-                            height: a,
-                            toolbar: { show: !1 },
-                        },
-                        plotOptions: {
-                            bar: {
-                                horizontal: !1,
-                                columnWidth: ["30%"],
-                                borderRadius: 4,
-                            },
-                        },
-                        legend: { show: !1 },
-                        dataLabels: { enabled: !1 },
-                        stroke: {
-                            show: !0,
-                            width: 2,
-                            colors: ["transparent"],
-                        },
-                        xaxis: {
-                            categories: [
-                                "Ene",
-                                "Feb",
-                                "Mar",
-                                "Abr",
-                                "May",
-                                "Jun",
-                                "Jul",
-                                "Ago",
-                                "Set",
-                                "Oct",
-                                "Nom",
-                                "Dic",
-                            ],
-                            axisBorder: { show: !1 },
-                            axisTicks: { show: !1 },
-                            labels: {
-                                style: {
-                                    colors: o,
-                                    fontSize: "12px",
-                                },
-                            },
-                        },
-                        yaxis: {
-                            labels: {
-                                style: {
-                                    colors: o,
-                                    fontSize: "12px",
-                                },
-                            },
-                        },
-                        fill: { opacity: 1 },
-                        states: {
-                            normal: {
-                                filter: { type: "none", value: 0 },
-                            },
-                            hover: {
-                                filter: { type: "none", value: 0 },
-                            },
-                            active: {
-                                allowMultipleDataPointsSelection:
-                                    !1,
-                                filter: { type: "none", value: 0 },
-                            },
-                        },
-                        tooltip: {
-                            style: { fontSize: "12px" },
-                            y: {
-                                formatter: function (e) {
-                                    {{--  return "$" + e + " thousands";  --}}
-                                    return e;
-                                },
-                            },
-                        },
-                        colors: [
-                            KTUtil.getCssVariableValue(
-                                "--bs-warning"
-                            ),
-                            KTUtil.getCssVariableValue(
-                                "--bs-gray-300"
-                            ),
-                        ],
-                        grid: {
-                            borderColor: r,
-                            strokeDashArray: 4,
-                            yaxis: { lines: { show: !0 } },
-                        },
-                    };
-                (t.self = new ApexCharts(e, s)),
-                    t.self.render(),
-                    (t.rendered = !0);
-            };
-        a(),
-        KTThemeMode.on("kt.thememode.change", function () {
-            t.rendered && t.self.destroy(), a();
-        });
-    }
-
     var e = document.getElementById("kt_charts_widget_3_chart");
     if (e) {
         var t = { self: null, rendered: !1 },
@@ -799,6 +756,156 @@
                 t.rendered && t.self.destroy(), a();
             });
     }
+
+    var e = document.getElementById("cantidad_exibidos");
+    if (e) {
+        var t = { self: null, rendered: !1 },
+            a = function () {
+                var a = parseInt(KTUtil.css(e, "height")),
+                    o = KTUtil.getCssVariableValue("--bs-gray-500"),
+                    r = KTUtil.getCssVariableValue("--bs-gray-200"),
+                    s = {
+                        series: [
+                            {
+                                name: ["Cantidad de visualizacion"],
+                                data: [0, 55, 57, 56, 61, 58,10, 55, 57, 56, 61, 58],
+                            },
+                            /*
+                            {
+                                name: "Cantidad de calificacion",
+                                data: [76, 85, 101, 98, 87, 105, 76, 85, 101, 98, 87, 105],
+                            },
+                            */
+                        ],
+                        chart: {
+                            fontFamily: "inherit",
+                            type: "bar",
+                            height: a,
+                            toolbar: { show: !1 },
+                        },
+                        plotOptions: {
+                            bar: {
+                                horizontal: !1,
+                                columnWidth: ["30%"],
+                                borderRadius: 4,
+                            },
+                        },
+                        legend: { show: !1 },
+                        dataLabels: { enabled: !1 },
+                        stroke: {
+                            show: !0,
+                            width: 2,
+                            colors: ["transparent"],
+                        },
+                        xaxis: {
+                            categories: [
+                                "Ene",
+                                "Feb",
+                                "Mar",
+                                "Abr",
+                                "May",
+                                "Jun",
+                                "Jul",
+                                "Ago",
+                                "Set",
+                                "Oct",
+                                "Nom",
+                                "Dic",
+                            ],
+                            axisBorder: {
+                                {{--  show: !1  --}}
+                                show: true,
+                                color: KTUtil.getCssVariableValue("--bs-gray-500"),
+                                height: 1,
+                                width: '100%',
+                                offsetX: 0,
+                                offsetY: 0
+                            },
+                            axisTicks: { show: !1 },
+                            labels: {
+                                style: {
+                                    colors: o,
+                                    fontSize: "12px",
+                                },
+                            },
+                        },
+                        yaxis: {
+                            labels: {
+                                style: {
+                                    colors: o,
+                                    fontSize: "12px",
+                                },
+                            },
+                        },
+                        fill: { opacity: 1 },
+                        states: {
+                            normal: {
+                                filter: { type: "none", value: 0 },
+                            },
+                            hover: {
+                                filter: { type: "none", value: 0 },
+                            },
+                            active: {
+                                allowMultipleDataPointsSelection:
+                                    !1,
+                                filter: { type: "none", value: 0 },
+                            },
+                        },
+                        tooltip: {
+                            style: { fontSize: "12px" },
+                            y: {
+                                formatter: function (e) {
+                                    {{--  return "$" + e + " thousands";  --}}
+                                    return e;
+                                },
+                            },
+                        },
+                        colors: [
+                            KTUtil.getCssVariableValue(
+                                "--bs-warning"
+                            ),
+                            KTUtil.getCssVariableValue(
+                                "--bs-gray-300"
+                            ),
+                        ],
+                        grid: {
+                            borderColor: r,
+                            strokeDashArray: 4,
+                            yaxis: { lines: { show: !0 } },
+                        },
+                    };
+                (t.self = new ApexCharts(e, s)),
+                    t.self.render(),
+                    (t.rendered = !0);
+            };
+        a(),
+        KTThemeMode.on("kt.thememode.change", function () {
+            t.rendered && t.self.destroy(), a();
+        });
+    }
+
+    // GOOGLE CHARTS INIT
+    google.load('visualization', '1', {
+        packages: ['corechart', 'bar', 'line']
+    });
+
+    google.setOnLoadCallback(function () {
+        var data = google.visualization.arrayToDataTable([
+            ['Task', 'Hours per Day'],
+            ['Basica', 20],
+            ['Estandar', 10],
+            ['Premiun', 6],
+        ]);
+
+        var options = {
+            //title: 'My Daily Activities',
+            colors: ['#fe3995', '#f6aa33', '#6e4ff5', '#2abe81', '#c7d2e7', '#593ae1']
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('kt_docs_google_chart_column'));
+        chart.draw(data, options);
+    });
+
 
 </script>
 @endsection

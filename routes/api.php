@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\CorreoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::post('/api/enviar-correo', [CorreoController::class, 'enviarCorreo']);
+Route::post('/enviarcorreo', [CorreoController::class, 'enviarCorreo']);
+
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });

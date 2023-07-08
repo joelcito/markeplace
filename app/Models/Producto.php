@@ -11,6 +11,4 @@ class Producto extends Model
     protected $table        = "producto";
     public $timestamps      = false;
     protected $primaryKey   = "idProducto";
-
-
 }

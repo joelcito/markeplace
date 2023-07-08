@@ -10,7 +10,12 @@ class HomeController extends Controller
     public function index(Request $request){
 
         // PRODUCTOS MAS VENDIDOS
+        // $prodyctosTienda = Producto::all();
         $prodyctosTienda = Producto::select('nombre')->where('idTienda', 1)->get();
+        // $prodyctosTienda = Producto::select('nombre')->where('idTienda', 1)->toSql();
+
+        // dd($prodyctosTienda);
+
         $productos = $prodyctosTienda->pluck('nombre')->toArray();
         $cantaProduct = Producto::count();
         $numerosAleatorios = [];

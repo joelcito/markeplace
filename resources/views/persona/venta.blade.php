@@ -1,8 +1,6 @@
 @extends('layouts.app')
 @section('css')
     <link href="{{ asset('assets/plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet" type="text/css" />
-
-
 @endsection
 @section('metadatos')
     <meta name="csrf-token" content="{{ csrf_token() }}" />
@@ -19,7 +17,7 @@
                 <!--begin::Modal header-->
                 <div class="modal-header" id="kt_modal_add_user_header">
                     <!--begin::Modal title-->
-                    <h2 class="fw-bold">Formulario de producto</h2>
+                    <h2 class="fw-bold">Formulario de usuario</h2>
                     <!--end::Modal title-->
                     <!--begin::Close-->
                     <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-users-modal-action="close">
@@ -34,104 +32,52 @@
                 <!--begin::Modal body-->
                 <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
 
-                    <form id="formularioProducto">
+                    <form id="formularioRol">
                         @csrf
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="fv-row mb-7">
-                                    <label class="required fw-semibold fs-6 mb-2">Categoria</label>
-                                    <select name="categoria_id" id="categoria_id" class="form-control form-control-solid mb-3 mb-lg-0" onchange="buscarSubCategorias(this)">
-                                        <option value="">SELECCIONE</option>
-                                        @foreach ($categorias as $c)
-                                            <option value="{{ $c->idCategoria }}">{{ $c->nombre }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="fv-row mb-7">
-                                    <label class="required fw-semibold fs-6 mb-2"> Sub Categoria</label>
-                                    <select name="subcategoria_id" id="subcategoria_id" class="form-control form-control-solid mb-3 mb-lg-0">
-                                        @foreach ($subcategorias as $c)
-                                            <option value="{{ $c->idSubcategoria }}">{{ $c->nombre }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="fv-row mb-7">
-                                    <label class="required fw-semibold fs-6 mb-2">Titulo</label>
+                                    <label class="required fw-semibold fs-6 mb-2">Nombre</label>
                                     <input type="text" id="nombre" name="nombre" class="form-control form-control-solid mb-3 mb-lg-0">
-                                    <input type="hidden" id="producto_id" name="producto_id" value="0">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="fv-row mb-7">
+                                    <label class="required fw-semibold fs-6 mb-2">Ap Paterno</label>
+                                    <input type="text" id="descripcion" name="descripcion" class="form-control form-control-solid mb-3 mb-lg-0" >
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="fv-row mb-7">
+                                    <label class="required fw-semibold fs-6 mb-2">Ap Materno</label>
+                                    <input type="text" id="descripcion" name="descripcion" class="form-control form-control-solid mb-3 mb-lg-0" >
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-4">
                                 <div class="fv-row mb-7">
-                                    <label class="required fw-semibold fs-6 mb-2">Descripcion</label>
-                                    <textarea id="descripcion" name="descripcion" cols="30" rows="3" class="form-control form-control-solid mb-3 mb-lg-0"></textarea>
+                                    <label class="required fw-semibold fs-6 mb-2">Cedula</label>
+                                    <input type="text" id="nombre" name="nombre" class="form-control form-control-solid mb-3 mb-lg-0">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="fv-row mb-7">
+                                    <label class="required fw-semibold fs-6 mb-2">Cedula</label>
+                                    <input type="text" id="descripcion" name="descripcion" class="form-control form-control-solid mb-3 mb-lg-0" >
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="fv-row mb-7">
+                                    <label class="required fw-semibold fs-6 mb-2">Imagne</label>
+                                    <input type="file" id="descripcion" name="descripcion" class="form-control form-control-solid mb-3 mb-lg-0" >
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="fv-row mb-7">
-                                    <label class="required fw-semibold fs-6 mb-2">Prec. Uni.</label>
-                                    <input type="number" id="precio_unitario" name="precio_unitario" class="form-control form-control-solid mb-3 mb-lg-0">
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="fv-row mb-7">
-                                    <label class="required fw-semibold fs-6 mb-2">Descuento</label>
-                                    <input type="number" id="cantidad" name="cantidad" class="form-control form-control-solid mb-3 mb-lg-0" >
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="fv-row mb-7">
-                                    <label class="required fw-semibold fs-6 mb-2">Tipo M.</label>
-                                    <select name="" id="" class="form-control form-control-solid mb-3 mb-lg-0">
-                                        <option value="Bs">Bs</option>
-                                        <option value="$us">$us</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="fv-row mb-7">
-                                    <label class="required fw-semibold fs-6 mb-2">Cantidad Disponible</label>
-                                    <input type="text" id="cantidad" name="cantidad" class="form-control form-control-solid mb-3 mb-lg-0" >
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="fv-row mb-7">
-                                    <label class="required fw-semibold fs-6 mb-2">Archivo PDF</label>
-                                    <input type="file" id="archivo" name="archivo" class="form-control form-control-solid mb-3 mb-lg-0" multiple>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="fv-row mb-7">
-                                    <label class="required fw-semibold fs-6 mb-2">Imagenes</label>
-                                    <input type="file" id="imagenes" name="imagenes" class="form-control form-control-solid mb-3 mb-lg-0" multiple accept="image/*">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h6 class="text-center">Imagenes subidas</h6>
-                                <div id="vista-previa">
-
-                                </div>
-                            </div>
-                        </div>
-
                     </form>
                     <div class="row">
                         <div class="col-md-12">
-                            <button class="btn btn-success w-100" onclick="guardarProducto()">Guardar</button>
+                            <button class="btn btn-success w-100">Guardar</button>
                         </div>
                     </div>
                 </div>
@@ -166,7 +112,7 @@
                 <!--begin::Toolbar-->
                 <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
-                    <i class="ki-duotone ki-plus fs-2"></i>Nuevo Producto</button>
+                    <i class="ki-duotone ki-plus fs-2"></i>Nuevo Usuario</button>
                     <!--end::Add user-->
                 </div>
                 <!--end::Toolbar-->
@@ -260,10 +206,65 @@
         <!--end::Card header-->
         <!--begin::Card body-->
         <div class="card-body py-4">
-            <div id="tabla_productos">
-
-            </div>
-
+            <table class="table align-middle table-row-dashed fs-6 gy-5">
+                <thead>
+                    <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
+                        <th>N</th>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Precio</th>
+                        <th>Estado</th>
+                        {{--  <th></th>  --}}
+                    </tr>
+                </thead>
+                <tbody>
+                    {{--  @dd($ventas)  --}}
+                    @foreach ( $ventas as $v)
+                        <tr>
+                            <td>{{ $v->idVenta }}</td>
+                            <td>{{ $v->producto->nombre }}</td>
+                            <td>{{ $v->cantidad }}</td>
+                            <td>{{ $v->preciounitario }}</td>
+                            {{--  <td>{{ $v->pen }}</td>  --}}
+                            <td><small class="bg-warning">Pendiente</small></td>
+                            {{--  <td>{{ $v->idVenta }}</td>  --}}
+                        </tr>
+                    @endforeach
+                    {{--  <tr>
+                        <td>1</td>
+                        <td>Joel Jonathan</td>
+                        <td>Flores</td>
+                        <td>Quispe</td>
+                        <td>Cedula</td>
+                        <td>
+                            <button class="btn btn-warning btn-icon btn-sm"><i class="fa fa-edit"></i></button></button>
+                            <button class="btn btn-danger btn-icon btn-sm"><i class="fa fa-trash"></i></button></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Nayana</td>
+                        <td>Ticona</td>
+                        <td>Quispe</td>
+                        <td>8251245</td>
+                        <td>
+                            <button class="btn btn-warning btn-icon btn-sm"><i class="fa fa-edit"></i></button></button>
+                            <button class="btn btn-danger btn-icon btn-sm"><i class="fa fa-trash"></i></button></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Paucara</td>
+                        <td>Pachecho</td>
+                        <td>Vianle</td>
+                        <td>451422</td>
+                        <td>
+                            <button class="btn btn-warning btn-icon btn-sm"><i class="fa fa-edit"></i></button></button>
+                            <button class="btn btn-danger btn-icon btn-sm"><i class="fa fa-trash"></i></button></button>
+                        </td>
+                    </tr>  --}}
+                </tbody>
+            </table>
             {{--  <div id="table_roles">
 
             </div>  --}}
@@ -276,6 +277,16 @@
 @section('js')
     <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
 
+    {{--  <script src="{{ asset('assets/js/custom/apps/user-management/users/list/table.js') }}"></script>  --}}
+    {{--  <script src="{{ asset('assets/js/custom/apps/user-management/users/list/export-users.js') }}"></script>  --}}
+    {{--  <script src="{{ asset('assets/js/custom/apps/user-management/users/list/add.js') }}"></script>  --}}
+    {{--  <script src="{{ asset('assets/js/widgets.bundle.js') }}"></script>
+    <script src="{{ asset('assets/js/custom/widgets.js') }}"></script>
+    <script src="{{ asset('assets/js/custom/apps/chat/chat.js') }}"></script>
+    <script src="{{ asset('assets/js/custom/utilities/modals/upgrade-plan.js') }}"></script>
+    <script src="{{ asset('assets/js/custom/utilities/modals/create-app.js') }}"></script>
+    <script src="{{ asset('assets/js/custom/utilities/modals/users-search.js') }}"></script>  --}}
+
     <script type="text/javascript">
 
         $.ajaxSetup({
@@ -287,102 +298,34 @@
 
         $( document ).ready(function() {
             ajaxListado();
-
-            $('#tabla_producto').DataTable({
-                language: {
-                    {{--  url: '{{ asset('datatableEs.json') }}'  --}}
-                },
-
-                // Opciones de exportación
-                dom: 'Bfrtip', // Elementos de control a mostrar (por ejemplo, botones de exportación)
-                buttons: [
-                    'copy', 'excel', 'pdf', 'print' // Botones de exportación disponibles (ejemplo: copiar, excel, pdf, imprimir)
-                ]
-            });
-
-
-            // Detectar cambios en el input de imágenes
-            $('#imagenes').on('change', function(e) {
-                // Obtener los archivos seleccionados
-                var archivos = e.target.files;
-
-                // Limpiar la vista previa
-                $('#vista-previa').empty();
-
-                // Recorrer los archivos
-                for (var i = 0; i < archivos.length; i++) {
-                var archivo = archivos[i];
-
-                // Crear un objeto FileReader
-                var lector = new FileReader();
-
-                // Cargar la imagen
-                lector.onload = function(e) {
-                    // Crear un elemento <img> para mostrar la imagen
-                    var imagen = $('<img>').attr('src', e.target.result)
-                                           .attr('width', '30%');
-
-                    // Agregar la imagen a la vista previa
-                    $('#vista-previa').append(imagen);
-                }
-
-                // Leer el archivo como una URL de datos
-                lector.readAsDataURL(archivo);
-                }
-            });
-
-
-
         });
 
-        function guardarProducto(){
-            if($("#formularioProducto")[0].checkValidity()){
-
-                var formData = new FormData();
-                var archivo = $('#imagenes')[0].files;
-                for(let i=0;i<archivo.length;i++){
-                    formData.append('archivo[]', archivo[i]);
-                }
-                formData.append('nombre',           $('#nombre').val());
-                formData.append('producto_id',      $('#producto_id').val());
-                formData.append('descripcion',      $('#descripcion').val());
-                formData.append('categoria_id',     $('#subcategoria_id').val());
-                formData.append('precio_unitario',  $('#precio_unitario').val());
-                formData.append('cantidad',         $('#cantidad').val());
+       function guardarVenta(){
+            if($("#formularioRol")[0].checkValidity()){
+                datos = $("#formularioRol").serializeArray()
                 $.ajax({
-                    url: "{{ url('producto/guarda') }}",
-                    data:formData,
+                    url: "{{ url('rol/guarda') }}",
+                    data:datos,
                     type: 'POST',
                     dataType: 'json',
-                    processData: false,
-                    contentType: false,
                     success: function(data) {
-                        if(data.estado === 'success'){
-                            Swal.fire({
-                                title:'Registrado!',
-                                text :'Se registro con exito.',
-                                icon: 'success',
-                                timer: 1500
-                            })
-                            $('#kt_modal_add_user').modal('hide');
-                            ajaxListado();
-                        }
+                        if(data.estado === 'success')
+                            $('#table_roles').html(data.listado);
                     }
                 });
-
             }else{
-    			$("#formularioProducto")[0].reportValidity()
+    			$("#formularioRol")[0].reportValidity()
             }
         }
 
         function ajaxListado(){
             $.ajax({
-                url: "{{ url('producto/ajaxListado') }}",
+                url: "{{ url('rol/ajaxListado') }}",
                 type: 'POST',
                 dataType: 'json',
                 success: function(data) {
                     if(data.estado === 'success')
-                        $('#tabla_productos').html(data.listado);
+                        $('#table_roles').html(data.listado);
                 }
             });
         }
@@ -396,63 +339,6 @@
                 success: function(data) {
                     if(data.estado === 'success')
                         $('#table_roles').html(data.listado);
-                }
-            });
-        }
-
-        function edita(idProducto,idSubcategoria,nombre,descripcion,preciounitario,cantidad,estado,calificacion, ubicacion){
-            $('#nombre').val(nombre)
-            $('#producto_id').val(idProducto)
-            $('#descripcion').val(descripcion.replaceAll('"',''))
-            $('#categoria_id').val(idSubcategoria)
-            $('#precio_unitario').val(preciounitario)
-            $('#cantidad').val(cantidad)
-            $('#kt_modal_add_user').modal('show')
-        }
-
-        function buscarSubCategorias(select){
-            let idCategoria = select.value
-            $.ajax({
-                url: "{{ url('categoria/buscaSubCategorias') }}",
-                type: 'POST',
-                data:{id:idCategoria},
-                dataType: 'json',
-                success: function(data) {
-                    if(data.estado === 'success'){
-                        $('#subcategoria_id').empty();
-                        let subCategorias = data.subCategorias
-                        $(subCategorias).each(function(index) {
-                            if(subCategorias.length>0){
-                                $('#subcategoria_id').append($('<option>', {
-                                    value: subCategorias[index]['idSubcategoria'],
-                                    text: subCategorias[index]['nombre']
-                                }));
-                            }
-                        });
-                    }
-                }
-            });
-        }
-
-        function cambiaEstado(valor, producto){
-            $.ajax({
-                url: "{{ url('producto/cambiaEstado') }}",
-                type: 'POST',
-                data:{
-                    valor:valor,
-                    producto:producto
-                },
-                dataType: 'json',
-                success: function(data) {
-                    if(data.estado === 'success'){
-                        if(valor === 0){
-                            html = "<span class='badge badge-light-danger fw-dold' onclick='cambiaEstado(1,"+producto+")'>Inactivo</span>";
-                        }else{
-                            html = "<span class='badge badge-light-success fw-dold' onclick='cambiaEstado(0,"+producto+")'>Activo</span>";
-                        }
-                        $('#contEstadoProd_'+producto).html(html);
-                    }
-
                 }
             });
         }
