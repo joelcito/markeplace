@@ -16,7 +16,10 @@
         @foreach ($categorias as $c)
         <tr>
             <td>{{ $c->idTienda }}</td>
-            <td>{{ $c->logo }}</td>
+            <td>
+                <img src="{{ $c->logo }}" alt="">
+                {{-- {{ $c->logo }} --}}
+            </td>
             <td>{{ $c->nombre }}</td>
             <td>{{ $c->nit }}</td>
             <td>{{ $c->celular }}</td>

@@ -187,6 +187,7 @@
         </div>
     </div>
 </div>
+{{-- @dd($vendedor) --}}
 <!--end::Content wrapper-->
 @stop
 @section('js')
@@ -205,11 +206,13 @@
                             {
                                 name: "Cantidad de Vendedores",
                                 // data: @json($numerosAleatorios),
-                                data: [105,95,83, 72, 61, 58, 100,105,95,83, 72, 61],
+                                // data: [105,95,83, 72, 61, 58, 100,105,95,83, 72, 61],
+                                data: @json($vendedor),
                             },
                             {
                                 name: "Cantidad de Compradores",
-                                data: [76, 85, 101, 98, 87, 105, 61, 58, 100,105,95,83],
+                                // data: [76, 85, 101, 98, 87, 105, 61, 58, 100,105,95,83],
+                                data: @json($compradores),
                             },
                         ],
                         chart: {
@@ -326,10 +329,10 @@
                                 name: ["Son"],
                                 data: [0, 55, 57, 56, 61, 58,0, 55, 57, 56, 61, 58],
                             },
-                            {{--  {
-                                name: "Revenue",
-                                data: [76, 85, 101, 98, 87, 105],
-                            },  --}}
+                            // {
+                            //     name: "Revenue",
+                            //     data: [76, 85, 101, 98, 87, 105],
+                            // },
                         ],
                         chart: {
                             fontFamily: "inherit",
@@ -442,7 +445,8 @@
                         series: [
                             {
                                 name: "Monto de Venta",
-                                data: [30, 40, 40, 90, 90, 70, 70,20,50,18,80,10],
+                                // data: [30, 40, 40, 90, 90, 70, 70,20,50,18,80,10],
+                                data: @json($cantidaVentas),
                             },
                         ],
                         chart: {
@@ -686,9 +690,9 @@
     google.setOnLoadCallback(function () {
         var data = google.visualization.arrayToDataTable([
             ['Task', 'Hours per Day'],
-            ['Basica', 20],
-            ['Estandar', 10],
-            ['Premiun', 6],
+            ['Basica', @json($dato[0])],
+            ['Estandar', @json($dato[1])],
+            ['Premiun', @json($dato[2])],
         ]);
 
         var options = {

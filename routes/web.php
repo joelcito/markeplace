@@ -10,6 +10,7 @@ use App\Http\Controllers\VendedorController;
 use App\Http\Controllers\InformacionController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PersonaController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -78,6 +79,11 @@ Route::get('/persona/pedido', [PersonaController::class, 'pedido']);
 // LOGIN
 Route::get('/login', [LoginController::class, 'login']);
 Route::post('/login/ingresa', [LoginController::class, 'ingresa']);
+Route::get('/login/cerrar', [LoginController::class, 'cerrar']);
+
+// USUARIO
+Route::get('/users', [UserController::class, 'listado']);
+Route::post('/users/guarda', [UserController::class, 'guarda']);
 
 // // EXTERNOS
 // Route::post('/enviarcorreo', [CorreoController::class, 'enviarCorreo']);

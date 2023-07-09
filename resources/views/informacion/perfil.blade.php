@@ -13,25 +13,20 @@
         <!--begin::Content container-->
         <div id="kt_app_content_container" class="app-container container-xxl">
 
-            {{--  <div id="detalleperfil">
-
-            </div>  --}}
-
             <div class="row g-5 g-xxl-8">
                 <div class="col-xl-12">
                     <div class="card mb-5 mb-xxl-8">
                         <div class="card-body pb-0">
 
-                            {{--  @dd($informacion)  --}}
-
-                            <form action="{{ url('informacion/guarda') }}" id="formularioTienda" method="POST">
+                            <form action="{{ url('informacion/guarda') }}" id="formularioTienda" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row mt-6">
                                     <div class="col-md-3">
                                         <div style="height: 250px; width: 250px;">
-                                            <img src="{{ asset('imgLogoTienda/20230621015635.jpg') }}" alt="la imae" width="100%">
+                                            {{-- <img src="{{ asset('imgLogoTienda/20230621015635.jpg') }}" alt="la imae" width="100%"> --}}
+                                            <img src="{{ asset('qrs/'.$informacion[16]->descripcion) }}" alt="la imae" width="100%">
                                         </div>
-                                        <input type="file" class="form-control mt-5">
+                                        <input type="file" class="form-control mt-5" id="logo" name="logo">
                                     </div>
                                     <div class="col-md-9">
                                         <div class="row">
@@ -88,17 +83,26 @@
                                 <div class="row mt-6">
                                     <div class="col-md-4">
                                         <label for="" class="required">IMAGEN QR 1</label>
-                                        <img src="" alt="">
+                                        <br>
+                                        <center>
+                                            <img width="50%" src="{{ asset('qrs/'.$informacion[13]->descripcion) }}" alt="QR1">
+                                        </center>
                                         <input type="file" class="form-control" id="qr1" name="qr1">
                                     </div>
                                     <div class="col-md-4">
                                         <label for="" class="required">IMAGEN QR 2</label>
-                                        <img src="" alt="">
+                                        <br>
+                                        <center>
+                                            <img width="50%" src="{{ asset('qrs/'.$informacion[14]->descripcion) }}" alt="QR2">
+                                        </center>
                                         <input type="file" class="form-control" id="qr2" name="qr2">
                                     </div>
                                     <div class="col-md-4">
                                         <label for="" class="required">IMAGEN QR 3</label>
-                                        <img src="" alt="">
+                                        <br>
+                                        <center>
+                                            <img width="50%" src="{{ asset('qrs/'.$informacion[15]->descripcion) }}" alt="QR3">
+                                        </center>
                                         <input type="file" class="form-control" id="qr3" name="qr3">
                                     </div>
                                 </div>

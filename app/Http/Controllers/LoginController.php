@@ -35,4 +35,11 @@ class LoginController extends Controller
             dd("nada");
         }
     }
+
+    public function cerrar(Request $request){
+        $request->session()->forget('perfil');
+        $request->session()->forget('rol');
+
+        return redirect("https://comercio-latino.com/");
+    }
 }

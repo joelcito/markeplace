@@ -110,11 +110,11 @@
             <!--begin::Card toolbar-->
             <div class="card-toolbar">
                 <!--begin::Toolbar-->
-                <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
+                {{-- <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
                     <i class="ki-duotone ki-plus fs-2"></i>Nuevo Usuario</button>
                     <!--end::Add user-->
-                </div>
+                </div> --}}
                 <!--end::Toolbar-->
                 <!--begin::Group actions-->
                 <div class="d-flex justify-content-end align-items-center d-none" data-kt-user-table-toolbar="selected">

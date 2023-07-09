@@ -32,54 +32,63 @@
                 <!--begin::Modal body-->
                 <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
 
-                    <form id="formularioRol">
+                    <form method="POST" action="{{ url('users/guarda') }}">
                         @csrf
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="fv-row mb-7">
                                     <label class="required fw-semibold fs-6 mb-2">Nombre</label>
-                                    <input type="text" id="nombre" name="nombre" class="form-control form-control-solid mb-3 mb-lg-0">
+                                    <input type="text" id="nombre" name="nombre" class="form-control">
+                                    <input type="text" id="persona_id" name="persona_id" value="0">
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="fv-row mb-7">
                                     <label class="required fw-semibold fs-6 mb-2">Ap Paterno</label>
-                                    <input type="text" id="descripcion" name="descripcion" class="form-control form-control-solid mb-3 mb-lg-0" >
+                                    <input type="text" id="ap_paterno" name="ap_paterno" class="form-control" >
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="fv-row mb-7">
                                     <label class="required fw-semibold fs-6 mb-2">Ap Materno</label>
-                                    <input type="text" id="descripcion" name="descripcion" class="form-control form-control-solid mb-3 mb-lg-0" >
+                                    <input type="text" id="ap_materno" name="pa_maternmo" class="form-control" >
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="fv-row mb-7">
+                                    <label class="required fw-semibold fs-6 mb-2">Cedula</label>
+                                    <input type="text" id="cedula" name="cedula" class="form-control">
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="fv-row mb-7">
-                                    <label class="required fw-semibold fs-6 mb-2">Cedula</label>
-                                    <input type="text" id="nombre" name="nombre" class="form-control form-control-solid mb-3 mb-lg-0">
+                                    <label class="required fw-semibold fs-6 mb-2">Rol</label>
+                                    <select name="rol" id="rol" class="form-control">
+                                        <option value="1">Administrador</option>
+                                        <option value="3">Vendedor</option>
+                                        <option value="2">Comprador</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="fv-row mb-7">
-                                    <label class="required fw-semibold fs-6 mb-2">Cedula</label>
-                                    <input type="text" id="descripcion" name="descripcion" class="form-control form-control-solid mb-3 mb-lg-0" >
+                                    <label for="">Usuario</label>
+                                    <input type="text" class="form-control" id="usuario" name="usuario">
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="fv-row mb-7">
-                                    <label class="required fw-semibold fs-6 mb-2">Imagne</label>
-                                    <input type="file" id="descripcion" name="descripcion" class="form-control form-control-solid mb-3 mb-lg-0" >
-                                </div>
+                                <label for="">Contraseña</label>
+                                <input type="password" class="form-control" id="pass" name="pass">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button class="btn btn-success w-100" type="submit">Guardar</button>
                             </div>
                         </div>
                     </form>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <button class="btn btn-success w-100">Guardar</button>
-                        </div>
-                    </div>
                 </div>
                 <!--end::Modal body-->
             </div>
@@ -220,7 +229,30 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    @foreach ($perfiles as $p)
+                        <tr>
+                            <td>{{ $p->idPerfil }}</td>
+                            <td>{{ $p->persona->nombres }} Jonathan</td>
+                            <td>{{ $p->persona->apellido_paterno }}</td>
+                            <td>{{ $p->persona->apellido_materno }}</td>
+                            <td>{{ $p->persona->ci }}</td>
+                            <td>
+                                @if ($p->rol === 1)
+                                    <span class="badge badge-success">Administrador</span>
+                                @elseif($p->rol === 2)
+                                    <span class="badge badge-dark">Comprador</span>
+                                @elseif($p->rol === 3)
+                                        <span class="badge badge-warning">Vendedor</span>
+                                @endif
+                            </td>
+                            <td>{{ $p->usuario }}</td>
+                            <td>
+                                <button class="btn btn-warning btn-icon btn-sm"><i class="fa fa-edit"></i></button></button>
+                                <button class="btn btn-danger btn-icon btn-sm"><i class="fa fa-trash"></i></button></button>
+                            </td>
+                        </tr>
+                    @endforeach
+                    {{-- <tr>
                         <td>1</td>
                         <td>Joel Jonathan</td>
                         <td>Flores</td>
@@ -258,7 +290,7 @@
                             <button class="btn btn-warning btn-icon btn-sm"><i class="fa fa-edit"></i></button></button>
                             <button class="btn btn-danger btn-icon btn-sm"><i class="fa fa-trash"></i></button></button>
                         </td>
-                    </tr>
+                    </tr> --}}
                 </tbody>
             </table>
             {{--  <div id="table_roles">
@@ -293,7 +325,7 @@
         })
 
         $( document ).ready(function() {
-            ajaxListado();
+            // ajaxListado();
         });
 
        function guardarVenta(){

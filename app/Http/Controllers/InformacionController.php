@@ -23,16 +23,8 @@ class InformacionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function guarda(Request $request)
-    {
-        // $informacion                = Informacion::where('codigo',"quienessomos")->first();
-        // $informacion                = Informacion::where('codigo',"quienessomos")->toSql();
+    public function guarda(Request $request){
 
-        // dd($informacion);
-        // $informacion->descripcion   = $request->input('quienessomos');
-        // $informacion->descripcion   = "JOEL.";
-        // $informacion->save();
-        // dd($request->input('quienessomos'), $informacion, $informacion->descripcion);
         $informacion = Informacion::where('codigo',"mision")->first();
         $informacion->descripcion = $request->input('mision');
         $informacion->save();
@@ -57,22 +49,50 @@ class InformacionController extends Controller
         $informacion = Informacion::where('codigo',"correo")->first();
         $informacion->descripcion = $request->input('correo');
         $informacion->save();
-        $informacion = Informacion::where('codigo',"qr1")->first();
-        $informacion->descripcion = $request->input('qr1');
-        $informacion->save();
-        $informacion = Informacion::where('codigo',"qr2")->first();
-        $informacion->descripcion = $request->input('qr2');
-        $informacion->save();
-        $informacion = Informacion::where('codigo',"qr3")->first();
-        $informacion->descripcion = $request->input('qr3');
-        $informacion->save();
 
-        // $informacion    = Informacion::all();
-        // $informacion[1]->descripcion = "joel";
-        // dd($informacion[1]->descripcion);
-        // $informacion[1]->save();
-        // dd($informacion);
-        // dd($informacion[0]->descripcion);
+        if($request->hasFile('qr1')){
+
+            $archivo = $request->file('qr1');
+            $nombreArchivo = $archivo->getClientOriginalName();
+            $archivo->move(public_path('qrs'), $nombreArchivo);
+
+            $informacion = Informacion::where('codigo',"qr1")->first();
+            $informacion->descripcion = $nombreArchivo;
+            $informacion->save();
+        }
+
+        if($request->hasFile('qr2')){
+
+            $archivo = $request->file('qr2');
+            $nombreArchivo = $archivo->getClientOriginalName();
+            $archivo->move(public_path('qrs'), $nombreArchivo);
+
+            $informacion = Informacion::where('codigo',"qr2")->first();
+            $informacion->descripcion = $nombreArchivo;
+            $informacion->save();
+        }
+
+        if($request->hasFile('qr3')){
+
+            $archivo = $request->file('qr3');
+            $nombreArchivo = $archivo->getClientOriginalName();
+            $archivo->move(public_path('qrs'), $nombreArchivo);
+
+            $informacion = Informacion::where('codigo',"qr3")->first();
+            $informacion->descripcion = $nombreArchivo;
+            $informacion->save();
+        }
+
+        if($request->hasFile('logo')){
+
+            $archivo = $request->file('logo');
+            $nombreArchivo = $archivo->getClientOriginalName();
+            $archivo->move(public_path('qrs'), $nombreArchivo);
+
+            $informacion = Informacion::where('codigo',"logo")->first();
+            $informacion->descripcion = $nombreArchivo;
+            $informacion->save();
+        }
 
         return redirect('informacion/perfil');
     }
