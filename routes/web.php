@@ -72,18 +72,24 @@ Route::get('/subcripcion/subcripcion', [SubcripcionControler::class, 'subcripcio
 Route::get('/informacion/perfil', [InformacionController::class, 'perfil']);
 Route::post('/informacion/guarda', [InformacionController::class, 'guarda']);
 
-// COMPRADOR
+// PERSONA / COMPRADOR
 Route::get('/persona/perfil', [PersonaController::class, 'perfil']);
 Route::get('/persona/pedido', [PersonaController::class, 'pedido']);
+Route::post('/persona/guarda', [PersonaController::class, 'guarda']);
 
 // LOGIN
 Route::get('/login', [LoginController::class, 'login']);
 Route::post('/login/ingresa', [LoginController::class, 'ingresa']);
+Route::get('/login/ingresaDennis', [LoginController::class, 'ingresaDennis']);
 Route::get('/login/cerrar', [LoginController::class, 'cerrar']);
+// Route::get('/login/volver', function () {
+//     return redirect()->to('https://www.otro-dominio.com');
+// });
 
 // USUARIO
 Route::get('/users', [UserController::class, 'listado']);
 Route::post('/users/guarda', [UserController::class, 'guarda']);
+
 
 // // EXTERNOS
 // Route::post('/enviarcorreo', [CorreoController::class, 'enviarCorreo']);

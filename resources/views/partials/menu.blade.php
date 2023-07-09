@@ -208,7 +208,7 @@
                     </a>
                     <!--end:Menu link-->
                 </div>
-                <div class="menu-item">
+                {{-- <div class="menu-item">
                     <!--begin:Menu link-->
                     <a class="menu-link" href="{{ url('/tramite') }}">
                         <span class="menu-icon">
@@ -220,7 +220,7 @@
                         <span class="menu-title">AJUSTES ADICIONALES</span>
                     </a>
                     <!--end:Menu link-->
-                </div>
+                </div> --}}
                 <!--end:Menu item-->
             @endif
 

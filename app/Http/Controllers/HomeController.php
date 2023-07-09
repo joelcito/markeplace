@@ -8,9 +8,14 @@ use App\Models\Venta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+// use Illuminate\Support\Facades\Request;
+
 class HomeController extends Controller
 {
+
     public function index(Request $request){
+        $logeo = app(LoginController::class);
+        $logeo->verificaLogueo();
 
         // PRODUCTOS MAS VENDIDOS
         // $prodyctosTienda = Producto::all();

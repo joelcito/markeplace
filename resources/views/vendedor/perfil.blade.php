@@ -42,44 +42,37 @@
                                     </div>
                                 </div>
 
-                                <div class="row mt-6">
+                                <div class="row mt-12">
                                     <div class="col-md-6">
                                         <label for="" class="required">Pais / Ciudad</label>
-                                        <input type="text" id="" name="" class="form-control">
+                                        <input type="text" id="ubicacion" name="ubicacion" class="form-control" value="{{ $tienda->ubicacion }}">
                                     </div>
-                                    <div class="col-md-6">
-                                        <label for="" class="required">Direccion de la Tienda</label>
-                                        <input type="text" id="" name="" class="form-control">
-                                    </div>
-                                </div>
-
-                                <div class="row mt-6">
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <label for="" class="required">Correo</label>
                                         <input type="email" id="correo" name="correo" class="form-control" value="{{ $tienda->correo }}">
                                     </div>
-                                    <div class="col-md-4">
-                                        <label for="" class="required">Telefono</label>
-                                        <input type="text" id="" name="" class="form-control">
-                                    </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <label for="" class="required">Celular</label>
                                         <input type="text" id="celular" name="celular" class="form-control" value="{{ $tienda->celular }}">
                                     </div>
+                                    {{-- <div class="col-md-6">
+                                        <label for="" class="required">Direccion de la Tienda</label>
+                                        <input type="text" id="" name="" class="form-control">
+                                    </div> --}}
                                 </div>
 
                                 <div class="row mt-6">
                                     <div class="col-md-4">
                                         <label for="">Enlace WhatsApp</label>
-                                        <input type="text" id="" name="" class="form-control">
+                                        <input type="text" id="url_whatsapp" name="url_whatsapp" class="form-control" value="{{ $tienda->url_whatsapp }}">
                                     </div>
                                     <div class="col-md-4">
                                         <label for="">Enlace Facebook</label>
-                                        <input type="text" id="" name="" class="form-control">
+                                        <input type="text" id="url_facebook" name="url_facebook" class="form-control" value="{{ $tienda->url_facebook }}">
                                     </div>
                                     <div class="col-md-4">
                                         <label for="">Enlace Instagram</label>
-                                        <input type="text" id="" name="" class="form-control">
+                                        <input type="text" id="url_instagram" name="url_instagram" class="form-control" value="{{ $tienda->url_instagram }}">
                                     </div>
                                 </div>
                                 <div class="row mt-6">
@@ -126,10 +119,17 @@
                 //}
                 formData.append('nombre',       $('#nombre').val());
                 formData.append('nit',          $('#nit').val());
+                formData.append('descripcion',  $('#descripcion').val());
+
+                formData.append('ubicacion',        $('#ubicacion').val());
+                formData.append('url_facebook',     $('#url_facebook').val());
+                formData.append('url_instagram',    $('#url_instagram').val());
+                formData.append('url_whatsapp',     $('#url_whatsapp').val());
+
                 formData.append('celular',      $('#celular').val());
                 formData.append('correo',       $('#correo').val());
-                formData.append('descripcion',  $('#descripcion').val());
                 formData.append('tienda_id',    $('#tienda_id').val());
+
                 $.ajax({
                     url: "{{ url('tienda/guarda') }}",
                     data:formData,
@@ -146,6 +146,7 @@
                                 timer: 1500
                             })
                             $('#detalleperfil').html(data.detalle);
+                            location.reload(); // Recargar la página
                         }
                     }
                 });

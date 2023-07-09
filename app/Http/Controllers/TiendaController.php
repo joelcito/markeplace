@@ -38,11 +38,19 @@ class TiendaController extends Controller
                 $tienda = Tienda::where('idTienda',$tienda_id)->first();
             }
 
+            // dd($request->all());
+
             $tienda->nombre         = $request->input('nombre');
             $tienda->nit            = $request->input('nit');
             $tienda->celular        = $request->input('celular');
             $tienda->correo         = $request->input('correo');
             $tienda->descripcion    = $request->input('descripcion');
+
+            $tienda->ubicacion      = $request->input('ubicacion');
+            $tienda->url_facebook   = $request->input('url_facebook');
+            $tienda->url_instagram  = $request->input('url_instagram');
+            $tienda->url_whatsapp   = $request->input('url_whatsapp');
+            $tienda->url_correo     = $request->input('correo');
 
             if($request->file('archivo')){
                 $archivos           = $request->file('archivo');
@@ -77,20 +85,17 @@ class TiendaController extends Controller
     }
 
     public function perfil(Request $request){
-
-        $tienda = Tienda::find(1);
-
+        $persona_id = session('perfil')->idPersona;
+        $tienda = Tienda::where('usuario_creacion', $persona_id)->first();
         return view('vendedor.perfil')->with(compact('tienda'));
     }
 
     public function detallePerfil(Request $request){
         if($request->ajax()){
-            $tienda_id = 1;
-            $tienda = Tienda::find($tienda_id);
-
+            $persona_id = session('perfil')->idPersona;
+            $tienda = Tienda::where('usuario_creacion', $persona_id)->first();
             $data['estado'] = "success";
             $data['detalle'] = view('tienda.detallePerfil')->with(compact('tienda'))->render();
-
         }else{
 
         }

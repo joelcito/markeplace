@@ -96,25 +96,26 @@
         <div class="card-header border-0 pt-6">
             <!--begin::Card title-->
             <div class="card-title">
+                <h3>LISTADO DE PEDIDOS</h3>
                 <!--begin::Search-->
-                <div class="d-flex align-items-center position-relative my-1">
+                {{-- <div class="d-flex align-items-center position-relative my-1">
                     <i class="ki-duotone ki-magnifier fs-3 position-absolute ms-5">
                         <span class="path1"></span>
                         <span class="path2"></span>
                     </i>
                     <input type="text" data-kt-user-table-filter="search" class="form-control form-control-solid w-250px ps-13" placeholder="Buscar Usuario" />
-                </div>
+                </div> --}}
                 <!--end::Search-->
             </div>
             <!--begin::Card title-->
             <!--begin::Card toolbar-->
             <div class="card-toolbar">
                 <!--begin::Toolbar-->
-                <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
+                {{-- <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
                     <i class="ki-duotone ki-plus fs-2"></i>Nuevo Usuario</button>
                     <!--end::Add user-->
-                </div>
+                </div> --}}
                 <!--end::Toolbar-->
                 <!--begin::Group actions-->
                 <div class="d-flex justify-content-end align-items-center d-none" data-kt-user-table-toolbar="selected">

@@ -19,13 +19,37 @@
             <td></td>
             <td>
                 @if ($v->estadoproducto == 1)
-                    <span class="badge badge-success">Iniciado</span>
+                    <select name="" id="" class="form-control">
+                        <option value="1" selected>Iniciado</option>
+                        <option value="2">En proceso</option>
+                        <option value="3">Finalizado</option>
+                        <option value="4">Finalizado sin entrega</option>
+                    </select>
+                    {{-- <span class="badge badge-success">Iniciado</span> --}}
                 @elseif($v->estadoproducto == 2)
-                    <span class="badge badge-success">En proceso</span>
+                    <select name="" id="" class="form-control">
+                        <option value="1" >Iniciado</option>
+                        <option value="2" selected>En proceso</option>
+                        <option value="3">Finalizado</option>
+                        <option value="4">Finalizado sin entrega</option>
+                    </select>
+                    {{-- <span class="badge badge-success">En proceso</span> --}}
                 @elseif($v->estadoproducto == 3)
-                    <span class="badge badge-success">Finalizado</span>
+                    <select name="" id="" class="form-control">
+                        <option value="1" >Iniciado</option>
+                        <option value="2" >En proceso</option>
+                        <option value="3" selected>Finalizado</option>
+                        <option value="4">Finalizado sin entrega</option>
+                    </select>
+                    {{-- <span class="badge badge-success">Finalizado</span> --}}
                 @elseif($v->estadoproducto == 4)
-                    <span class="badge badge-success">Finalizado sin entrega</span>
+                    <select name="" id="" class="form-control">
+                        <option value="1" >Iniciado</option>
+                        <option value="2" >En proceso</option>
+                        <option value="3" >Finalizado</option>
+                        <option value="4" selected>Finalizado sin entrega</option>
+                    </select>
+                    {{-- <span class="badge badge-success">Finalizado sin entrega</span> --}}
                 @endif
             </td>
             {{-- <td>
