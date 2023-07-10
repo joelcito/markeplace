@@ -16,7 +16,9 @@ class PersonaController extends Controller
     }
 
     public function pedido(Request $request){
-        $ventas = Venta::all();
+        // $ventas = Venta::all();
+        $perfil_id = session('perfil')->idPerfil;
+        $ventas = Venta::where('idPerfil', $perfil_id)->get();
         return view('persona.venta')->with(compact('ventas'));
     }
 
