@@ -19,38 +19,35 @@
             <td></td>
             <td>
                 @if ($v->estadoproducto == 1)
-                    <select name="" id="" class="form-control">
+                    <select name="estado_pedido_{{ $v->idVenta }}" id="estado_pedido_{{ $v->idVenta }}" class="form-control" onchange="cambiaEstado(this, '{{ $v->idVenta }}')">
                         <option value="1" selected>Iniciado</option>
                         <option value="2">En proceso</option>
                         <option value="3">Finalizado</option>
                         <option value="4">Finalizado sin entrega</option>
                     </select>
-                    {{-- <span class="badge badge-success">Iniciado</span> --}}
                 @elseif($v->estadoproducto == 2)
-                    <select name="" id="" class="form-control">
+                    <select name="estado_pedido_{{ $v->idVenta }}" id="estado_pedido_{{ $v->idVenta }}" class="form-control" onchange="cambiaEstado(this, '{{ $v->idVenta }}')">
                         <option value="1" >Iniciado</option>
                         <option value="2" selected>En proceso</option>
                         <option value="3">Finalizado</option>
                         <option value="4">Finalizado sin entrega</option>
                     </select>
-                    {{-- <span class="badge badge-success">En proceso</span> --}}
                 @elseif($v->estadoproducto == 3)
-                    <select name="" id="" class="form-control">
+                    <select name="estado_pedido_{{ $v->idVenta }}" id="estado_pedido_{{ $v->idVenta }}" class="form-control" onchange="cambiaEstado(this, '{{ $v->idVenta }}')">
                         <option value="1" >Iniciado</option>
                         <option value="2" >En proceso</option>
                         <option value="3" selected>Finalizado</option>
                         <option value="4">Finalizado sin entrega</option>
                     </select>
-                    {{-- <span class="badge badge-success">Finalizado</span> --}}
                 @elseif($v->estadoproducto == 4)
-                    <select name="" id="" class="form-control">
+                    <select name="estado_pedido_{{ $v->idVenta }}" id="estado_pedido_{{ $v->idVenta }}" class="form-control" onchange="cambiaEstado(this, '{{ $v->idVenta }}')">
                         <option value="1" >Iniciado</option>
                         <option value="2" >En proceso</option>
                         <option value="3" >Finalizado</option>
                         <option value="4" selected>Finalizado sin entrega</option>
                     </select>
-                    {{-- <span class="badge badge-success">Finalizado sin entrega</span> --}}
                 @endif
+                <small class="text-success" style="display: none" id="msg_{{ $v->idVenta }}">Guardado...</small>
             </td>
             {{-- <td>
                 <button class="btn btn-warning btn-icon btn-sm" onclick="edita('{{ $c->idSubcategoria }}', '{{ $c->nombre }}', '{{ $c->descripcion }}', '{{ $c->idCategoria }}')"><i class="fa fa-edit"></i></button></button>

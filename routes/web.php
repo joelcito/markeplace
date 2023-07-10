@@ -64,6 +64,7 @@ Route::post('/tienda/detallePerfil', [TiendaController::class, 'detallePerfil'])
 Route::get('/vendedor/inicio', [VendedorController::class, 'index']);
 Route::get('/vendedor/pedido', [VendedorController::class, 'pedido']);
 Route::post('/vendedor/ajaxListadoPedido', [VendedorController::class, 'ajaxListadoPedido']);
+Route::post('/vendedor/cambiaEstado', [VendedorController::class, 'cambiaEstado']);
 
 // SUBCRIPCION
 Route::get('/subcripcion/subcripcion', [SubcripcionControler::class, 'subcripcion']);

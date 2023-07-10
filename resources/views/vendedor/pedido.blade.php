@@ -303,6 +303,23 @@
             });
         }
 
+        function cambiaEstado(select, venta){
+            $.ajax({
+                url: "{{ url('vendedor/cambiaEstado') }}",
+                type: 'POST',
+                data:{
+                    estado:select.value,
+                    venta:venta
+                },
+                dataType: 'json',
+                success: function(data) {
+                    if(data.estado === 'success')
+                        $('#msg_'+venta).show("toogle");
+                }
+            });
+
+        }
+
     //     function eliminar(rol){
     //         $.ajax({
     //             url: "{{ url('rol/eliminar') }}",

@@ -69,15 +69,17 @@ class VendedorController extends Controller
         return view("vendedor.ajaxListadoPedido")->with(compact('ventas'))->render();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Vendedor  $vendedor
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Vendedor $vendedor)
-    {
-        //
+    public function cambiaEstado(Request $request)    {
+        if($request->ajax()){
+            $venta_id = $request->input('venta');
+            $venta = Venta::find($venta_id);
+            $venta->estadoproducto = $request->input('estado');
+            $venta->save();
+            $data['estado'] = 'success';
+        }else{
+            $data['estado'] = 'error';
+        }
+        return $data;
     }
 
     /**
