@@ -50,7 +50,8 @@ class ProductoController extends Controller
 
             dd(
                 $perfil->idPersona,
-                $perfil->persona->tienda->idTienda,
+                $perfil->persona,
+                // $perfil->persona->tienda->idTienda,
                 $request->all(),
                 ((100*$request->input('descuento'))/$request->input('precio_unitario'))/100
             );
