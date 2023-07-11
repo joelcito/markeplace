@@ -46,21 +46,27 @@ class ProductoController extends Controller
                 $producto = Producto::find($prodducto_id);
             }
 
+            $perfil = session('perfil');
+
+            // dd(
+            //     $perfil->idPersona,
+            //     $perfil->persona->tienda->idTienda,
+            //     $request->all(),
+            //     ((100*$request->input('descuento'))/$request->input('precio_unitario'))/100
+            // );
+
             $producto->idSubcategoria   = $request->input('categoria_id');
-            $producto->idTienda         = 1;
+            $producto->idTienda         = $perfil->persona->tienda->idTienda;
             $producto->nombre           = $request->input('nombre');
             $producto->descripcion      = $request->input('descripcion');
             $producto->preciounitario   = $request->input('precio_unitario');
             $producto->cantidad         = $request->input('cantidad');
             $producto->estadoproducto   = 1;
             $producto->estado           = 1;
-            $producto->estado           = 1;
-
-            $producto->moneda           = 0; //momentaneo
-            $producto->promocion        = 0; //momentaneo
-            $producto->descuento        = 0; //momentaneo
+            $producto->usuario_creacion = $perfil->idPersona;
+            $producto->moneda           = $request->input('moneda');
+            $producto->descuento        = ((100*$request->input('descuento'))/$request->input('precio_unitario'))/100;
             $producto->calificacion     = 0; //momentaneo
-
             $producto->ubicacion        = "La Paz, Bolivia";
 
             if($request->file('archivo')){

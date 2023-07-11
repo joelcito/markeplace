@@ -86,15 +86,15 @@
                             <div class="col-md-3">
                                 <div class="fv-row mb-7">
                                     <label class="required fw-semibold fs-6 mb-2">Descuento</label>
-                                    <input type="number" id="cantidad" name="cantidad" class="form-control form-control-solid mb-3 mb-lg-0" >
+                                    <input type="number" id="descuento" name="descuento" class="form-control form-control-solid mb-3 mb-lg-0" >
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="fv-row mb-7">
                                     <label class="required fw-semibold fs-6 mb-2">Tipo M.</label>
-                                    <select name="" id="" class="form-control form-control-solid mb-3 mb-lg-0">
-                                        <option value="Bs">Bs</option>
-                                        <option value="$us">$us</option>
+                                    <select name="moneda" id="moneda" class="form-control form-control-solid mb-3 mb-lg-0">
+                                        <option value="0">Bs</option>
+                                        <option value="1">$us</option>
                                     </select>
                                 </div>
                             </div>
@@ -349,6 +349,8 @@
                 formData.append('categoria_id',     $('#subcategoria_id').val());
                 formData.append('precio_unitario',  $('#precio_unitario').val());
                 formData.append('cantidad',         $('#cantidad').val());
+                formData.append('descuento',         $('#descuento').val());
+                formData.append('moneda',           $('#moneda').val());
                 $.ajax({
                     url: "{{ url('producto/guarda') }}",
                     data:formData,
