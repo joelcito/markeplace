@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Producto;
+use App\Models\Tienda;
 use App\Models\Vendedor;
 use App\Models\Venta;
 use Illuminate\Http\Request;
@@ -65,6 +66,13 @@ class VendedorController extends Controller
     }
 
     protected function listadoArray(){
+
+        // dd(session('perfil')->idPersona);
+        // $persona_id = session('perfil')->idPersona;
+        // $tienda = Tienda::where('usuario_creacion', $persona_id)->first();
+        // $productos = Producto::where('idTienda',$tienda->idTienda)->get();
+        // dd($tienda, $productos);
+
         $ventas = Venta::orderBy('idVenta', 'desc')->get();
         return view("vendedor.ajaxListadoPedido")->with(compact('ventas'))->render();
     }
