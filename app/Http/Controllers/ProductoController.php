@@ -48,12 +48,12 @@ class ProductoController extends Controller
 
             $perfil = session('perfil');
 
-            // dd(
-            //     $perfil->idPersona,
-            //     $perfil->persona->tienda->idTienda,
-            //     $request->all(),
-            //     ((100*$request->input('descuento'))/$request->input('precio_unitario'))/100
-            // );
+            dd(
+                $perfil->idPersona,
+                $perfil->persona->tienda->idTienda,
+                $request->all(),
+                ((100*$request->input('descuento'))/$request->input('precio_unitario'))/100
+            );
 
             $producto->idSubcategoria   = $request->input('categoria_id');
             $producto->idTienda         = $perfil->persona->tienda->idTienda;
