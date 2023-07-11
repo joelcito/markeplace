@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Categoria;
+use App\Models\Tienda;
 use App\Models\Producto;
 use App\Models\SubCategoria;
 use Illuminate\Http\Request;
@@ -47,17 +48,20 @@ class ProductoController extends Controller
             }
 
             $perfil = session('perfil');
+            // $persona = Persona::find($perfil->idPersona);
+            $tienda  = Tienda::where('usuario_creacion', $perfil->idPersona)->first();
 
-            dd(
-                $perfil->idPersona,
-                // $perfil->persona,
-                // $perfil->persona->tienda->idTienda,
-                $request->all(),
-                ((100*$request->input('descuento'))/$request->input('precio_unitario'))/100
-            );
+            // dd(
+            //     $perfil->idPersona,
+            //     $tienda,
+            //     // $perfil->persona,
+            //     // $perfil->persona->tienda->idTienda,
+            //     $request->all(),
+            //     ((100*$request->input('descuento'))/$request->input('precio_unitario'))/100
+            // );
 
             $producto->idSubcategoria   = $request->input('categoria_id');
-            $producto->idTienda         = $perfil->persona->tienda->idTienda;
+            $producto->idTienda         = $tienda->idTienda;
             $producto->nombre           = $request->input('nombre');
             $producto->descripcion      = $request->input('descripcion');
             $producto->preciounitario   = $request->input('precio_unitario');
