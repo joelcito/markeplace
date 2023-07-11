@@ -40,7 +40,7 @@
                             <div class="col-md-6">
                                 <div class="fv-row mb-7">
                                     <label class="required fw-semibold fs-6 mb-2">Categoria</label>
-                                    <select name="categoria_id" id="categoria_id" class="form-control form-control-solid mb-3 mb-lg-0" onchange="buscarSubCategorias(this)">
+                                    <select name="categoria_id" id="categoria_id" class="form-control form-control-solid mb-3 mb-lg-0" onchange="buscarSubCategorias(this)" required>
                                         <option value="">SELECCIONE</option>
                                         @foreach ($categorias as $c)
                                             <option value="{{ $c->idCategoria }}">{{ $c->nombre }}</option>
@@ -51,7 +51,7 @@
                             <div class="col-md-6">
                                 <div class="fv-row mb-7">
                                     <label class="required fw-semibold fs-6 mb-2"> Sub Categoria</label>
-                                    <select name="subcategoria_id" id="subcategoria_id" class="form-control form-control-solid mb-3 mb-lg-0">
+                                    <select name="subcategoria_id" id="subcategoria_id" class="form-control form-control-solid mb-3 mb-lg-0" required>
                                         @foreach ($subcategorias as $c)
                                             <option value="{{ $c->idSubcategoria }}">{{ $c->nombre }}</option>
                                         @endforeach
@@ -63,8 +63,8 @@
                             <div class="col-md-12">
                                 <div class="fv-row mb-7">
                                     <label class="required fw-semibold fs-6 mb-2">Titulo</label>
-                                    <input type="text" id="nombre" name="nombre" class="form-control form-control-solid mb-3 mb-lg-0">
-                                    <input type="hidden" id="producto_id" name="producto_id" value="0">
+                                    <input type="text" id="nombre" name="nombre" class="form-control form-control-solid mb-3 mb-lg-0" required>
+                                    <input type="hidden" id="producto_id" name="producto_id" value="0" >
                                 </div>
                             </div>
                         </div>
@@ -72,7 +72,7 @@
                             <div class="col-md-12">
                                 <div class="fv-row mb-7">
                                     <label class="required fw-semibold fs-6 mb-2">Descripcion</label>
-                                    <textarea id="descripcion" name="descripcion" cols="30" rows="3" class="form-control form-control-solid mb-3 mb-lg-0"></textarea>
+                                    <textarea id="descripcion" name="descripcion" cols="30" rows="3" class="form-control form-control-solid mb-3 mb-lg-0" required></textarea>
                                 </div>
                             </div>
                         </div>
@@ -80,19 +80,19 @@
                             <div class="col-md-3">
                                 <div class="fv-row mb-7">
                                     <label class="required fw-semibold fs-6 mb-2">Prec. Uni.</label>
-                                    <input type="number" id="precio_unitario" name="precio_unitario" class="form-control form-control-solid mb-3 mb-lg-0">
+                                    <input type="number" id="precio_unitario" name="precio_unitario" class="form-control form-control-solid mb-3 mb-lg-0" required>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="fv-row mb-7">
                                     <label class="required fw-semibold fs-6 mb-2">Descuento</label>
-                                    <input type="number" id="descuento" name="descuento" class="form-control form-control-solid mb-3 mb-lg-0" >
+                                    <input type="number" id="descuento" name="descuento" class="form-control form-control-solid mb-3 mb-lg-0"  required>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="fv-row mb-7">
                                     <label class="required fw-semibold fs-6 mb-2">Tipo M.</label>
-                                    <select name="moneda" id="moneda" class="form-control form-control-solid mb-3 mb-lg-0">
+                                    <select name="moneda" id="moneda" class="form-control form-control-solid mb-3 mb-lg-0" required>
                                         <option value="0">Bs</option>
                                         <option value="1">$us</option>
                                     </select>
@@ -101,7 +101,7 @@
                             <div class="col-md-3">
                                 <div class="fv-row mb-7">
                                     <label class="required fw-semibold fs-6 mb-2">Cantidad Disponible</label>
-                                    <input type="text" id="cantidad" name="cantidad" class="form-control form-control-solid mb-3 mb-lg-0" >
+                                    <input type="text" id="cantidad" name="cantidad" class="form-control form-control-solid mb-3 mb-lg-0" required>
                                 </div>
                             </div>
                         </div>
@@ -109,13 +109,13 @@
                             <div class="col-md-6">
                                 <div class="fv-row mb-7">
                                     <label class="required fw-semibold fs-6 mb-2">Archivo PDF</label>
-                                    <input type="file" id="archivo" name="archivo" class="form-control form-control-solid mb-3 mb-lg-0" multiple>
+                                    <input type="file" id="archivo" name="archivo" class="form-control form-control-solid mb-3 mb-lg-0" multiple required>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="fv-row mb-7">
                                     <label class="required fw-semibold fs-6 mb-2">Imagenes</label>
-                                    <input type="file" id="imagenes" name="imagenes" class="form-control form-control-solid mb-3 mb-lg-0" multiple accept="image/*">
+                                    <input type="file" id="imagenes" name="imagenes" class="form-control form-control-solid mb-3 mb-lg-0" multiple accept="image/*" required>
                                 </div>
                             </div>
                         </div>
@@ -340,17 +340,19 @@
 
                 var formData = new FormData();
                 var archivo = $('#imagenes')[0].files;
-                for(let i=0;i<archivo.length;i++){
+
+                for(let i=0;i<archivo.length;i++)
                     formData.append('archivo[]', archivo[i]);
-                }
+
                 formData.append('nombre',           $('#nombre').val());
                 formData.append('producto_id',      $('#producto_id').val());
                 formData.append('descripcion',      $('#descripcion').val());
                 formData.append('categoria_id',     $('#subcategoria_id').val());
                 formData.append('precio_unitario',  $('#precio_unitario').val());
                 formData.append('cantidad',         $('#cantidad').val());
-                formData.append('descuento',         $('#descuento').val());
+                formData.append('descuento',        $('#descuento').val());
                 formData.append('moneda',           $('#moneda').val());
+
                 $.ajax({
                     url: "{{ url('producto/guarda') }}",
                     data:formData,

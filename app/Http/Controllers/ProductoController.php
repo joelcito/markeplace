@@ -34,7 +34,16 @@ class ProductoController extends Controller
 
     protected function listadoArray(){
         // $productos = Producto::all();
-        $productos = Producto::orderBy('idproducto', 'desc')->get();
+
+        // dd(session()->all());
+        // dd(session('perfil'));
+
+        $perfil = session('perfil');
+        $tienda  = Tienda::where('usuario_creacion', $perfil->idPersona)->first();
+
+        $productos = Producto::where('idTienda', $tienda->idTienda)
+                            ->orderBy('idproducto', 'desc')
+                            ->get();
         return view("producto.ajaxListado")->with(compact('productos'))->render();
     }
 
@@ -48,17 +57,7 @@ class ProductoController extends Controller
             }
 
             $perfil = session('perfil');
-            // $persona = Persona::find($perfil->idPersona);
             $tienda  = Tienda::where('usuario_creacion', $perfil->idPersona)->first();
-
-            // dd(
-            //     $perfil->idPersona,
-            //     $tienda,
-            //     // $perfil->persona,
-            //     // $perfil->persona->tienda->idTienda,
-            //     $request->all(),
-            //     ((100*$request->input('descuento'))/$request->input('precio_unitario'))/100
-            // );
 
             $producto->idSubcategoria   = $request->input('categoria_id');
             $producto->idTienda         = $tienda->idTienda;

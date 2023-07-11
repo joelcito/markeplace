@@ -21,7 +21,6 @@
             <th class="text-center">Stock</th>
             <th class="text-center">Estado</th>
             <th class="text-center">Calificacion</th>
-            {{--  <th>Ubicacion</th>  --}}
             <th></th>
         </tr>
     </thead>
