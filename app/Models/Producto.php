@@ -11,4 +11,9 @@ class Producto extends Model
     protected $table        = "producto";
     public $timestamps      = false;
     protected $primaryKey   = "idProducto";
+
+    public function subCategoria()
+    {
+        return $this->belongsTo('App\Models\subCategoria', 'idSubcategoria');
+    }
 }

@@ -14,7 +14,7 @@
         <tr class="text-white bg-primary text-uppercase text-center">
             <th class="text-center">Codigo</th>
             <th class="text-center" width="80px">Imagen</th>
-            <th class="text-center">Categoria</th>
+            <th class="text-center">Sub Categoria</th>
             <th class="text-center">Titulo</th>
             <th class="text-center">Descripcion</th>
             <th class="text-center">Precio Unitario</th>
@@ -42,7 +42,7 @@
                 @endif
             </td>
             <td>
-
+                {{ $p->subCategoria->nombre }}
             </td>
             <td>{{ $p->nombre }}</td>
             <td class="limited-cell limited-text">

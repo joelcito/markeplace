@@ -498,6 +498,7 @@
             $('#descuento').val('')
             $('#moneda').val(0)
             $('#categoria_id').val('')
+            $('#vista-previa').html("")
         }
     </script>
 @endsection
