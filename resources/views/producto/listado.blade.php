@@ -64,7 +64,7 @@
                                 <div class="fv-row mb-7">
                                     <label class="required fw-semibold fs-6 mb-2">Titulo</label>
                                     <input type="text" id="nombre" name="nombre" class="form-control form-control-solid mb-3 mb-lg-0" required>
-                                    <input type="hidden" id="producto_id" name="producto_id" value="0" >
+                                    <input type="text" id="producto_id" name="producto_id" value="0" >
                                 </div>
                             </div>
                         </div>
@@ -151,13 +151,13 @@
             <!--begin::Card title-->
             <div class="card-title">
                 <!--begin::Search-->
-                <div class="d-flex align-items-center position-relative my-1">
+                {{--  <div class="d-flex align-items-center position-relative my-1">
                     <i class="ki-duotone ki-magnifier fs-3 position-absolute ms-5">
                         <span class="path1"></span>
                         <span class="path2"></span>
                     </i>
                     <input type="text" data-kt-user-table-filter="search" class="form-control form-control-solid w-250px ps-13" placeholder="Buscar Usuario" />
-                </div>
+                </div>  --}}
                 <!--end::Search-->
             </div>
             <!--begin::Card title-->
@@ -165,7 +165,7 @@
             <div class="card-toolbar">
                 <!--begin::Toolbar-->
                 <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_user" onclick="nuevoProducto()">
                     <i class="ki-duotone ki-plus fs-2"></i>Nuevo Producto</button>
                     <!--end::Add user-->
                 </div>
@@ -459,6 +459,19 @@
 
                 }
             });
+        }
+
+        function nuevoProducto(){
+            $('#nombre').val('')
+            $('#nombre').val('')
+            $('#producto_id').val(0)
+            $('#descripcion').val('')
+            $('#subcategoria_id').val('')
+            $('#precio_unitario').val('')
+            $('#cantidad').val('')
+            $('#descuento').val('')
+            $('#moneda').val(0)
+            $('#categoria_id').val('')
         }
     </script>
 @endsection

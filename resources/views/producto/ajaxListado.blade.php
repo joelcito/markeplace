@@ -34,7 +34,9 @@
                     $imgs = explode(",", $p->imagenes);
                 @endphp
                 @if (count($imgs)>0)
-                    <img src="{{ $imgs[0] }}" alt="" width="100%">
+                    {{--  <img src="{{ $imgs[0] }}" alt="" width="100%">  --}}
+                    {{--  <img src="{{ asset('') }}" alt="" width="100%">  --}}
+                    <img src="https://comercio-latino.com/" alt="" width="100%">
                 @endif
             </td>
             <td>

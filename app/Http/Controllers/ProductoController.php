@@ -75,7 +75,8 @@ class ProductoController extends Controller
 
             if($request->file('archivo')){
                 $archivos = $request->file('archivo');
-                $nombre = url("imgProducto");
+                // $nombre = url("imgProducto");
+                $nombre = "sistema/public/imgProducto";
                 $todo = "";
                 foreach ($archivos as $key => $arch) {
                     $archivo                            = $arch;
