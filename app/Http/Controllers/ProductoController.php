@@ -33,15 +33,12 @@ class ProductoController extends Controller
     }
 
     protected function listadoArray(){
-        // $productos = Producto::all();
-
-        // dd(session()->all());
-        // dd(session('perfil'));
 
         $perfil = session('perfil');
         $tienda  = Tienda::where('usuario_creacion', $perfil->idPersona)->first();
 
         $productos = Producto::where('idTienda', $tienda->idTienda)
+                            ->where('estado',1)
                             ->orderBy('idproducto', 'desc')
                             ->get();
         return view("producto.ajaxListado")->with(compact('productos'))->render();
@@ -112,6 +109,19 @@ class ProductoController extends Controller
         }else{
             $data['estado'] = 'error';
         }
+        return $data;
+    }
+
+    public function eliminar(Request $request){
+        if($request->ajax()){
+            $producto = Producto::find($request->input('id'));
+            $producto->estado = 0;
+            $producto->save();
+            $data['estado'] = 'success';
+        }else{
+            $data['estado'] = 'error';
+        }
+
         return $data;
     }
 

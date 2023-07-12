@@ -64,7 +64,7 @@
                                 <div class="fv-row mb-7">
                                     <label class="required fw-semibold fs-6 mb-2">Titulo</label>
                                     <input type="text" id="nombre" name="nombre" class="form-control form-control-solid mb-3 mb-lg-0" required>
-                                    <input type="text" id="producto_id" name="producto_id" value="0" >
+                                    <input type="hidden" id="producto_id" name="producto_id" value="0" >
                                 </div>
                             </div>
                         </div>
@@ -109,7 +109,7 @@
                             <div class="col-md-6">
                                 <div class="fv-row mb-7">
                                     <label class="required fw-semibold fs-6 mb-2">Archivo PDF</label>
-                                    <input type="file" id="archivo" name="archivo" class="form-control form-control-solid mb-3 mb-lg-0" multiple required>
+                                    <input type="file" id="archivo" name="archivo" class="form-control form-control-solid mb-3 mb-lg-0" multiple>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -337,43 +337,51 @@
 
         function guardarProducto(){
             if($("#formularioProducto")[0].checkValidity()){
-
                 var formData = new FormData();
                 var archivo = $('#imagenes')[0].files;
-
-                for(let i=0;i<archivo.length;i++)
+                let contador = 0;
+                for(let i=0;i<archivo.length;i++){
                     formData.append('archivo[]', archivo[i]);
+                    contador++;
+                }
+                if(contador >= 2){
+                    formData.append('nombre',           $('#nombre').val());
+                    formData.append('producto_id',      $('#producto_id').val());
+                    formData.append('descripcion',      $('#descripcion').val());
+                    formData.append('categoria_id',     $('#subcategoria_id').val());
+                    formData.append('precio_unitario',  $('#precio_unitario').val());
+                    formData.append('cantidad',         $('#cantidad').val());
+                    formData.append('descuento',        $('#descuento').val());
+                    formData.append('moneda',           $('#moneda').val());
 
-                formData.append('nombre',           $('#nombre').val());
-                formData.append('producto_id',      $('#producto_id').val());
-                formData.append('descripcion',      $('#descripcion').val());
-                formData.append('categoria_id',     $('#subcategoria_id').val());
-                formData.append('precio_unitario',  $('#precio_unitario').val());
-                formData.append('cantidad',         $('#cantidad').val());
-                formData.append('descuento',        $('#descuento').val());
-                formData.append('moneda',           $('#moneda').val());
-
-                $.ajax({
-                    url: "{{ url('producto/guarda') }}",
-                    data:formData,
-                    type: 'POST',
-                    dataType: 'json',
-                    processData: false,
-                    contentType: false,
-                    success: function(data) {
-                        if(data.estado === 'success'){
-                            Swal.fire({
-                                title:'Registrado!',
-                                text :'Se registro con exito.',
-                                icon: 'success',
-                                timer: 1500
-                            })
-                            $('#kt_modal_add_user').modal('hide');
-                            ajaxListado();
+                    $.ajax({
+                        url: "{{ url('producto/guarda') }}",
+                        data:formData,
+                        type: 'POST',
+                        dataType: 'json',
+                        processData: false,
+                        contentType: false,
+                        success: function(data) {
+                            if(data.estado === 'success'){
+                                Swal.fire({
+                                    title:'Registrado!',
+                                    text :'Se registro con exito.',
+                                    icon: 'success',
+                                    timer: 1500
+                                })
+                                $('#kt_modal_add_user').modal('hide');
+                                ajaxListado();
+                            }
                         }
-                    }
-                });
-
+                    });
+                }else{
+                    Swal.fire({
+                        title:'Error!',
+                        icon:'error',
+                        text: 'Debe seleccionar al menos 2 fotografias',
+                        timer: 3000
+                    })
+                }
             }else{
     			$("#formularioProducto")[0].reportValidity()
             }
@@ -391,17 +399,35 @@
             });
         }
 
-        function eliminar(rol){
-            $.ajax({
-                url: "{{ url('rol/eliminar') }}",
-                type: 'POST',
-                data:{id:rol},
-                dataType: 'json',
-                success: function(data) {
-                    if(data.estado === 'success')
-                        $('#table_roles').html(data.listado);
-                }
-            });
+        function eliminar(producto){
+            Swal.fire({
+                title: 'Esta seguro de eliminar?',
+                text: "No podras revertir eso!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si, Eliminar!'
+            }).then((result) => {
+                $.ajax({
+                    url: "{{ url('producto/eliminar') }}",
+                    type: 'POST',
+                    data:{id:producto},
+                    dataType: 'json',
+                    success: function(data) {
+                        if(data.estado === 'success'){
+                            if (result.isConfirmed) {
+                                Swal.fire(
+                                'Eliminado!',
+                                'Se elimino el producto.',
+                                'success'
+                                )
+                            }
+                            ajaxListado();
+                        }
+                    }
+                });
+            })
         }
 
         function edita(idProducto,idSubcategoria,nombre,descripcion,preciounitario,cantidad,estado,calificacion, ubicacion){

@@ -63,7 +63,7 @@
             <td>
                 <button class="btn btn-warning btn-icon btn-sm" onclick="edita('{{ $p->idProducto }}','{{ $p->idSubcategoria }}','{{ $p->nombre }}','{{ json_encode($p->descripcion) }}','{{ $p->preciounitario }}','{{ $p->cantidad }}','{{ $p->estado }}','{{ $p->calificacion }}','{{ $p->ubicacion }}')"><i class="fa fa-edit"></i></button></button>
 
-                <button class="btn btn-danger btn-icon btn-sm"><i class="fa fa-trash"></i></button></button>
+                <button class="btn btn-danger btn-icon btn-sm" onclick="eliminar('{{ $p->idProducto }}')"><i class="fa fa-trash"></i></button></button>
             </td>
         </tr>
         @endforeach
