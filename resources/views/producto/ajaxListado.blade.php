@@ -42,7 +42,10 @@
                 @endif
             </td>
             <td>
-                {{ $p->subCategoria->nombre }}
+                @php
+                    $subcategoria = App\Models\SubCategoria::find($p->idSubcategoria);
+                    echo $subcategoria->nombre;
+                @endphp
             </td>
             <td>{{ $p->nombre }}</td>
             <td class="limited-cell limited-text">
