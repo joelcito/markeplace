@@ -39,7 +39,7 @@
                                 <div class="fv-row mb-7">
                                     <label class="required fw-semibold fs-6 mb-2">Nombre</label>
                                     <input type="text" id="nombre" name="nombre" class="form-control">
-                                    <input type="text" id="persona_id" name="persona_id" value="0">
+                                    <input type="hidden" id="persona_id" name="persona_id" value="0">
                                 </div>
                             </div>
                             <div class="col-md-3">
@@ -81,6 +81,7 @@
                             <div class="col-md-4">
                                 <label for="">Contraseña</label>
                                 <input type="password" class="form-control" id="pass" name="pass">
+                                <small id="text_pass" style="display: none" class="text-success">Vuelva a introducir una nueva contraseña si desea cambiar, si no desea cambiar la contraseña deje vacio el campo</small>
                             </div>
                         </div>
                         <div class="row">
@@ -120,7 +121,7 @@
             <div class="card-toolbar">
                 <!--begin::Toolbar-->
                 <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_user" onclick="nuevo()">
                     <i class="ki-duotone ki-plus fs-2"></i>Nuevo Usuario</button>
                     <!--end::Add user-->
                 </div>
@@ -230,12 +231,15 @@
                 </thead>
                 <tbody>
                     @foreach ($perfiles as $p)
+                        @php
+                            $persona = App\Models\Persona::where("idPersona",$p->idPersona)->first();
+                        @endphp
                         <tr>
                             <td>{{ $p->idPerfil }}</td>
-                            <td>{{ $p->persona->nombres }} Jonathan</td>
-                            <td>{{ $p->persona->apellido_paterno }}</td>
-                            <td>{{ $p->persona->apellido_materno }}</td>
-                            <td>{{ $p->persona->ci }}</td>
+                            <td>{{ $persona->nombres }}</td>
+                            <td>{{ $persona->apellido_paterno }}</td>
+                            <td>{{ $persona->apellido_materno }}</td>
+                            <td>{{ $persona->ci }}</td>
                             <td>
                                 @if ($p->rol === 1)
                                     <span class="badge badge-success">Administrador</span>
@@ -247,8 +251,8 @@
                             </td>
                             <td>{{ $p->usuario }}</td>
                             <td>
-                                <button class="btn btn-warning btn-icon btn-sm"><i class="fa fa-edit"></i></button></button>
-                                <button class="btn btn-danger btn-icon btn-sm"><i class="fa fa-trash"></i></button></button>
+                                <button class="btn btn-warning btn-icon btn-sm" onclick="editar('{{ $persona->idPersona }}','{{ $p->usuario }}','{{ $persona->nombres }}', '{{ $persona->apellido_paterno }}','{{ $persona->apellido_materno }}',  '{{ $persona->ci }}', '{{ $p->rol }}')"><i class="fa fa-edit"></i></button></button>
+                                <button class="btn btn-danger btn-icon btn-sm" onclick="eliminar('{{ $persona->idPersona }}')"><i class="fa fa-trash"></i></button></button>
                             </td>
                         </tr>
                     @endforeach
@@ -358,15 +362,42 @@
             });
         }
 
-        function eliminar(rol){
+        function nuevo(){
+            $('#persona_id').val('0')
+            $('#usuario').val('')
+            $('#nombre').val('')
+            $('#ap_paterno').val('')
+            $('#ap_materno').val('')
+            $('#cedula').val('')
+            $('#rol').val('')
+            $('#text_pass').hide('toggle')
+            $('#kt_modal_add_user').modal('show')
+
+        }
+
+        function editar(perfil,user ,nombre, ap, am,ci,rol){
+            $('#persona_id').val(perfil)
+            $('#usuario').val(user)
+            $('#nombre').val(nombre)
+            $('#ap_paterno').val(ap)
+            $('#ap_materno').val(am)
+            $('#cedula').val(ci)
+            $('#rol').val(rol)
+
+            $('#text_pass').show('toggle')
+
+            $('#kt_modal_add_user').modal('show')
+        }
+
+        function eliminar(persona){
             $.ajax({
-                url: "{{ url('rol/eliminar') }}",
+                url: "{{ url('users/eliminar') }}",
                 type: 'POST',
-                data:{id:rol},
+                data:{id:persona},
                 dataType: 'json',
                 success: function(data) {
                     if(data.estado === 'success')
-                        $('#table_roles').html(data.listado);
+                        window.location.reload();
                 }
             });
         }

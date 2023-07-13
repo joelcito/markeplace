@@ -115,7 +115,7 @@
                             <div class="col-md-6">
                                 <div class="fv-row mb-7">
                                     <label class="required fw-semibold fs-6 mb-2">Imagenes</label>
-                                    <input type="file" id="imagenes" name="imagenes" class="form-control form-control-solid mb-3 mb-lg-0" multiple accept="image/*" required>
+                                    <input type="file" id="imagenes" name="imagenes" class="form-control form-control-solid mb-3 mb-lg-0" multiple accept="image/*">
                                 </div>
                             </div>
                         </div>
@@ -344,7 +344,7 @@
                     formData.append('archivo[]', archivo[i]);
                     contador++;
                 }
-                if(contador >= 2){
+                // if(contador >= 2){
                     formData.append('nombre',           $('#nombre').val());
                     formData.append('producto_id',      $('#producto_id').val());
                     formData.append('descripcion',      $('#descripcion').val());
@@ -374,14 +374,14 @@
                             }
                         }
                     });
-                }else{
-                    Swal.fire({
-                        title:'Error!',
-                        icon:'error',
-                        text: 'Debe seleccionar al menos 2 fotografias',
-                        timer: 3000
-                    })
-                }
+                // }else{
+                //     Swal.fire({
+                //         title:'Error!',
+                //         icon:'error',
+                //         text: 'Debe seleccionar al menos 2 fotografias',
+                //         timer: 3000
+                //     })
+                // }
             }else{
     			$("#formularioProducto")[0].reportValidity()
             }
@@ -430,13 +430,15 @@
             })
         }
 
-        function edita(idProducto,idSubcategoria,nombre,descripcion,preciounitario,cantidad,estado,calificacion, ubicacion){
+        function edita(idProducto,categoria,idSubcategoria,nombre,descripcion,preciounitario,cantidad,estado,calificacion, ubicacion, descuento){
             $('#nombre').val(nombre)
             $('#producto_id').val(idProducto)
             $('#descripcion').val(descripcion.replaceAll('"',''))
-            $('#categoria_id').val(idSubcategoria)
+            $('#subcategoria_id').val(idSubcategoria)
+            $('#categoria_id').val(categoria)
             $('#precio_unitario').val(preciounitario)
             $('#cantidad').val(cantidad)
+            $('#descuento').val(descuento)
             $('#kt_modal_add_user').modal('show')
         }
 

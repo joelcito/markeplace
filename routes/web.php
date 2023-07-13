@@ -91,6 +91,7 @@ Route::get('/login/cerrar', [LoginController::class, 'cerrar']);
 // USUARIO
 Route::get('/users', [UserController::class, 'listado']);
 Route::post('/users/guarda', [UserController::class, 'guarda']);
+Route::post('/users/eliminar', [UserController::class, 'eliminar']);
 
 
 // // EXTERNOS
