@@ -9,7 +9,7 @@
             <th>Correo</th>
             <th>Descripcion</th>
             <th>Estado</th>
-            <th></th>
+            {{--  <th></th>  --}}
         </tr>
     </thead>
     <tbody>
@@ -32,10 +32,10 @@
                     <span class="badge badge-light-danger fw-dold">Inactivo</span>
                 @endif
             </td>
-            <td>
+            {{--  <td>
                 <button class="btn btn-warning btn-icon btn-sm" onclick="edita('{{ $c->idSubcategoria }}', '{{ $c->nombre }}', '{{ $c->descripcion }}', '{{ $c->idCategoria }}')"><i class="fa fa-edit"></i></button></button>
                 <button class="btn btn-danger btn-icon btn-sm" onclick="elimina('{{ $c->idSubcategoria }}', '{{ $c->nombre }}')"><i class="fa fa-trash"></i></button></button>
-            </td>
+            </td>  --}}
         </tr>
         @endforeach
     </tbody>

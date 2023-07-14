@@ -79,9 +79,9 @@
                                         <input type="text" id="correo" name="correo" class="form-control" value="{{ $informacion[9]->descripcion }}">
                                     </div>
                                 </div>
-
+                                <hr>
                                 <div class="row mt-6">
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <label for="" class="required">IMAGEN QR 1</label>
                                         <br>
                                         <center>
@@ -89,7 +89,7 @@
                                         </center>
                                         <input type="file" class="form-control" id="qr1" name="qr1">
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <label for="" class="required">IMAGEN QR 2</label>
                                         <br>
                                         <center>
@@ -97,13 +97,33 @@
                                         </center>
                                         <input type="file" class="form-control" id="qr2" name="qr2">
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <label for="" class="required">IMAGEN QR 3</label>
                                         <br>
                                         <center>
                                             <img width="50%" src="{{ asset('qrs/'.$informacion[15]->descripcion) }}" alt="QR3">
                                         </center>
                                         <input type="file" class="form-control" id="qr3" name="qr3">
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <label for="" class="required">IMAGEN QR 4</label>
+                                        <br>
+                                        <center>
+                                            <img width="50%" src="{{ asset('qrs/'.$informacion[18]->descripcion) }}" alt="QR3">
+                                        </center>
+                                        <input type="file" class="form-control" id="qr4" name="qr4">
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label for="" class="text-center">IMAGEN PUBLICITARIO</label>
+                                        <br>
+                                        <center>
+                                            <img width="20%" src="{{ asset('qrs/'.$informacion[17]->descripcion) }}" alt="QR3">
+                                        </center>
+                                        <input type="file" class="form-control" id="logopublicitario" name="logopublicitario">
                                     </div>
                                 </div>
 

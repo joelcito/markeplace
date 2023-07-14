@@ -83,6 +83,17 @@ class InformacionController extends Controller
             $informacion->save();
         }
 
+        if($request->hasFile('qr4')){
+
+            $archivo = $request->file('qr4');
+            $nombreArchivo = $archivo->getClientOriginalName();
+            $archivo->move(public_path('qrs'), $nombreArchivo);
+
+            $informacion = Informacion::where('codigo',"qr4")->first();
+            $informacion->descripcion = $nombreArchivo;
+            $informacion->save();
+        }
+
         if($request->hasFile('logo')){
 
             $archivo = $request->file('logo');
@@ -90,6 +101,17 @@ class InformacionController extends Controller
             $archivo->move(public_path('qrs'), $nombreArchivo);
 
             $informacion = Informacion::where('codigo',"logo")->first();
+            $informacion->descripcion = $nombreArchivo;
+            $informacion->save();
+        }
+
+        if($request->hasFile('logopublicitario')){
+
+            $archivo = $request->file('logopublicitario');
+            $nombreArchivo = $archivo->getClientOriginalName();
+            $archivo->move(public_path('qrs'), $nombreArchivo);
+
+            $informacion = Informacion::where('codigo',"logopublicitario")->first();
             $informacion->descripcion = $nombreArchivo;
             $informacion->save();
         }
