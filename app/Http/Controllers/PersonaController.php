@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 class PersonaController extends Controller
 {
     public function perfil(Request $request){
+        $logeo = app(LoginController::class);
+        $logeo->verificaLogueo();
         $persona_id = session('perfil')->idPersona;
         $persona = Persona::find($persona_id);
         return view('persona.perfil')->with(compact('persona'));

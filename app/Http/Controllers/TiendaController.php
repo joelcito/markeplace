@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 class TiendaController extends Controller
 {
     public function listado(Request $request){
+        $logeo = app(LoginController::class);
+        $logeo->verificaLogueo();
         return view('tienda.listado');
     }
 

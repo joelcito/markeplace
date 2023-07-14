@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
     public function listado(Request $request){
+        $logeo = app(LoginController::class);
+        $logeo->verificaLogueo();
         // $perfiles = Perfil::all();
         $perfiles = Perfil::where('estado', 1)->orderBy('idPerfil', 'desc')->get();
         return view('user.listado')->with(compact('perfiles'));

@@ -17,6 +17,8 @@ class VendedorController extends Controller
      */
     public function index(Request $request)
     {
+        $logeo = app(LoginController::class);
+        $logeo->verificaLogueo();
         // PRODUCTOS MAS VENDIDOS
         $prodyctosTienda = Producto::select('nombre')->where('idTienda', 1)->get();
         $productos = $prodyctosTienda->pluck('nombre')->toArray();

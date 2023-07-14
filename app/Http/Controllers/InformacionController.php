@@ -14,6 +14,8 @@ class InformacionController extends Controller
      */
     public function perfil(Request $request)
     {
+        $logeo = app(LoginController::class);
+        $logeo->verificaLogueo();
         $informacion = Informacion::all();
         return view('informacion.perfil')->with(compact('informacion'));
     }

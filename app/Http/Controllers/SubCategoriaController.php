@@ -10,6 +10,9 @@ class SubCategoriaController extends Controller
 {
     public function listado(Request $request){
 
+        $logeo = app(LoginController::class);
+        $logeo->verificaLogueo();
+
         $categorias = Categoria::all();
 
         return view('subcategoria.listado')->with(compact('categorias'));

@@ -10,6 +10,8 @@ class CategoriaController extends Controller
 {
 
     public function listado(Request $request){
+        $logeo = app(LoginController::class);
+        $logeo->verificaLogueo();
         return view('categoria.listado');
     }
 
