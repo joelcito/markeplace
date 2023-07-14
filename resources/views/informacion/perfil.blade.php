@@ -56,8 +56,8 @@
                                         <input type="text" id="whatsapp" name="whatsapp" class="form-control" value="{{ $informacion[0]->descripcion }}">
                                     </div>
                                     <div class="col-md-4">
-                                        <label for="" class="required">Telegram</label>
-                                        <input type="text" id="telegram" name="telegram" class="form-control" value="{{ $informacion[1]->descripcion }}">
+                                        <label for="" class="required">Instagram</label>
+                                        <input type="text" id="instagram" name="instagram" class="form-control" value="{{ $informacion[12]->descripcion }}">
                                     </div>
                                     <div class="col-md-4">
                                         <label for="" class="required">Facebook</label>

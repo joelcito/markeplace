@@ -34,8 +34,10 @@ class InformacionController extends Controller
         $informacion = Informacion::where('codigo',"whatsapp")->first();
         $informacion->descripcion = $request->input('whatsapp');
         $informacion->save();
-        $informacion = Informacion::where('codigo',"telegram")->first();
-        $informacion->descripcion = $request->input('telegram');
+        // $informacion = Informacion::where('codigo',"telegram")->first();
+        // $informacion->descripcion = $request->input('telegram');
+        $informacion = Informacion::where('codigo',"instagram")->first();
+        $informacion->descripcion = $request->input('instagram');
         $informacion->save();
         $informacion = Informacion::where('codigo',"facebook")->first();
         $informacion->descripcion = $request->input('facebook');
