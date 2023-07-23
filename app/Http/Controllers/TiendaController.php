@@ -149,10 +149,9 @@ class TiendaController extends Controller
 
             try {
                 // Mail::to($email)->send(new EnviarCorreoSuscripcion($nombre, $tipo, $modalidad, $qrImg));
-                Mail::to("efgipetsrllp@gmail.com")->send(new EnviarCorreoSuscripcion($nombre, $tipo, $modalidad, $qrImg));
-                echo "¡Correo enviado con éxito!"." "."efgipetsrllp@gmail.com";
+                Mail::to("jjjoelcito123@gmail.com")->send(new EnviarCorreoSuscripcion($nombre, $tipo, $modalidad, $qrImg));
+                echo "¡Correo enviado con éxito!"." "."jjjoelcito123@gmail.com";
             } catch (\Exception $e) {
-
                 // Ocurrió un error al enviar el correo, puedes manejar el error aquí.
                 echo "Error al enviar el correo: " . $e->getMessage();
             }
