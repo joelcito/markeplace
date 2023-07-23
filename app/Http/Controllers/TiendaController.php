@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\EnviarCorreoSuscripcion;
 use App\Models\Tienda;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class TiendaController extends Controller
 {
@@ -103,5 +105,13 @@ class TiendaController extends Controller
         }
 
         return $data;
+    }
+
+    public function enviarCorreo(Request $request){
+        if($request->ajax()){
+
+            Mail::to('correo_destino@example.com')->send(new EnviarCorreoSuscripcion("joel"));
+            // dd($request->all());
+        }
     }
 }

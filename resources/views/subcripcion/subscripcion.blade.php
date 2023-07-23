@@ -240,11 +240,23 @@
                                 </div>  --}}
                                 <!--end::Item-->
                             </div>
+                            <div class="row w-100" >
+                                <div class="col-md-12">
+                                    <form id="form_estandar">
+                                        <label for="" class="required">Modalidad</label>
+                                        <select name="modalidad_estandar" id="modalidad_estandar" class="form-control" required>
+                                            <option value="">Seleccione</option>
+                                            <option value="Mensual">Mensual</option>
+                                            <option value="Anual">Anual</option>
+                                        </select>
+                                    </form>
+                                </div>
+                            </div>
                             <!--end::Features-->
                             <!--begin::Select-->
-                            <a href="mailto:jjjoeelcito123@gmail.com?subject=Quiero%cambiar%al%plana%Estandar" class="btn btn-sm btn-primary" target="_blank">
+                            <button type="button" onclick="enviarCorreo('estandar')" class="btn btn-sm btn-primary mt-5" target="_blank">
                                 Solicitar
-                            </a>
+                            </button>
                             <!--end::Select-->
                         </div>
                         <!--end::Option-->
@@ -437,6 +449,27 @@
                         $('#detalleperfil').html(data.detalle);
                 }
             });
+        }
+
+        function enviarCorreo(tipo){
+            console.log(tipo)
+            let f = "form_"+tipo;
+            if($("#"+f)[0].checkValidity()){
+                $.ajax({
+                    url: "{{ url('tienda/enviarCorreo') }}",
+                    type: 'POST',
+                    data:{
+                        tipo:tipo
+                    },
+                    dataType: 'json',
+                    success: function(data) {
+                        if(data.estado === 'success')
+                            $('#detalleperfil').html(data.detalle);
+                    }
+                });
+            }else{
+    			$("#"+f)[0].reportValidity()
+            }
         }
 
     </script>

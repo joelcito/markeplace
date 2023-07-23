@@ -60,6 +60,8 @@ Route::post('/tienda/guarda', [TiendaController::class, 'guarda']);
 Route::post('/tienda/elimina', [TiendaController::class, 'elimina']);
 Route::get('/tienda/perfil', [TiendaController::class, 'perfil']);
 Route::post('/tienda/detallePerfil', [TiendaController::class, 'detallePerfil']);
+Route::post('/tienda/enviarCorreo', [TiendaController::class, 'enviarCorreo']);
+
 
 // VENDEDOR
 Route::get('/vendedor/inicio', [VendedorController::class, 'index']);

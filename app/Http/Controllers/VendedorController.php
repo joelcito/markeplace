@@ -44,6 +44,9 @@ class VendedorController extends Controller
 
         // $ventas = Venta::all();
 
+        $logeo = app(LoginController::class);
+        $logeo->verificaLogueo();
+
         // return view('vendedor.pedido')->with(compact('ventas'));
         return view('vendedor.pedido');
 
