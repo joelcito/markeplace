@@ -57,9 +57,9 @@ class InformacionController extends Controller
         if($request->hasFile('qr1')){
 
             $archivo = $request->file('qr1');
-            $nombreArchivo = $archivo->getClientOriginalName();
+            // $nombreArchivo = $archivo->getClientOriginalName();
+            $nombreArchivo      = date('YmdHis').".".$archivo->getClientOriginalExtension();
             $archivo->move(public_path('qrs'), $nombreArchivo);
-
             $informacion = Informacion::where('codigo',"qr1")->first();
             $informacion->descripcion = $nombreArchivo;
             $informacion->save();
@@ -68,7 +68,8 @@ class InformacionController extends Controller
         if($request->hasFile('qr2')){
 
             $archivo = $request->file('qr2');
-            $nombreArchivo = $archivo->getClientOriginalName();
+            // $nombreArchivo = $archivo->getClientOriginalName();
+            $nombreArchivo      = date('YmdHis').".".$archivo->getClientOriginalExtension();
             $archivo->move(public_path('qrs'), $nombreArchivo);
 
             $informacion = Informacion::where('codigo',"qr2")->first();
@@ -79,7 +80,8 @@ class InformacionController extends Controller
         if($request->hasFile('qr3')){
 
             $archivo = $request->file('qr3');
-            $nombreArchivo = $archivo->getClientOriginalName();
+            // $nombreArchivo = $archivo->getClientOriginalName();
+            $nombreArchivo      = date('YmdHis').".".$archivo->getClientOriginalExtension();
             $archivo->move(public_path('qrs'), $nombreArchivo);
 
             $informacion = Informacion::where('codigo',"qr3")->first();
@@ -90,9 +92,9 @@ class InformacionController extends Controller
         if($request->hasFile('qr4')){
 
             $archivo = $request->file('qr4');
-            $nombreArchivo = $archivo->getClientOriginalName();
+            // $nombreArchivo = $archivo->getClientOriginalName();
+            $nombreArchivo      = date('YmdHis').".".$archivo->getClientOriginalExtension();
             $archivo->move(public_path('qrs'), $nombreArchivo);
-
             $informacion = Informacion::where('codigo',"qr4")->first();
             $informacion->descripcion = $nombreArchivo;
             $informacion->save();
