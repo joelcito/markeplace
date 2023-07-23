@@ -126,36 +126,36 @@ class TiendaController extends Controller
 
 
 
-            $para = "jjjoelcito123@gmail.com";
-            $asunto = "Correo de prueba";
+            // $para = "jjjoelcito123@gmail.com";
+            // $asunto = "Correo de prueba";
 
-            // Cuerpo del correo
-            $mensaje = "Este es un correo de prueba enviado desde PHP.";
+            // // Cuerpo del correo
+            // $mensaje = "Este es un correo de prueba enviado desde PHP.";
 
-            // Cabeceras del correo
-            $headers = "From: sistemas@gipet.net" . "\r\n" .
-                    "Reply-To: sistemas@gipet.net" . "\r\n" .
-                    "X-Mailer: PHP/" . phpversion();
+            // // Cabeceras del correo
+            // $headers = "From: sistemas@gipet.net" . "\r\n" .
+            //         "Reply-To: sistemas@gipet.net" . "\r\n" .
+            //         "X-Mailer: PHP/" . phpversion();
 
-            // Enviar el correo
-            if (mail($para, $asunto, $mensaje, $headers)) {
-                echo "Correo enviado correctamente.";
-            } else {
-                echo "Error al enviar el correo.";
-            }
-
-
-
-
-            // try {
-            //     // Mail::to($email)->send(new EnviarCorreoSuscripcion($nombre, $tipo, $modalidad, $qrImg));
-            //     Mail::to("jjjoelcito123@gmail.com")->send(new EnviarCorreoSuscripcion($nombre, $tipo, $modalidad, $qrImg));
-            //     echo "¡Correo enviado con éxito!"." "."jjjoelcito123@gmail.com";
-            // } catch (\Exception $e) {
-
-            //     // Ocurrió un error al enviar el correo, puedes manejar el error aquí.
-            //     echo "Error al enviar el correo: " . $e->getMessage();
+            // // Enviar el correo
+            // if (mail($para, $asunto, $mensaje, $headers)) {
+            //     echo "Correo enviado correctamente.";
+            // } else {
+            //     echo "Error al enviar el correo.";
             // }
+
+
+
+
+            try {
+                // Mail::to($email)->send(new EnviarCorreoSuscripcion($nombre, $tipo, $modalidad, $qrImg));
+                Mail::to("efgipetsrllp@gmail.com")->send(new EnviarCorreoSuscripcion($nombre, $tipo, $modalidad, $qrImg));
+                echo "¡Correo enviado con éxito!"." "."efgipetsrllp@gmail.com";
+            } catch (\Exception $e) {
+
+                // Ocurrió un error al enviar el correo, puedes manejar el error aquí.
+                echo "Error al enviar el correo: " . $e->getMessage();
+            }
         }
     }
 
