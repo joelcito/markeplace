@@ -175,8 +175,8 @@ class TiendaController extends Controller
             ';
 
             // Cabeceras del correo
-            $headers = "From: sistemas@gipet.net" . "\r\n" .
-                    "Reply-To: sistemas@gipet.net" . "\r\n" .
+            $headers = "From: suscripcion@comercio-latino.com" . "\r\n" .
+                    "Reply-To: suscripcion@comercio-latino.com" . "\r\n" .
                     "X-Mailer: PHP/" . phpversion();
 
             // Enviar el correo
