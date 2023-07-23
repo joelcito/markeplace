@@ -133,8 +133,8 @@ class TiendaController extends Controller
             $mensaje = "Este es un correo de prueba enviado desde PHP.";
 
             // Cabeceras del correo
-            $headers = "From: suscripcion@comercio-latino.com" . "\r\n" .
-                    "Reply-To: suscripcion@comercio-latino.com" . "\r\n" .
+            $headers = "From: sistemas@gipet.net" . "\r\n" .
+                    "Reply-To: sistemas@gipet.net" . "\r\n" .
                     "X-Mailer: PHP/" . phpversion();
 
             // Enviar el correo
