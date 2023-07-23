@@ -155,7 +155,7 @@ class TiendaController extends Controller
                     "X-Mailer: PHP/" . phpversion();
 
             // Enviar el correo
-            if (mail($para, $asunto, $contenidoHTML, $headers)) {
+            if (mail($para, $asunto, strip_tags($contenidoHTML), $headers)) {
                 echo "Correo enviado correctamente.";
             } else {
                 echo "Error al enviar el correo.";
