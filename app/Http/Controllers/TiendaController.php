@@ -114,7 +114,9 @@ class TiendaController extends Controller
             $perfil = session('perfil');
             $persona = Persona::find($perfil->idPersona);
             $nombre = $persona->nombre." ".$persona->apellido_paterno." ".$persona->apellido_materno;
-            $email = $perfil->usuario;
+
+            $tienda = Tienda::where('usuario_creacion', $persona->idPersona)->first();
+            $email = $tienda->correo;
 
             $tipo       = $request->input('tipo');
             $modalidad  = $request->input('modalidad');
