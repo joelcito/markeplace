@@ -114,4 +114,28 @@ class TiendaController extends Controller
             // dd($request->all());
         }
     }
+
+    public function guardaAdmin(Request $request){
+        if($request->ajax()){
+            $tienda_id = $request->input('tienda_id');
+
+            $tienda = Tienda::find($tienda_id);
+
+            $tienda->nombre         = $request->input('nombre');
+            $tienda->nit            = $request->input('nit');
+            $tienda->celular        = $request->input('celular');
+            $tienda->correo         = $request->input('correo');
+            $tienda->descripcion    = $request->input('descripcion');
+            $tienda->estado         = $request->input('estado');
+
+            $tienda->save();
+
+            $data['estado'] = 'success';
+
+        }else{
+            $data['estado'] = 'error';
+        }
+
+        return $data;
+    }
 }

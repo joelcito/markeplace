@@ -13,7 +13,13 @@
         @foreach ($ventas as $v)
         <tr>
             <td>{{ $v->idVenta }}</td>
-            <td>{{ $v->perfil->persona->nombres." ".$v->perfil->persona->apellido_paterno." ".$v->perfil->persona->apellido_materno }}</td>
+            <td>
+                @php
+                    $perfil = App\Models\Perfil::find($v->idPerfil);
+                    $persona = App\Models\Persona::find($perfil->idPersona);
+                @endphp
+                {{ $persona->nombres." ".$persona->apellido_paterno." ".$persona->apellido_materno }}
+            </td>
             <td>{{ $v->preciounitario }}</td>
             <td>{{ $v->fecha_creacion }}</td>
             <td></td>

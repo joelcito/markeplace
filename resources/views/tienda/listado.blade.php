@@ -9,7 +9,7 @@
 
     <!--end::Modal - New Card-->
     <!--begin::Modal - Add task-->
-    <div class="modal fade" id="kt_modal_add_user" tabindex="-1" aria-hidden="true">
+    <div class="modal fade" id="modaTienda" tabindex="-1" aria-hidden="true">
         <!--begin::Modal dialog-->
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <!--begin::Modal content-->
@@ -17,7 +17,7 @@
                 <!--begin::Modal header-->
                 <div class="modal-header" id="kt_modal_add_user_header">
                     <!--begin::Modal title-->
-                    <h2 class="fw-bold">Formulario de usuario</h2>
+                    <h2 class="fw-bold">FORMULARIO DE TIENDA</h2>
                     <!--end::Modal title-->
                     <!--begin::Close-->
                     <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-users-modal-action="close">
@@ -32,52 +32,56 @@
                 <!--begin::Modal body-->
                 <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
 
-                    <form id="formularioRol">
+                    <form id="formularioTeinda">
                         @csrf
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="fv-row mb-7">
                                     <label class="required fw-semibold fs-6 mb-2">Nombre</label>
-                                    <input type="text" id="nombre" name="nombre" class="form-control form-control-solid mb-3 mb-lg-0">
+                                    <input type="text" id="nombre" name="nombre" class="form-control" required>
+                                    <input type="hidden" id="tienda_id" name="tienda_id">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="fv-row mb-7">
-                                    <label class="required fw-semibold fs-6 mb-2">Ap Paterno</label>
-                                    <input type="text" id="descripcion" name="descripcion" class="form-control form-control-solid mb-3 mb-lg-0" >
+                                    <label class="required fw-semibold fs-6 mb-2">Nit</label>
+                                    <input type="text" id="nit" name="nit" class="form-control" required >
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="fv-row mb-7">
-                                    <label class="required fw-semibold fs-6 mb-2">Ap Materno</label>
-                                    <input type="text" id="descripcion" name="descripcion" class="form-control form-control-solid mb-3 mb-lg-0" >
+                                    <label class="required fw-semibold fs-6 mb-2">Celular</label>
+                                    <input type="text" id="celular" name="celular" class="form-control" required >
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="fv-row mb-7">
-                                    <label class="required fw-semibold fs-6 mb-2">Cedula</label>
-                                    <input type="text" id="nombre" name="nombre" class="form-control form-control-solid mb-3 mb-lg-0">
+                                    <label class="required fw-semibold fs-6 mb-2">Correo</label>
+                                    <input type="text" id="correo" name="correo" class="form-control" required>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="fv-row mb-7">
-                                    <label class="required fw-semibold fs-6 mb-2">Cedula</label>
-                                    <input type="text" id="descripcion" name="descripcion" class="form-control form-control-solid mb-3 mb-lg-0" >
+                                    <label class="required fw-semibold fs-6 mb-2">Descripcion</label>
+                                    <input type="text" id="descripcion" name="descripcion" class="form-control" required >
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="fv-row mb-7">
-                                    <label class="required fw-semibold fs-6 mb-2">Imagne</label>
-                                    <input type="file" id="descripcion" name="descripcion" class="form-control form-control-solid mb-3 mb-lg-0" >
+                                    <label class="required fw-semibold fs-6 mb-2">Estdo</label>
+                                    <select name="estado" id="estado" class="form-control" required>
+                                        <option value="1">Activo</option>
+                                        <option value="0">Inactivo</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
                     </form>
                     <div class="row">
                         <div class="col-md-12">
-                            <button class="btn btn-success w-100">Guardar</button>
+                            <button class="btn btn-success w-100" onclick="guardar()">Guardar</button>
                         </div>
                     </div>
                 </div>
@@ -97,14 +101,15 @@
             <!--begin::Card title-->
             <div class="card-title">
                 <!--begin::Search-->
-                <div class="d-flex align-items-center position-relative my-1">
+                {{-- <div class="d-flex align-items-center position-relative my-1">
                     <i class="ki-duotone ki-magnifier fs-3 position-absolute ms-5">
                         <span class="path1"></span>
                         <span class="path2"></span>
                     </i>
                     <input type="text" data-kt-user-table-filter="search" class="form-control form-control-solid w-250px ps-13" placeholder="Buscar Usuario" />
-                </div>
+                </div> --}}
                 <!--end::Search-->
+                <h3>LISTADO DE TIENDAS</h3>
             </div>
             <!--begin::Card title-->
             <!--begin::Card toolbar-->
@@ -314,6 +319,43 @@
                         $('#table_tiendas').html(data.listado);
                 }
             });
+        }
+
+        function edita(idTienda , nombre , nit , celular , correo , descripcion,estado){
+            $('#nombre').val(nombre)
+            $('#tienda_id').val(idTienda)
+            $('#nit').val(nit)
+            $('#celular').val(celular)
+            $('#correo').val(correo)
+            $('#descripcion').val(descripcion)
+            $('#estado').val(estado)
+            $('#modaTienda').modal('show')
+        }
+
+        function guardar(){
+            if($("#formularioTeinda")[0].checkValidity()){
+                datos = $("#formularioTeinda").serializeArray()
+                $.ajax({
+                    url: "{{ url('tienda/guardaAdmin') }}",
+                    data:datos,
+                    type: 'POST',
+                    dataType: 'json',
+                    success: function(data) {
+                        if(data.estado === 'success'){
+                            ajaxListado();
+                            $('#modaTienda').modal('hide')
+                            Swal.fire({
+                                title: 'Editado',
+                                text: 'Se guardo con exito!',
+                                icon: 'success',
+                                timer: 1500
+                            })
+                        }
+                    }
+                });
+            }else{
+    			$("#formularioTeinda")[0].reportValidity()
+            }
         }
     </script>
 @endsection

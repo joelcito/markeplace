@@ -61,6 +61,7 @@ Route::post('/tienda/elimina', [TiendaController::class, 'elimina']);
 Route::get('/tienda/perfil', [TiendaController::class, 'perfil']);
 Route::post('/tienda/detallePerfil', [TiendaController::class, 'detallePerfil']);
 Route::post('/tienda/enviarCorreo', [TiendaController::class, 'enviarCorreo']);
+Route::post('/tienda/guardaAdmin', [TiendaController::class, 'guardaAdmin']);
 
 
 // VENDEDOR

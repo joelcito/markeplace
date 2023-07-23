@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Perfil;
 use App\Models\Persona;
+use App\Models\Tienda;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -39,6 +41,21 @@ class UserController extends Controller
             $perfil->rol        = $request->input('rol');
 
             $perfil->save();
+
+            if($perfil->rol === "3"){
+                $tienda                     = new Tienda();
+                $tienda->correo             = $request->input('usuario');
+                $tienda->ubicacion          = "";
+                $tienda->url_facebook       = "";
+                $tienda->url_instagram      = "";
+                $tienda->url_whatsapp       = "";
+                $tienda->url_correo         = "";
+                $tienda->estado             = 1;
+                $tienda->calificacion       = 0;
+                $tienda->usuario_creacion   = $persona->idPersona;
+                $tienda->usuario_update     = $persona->idPersona;
+                $tienda->save();
+            }
 
         }else{
             $persona = Persona::find($persona_id);
