@@ -13,16 +13,22 @@ class EnviarCorreoSuscripcion extends Mailable
 {
     use Queueable, SerializesModels;
 
-    protected $name;
+    public $name;
+    public $tipo;
+    public $modalidad;
+    public $qr;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($nombre)
+    public function __construct($nombre, $tipo, $modalidad, $qr)
     {
         $this->name = $nombre;
+        $this->tipo = $tipo;
+        $this->modalidad = $modalidad;
+        $this->qr = $qr;
     }
 
     /**
@@ -33,7 +39,7 @@ class EnviarCorreoSuscripcion extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Enviar Correo Suscripcion',
+            subject: 'CORREO DE SUSCRIPCION',
         );
     }
 

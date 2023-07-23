@@ -15,17 +15,7 @@
             <!--begin::Heading-->
             <div class="mb-13 text-center">
                 <h1 class="fs-2hx fw-bold mb-5">Plan de suscripcion</h1>
-                {{--  <div class="text-gray-400 fw-semibold fs-5">If you need more info about our pricing, please check
-                <a href="#" class="link-primary fw-bold">Pricing Guidelines</a>.</div>  --}}
             </div>
-            <!--end::Heading-->
-            <!--begin::Nav group-->
-            {{--  <div class="nav-group nav-group-outline mx-auto mb-15" data-kt-buttons="true">
-                <button class="btn btn-color-gray-400 btn-active btn-active-secondary px-6 py-3 me-2 active" data-kt-plan="month">Monthly</button>
-                <button class="btn btn-color-gray-400 btn-active btn-active-secondary px-6 py-3" data-kt-plan="annual">Annual</button>
-            </div>  --}}
-            <!--end::Nav group-->
-            <!--begin::Row-->
             <div class="row g-10">
                 <!--begin::Col-->
                 <div class="col-xl-4">
@@ -36,12 +26,6 @@
                             <div class="mb-7 text-center">
                                 <!--begin::Title-->
                                 <h1 class="text-dark mb-5 fw-bolder">Basica</h1>
-                                <!--end::Title-->
-                                <!--begin::Description-->
-                                {{--  <div class="text-gray-400 fw-semibold mb-5">Optimal for 10+ team size
-                                <br />and new startup</div>  --}}
-                                <!--end::Description-->
-                                <!--begin::Price-->
                                 <div class="row w-100">
                                     <div class="col-md-6">
                                         <div class="text-center">
@@ -452,14 +436,15 @@
         }
 
         function enviarCorreo(tipo){
-            console.log(tipo)
             let f = "form_"+tipo;
+            // let dato = $('#'+f).serialize()
             if($("#"+f)[0].checkValidity()){
                 $.ajax({
                     url: "{{ url('tienda/enviarCorreo') }}",
                     type: 'POST',
                     data:{
-                        tipo:tipo
+                        tipo        :   tipo,
+                        modalidad   :  $('#modalidad_'+tipo).val()
                     },
                     dataType: 'json',
                     success: function(data) {

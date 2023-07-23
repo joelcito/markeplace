@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Mail\EnviarCorreoSuscripcion;
+use App\Models\Informacion;
+use App\Models\Persona;
 use App\Models\Tienda;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -109,9 +111,18 @@ class TiendaController extends Controller
 
     public function enviarCorreo(Request $request){
         if($request->ajax()){
+            $perfil = session('perfil');
+            $persona = Persona::find($perfil->idPersona);
+            $nombre = $persona->nombre." ".$persona->apellido_paterno." ".$persona->apellido_materno;
+            $email = $perfil->usuario;
 
-            Mail::to('correo_destino@example.com')->send(new EnviarCorreoSuscripcion("joel"));
-            // dd($request->all());
+            $tipo       = $request->input('tipo');
+            $modalidad  = $request->input('modalidad');
+
+            $qr = Informacion::find(14);
+            $qrImg = $qr->descripcion;
+
+            Mail::to($email)->send(new EnviarCorreoSuscripcion($nombre, $tipo, $modalidad, $qrImg));
         }
     }
 

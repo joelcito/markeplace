@@ -215,11 +215,9 @@
                         <th>Cantidad</th>
                         <th>Precio</th>
                         <th>Estado</th>
-                        {{--  <th></th>  --}}
                     </tr>
                 </thead>
                 <tbody>
-                    {{--  @dd($ventas)  --}}
                     @foreach ( $ventas as $v)
                         <tr>
                             <td>{{ $v->idVenta }}</td>
@@ -231,68 +229,27 @@
                             </td>
                             <td>{{ $v->cantidad }}</td>
                             <td>{{ $v->preciounitario }}</td>
-                            {{--  <td>{{ $v->pen }}</td>  --}}
-                            <td><small class="bg-warning">Pendiente</small></td>
-                            {{--  <td>{{ $v->idVenta }}</td>  --}}
+                            <td>
+                                @if ($v->estadoproducto === 1)
+                                    <small class="badge badge-info">Iniciado</small>
+                                @elseif($v->estadoproducto === 2)
+                                    <small class="badge badge-primary">En Proceso</small>
+                                @elseif($v->estadoproducto === 3)
+                                    <small class="badge badge-success">Finalizado</small>
+                                @elseif($v->estadoproducto === 4)
+                                    <small class="badge badge-danger">Finalizado sin entregar</small>
+                                @endif
+                            </td>
                         </tr>
                     @endforeach
-                    {{--  <tr>
-                        <td>1</td>
-                        <td>Joel Jonathan</td>
-                        <td>Flores</td>
-                        <td>Quispe</td>
-                        <td>Cedula</td>
-                        <td>
-                            <button class="btn btn-warning btn-icon btn-sm"><i class="fa fa-edit"></i></button></button>
-                            <button class="btn btn-danger btn-icon btn-sm"><i class="fa fa-trash"></i></button></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Nayana</td>
-                        <td>Ticona</td>
-                        <td>Quispe</td>
-                        <td>8251245</td>
-                        <td>
-                            <button class="btn btn-warning btn-icon btn-sm"><i class="fa fa-edit"></i></button></button>
-                            <button class="btn btn-danger btn-icon btn-sm"><i class="fa fa-trash"></i></button></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Paucara</td>
-                        <td>Pachecho</td>
-                        <td>Vianle</td>
-                        <td>451422</td>
-                        <td>
-                            <button class="btn btn-warning btn-icon btn-sm"><i class="fa fa-edit"></i></button></button>
-                            <button class="btn btn-danger btn-icon btn-sm"><i class="fa fa-trash"></i></button></button>
-                        </td>
-                    </tr>  --}}
                 </tbody>
             </table>
-            {{--  <div id="table_roles">
-
-            </div>  --}}
         </div>
-        <!--end::Card body-->
     </div>
-    <!--end::Card-->
 @stop()
 
 @section('js')
     <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
-
-    {{--  <script src="{{ asset('assets/js/custom/apps/user-management/users/list/table.js') }}"></script>  --}}
-    {{--  <script src="{{ asset('assets/js/custom/apps/user-management/users/list/export-users.js') }}"></script>  --}}
-    {{--  <script src="{{ asset('assets/js/custom/apps/user-management/users/list/add.js') }}"></script>  --}}
-    {{--  <script src="{{ asset('assets/js/widgets.bundle.js') }}"></script>
-    <script src="{{ asset('assets/js/custom/widgets.js') }}"></script>
-    <script src="{{ asset('assets/js/custom/apps/chat/chat.js') }}"></script>
-    <script src="{{ asset('assets/js/custom/utilities/modals/upgrade-plan.js') }}"></script>
-    <script src="{{ asset('assets/js/custom/utilities/modals/create-app.js') }}"></script>
-    <script src="{{ asset('assets/js/custom/utilities/modals/users-search.js') }}"></script>  --}}
-
     <script type="text/javascript">
 
         $.ajaxSetup({
@@ -303,7 +260,7 @@
         })
 
         $( document ).ready(function() {
-            ajaxListado();
+            // ajaxListado();
         });
 
        function guardarVenta(){
