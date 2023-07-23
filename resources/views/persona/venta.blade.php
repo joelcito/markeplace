@@ -223,7 +223,12 @@
                     @foreach ( $ventas as $v)
                         <tr>
                             <td>{{ $v->idVenta }}</td>
-                            <td>{{ $v->producto->nombre }}</td>
+                            <td>
+                                @php
+                                    $producto = App\Models\Producto::find($v->idProducto);
+                                    echo $producto->nombre;
+                                @endphp
+                            </td>
                             <td>{{ $v->cantidad }}</td>
                             <td>{{ $v->preciounitario }}</td>
                             {{--  <td>{{ $v->pen }}</td>  --}}

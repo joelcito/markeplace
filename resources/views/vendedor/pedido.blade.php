@@ -206,49 +206,6 @@
         <!--end::Card header-->
         <!--begin::Card body-->
         <div class="card-body py-4">
-            {{--  <table class="table align-middle table-row-dashed fs-6 gy-5">
-                <thead>
-                    <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
-                        <th>N</th>
-                        <th>Usuario</th>
-                        <th>Nombre</th>
-                        <th>Descripcion</th>
-                        <th>Estado</th>
-                        <th>Calificacion</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Joel Jonathan Flores Quispe</td>
-                        <td>Galeria Sony Erizon Srl</td>
-                        <td>Tienda de equipos de computadoras</td>
-                        <td>
-                            <span class="badge badge-light-success fw-dold">Activo</span>
-                        </td>
-                        <td>100 <i class="fa fa-star text-warning"></i></td>
-                        <td>
-                            <button class="btn btn-warning btn-icon btn-sm"><i class="fa fa-edit"></i></button></button>
-                            <button class="btn btn-danger btn-icon btn-sm"><i class="fa fa-trash"></i></button></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Nayana Ticona Quispe</td>
-                        <td>Ferreteria buena esperanza</td>
-                        <td>Tienda de ferreteria</td>
-                        <td>
-                            <span class="badge badge-light-danger fw-dold">Inactivo</span>
-                        </td>
-                        <td>10 <i class="fa fa-star text-warning"></i></td>
-                        <td>
-                            <button class="btn btn-warning btn-icon btn-sm"><i class="fa fa-edit"></i></button></button>
-                            <button class="btn btn-danger btn-icon btn-sm"><i class="fa fa-trash"></i></button></button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>  --}}
             <div id="table_tiendas">
 
             </div>
