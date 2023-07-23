@@ -124,46 +124,6 @@ class TiendaController extends Controller
             $qr = Informacion::find(14);
             $qrImg = $qr->descripcion;
 
-
-
-            // $para = $email;
-            // $asunto = "CORREO DE SUSCRIPCION";
-            // $fecha =date('d/m/Y H:m:s');
-            // //<img src="{{ asset('qrs')."/".$qr }}" alt="aqui la img">
-
-
-            // // Cuerpo del correo
-            // /// Construir el contenido HTML del correo
-            // $contenidoHTML = '<!DOCTYPE html>';
-            // $contenidoHTML .= '<html>';
-            // $contenidoHTML .= '<head><title>Correo de Suscripción</title></head>';
-            // $contenidoHTML .= '<body>';
-            // $contenidoHTML .= '<h1>Bienvenido, ' . $nombre . '!</h1>';
-            // $contenidoHTML .= '<p>Gracias por suscribirte. Tu tipo de suscripción es ' . $tipo . ' y la modalidad es ' . $modalidad . '.</p>';
-            // $contenidoHTML .= '<img src="' . $qrImg . '" alt="Código QR de suscripción">';
-            // $contenidoHTML .= '</body>';
-            // $contenidoHTML .= '</html>';
-
-            // // Define las cabeceras del correo
-            // $headers = "MIME-Version: 1.0" . "\r\n";
-            // $headers .= "Content-type: text/html; charset=UTF-8" . "\r\n";
-            // $headers .= "From: suscripcion@comercio-latino.com" . "\r\n";
-
-            // // Cabeceras del correo
-            // $headers = "From: suscripcion@comercio-latino.com" . "\r\n" .
-            //         "Reply-To: suscripcion@comercio-latino.com" . "\r\n" .
-            //         "X-Mailer: PHP/" . phpversion();
-
-            // // Enviar el correo
-            // if (mail($para, $asunto, strip_tags($contenidoHTML), $headers)) {
-            //     echo "Correo enviado correctamente.";
-            // } else {
-            //     echo "Error al enviar el correo.";
-            // }
-
-
-
-
             try {
                 // Mail::to($email)->send(new EnviarCorreoSuscripcion($nombre, $tipo, $modalidad, $qrImg));
                 Mail::to("jjjoelcito123@gmail.com")->send(new EnviarCorreoSuscripcion($nombre, $tipo, $modalidad, $qrImg));

@@ -12,7 +12,7 @@
     <br>
     <p>Gracias por usar nuestro servicio, tu suscripcion {{ $tipo." ".$modalidad }} ha sido aceptada para mantener activo debe realizar el pago por QR y confirmar al siguiente email admin@comercio-latino.com </p>
     <center>
-        <img src="{{ asset('qrs')."/".$qr }}" alt="aqui la img">
+        <img src="https://comercio-latino.com/sistema/public/qrs/{{ $qrImg }}" alt="aqui la img">
     </center>
     <table>
         <tr>
