@@ -126,35 +126,77 @@ class TiendaController extends Controller
 
 
 
-            // $para = "jjjoelcito123@gmail.com";
-            // $asunto = "Correo de prueba";
-
-            // // Cuerpo del correo
-            // $mensaje = "Este es un correo de prueba enviado desde PHP.";
-
-            // // Cabeceras del correo
-            // $headers = "From: sistemas@gipet.net" . "\r\n" .
-            //         "Reply-To: sistemas@gipet.net" . "\r\n" .
-            //         "X-Mailer: PHP/" . phpversion();
-
-            // // Enviar el correo
-            // if (mail($para, $asunto, $mensaje, $headers)) {
-            //     echo "Correo enviado correctamente.";
-            // } else {
-            //     echo "Error al enviar el correo.";
-            // }
+            $para = $email;
+            $asunto = "CORREO DE SUSCRIPCION";
+            $fecha =date('d/m/Y H:m:s');
+            //<img src="{{ asset('qrs')."/".$qr }}" alt="aqui la img">
 
 
+            // Cuerpo del correo
+            $mensaje = '
 
+            <!DOCTYPE html>
+                <html lang="en">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+                    <title>Document</title>
+                </head>
+                <body>
+                    <center><h3>COMERCIO LATINO</h3></center>
+                    <h1>Estimad@ : {{ $name }}</h1>
+                    <br>
+                    <p>Gracias por usar nuestro servicio, tu suscripcion {{ $tipo." ".$modalidad }} ha sido aceptada para mantener activo debe realizar el pago por QR y confirmar al siguiente email admin@comercio-latino.com </p>
+                    <center>
+                    </center>
+                    <table>
+                        <tr>
+                            <td><b>Importe {{ $modalidad }} Bs:</b></td>
+                            <td>
+                                @if (true)
+                                    2000
+                                @else
+                                    200
+                                @endif
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b>Fecha de Suscripcion:</b></td>
+                            <td>'.$fecha.'</td>
+                        </tr>
+                    </table>
+                    <center>
+                        <button>Ir a la Tienda</button>
+                    </center>
+                    <p>Al no contar con la confirmacion de pago, la suscripcion sera revertido</p>
+                </body>
+                </html>
+            ';
 
-            try {
-                // Mail::to($email)->send(new EnviarCorreoSuscripcion($nombre, $tipo, $modalidad, $qrImg));
-                Mail::to("jjjoelcito123@gmail.com")->send(new EnviarCorreoSuscripcion($nombre, $tipo, $modalidad, $qrImg));
-                echo "¡Correo enviado con éxito!"." "."jjjoelcito123@gmail.com";
-            } catch (\Exception $e) {
-                // Ocurrió un error al enviar el correo, puedes manejar el error aquí.
-                echo "Error al enviar el correo: " . $e->getMessage();
+            // Cabeceras del correo
+            $headers = "From: sistemas@gipet.net" . "\r\n" .
+                    "Reply-To: sistemas@gipet.net" . "\r\n" .
+                    "X-Mailer: PHP/" . phpversion();
+
+            // Enviar el correo
+            if (mail($para, $asunto, $mensaje, $headers)) {
+                echo "Correo enviado correctamente.";
+            } else {
+                echo "Error al enviar el correo.";
             }
+
+
+
+
+            // try {
+            //     // Mail::to($email)->send(new EnviarCorreoSuscripcion($nombre, $tipo, $modalidad, $qrImg));
+            //     Mail::to("jjjoelcito123@gmail.com")->send(new EnviarCorreoSuscripcion($nombre, $tipo, $modalidad, $qrImg));
+            //     echo "¡Correo enviado con éxito!"." "."jjjoelcito123@gmail.com";
+            // } catch (\Exception $e) {
+            //     // Ocurrió un error al enviar el correo, puedes manejar el error aquí.
+            //     echo "Error al enviar el correo: " . $e->getMessage();
+            // }
         }
     }
 
