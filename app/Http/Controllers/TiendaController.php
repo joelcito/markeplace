@@ -146,8 +146,8 @@ class TiendaController extends Controller
 
             // Define las cabeceras del correo
             $headers = "MIME-Version: 1.0" . "\r\n";
-            $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-            $headers .= "From: remitente@example.com" . "\r\n";
+            $headers .= "Content-type: text/html; charset=UTF-8" . "\r\n";
+            $headers .= "From: suscripcion@comercio-latino.com" . "\r\n";
 
             // Cabeceras del correo
             $headers = "From: suscripcion@comercio-latino.com" . "\r\n" .
