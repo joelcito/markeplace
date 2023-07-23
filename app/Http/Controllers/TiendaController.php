@@ -133,46 +133,21 @@ class TiendaController extends Controller
 
 
             // Cuerpo del correo
-            $mensaje = '
+            /// Construir el contenido HTML del correo
+            $contenidoHTML = '<!DOCTYPE html>';
+            $contenidoHTML .= '<html>';
+            $contenidoHTML .= '<head><title>Correo de Suscripción</title></head>';
+            $contenidoHTML .= '<body>';
+            $contenidoHTML .= '<h1>Bienvenido, ' . $nombre . '!</h1>';
+            $contenidoHTML .= '<p>Gracias por suscribirte. Tu tipo de suscripción es ' . $tipo . ' y la modalidad es ' . $modalidad . '.</p>';
+            $contenidoHTML .= '<img src="' . $qrImg . '" alt="Código QR de suscripción">';
+            $contenidoHTML .= '</body>';
+            $contenidoHTML .= '</html>';
 
-            <!DOCTYPE html>
-                <html lang="en">
-                <head>
-                    <meta charset="UTF-8">
-                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-                    <title>Document</title>
-                </head>
-                <body>
-                    <center><h3>COMERCIO LATINO</h3></center>
-                    <h1>Estimad@ : {{ $name }}</h1>
-                    <br>
-                    <p>Gracias por usar nuestro servicio, tu suscripcion {{ $tipo." ".$modalidad }} ha sido aceptada para mantener activo debe realizar el pago por QR y confirmar al siguiente email admin@comercio-latino.com </p>
-                    <center>
-                    </center>
-                    <table>
-                        <tr>
-                            <td><b>Importe {{ $modalidad }} Bs:</b></td>
-                            <td>
-                                @if (true)
-                                    2000
-                                @else
-                                    200
-                                @endif
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><b>Fecha de Suscripcion:</b></td>
-                            <td>'.$fecha.'</td>
-                        </tr>
-                    </table>
-                    <center>
-                        <button>Ir a la Tienda</button>
-                    </center>
-                    <p>Al no contar con la confirmacion de pago, la suscripcion sera revertido</p>
-                </body>
-                </html>
-            ';
+            // Define las cabeceras del correo
+            $headers = "MIME-Version: 1.0" . "\r\n";
+            $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+            $headers .= "From: remitente@example.com" . "\r\n";
 
             // Cabeceras del correo
             $headers = "From: suscripcion@comercio-latino.com" . "\r\n" .
@@ -180,7 +155,7 @@ class TiendaController extends Controller
                     "X-Mailer: PHP/" . phpversion();
 
             // Enviar el correo
-            if (mail($para, $asunto, $mensaje, $headers)) {
+            if (mail($para, $asunto, $contenidoHTML, $headers)) {
                 echo "Correo enviado correctamente.";
             } else {
                 echo "Error al enviar el correo.";
