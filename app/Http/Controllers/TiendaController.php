@@ -124,7 +124,8 @@ class TiendaController extends Controller
             $qr = Informacion::find(14);
             $qrImg = $qr->descripcion;
 
-            Mail::to($email)->send(new EnviarCorreoSuscripcion($nombre, $tipo, $modalidad, $qrImg));
+            // Mail::to($email)->send(new EnviarCorreoSuscripcion($nombre, $tipo, $modalidad, $qrImg));
+            Mail::to("jjjoelcito123@gmail.com")->send(new EnviarCorreoSuscripcion($nombre, $tipo, $modalidad, $qrImg));
         }
     }
 
