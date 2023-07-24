@@ -15,24 +15,47 @@ class VendedorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
-    {
+    public function index(Request $request){
+
         $logeo = app(LoginController::class);
         $logeo->verificaLogueo();
+
+        $persona_id = session('perfil')->idPersona;
+        $tienda = Tienda::where('usuario_creacion', $persona_id)->first();
+        $tienda_id = $tienda->idTienda;
         // PRODUCTOS MAS VENDIDOS
-        $prodyctosTienda = Producto::select('nombre')->where('idTienda', 1)->get();
-        $productos = $prodyctosTienda->pluck('nombre')->toArray();
-        $cantaProduct = Producto::count();
-        $numerosAleatorios = [];
-        for ($i = 0; $i < $cantaProduct; $i++)
-            $numerosAleatorios[] = rand(0,200);
-        arsort($numerosAleatorios);
+        $prodyctosTienda    = Producto::select('*')->where('idTienda', $tienda_id)->get();
+        $productos          = $prodyctosTienda->pluck('nombre')->toArray();
+        $productosId        = $prodyctosTienda->pluck('idProducto')->toArray();
+        $numerosAleatorios  = [];
+        foreach ($productosId as $key => $value) {
+            $cantidad = Venta::where('idProducto', $value)
+                                ->where('estadoproducto',3)
+                                ->count();
+
+            $numerosAleatorios[] = $cantidad;
+        }
         $numerosAleatorios = array_values($numerosAleatorios);
 
         //PEDIDOS POR MES
+        $anio = date('Y');
+        $cnatidaMeses  = [];
+        for ($i=1; $i <= 12 ; $i++) {
+            $numberOfDays = cal_days_in_month(CAL_GREGORIAN, $i, $anio); // Obtener el número de días en el mes especificado
+            $mes = (($i<10)? '0'.$i : $i);
+            $fechaFin = $anio."-".(($i<10)? '0'.$i : $i)."-".$numberOfDays;
+            $cantidad = Venta::whereIn('idProducto', function ($query) use ($tienda_id) {
+                $query->select('idProducto')
+                    ->from('producto')
+                    ->where('idTienda', $tienda_id);
+            })->whereBetween('fecha_creacion', [$anio."-".$mes."-01", $fechaFin])
+            ->count();
+            $cnatidaMeses[] = $cantidad;
+        }
+        $cnatidaMeses = array_values($cnatidaMeses);
 
 
-        return view('home.inicioVendedor')->with(compact('productos', 'numerosAleatorios'));
+        return view('home.inicioVendedor')->with(compact('productos', 'numerosAleatorios', 'cnatidaMeses'));
     }
 
     /**

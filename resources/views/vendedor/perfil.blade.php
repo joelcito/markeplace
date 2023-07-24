@@ -25,12 +25,12 @@
                                 <div class="row mt-6">
                                     <div class="col-md-6">
                                         <label for="" class="required">Nombre o Razon Social</label>
-                                        <input type="text" id="nombre" name="nombre" class="form-control" value="{{ $tienda->nombre }}">
+                                        <input type="text" id="nombre" name="nombre" class="form-control" value="{{ $tienda->nombre }}" required>
                                         <input type="hidden" id="tienda_id" name="tienda_id" value="{{ $tienda->idTienda }}">
                                     </div>
                                     <div class="col-md-6">
                                         <label for="" class="required">Numero de Identificacion Tributaria</label>
-                                        <input type="text" id="nit" name="nit" class="form-control" value="{{ $tienda->nit }}">
+                                        <input type="text" id="nit" name="nit" class="form-control" value="{{ $tienda->nit }}" required>
                                     </div>
                                 </div>
 
@@ -38,22 +38,22 @@
                                     <div class="col-md-12">
 
                                         <label for="" class="required">Descripcion de la tienda</label>
-                                        <input type="text" id="descripcion" name="descripcion" class="form-control" value="{{ $tienda->descripcion }}">
+                                        <input type="text" id="descripcion" name="descripcion" class="form-control" value="{{ $tienda->descripcion }}" required>
                                     </div>
                                 </div>
 
                                 <div class="row mt-12">
                                     <div class="col-md-6">
                                         <label for="" class="required">Pais / Ciudad</label>
-                                        <input type="text" id="ubicacion" name="ubicacion" class="form-control" value="{{ $tienda->ubicacion }}">
+                                        <input type="text" id="ubicacion" name="ubicacion" class="form-control" value="{{ $tienda->ubicacion }}" required>
                                     </div>
                                     <div class="col-md-3">
                                         <label for="" class="required">Correo</label>
-                                        <input type="email" id="correo" name="correo" class="form-control" value="{{ $tienda->correo }}">
+                                        <input type="email" id="correo" name="correo" class="form-control" value="{{ $tienda->correo }}" required>
                                     </div>
                                     <div class="col-md-3">
                                         <label for="" class="required">Celular</label>
-                                        <input type="text" id="celular" name="celular" class="form-control" value="{{ $tienda->celular }}">
+                                        <input type="text" id="celular" name="celular" class="form-control" value="{{ $tienda->celular }}" required>
                                     </div>
                                     {{-- <div class="col-md-6">
                                         <label for="" class="required">Direccion de la Tienda</label>
@@ -64,15 +64,15 @@
                                 <div class="row mt-6">
                                     <div class="col-md-4">
                                         <label for="">Enlace WhatsApp</label>
-                                        <input type="text" id="url_whatsapp" name="url_whatsapp" class="form-control" value="{{ $tienda->url_whatsapp }}">
+                                        <input type="text" id="url_whatsapp" name="url_whatsapp" class="form-control" value="{{ $tienda->url_whatsapp }}" required>
                                     </div>
                                     <div class="col-md-4">
                                         <label for="">Enlace Facebook</label>
-                                        <input type="text" id="url_facebook" name="url_facebook" class="form-control" value="{{ $tienda->url_facebook }}">
+                                        <input type="text" id="url_facebook" name="url_facebook" class="form-control" value="{{ $tienda->url_facebook }}" required>
                                     </div>
                                     <div class="col-md-4">
                                         <label for="">Enlace Instagram</label>
-                                        <input type="text" id="url_instagram" name="url_instagram" class="form-control" value="{{ $tienda->url_instagram }}">
+                                        <input type="text" id="url_instagram" name="url_instagram" class="form-control" value="{{ $tienda->url_instagram }}" required>
                                     </div>
                                 </div>
                                 <div class="row mt-6">
@@ -85,7 +85,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <label for="">Usuario</label>
-                                        <input type="text" id="usuario" name="usuario" class="form-control" value="{{ $perfil->usuario }}">
+                                        <input type="text" id="usuario" name="usuario" class="form-control" value="{{ $perfil->usuario }}" required>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="">Contraseña</label>

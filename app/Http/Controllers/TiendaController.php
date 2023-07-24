@@ -45,8 +45,6 @@ class TiendaController extends Controller
                 $tienda = Tienda::where('idTienda',$tienda_id)->first();
             }
 
-            // dd($request->all());
-
             $tienda->nombre         = $request->input('nombre');
             $tienda->nit            = $request->input('nit');
             $tienda->celular        = $request->input('celular');
