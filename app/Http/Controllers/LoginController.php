@@ -74,10 +74,10 @@ class LoginController extends Controller
         $perfil     = session()->has('perfil');
         $rol        = session()->has('rol');
         if (!($perfil && $rol)) {
-            // $url = "https://comercio-latino.com";
-            // header("Location: $url");
-            $url = "http://markeplace.test/login";
+            $url = "https://comercio-latino.com";
             header("Location: $url");
+            // $url = "http://markeplace.test/login";
+            // header("Location: $url");
             exit;
         }
     }

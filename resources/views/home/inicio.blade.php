@@ -110,54 +110,8 @@
                         <div id="kt_docs_google_chart_column" style="height: 350px"></div>
                     </center>
                 </div>
-                <!--end::Body-->
             </div>
         </div>
-    </div>
-    {{--  <div class="row">
-        <div class="col-md-12">
-            <!--begin::Charts Widget 2-->
-            <div class="card card-xl-stretch mb-5 mb-xl-8">
-                <!--begin::Header-->
-                <div class="card-header border-0 pt-5">
-                    <h3 class="card-title align-items-start flex-column">
-                        <span class="card-label fw-bold fs-3 mb-1">Pedidos por mes</span>
-                    </h3>
-                </div>
-                <!--end::Header-->
-                <!--begin::Body-->
-                <div class="card-body">
-                    <!--begin::Chart-->
-                    <div id="pedidos_por_mes" style="height: 350px"></div>
-                    <!--end::Chart-->
-                </div>
-                <!--end::Body-->
-            </div>
-            <!--end::Charts Widget 2-->
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <!--begin::Charts Widget 2-->
-            <div class="card card-xl-stretch mb-5 mb-xl-8">
-                <!--begin::Header-->
-                <div class="card-header border-0 pt-5">
-                    <h3 class="card-title align-items-start flex-column">
-                        <span class="card-label fw-bold fs-3 mb-1">Visualización y calificación</span>
-                    </h3>
-                </div>
-                <!--end::Header-->
-                <!--begin::Body-->
-                <div class="card-body">
-                    <!--begin::Chart-->
-                    <div id="visuallizaciones" style="height: 350px"></div>
-                    <!--end::Chart-->
-                </div>
-                <!--end::Body-->
-            </div>
-            <!--end::Charts Widget 2-->
-        </div>
-    </div>  --}}
     <div class="row">
         <div class="col-md-12">
             <div class="card card-xl-stretch mb-xl-8">
@@ -165,15 +119,7 @@
                 <div class="card-header border-0 pt-5">
                     <h3 class="card-title align-items-start flex-column">
                         <span class="card-label fw-bold fs-3 mb-1">Ventas Alcanzadas por mes</span>
-                        {{--  <span class="text-muted fw-semibold fs-7">More than 1000 new records</span>  --}}
                     </h3>
-                    {{--  <!--begin::Toolbar-->
-                    <div class="card-toolbar" data-kt-buttons="true">
-                        <a class="btn btn-sm btn-color-muted btn-active btn-active-primary active px-4 me-1" id="kt_charts_widget_3_year_btn">Year</a>
-                        <a class="btn btn-sm btn-color-muted btn-active btn-active-primary px-4 me-1" id="kt_charts_widget_3_month_btn">Month</a>
-                        <a class="btn btn-sm btn-color-muted btn-active btn-active-primary px-4" id="kt_charts_widget_3_week_btn">Week</a>
-                    </div>
-                    <!--end::Toolbar-->  --}}
                 </div>
                 <!--end::Header-->
                 <!--begin::Body-->
