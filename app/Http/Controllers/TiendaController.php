@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\EnviarCorreoSuscripcion;
 use App\Models\Informacion;
+use App\Models\Perfil;
 use App\Models\Persona;
 use App\Models\Tienda;
 use Illuminate\Http\Request;
@@ -69,6 +70,18 @@ class TiendaController extends Controller
 
             $tienda->save();
 
+            // persona y perfil
+            $persona = Persona::find($tienda->usuario_creacion);
+            $persona->correo = $request->input('usuario');
+            $persona->save();
+
+            $perfil = Perfil::where('idPersona', $persona->idPersona)->first();
+            $perfil->usuario = $request->input('usuario');
+            if($request->input('contrasena') != null){
+                $perfil->contrasena = $request->input('contrasena');
+            }
+            $perfil->save();
+
             $data['detalle'] = view('tienda.detallePerfil')->with(compact('tienda'))->render();
             $data['estado'] = 'success';
         }else{
@@ -92,8 +105,11 @@ class TiendaController extends Controller
 
     public function perfil(Request $request){
         $persona_id = session('perfil')->idPersona;
+        $perfil_id = session('perfil')->idPerfil;
         $tienda = Tienda::where('usuario_creacion', $persona_id)->first();
-        return view('vendedor.perfil')->with(compact('tienda'));
+        $perfil = Perfil::where('idPersona', $perfil_id)->first();
+
+        return view('vendedor.perfil')->with(compact('tienda', 'perfil'));
     }
 
     public function detallePerfil(Request $request){
@@ -113,7 +129,7 @@ class TiendaController extends Controller
         if($request->ajax()){
             $perfil = session('perfil');
             $persona = Persona::find($perfil->idPersona);
-            $nombre = $persona->nombre." ".$persona->apellido_paterno." ".$persona->apellido_materno;
+            $nombre = $persona->nombres." ".$persona->apellido_paterno." ".$persona->apellido_materno;
 
             $tienda = Tienda::where('usuario_creacion', $persona->idPersona)->first();
             $email = $tienda->correo;
@@ -124,15 +140,25 @@ class TiendaController extends Controller
             $qr = Informacion::find(14);
             $qrImg = $qr->descripcion;
 
+
+            // CAMBIAMOS EL TIPO DE SUSCRIPCION
+            $perfil = Perfil::find($perfil->idPerfil);
+            $perfil->plandepago = (($tipo === 'basica')? 1 : (($tipo === 'estandar')? 2 : 3) );
+            $perfil->save();
+
             try {
-                // Mail::to($email)->send(new EnviarCorreoSuscripcion($nombre, $tipo, $modalidad, $qrImg));
-                Mail::to("jjjoelcito123@gmail.com")->send(new EnviarCorreoSuscripcion($nombre, $tipo, $modalidad, $qrImg));
-                echo "¡Correo enviado con éxito!"." "."jjjoelcito123@gmail.com";
+                Mail::to($email)->send(new EnviarCorreoSuscripcion($nombre, $tipo, $modalidad, $qrImg));
+                // Mail::to("jjjoelcito123@gmail.com")->send(new EnviarCorreoSuscripcion($nombre, $tipo, $modalidad, $qrImg));
+                $data['estado'] = 'success';
             } catch (\Exception $e) {
                 // Ocurrió un error al enviar el correo, puedes manejar el error aquí.
-                echo "Error al enviar el correo: " . $e->getMessage();
+                $data['estado'] = 'error';
             }
+        }else{
+            $data['estado'] = 'error';
         }
+
+        return $data;
     }
 
     public function guardaAdmin(Request $request){

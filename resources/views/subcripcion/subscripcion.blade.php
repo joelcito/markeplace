@@ -102,20 +102,29 @@
                                         <span class="path2"></span>
                                     </i>
                                 </div>
-                                <!--end::Item-->
-                                <!--begin::Item-->
-                                {{--  <div class="d-flex align-items-center">
-                                    <span class="fw-semibold fs-6 text-gray-400 flex-grow-1">Unlimited Cloud Space</span>
-                                    <i class="ki-duotone ki-cross-circle fs-1">
-                                        <span class="path1"></span>
-                                        <span class="path2"></span>
-                                    </i>
-                                </div>  --}}
-                                <!--end::Item-->
                             </div>
-                            <!--end::Features-->
-                            <!--begin::Select-->
-                            <a href="#" class="btn btn-sm btn-primary disabled">Actual</a>
+                            @php
+                                $perfil_id =session('perfil')->idPerfil;
+                                $perfil = App\Models\Perfil::find($perfil_id);
+                            @endphp
+                            <div class="row w-100" >
+                                <div class="col-md-12">
+                                    <form id="form_basica">
+                                        <label for="" class="required">Modalidad</label>
+                                        <select name="modalidad_basica" id="modalidad_basica" class="form-control" required>
+                                            <option value="">Seleccione</option>
+                                            <option value="Mensual">Mensual</option>
+                                            <option value="Anual">Anual</option>
+                                        </select>
+                                    </form>
+                                </div>
+                            </div>
+                            <button type="button" onclick="enviarCorreo('basica')" class="btn w-100 btn-sm btn-primary mt-5" target="_blank">
+                                Solicitar
+                            </button>
+                            @if ($perfil->plandepago === 1)
+                                <h3 class="text-success mt-2 text-center">PLAN ACTUAL</h3>
+                            @endif
                             <!--end::Select-->
                         </div>
                         <!--end::Option-->
@@ -213,16 +222,6 @@
                                         <span class="path2"></span>
                                     </i>
                                 </div>
-                                <!--end::Item-->
-                                <!--begin::Item-->
-                                {{--  <div class="d-flex align-items-center">
-                                    <span class="fw-semibold fs-6 text-gray-400 flex-grow-1">Unlimited Cloud Space</span>
-                                    <i class="ki-duotone ki-cross-circle fs-1">
-                                        <span class="path1"></span>
-                                        <span class="path2"></span>
-                                    </i>
-                                </div>  --}}
-                                <!--end::Item-->
                             </div>
                             <div class="row w-100" >
                                 <div class="col-md-12">
@@ -236,12 +235,12 @@
                                     </form>
                                 </div>
                             </div>
-                            <!--end::Features-->
-                            <!--begin::Select-->
-                            <button type="button" onclick="enviarCorreo('estandar')" class="btn btn-sm btn-primary mt-5" target="_blank">
+                            <button type="button" onclick="enviarCorreo('estandar')" class="btn btn-sm btn-primary mt-5 w-100" target="_blank">
                                 Solicitar
                             </button>
-                            <!--end::Select-->
+                            @if ($perfil->plandepago === 2)
+                                <h3 class="text-success mt-2 text-center">PLAN ACTUAL</h3>
+                            @endif
                         </div>
                         <!--end::Option-->
                     </div>
@@ -338,23 +337,25 @@
                                         <span class="path2"></span>
                                     </i>
                                 </div>
-                                <!--end::Item-->
-                                <!--begin::Item-->
-                                {{--  <div class="d-flex align-items-center">
-                                    <span class="fw-semibold fs-6 text-gray-400 flex-grow-1">Unlimited Cloud Space</span>
-                                    <i class="ki-duotone ki-cross-circle fs-1">
-                                        <span class="path1"></span>
-                                        <span class="path2"></span>
-                                    </i>
-                                </div>  --}}
-                                <!--end::Item-->
+                                <div class="row w-100" >
+                                    <div class="col-md-12">
+                                        <form id="form_superior">
+                                            <label for="" class="required">Modalidad</label>
+                                            <select name="modalidad_superior" id="modalidad_superior" class="form-control" required>
+                                                <option value="">Seleccione</option>
+                                                <option value="Mensual">Mensual</option>
+                                                <option value="Anual">Anual</option>
+                                            </select>
+                                        </form>
+                                    </div>
+                                </div>
+                                <button type="button" onclick="enviarCorreo('superior')" class="btn w-100 btn-sm btn-primary mt-5" target="_blank">
+                                    Solicitar
+                                </button>
+                                @if ($perfil->plandepago === 3)
+                                    <h3 class="text-success mt-2 text-center">PLAN ACTUAL</h3>
+                                @endif
                             </div>
-                            <!--end::Features-->
-                            <!--begin::Select-->
-                            <a href="mailto:admin@comercio-latino.com?subject=Quiero%cambiar%al%plana%Superior" class="btn btn-sm btn-primary" target="_blank">
-                                Solicitar
-                            </a>
-                            <!--end::Select-->
                         </div>
                         <!--end::Option-->
                     </div>
@@ -448,8 +449,9 @@
                     },
                     dataType: 'json',
                     success: function(data) {
-                        if(data.estado === 'success')
-                            $('#detalleperfil').html(data.detalle);
+                        if(data.estado === 'success'){
+                            location.reload();
+                        }
                     }
                 });
             }else{

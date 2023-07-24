@@ -12,7 +12,7 @@
     <tbody>
         @foreach ($ventas as $v)
         <tr>
-            <td>{{ $v->idVenta }}</td>
+            <td>{{ $v->pedido }}</td>
             <td>
                 @php
                     $perfil = App\Models\Perfil::find($v->idPerfil);

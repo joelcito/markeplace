@@ -10,18 +10,33 @@
     <center><h3>COMERCIO LATINO</h3></center>
     <h1>Estimad@ : {{ $name }}</h1>
     <br>
-    <p>Gracias por usar nuestro servicio, tu suscripcion {{ $tipo." ".$modalidad }} ha sido aceptada para mantener activo debe realizar el pago por QR y confirmar al siguiente email admin@comercio-latino.com </p>
+    <p>Gracias por usar nuestro servicio, tu suscripcion <b>{{ $tipo." ".$modalidad }}</b> ha sido aceptada para mantener activo debe realizar el pago por QR y confirmar al siguiente email admin@comercio-latino.com </p>
     <center>
-        <img src="https://comercio-latino.com/sistema/public/qrs/{{ $qr }}" alt="aqui la img">
+        <img width="30%" src="https://comercio-latino.com/sistema/public/qrs/{{ $qr }}" alt="aqui la img">
     </center>
     <table>
         <tr>
             <td><b>Importe {{ $modalidad }} Bs:</b></td>
             <td>
-                @if (true)
-                    2000
-                @else
-                    200
+
+                @if ($tipo === "basica")
+                    @if ($modalidad === "Mensual")
+                        0
+                    @else
+                        0
+                    @endif
+                @elseif($tipo === "estandar")
+                    @if ($modalidad === "Mensual")
+                        200
+                    @else
+                        2.000
+                    @endif
+                @elseif($tipo === "superior")
+                    @if ($modalidad === "Mensual")
+                        500
+                    @else
+                        5.000
+                    @endif
                 @endif
             </td>
         </tr>
@@ -31,7 +46,19 @@
         </tr>
     </table>
     <center>
-        <button>Ir a la Tienda</button>
+        <a style="
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            background-color: #007BFF; /* Color de fondo azul */
+            color: #fff; /* Color de texto blanco */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            " href="{{ url('vendedor/inicio') }}">Ir a la Tienda</a>
     </center>
     <p>Al no contar con la confirmacion de pago, la suscripcion sera revertido</p>
 </body>

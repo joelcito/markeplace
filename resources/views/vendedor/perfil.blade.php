@@ -81,6 +81,18 @@
                                         <input id="imagenes" name="imagenes" type="file" class="form-control">
                                     </div>
                                 </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label for="">Usuario</label>
+                                        <input type="text" id="usuario" name="usuario" class="form-control" value="{{ $perfil->usuario }}">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="">Contraseña</label>
+                                        <input type="password" id="contrasena" name="contrasena" class="form-control">
+                                        <small class="text-success">Llene el campo si desea cambiar la contraseña, caso contrario deje el campo vacio</small>
+                                    </div>
+                                </div>
                                 <div class="row mt-10 mb-5">
                                     <div class="col-md-12">
                                         <button type="button" class="btn btn-success w-100 btn-sm" onclick="guardarTienda()">Guardar</button>
@@ -129,6 +141,9 @@
                 formData.append('celular',      $('#celular').val());
                 formData.append('correo',       $('#correo').val());
                 formData.append('tienda_id',    $('#tienda_id').val());
+
+                formData.append('usuario',      $('#usuario').val());
+                formData.append('contrasena',   $('#contrasena').val());
 
                 $.ajax({
                     url: "{{ url('tienda/guarda') }}",
