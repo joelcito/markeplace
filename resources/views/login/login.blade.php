@@ -90,7 +90,7 @@
       </div>
       <div class="form-group">
         <label for="password">Contraseña:</label>
-        <input type="password" id="password" name=" password" placeholder="Ingresa tu contraseña" required value="admin">
+        <input type="password" id="password" name=" password" placeholder="Ingresa tu contraseña" required value="1234567lP.">
       </div>
       <div class="form-group">
         <button type="submit">Iniciar sesión</button>
