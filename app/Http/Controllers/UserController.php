@@ -14,7 +14,8 @@ class UserController extends Controller
         $logeo = app(LoginController::class);
         $logeo->verificaLogueo();
         // $perfiles = Perfil::all();
-        $perfiles = Perfil::where('estado', 1)->orderBy('idPerfil', 'desc')->get();
+        // $perfiles = Perfil::where('estado', 1)->orderBy('idPerfil', 'desc')->get();
+        $perfiles = Perfil::whereNot('estado', 0)->orderBy('idPerfil', 'desc')->get();
         return view('user.listado')->with(compact('perfiles'));
     }
 
@@ -100,6 +101,22 @@ class UserController extends Controller
 
         return $data;
     }
+
+    public function cambiarEstadoPerfil(Request $request){
+        if($request->ajax()){
+            $id = $request->input('id');
+            
+            $perfil = Perfil::find($id);
+            $perfil->estado = $request->input('estado');
+            $perfil->save();
+
+            $data['estado'] = 'success';
+        }else{
+            $data['estado'] = 'error';
+        }
+        return $data;
+    }
+
 
 
 }

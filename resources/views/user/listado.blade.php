@@ -20,7 +20,7 @@
                     <h2 class="fw-bold">Formulario de usuario</h2>
                     <!--end::Modal title-->
                     <!--begin::Close-->
-                    <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-users-modal-action="close">
+                    <div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
                         <i class="ki-duotone ki-cross fs-1">
                             <span class="path1"></span>
                             <span class="path2"></span>
@@ -221,12 +221,12 @@
                     <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
                         <th>N</th>
                         <th>Nombres</th>
-                        <th>Ap Paterno</th>
-                        <th>Ap Materno</th>
-                        <th>Cedula</th>
-                        <th>Rol</th>
-                        <td>Correo / Usuario</td>
-                        <th></th>
+                        <th>Apellidos</th>
+                        <th>Rol de Usuario</th>
+                        <th>Correo / Usuario</th>
+                        <td>Fecha de Registro</td>
+                        <td>Estado</td>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -237,9 +237,7 @@
                         <tr>
                             <td>{{ $p->idPerfil }}</td>
                             <td>{{ $persona->nombres }}</td>
-                            <td>{{ $persona->apellido_paterno }}</td>
-                            <td>{{ $persona->apellido_materno }}</td>
-                            <td>{{ $persona->ci }}</td>
+                            <td>{{ $persona->apellido_paterno." ".$persona->apellido_materno }}</td>
                             <td>
                                 @if ($p->rol === 1)
                                     <span class="badge badge-success">Administrador</span>
@@ -250,6 +248,14 @@
                                 @endif
                             </td>
                             <td>{{ $p->usuario }}</td>
+                            <td>{{ $p->fecha_creacion }}</td>
+                            <td>
+                                <select name="estadoPerfil_{{ $p->idPerfil }}" id="estadoPerfil_{{ $p->idPerfil }}" class="form-control" onchange="cambiarEstadoPerfil({{$p->idPerfil}})">
+                                    <option {{ $p->estado === 1? 'selected' : '' }} value="1">Activo</option>
+                                    <option {{ $p->estado === 2? 'selected' : '' }} value="2">Suspendido</option>
+                                </select>
+                                <small id="msg_estado_{{ $p->idPerfil }}" style="display: none" class="text-success">Se guado con exito</small>
+                            </td>
                             <td>
                                 <button class="btn btn-warning btn-icon btn-sm" onclick="editar('{{ $persona->idPersona }}','{{ $p->usuario }}','{{ $persona->nombres }}', '{{ $persona->apellido_paterno }}','{{ $persona->apellido_materno }}',  '{{ $persona->ci }}', '{{ $p->rol }}')"><i class="fa fa-edit"></i></button></button>
                                 <button class="btn btn-danger btn-icon btn-sm" onclick="eliminar('{{ $persona->idPersona }}')"><i class="fa fa-trash"></i></button></button>
@@ -398,6 +404,23 @@
                 success: function(data) {
                     if(data.estado === 'success')
                         window.location.reload();
+                }
+            });
+        }
+
+        function cambiarEstadoPerfil(perfil){
+            $.ajax({
+                url: "{{ url('users/cambiarEstadoPerfil') }}",
+                type: 'POST',
+                data:{
+                    id      :   perfil,
+                    estado  :   $('#estadoPerfil_'+perfil).val()
+                },
+                dataType: 'json',
+                success: function(data) {
+                    if(data.estado === 'success')
+                        $('#msg_estado_'+perfil).show('toggle')
+
                 }
             });
         }

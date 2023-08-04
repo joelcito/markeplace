@@ -357,6 +357,39 @@
     			$("#formularioTeinda")[0].reportValidity()
             }
         }
+
+        function cambiaEstadoTienda(tienda){
+            $.ajax({
+                url: "{{ url('tienda/cambiaEstadoTienda') }}",
+                data:{
+                    id:tienda,
+                    estado:$('#estadoTienda_'+tienda).val()
+                },
+                type: 'POST',
+                dataType: 'json',
+                success: function(data) {
+                    if(data.estado === 'success'){
+                        $('#msg_nesaje_'+tienda).show('toggle')
+                    }
+                }
+            });
+        }
+
+        function elimina(tienda){
+            $.ajax({
+                url: "{{ url('tienda/elimina') }}",
+                data:{
+                    id:tienda
+                },
+                type: 'POST',
+                dataType: 'json',
+                success: function(data) {
+                    if(data.estado === 'success'){
+                        ajaxListado();
+                    }
+                }
+            });
+        }
     </script>
 @endsection
 

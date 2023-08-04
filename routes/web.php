@@ -62,6 +62,7 @@ Route::get('/tienda/perfil', [TiendaController::class, 'perfil']);
 Route::post('/tienda/detallePerfil', [TiendaController::class, 'detallePerfil']);
 Route::post('/tienda/enviarCorreo', [TiendaController::class, 'enviarCorreo']);
 Route::post('/tienda/guardaAdmin', [TiendaController::class, 'guardaAdmin']);
+Route::post('/tienda/cambiaEstadoTienda', [TiendaController::class, 'cambiaEstadoTienda']);
 
 
 // VENDEDOR
@@ -95,6 +96,7 @@ Route::get('/login/cerrar', [LoginController::class, 'cerrar']);
 Route::get('/users', [UserController::class, 'listado']);
 Route::post('/users/guarda', [UserController::class, 'guarda']);
 Route::post('/users/eliminar', [UserController::class, 'eliminar']);
+Route::post('/users/cambiarEstadoPerfil', [UserController::class, 'cambiarEstadoPerfil']);
 
 
 // // EXTERNOS

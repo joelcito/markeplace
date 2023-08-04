@@ -27,6 +27,10 @@ class InformacionController extends Controller
      */
     public function guarda(Request $request){
 
+        
+        $informacion = Informacion::where('codigo',"quienessomos")->first();
+        $informacion->descripcion = $request->input('quienessomos');
+        $informacion->save();
         $informacion = Informacion::where('codigo',"mision")->first();
         $informacion->descripcion = $request->input('mision');
         $informacion->save();

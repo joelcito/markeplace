@@ -31,7 +31,8 @@ class TiendaController extends Controller
     }
 
     protected function listadoArray(){
-        $categorias = Tienda::all();
+        // $categorias = Tienda::all();
+        $categorias = Tienda::whereNot('estado',0)->get();
         return view("tienda.ajaxListado")->with(compact('categorias'))->render();
     }
 
@@ -91,8 +92,10 @@ class TiendaController extends Controller
 
     public function elimina(Request $request){
         if($request->ajax()){
-            $categoria = $request->input('id');
-            Tienda::destroy($categoria);
+            $tienda = $request->input('id');
+            $tienda = Tienda::find($tienda);
+            $tienda->estado = 0;
+            $tienda->save();
             $data['estado'] = 'success';
         }else{
             $data['estado'] = 'error';
@@ -180,6 +183,20 @@ class TiendaController extends Controller
             $data['estado'] = 'error';
         }
 
+        return $data;
+    }
+
+    public function cambiaEstadoTienda(Request $request){
+        if($request->ajax()){
+            // dd($request->all());
+            $tienda = Tienda::find($request->input('id'));
+            $tienda->estado = $request->input('estado');
+            $tienda->save();
+
+            $data['estado'] = "success";
+        }else{
+            $data['estado'] = "error";
+        }
         return $data;
     }
 }
