@@ -188,13 +188,13 @@
                                 </div>
                                 <!--end::Item-->
                                 <!--begin::Item-->
-                                <div class="d-flex align-items-center mb-5">
+                                {{-- <div class="d-flex align-items-center mb-5">
                                     <span class="fw-semibold fs-6 text-gray-800 flex-grow-1 pe-3">Marketing de productos <br> ( Facebook )</span>
                                     <i class="ki-duotone ki-check-circle fs-1 text-success">
                                         <span class="path1"></span>
                                         <span class="path2"></span>
                                     </i>
-                                </div>
+                                </div> --}}
                                 <!--end::Item-->
                                 <!--begin::Item-->
                                 <div class="d-flex align-items-center mb-5">
@@ -303,13 +303,13 @@
                                 </div>
                                 <!--end::Item-->
                                 <!--begin::Item-->
-                                <div class="d-flex align-items-center mb-5">
+                                {{-- <div class="d-flex align-items-center mb-5">
                                     <span class="fw-semibold fs-6 text-gray-800 flex-grow-1 pe-3">Marketing de productos <br> ( Facebook, Instagram )</span>
                                     <i class="ki-duotone ki-check-circle fs-1 text-success">
                                         <span class="path1"></span>
                                         <span class="path2"></span>
                                     </i>
-                                </div>
+                                </div> --}}
                                 <!--end::Item-->
                                 <!--begin::Item-->
                                 <div class="d-flex align-items-center mb-5">

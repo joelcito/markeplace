@@ -66,15 +66,21 @@
 						<div class="d-flex align-items-stretch justify-content-between flex-lg-grow-1" id="kt_app_header_wrapper">
 							<div class="app-header-menu app-header-mobile-drawer align-items-stretch" data-kt-drawer="true" data-kt-drawer-name="app-header-menu" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="250px" data-kt-drawer-direction="end" data-kt-drawer-toggle="#kt_app_header_menu_toggle" data-kt-swapper="true" data-kt-swapper-mode="{default: 'append', lg: 'prepend'}" data-kt-swapper-parent="{default: '#kt_app_body', lg: '#kt_app_header_wrapper'}">
 								<div class="menu menu-rounded menu-column menu-lg-row my-5 my-lg-0 align-items-stretch fw-semibold px-2 px-lg-0" id="kt_app_header_menu" data-kt-menu="true">
+                                    @php
+										$persona_id = session('perfil')->idPersona;
+                                        $persona    = \App\Models\Persona::find($persona_id);
+                                        $rol        = session('rol');
 
+                                        if($rol===3){
+                                            $tienda = \App\Models\Tienda::where('usuario_creacion', $persona_id)->first();
+                                            echo '<h3 class="text-white mt-7">'.$tienda->nombre.'</h3>';
+                                        }
+									@endphp
 								</div>
 							</div>
 							<div class="app-navbar flex-shrink-0">
 								<div class="app-navbar-item ms-1 ms-md-3">
-									@php
-										$persona_id = session('perfil')->idPersona;
-                                        $persona = \App\Models\Persona::find($persona_id);
-									@endphp
+
 									<h4 class="text-white mt-4">{{ $persona->nombres." ".$persona->apellido_paterno." ".$persona->apellido_materno }}</h4>
 									<a href="#" class="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-30px h-30px w-md-40px h-md-40px" data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
 										<i class="ki-duotone ki-night-day theme-light-show fs-2 fs-lg-1">

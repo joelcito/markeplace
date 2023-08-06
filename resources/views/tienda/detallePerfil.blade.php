@@ -18,8 +18,8 @@
                     <div class="d-flex flex-column">
                         <!--begin::Name-->
                         <div class="d-flex align-items-center mb-2">
-                            <a href="#" class="text-gray-900 text-hover-primary fs-2 fw-bold me-1">{{ $tienda->nombre }}</a>
-                            <a href="#">
+                            <a href="#" class="text-gray-900 text-hover-primary fs-2 fw-bold me-1 mt-15"><h1>{{ $tienda->nombre }}</h1></a>
+                            <a href="#" class="mt-15">
                                 <i class="ki-duotone ki-verify fs-1 text-primary">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
@@ -32,13 +32,13 @@
                         </div>
                         <!--end::Name-->
                         <!--begin::Info-->
-                        <div class="d-flex flex-wrap fw-semibold fs-6 mb-4 pe-2">
+                        {{-- <div class="d-flex flex-wrap fw-semibold fs-6 mb-4 pe-2">
                             <a href="#" class="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2">
-                            {{-- <i class="ki-duotone ki-profile-circle fs-4 me-1">
+                            <i class="ki-duotone ki-profile-circle fs-4 me-1">
                                 <span class="path1"></span>
                                 <span class="path2"></span>
                                 <span class="path3"></span>
-                            </i>Computacion</a> --}}
+                            </i>Computacion</a>
                             <a href="#" class="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2">
                             <i class="ki-duotone ki-geolocation fs-4 me-1">
                                 <span class="path1"></span>
@@ -49,7 +49,7 @@
                                 <span class="path1"></span>
                                 <span class="path2"></span>
                             </i>{{ $tienda->correo }}</a>
-                        </div>
+                        </div> --}}
                         <!--end::Info-->
                     </div>
                 </div>

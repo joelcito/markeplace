@@ -91,6 +91,16 @@ class ProductoController extends Controller
                 }
                 $producto->imagenes = $todo;
             }
+
+            if($request->file('archivo')){
+                $archivos                   = $request->file('archivo');
+                $archivo                    = $archivos;
+                $direccion                  = 'imgProducto/';
+                $nombreArchivo              = "a_".date('YmdHis').".".$archivo->getClientOriginalExtension();
+                $archivo->move($direccion,$nombreArchivo);
+                $producto->archivos         = $nombreArchivo;
+            }
+
             $producto->save();
             $data['estado'] = 'success';
         }else{

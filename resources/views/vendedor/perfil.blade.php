@@ -24,12 +24,12 @@
                             <form action="" id="formularioTienda">
                                 <div class="row mt-6">
                                     <div class="col-md-6">
-                                        <label for="" class="required">Nombre o Razon Social</label>
+                                        <label for="" class="required">Nombre o Razon Social (Nombre de la Tienda)</label>
                                         <input type="text" id="nombre" name="nombre" class="form-control" value="{{ $tienda->nombre }}" required>
                                         <input type="hidden" id="tienda_id" name="tienda_id" value="{{ $tienda->idTienda }}">
                                     </div>
                                     <div class="col-md-6">
-                                        <label for="" class="required">Numero de Identificacion Tributaria</label>
+                                        <label for="">NIT o CI</label>
                                         <input type="text" id="nit" name="nit" class="form-control" value="{{ $tienda->nit }}" required>
                                     </div>
                                 </div>
@@ -37,14 +37,14 @@
                                 <div class="row mt-6">
                                     <div class="col-md-12">
 
-                                        <label for="" class="required">Descripcion de la tienda</label>
+                                        <label for="" class="required">Descripcion breve de la tienda</label>
                                         <input type="text" id="descripcion" name="descripcion" class="form-control" value="{{ $tienda->descripcion }}" required>
                                     </div>
                                 </div>
 
                                 <div class="row mt-12">
                                     <div class="col-md-6">
-                                        <label for="" class="required">Pais / Ciudad</label>
+                                        <label for="" class="required">Ciudad / Pais</label>
                                         <input type="text" id="ubicacion" name="ubicacion" class="form-control" value="{{ $tienda->ubicacion }}" required>
                                     </div>
                                     <div class="col-md-3">
@@ -76,9 +76,13 @@
                                     </div>
                                 </div>
                                 <div class="row mt-6">
-                                    <div class="col-md-12">
-                                        <label for="" class="required">Imagen</label>
+                                    <div class="col-md-6">
+                                        <label for="" class="required">Adjuntar logo de la empresa</label>
                                         <input id="imagenes" name="imagenes" type="file" class="form-control">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="" class="required">Certificacion de NIT</label>
+                                        <input id="certificacion" name="certificacion" type="file" class="form-control">
                                     </div>
                                 </div>
                                 <hr>
@@ -95,7 +99,7 @@
                                 </div>
                                 <div class="row mt-10 mb-5">
                                     <div class="col-md-12">
-                                        <button type="button" class="btn btn-success w-100 btn-sm" onclick="guardarTienda()">Guardar</button>
+                                        <button type="button" class="btn btn-primary w-100 btn-sm" onclick="guardarTienda()">Guardar</button>
                                     </div>
                                 </div>
                             </form>
@@ -125,10 +129,11 @@
 
                 var formData = new FormData();
                 var archivo = $('#imagenes')[0].files;
-                //for(let i=0;i<archivo.length;i++){
-                //formData.append('archivo[]', archivo[i]);
                 formData.append('archivo', archivo[0]);
-                //}
+
+                var certificado = $('#certificacion')[0].files;
+                formData.append('certificado', certificado[0]);
+
                 formData.append('nombre',       $('#nombre').val());
                 formData.append('nit',          $('#nit').val());
                 formData.append('descripcion',  $('#descripcion').val());

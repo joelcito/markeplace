@@ -67,6 +67,15 @@ class TiendaController extends Controller
                 $tienda->logo    = $nombreArchivo;
             }
 
+            if($request->file('certificado')){
+                $archivos                   = $request->file('certificado');
+                $archivo                    = $archivos;
+                $direccion                  = 'imgLogoTienda/';
+                $nombreArchivo              = date('YmdHis').".".$archivo->getClientOriginalExtension();
+                $archivo->move($direccion,$nombreArchivo);
+                $tienda->confirmacionnit    = $nombreArchivo;
+            }
+
             $tienda->save();
 
             // persona y perfil

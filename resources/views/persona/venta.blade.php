@@ -210,25 +210,45 @@
             <table class="table align-middle table-row-dashed fs-6 gy-5">
                 <thead>
                     <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
-                        <th>N</th>
-                        <th>Producto</th>
-                        <th>Cantidad</th>
+                        <th>Nro Pedido</th>
+                        <th>Cliente</th>
                         <th>Precio</th>
+                        <th>Doc Pedido</th>
+                        <th>Fecha de Pedido</th>
                         <th>Estado</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ( $ventas as $v)
                         <tr>
-                            <td>{{ $v->idVenta }}</td>
+                            <td>{{ $v->pedido }}</td>
                             <td>
                                 @php
-                                    $producto = App\Models\Producto::find($v->idProducto);
-                                    echo $producto->nombre;
+                                    $persona = App\Models\Persona::find($v->usuario_creacion);
+                                    echo $persona->nombres." ".$persona->ap_paterno." ".$persona->ap_materno;
                                 @endphp
                             </td>
-                            <td>{{ $v->cantidad }}</td>
-                            <td>{{ $v->preciounitario }}</td>
+                            <td>{{ $v->total_precio }}</td>
+                            <td>
+                                <a class="btn btn-danger btn-icon btn-sm" target="_blank" href="https://comercio-latino.com/services_landing/pdfrecibo.php?pedido={{ $v->pedido }}
+                                                                                                    &nombre=LFORES
+                                                                                                    &telefono=77752452
+                                                                                                    &email=jjjoelcito123@gmail.com
+                                                                                                    &pronombre=LFORES
+                                                                                                    &pronit=8401524016
+                                                                                                    &prodireccion=LA%20PAZ
+                                                                                                    &protelefono=77752452
+                                                                                                    &procorreo=jjjoelcito123@gmail.com
+                                                                                                    &clinombre=alfredjose360%20%20
+                                                                                                    &clinit=
+                                                                                                    &clidireccion=
+                                                                                                    &clitelefono=
+                                                                                                    &clicorreo=alfredjose360@gmail.com
+                                                                                                    &logoimagen=17-07-20-Elementor-Page-Builder-construye-tu-web-de-forma-fa%CC%81cil-y-eficaz-1-1200x630.jpg
+                                                                                                    &fecha=31/07/2023%2021:09:45">
+                                                                                                <i class="fa fa-file-pdf"></i></a>
+                            </td>
+                            <td>{{ $v->fecha_creacion }}</td>
                             <td>
                                 @if ($v->estadoproducto === 1)
                                     <small class="badge badge-info">Iniciado</small>

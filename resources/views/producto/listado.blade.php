@@ -22,7 +22,7 @@
                     <h2 class="fw-bold">Formulario de producto</h2>
                     <!--end::Modal title-->
                     <!--begin::Close-->
-                    <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-users-modal-action="close">
+                    <div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
                         <i class="ki-duotone ki-cross fs-1">
                             <span class="path1"></span>
                             <span class="path2"></span>
@@ -85,8 +85,8 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="fv-row mb-7">
-                                    <label class="required fw-semibold fs-6 mb-2">Descuento</label>
-                                    <input type="number" id="descuento" name="descuento" class="form-control form-control-solid mb-3 mb-lg-0"  required>
+                                    <label class="fw-semibold fs-6 mb-2">Descuento</label>
+                                    <input type="number" id="descuento" name="descuento" class="form-control form-control-solid mb-3 mb-lg-0">
                                 </div>
                             </div>
                             <div class="col-md-3">
@@ -344,6 +344,10 @@
                     formData.append('archivo[]', archivo[i]);
                     contador++;
                 }
+
+                var archivo = $('#archivo')[0].files;
+                formData.append('archivo', archivo[0]);
+
                 // if(contador >= 2){
                     formData.append('nombre',           $('#nombre').val());
                     formData.append('producto_id',      $('#producto_id').val());

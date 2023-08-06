@@ -98,32 +98,7 @@
                     </a>
                     <!--end:Menu link-->
                 </div>
-                <div class="menu-item">
-                    <!--begin:Menu link-->
-                    <a class="menu-link" href="#">
-                        <span class="menu-icon">
-                            <i class="ki-duotone ki-rocket fs-2">
-                                <span class="path1"></span>
-                                <span class="path2"></span>
-                            </i>
-                        </span>
-                        <span class="menu-title text-white">IR A LA TIENDA</span>
-                    </a>
-                    <!--end:Menu link-->
-                </div>
-                <div class="menu-item">
-                    <!--begin:Menu link-->
-                    <a class="menu-link" href="#">
-                        <span class="menu-icon">
-                            <i class="ki-duotone ki-rocket fs-2">
-                                <span class="path1"></span>
-                                <span class="path2"></span>
-                            </i>
-                        </span>
-                        <span class="menu-title text-white">CERRAR CESSION</span>
-                    </a>
-                    <!--end:Menu link-->
-                </div>
+
             @endif
 
             @if (session('rol') === 3)
@@ -135,19 +110,7 @@
                     </div>
                     <!--end:Menu content-->
                 </div>
-                <div class="menu-item">
-                    <!--begin:Menu link-->
-                    <a class="menu-link" href="{{ url('vendedor/inicio') }}">
-                        <span class="menu-icon">
-                            <i class="ki-duotone ki-rocket fs-2">
-                                <span class="path1"></span>
-                                <span class="path2"></span>
-                            </i>
-                        </span>
-                        <span class="menu-title" {{ Request::is('vendedor/inicio') ? "style=color:orange" : 'style=color:white' }}>DASHBOARD</span>
-                    </a>
-                    <!--end:Menu link-->
-                </div>
+
                 <div class="menu-item">
                     <!--begin:Menu link-->
                     <a class="menu-link" href="{{ url('tienda/perfil') }}">
@@ -161,6 +124,7 @@
                     </a>
                     <!--end:Menu link-->
                 </div>
+
                 <div class="menu-item">
                     <!--begin:Menu link-->
                     <a class="menu-link" href="{{ url('producto/listado') }}" >
@@ -170,10 +134,11 @@
                                 <span class="path2"></span>
                             </i>
                         </span>
-                        <span class="menu-title" {{ Request::is('producto/listado') ? "style=color:orange" : 'style=color:white' }}>PRODUCTOS</span>
+                        <span class="menu-title" {{ Request::is('producto/listado') ? "style=color:orange" : 'style=color:white' }}>MIS PRODUCTOS</span>
                     </a>
                     <!--end:Menu link-->
                 </div>
+
                 <div class="menu-item">
                     <!--begin:Menu link-->
                     <a class="menu-link" href="{{ url('vendedor/pedido') }}">
@@ -187,6 +152,7 @@
                     </a>
                     <!--end:Menu link-->
                 </div>
+
                 <div class="menu-item">
                     <!--begin:Menu link-->
                     <a class="menu-link" href="{{ url('subcripcion/subcripcion') }}">
@@ -200,6 +166,24 @@
                     </a>
                     <!--end:Menu link-->
                 </div>
+
+                <div class="menu-item">
+                    <!--begin:Menu link-->
+                    <a class="menu-link" href="{{ url('vendedor/inicio') }}">
+                        <span class="menu-icon">
+                            <i class="ki-duotone ki-rocket fs-2">
+                                <span class="path1"></span>
+                                <span class="path2"></span>
+                            </i>
+                        </span>
+                        <span class="menu-title" {{ Request::is('vendedor/inicio') ? "style=color:orange" : 'style=color:white' }}>PANEL INFORMATIVO</span>
+                    </a>
+                    <!--end:Menu link-->
+                </div>
+
+
+
+
             @endif
 
             @if (session('rol') === 2)
@@ -239,6 +223,34 @@
                 </div>
                 <!--end:Menu item-->
             @endif
+
+            <div class="menu-item">
+                <!--begin:Menu link-->
+                <a class="menu-link" href="#">
+                    <span class="menu-icon">
+                        <i class="ki-duotone ki-rocket fs-2">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                        </i>
+                    </span>
+                    <span class="menu-title text-white">IR A LA TIENDA</span>
+                </a>
+                <!--end:Menu link-->
+            </div>
+            <div class="menu-item">
+                <!--begin:Menu link-->
+                <a class="menu-link" href="#">
+                    <span class="menu-icon">
+                        <i class="ki-duotone ki-rocket fs-2">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                        </i>
+                    </span>
+                    <span class="menu-title text-white">CERRAR CESSION</span>
+                </a>
+                <!--end:Menu link-->
+            </div>
+
             <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                 <div class="menu-sub menu-sub-accordion">
                 </div>

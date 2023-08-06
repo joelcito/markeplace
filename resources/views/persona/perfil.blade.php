@@ -40,65 +40,62 @@
                                             <div class="col-md-4">
                                                 <label for="" class="required">NOMBRES</label>
                                                 {{--  <textarea name="quienessomos" id="quienessomos" cols="30" rows="5" class="form-control"></textarea>  --}}
-                                                <input type="text" id="nombres" name="nombres" class="form-control" value="{{ $persona->nombres }}">
+                                                <input type="text" id="nombres" name="nombres" class="form-control" value="{{ $persona->nombres }}" required>
                                                 <input type="hidden" id="persona_id" name="persona_id" value="{{ $persona->idPersona }}">
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="" class="required">APELLIDO PATERNO</label>
                                                 {{--  <textarea name="quienessomos" id="quienessomos" cols="30" rows="5" class="form-control"></textarea>  --}}
-                                                <input type="text" id="ap_paterno" name="ap_paterno" class="form-control" value="{{ $persona->apellido_paterno }}">
+                                                <input type="text" id="ap_paterno" name="ap_paterno" class="form-control" value="{{ $persona->apellido_paterno }}" required>
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="" class="required">APELLIDO MATERNO</label>
                                                 {{--  <textarea name="quienessomos" id="quienessomos" cols="30" rows="5" class="form-control"></textarea>  --}}
-                                                <input type="text" id="ap_materno" name="ap_materno" class="form-control" value="{{ $persona->apellido_materno }}">
+                                                <input type="text" id="ap_materno" name="ap_materno" class="form-control" value="{{ $persona->apellido_materno }}" required>
                                             </div>
                                         </div>
                                         <div class="row mt-5">
-                                            <div class="col-md-4">
-                                                <label for="" class="required">CEDULA</label>
-                                                {{--  <textarea name="quienessomos" id="quienessomos" cols="30" rows="5" class="form-control"></textarea>  --}}
-                                                <input type="text" id="cedula" name="cedula" class="form-control" value="{{ $persona->ci }}">
+                                            <div class="col-md-6">
+                                                <label for="" class="required">RAZON SOCIAL</label>
+                                                <input type="text" id="razon_social" name="razon_social" class="form-control" value="{{ $persona->razon_social }}" required>
                                             </div>
-                                            <div class="col-md-4">
-                                                <label for="" class="required">NIT</label>
-                                                {{--  <textarea name="quienessomos" id="quienessomos" cols="30" rows="5" class="form-control"></textarea>  --}}
+                                            <div class="col-md-6">
+                                                <label for="">NIT</label>
                                                 <input type="text" id="nit" name="nit" class="form-control" value="{{ $persona->nit }}">
                                             </div>
-                                            <div class="col-md-4">
-                                                <label for="" class="required">RAZON SOCIAL</label>
-                                                {{--  <textarea name="quienessomos" id="quienessomos" cols="30" rows="5" class="form-control"></textarea>  --}}
-                                                <input type="text" id="razon_social" name="razon_social" class="form-control" value="{{ $persona->razon_social }}">
-                                            </div>
+                                            {{-- <div class="col-md-4">
+                                                <label for="" class="required">CEDULA</label>
+                                                <input type="text" id="cedula" name="cedula" class="form-control" value="{{ $persona->ci }}">
+                                            </div> --}}
                                         </div>
                                         <div class="row mt-5">
-                                            <div class="col-md-4">
-                                                <label for="" class="required">CELULAR</label>
-                                                <input type="text" id="celular" name="celular" class="form-control" value="{{ $persona->celular }}">
-                                            </div>
-                                            <div class="col-md-4">
+                                            <div class="col-md-6">
                                                 <label for="" class="required">CORREO / USUARIO</label>
-                                                <input type="email" id="correo" name="correo" class="form-control" value="{{ $persona->correo }}">
+                                                <input type="email" id="correo" name="correo" class="form-control" value="{{ $persona->correo }}" required>
                                             </div>
-                                            <div class="col-md-4">
+                                            <div class="col-md-6">
+                                                <label for="" class="required">TELEFONO / CELULAR</label>
+                                                <input type="text" id="celular" name="celular" class="form-control" value="{{ $persona->celular }}" required>
+                                            </div>
+                                            {{-- <div class="col-md-4">
                                                 <label for="" class="required">FECHA DE NACIMEINTO</label>
                                                 <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" class="form-control" value="{{ $persona->fecha_nacimiento }}">
-                                            </div>
+                                            </div> --}}
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="row mt-6">
                                     <div class="col-md-6">
-                                        <label for="" class="required">DIRECCION</label>
-                                        <input type="text" id="direccion" name="direccion" class="form-control" value="{{ $persona->direccion }}">
+                                        <label for="" class="required">DIRECCION DE ENTREGA</label>
+                                        <input type="text" id="direccion" name="direccion" class="form-control" value="{{ $persona->direccion }}" required>
                                     </div>
                                     <div class="col-md-3">
                                         <label for="" class="required">FOTO</label>
                                         <input type="file" id="foto" name="foto" class="form-control">
                                     </div>
                                     <div class="col-md-3">
-                                        <label for="" class="required">CONTRASEÑA</label>
+                                        <label for="">CAMBIAR CONTRASEÑA</label>
                                         <input type="password" class="form-control" id="password" name="password">
                                     </div>
                                 </div>

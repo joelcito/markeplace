@@ -6,6 +6,7 @@ use App\Models\Perfil;
 use App\Models\Persona;
 use App\Models\Venta;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PersonaController extends Controller
 {
@@ -20,7 +21,16 @@ class PersonaController extends Controller
     public function pedido(Request $request){
         // $ventas = Venta::all();
         $perfil_id = session('perfil')->idPerfil;
-        $ventas = Venta::where('idPerfil', $perfil_id)->get();
+
+        $ventas = Venta::
+        // $ventas = Venta::select('pedido', 'usuario_creacion',DB::raw('SUM(preciounitario) as total_precio'),'fecha_creacion', 'estadoproducto')
+                        // ->where('idPerfil', $perfil_id)
+                        where('idPerfil', $perfil_id)
+                        // ->groupBy('pedido', 'usuario_creacion','fecha_creacion', 'estadoproducto')
+                        ->get();
+        //                 ->toSql();
+        // dd($ventas, $perfil_id);
+
         return view('persona.venta')->with(compact('ventas'));
     }
 
