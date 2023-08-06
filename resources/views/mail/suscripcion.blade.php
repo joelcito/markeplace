@@ -10,7 +10,9 @@
     <center><h3>COMERCIO LATINO</h3></center>
     <h1>Estimad@ : {{ $name }}</h1>
     <br>
-    <p>Gracias por usar nuestro servicio, tu suscripcion <b>{{ $tipo." ".$modalidad }}</b> ha sido aceptada para mantener activo debe realizar el pago por QR y confirmar al siguiente email admin@comercio-latino.com </p>
+    <p>
+        Gracias por usar nuestro servicio, tu suscripcion <b>{{ $tipo." ".$modalidad }}</b>
+        ha sido aceptada para mantener activo debe realizar el pago por QR y confirmar al siguiente email admin@comercio-latino.com, soporte@comercio-latino.com </p>
     <center>
         <img width="30%" src="https://comercio-latino.com/sistema/public/qrs/{{ $qr }}" alt="aqui la img">
     </center>

@@ -450,6 +450,12 @@
                     dataType: 'json',
                     success: function(data) {
                         if(data.estado === 'success'){
+                            Swal.fire({
+                                title:'Guardado!',
+                                text :'Se guardo con exito.',
+                                icon: 'success',
+                                timer: 1500
+                            })
                             location.reload();
                         }
                     }

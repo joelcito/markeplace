@@ -6,6 +6,7 @@ use App\Mail\EnviarCorreoSuscripcion;
 use App\Models\Informacion;
 use App\Models\Perfil;
 use App\Models\Persona;
+use App\Models\Suscripcion;
 use App\Models\Tienda;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -150,11 +151,40 @@ class TiendaController extends Controller
             $qr = Informacion::find(14);
             $qrImg = $qr->descripcion;
 
-
             // CAMBIAMOS EL TIPO DE SUSCRIPCION
             $perfil = Perfil::find($perfil->idPerfil);
             $perfil->plandepago = (($tipo === 'basica')? 1 : (($tipo === 'estandar')? 2 : 3) );
             $perfil->save();
+
+            $suscripcion = new Suscripcion();
+            $suscripcion->idPerfil          = $perfil->idPerfil;
+            $suscripcion->plan              = $perfil->plandepago;
+
+            if($tipo === 'basica'){
+                $monto = ($modalidad === 'Mensual')? 0 : 0;
+            }else if($tipo === 'estandar'){
+                $monto = ($modalidad === 'Mensual')? 200 : 2000;
+            }else{
+                $monto = ($modalidad === 'Mensual')? 500 : 5000;
+            }
+
+            $fechaIni = date('Y-m-d H:m:s');
+            if($modalidad === 'Mensual'){
+                $tipo_fecha = 1;
+                $fechaFin = date('Y-m-d H:i:s', strtotime('+1 month', strtotime($fechaIni)));
+            }else{
+                $tipo_fecha = 2;
+                $fechaFin = date('Y-m-d H:i:s', strtotime('+1 year', strtotime($fechaIni)));
+            }
+
+            $suscripcion->monto             = $monto;
+            $suscripcion->fecha_inicio      = $fechaIni;
+            $suscripcion->fecha_final       = $fechaFin;
+            $suscripcion->tipo_fecha        = $tipo_fecha;
+            $suscripcion->estado            = 1;
+            $suscripcion->usuario_creacion  = $perfil->idPerfil;
+            $suscripcion->usuario_update    = $perfil->idPerfil;
+            $suscripcion->save();
 
             try {
                 Mail::to($email)->send(new EnviarCorreoSuscripcion($nombre, $tipo, $modalidad, $qrImg));
