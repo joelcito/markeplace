@@ -11,7 +11,9 @@ use Illuminate\Queue\SerializesModels;
 
 class EnviarCorreoSuscripcion extends Mailable
 {
-    use Queueable, SerializesModels;
+    use
+    // Queueable,
+    SerializesModels;
 
     public $name;
     public $tipo;
