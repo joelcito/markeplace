@@ -67,6 +67,27 @@ class HomeController extends Controller
                         ->groupBy('p.plandepago')
                         ->get()->pluck('cantidad')->toArray();
 
-        return view('home.inicio')->with(compact('productos', 'numerosAleatorios', 'vendedor', 'compradores','dato', 'cantidaVentas'));
+
+        // cantidad de productos por tienda
+        $tiendas = DB::table('tienda as t')
+                    ->leftJoin('perfil as p', function ($join) {
+                        $join->on('p.idPersona', '=', 't.usuario_creacion')
+                            ->where('p.rol', '=', 3)
+                            ->where('p.estado', '=', 1);
+                    })
+                    ->leftJoin('producto as pro', function ($join) {
+                        $join->on('pro.idTienda', '=', 't.idTienda')
+                            ->where('pro.estado', '=', 1);
+                    })
+                    ->where('t.estado', '=', 1)
+                    ->groupBy('t.idTienda', 't.nombre')
+                    ->orderByDesc('cantidad_productos')
+                    ->select('t.idTienda', 't.nombre', DB::raw('COUNT(pro.idTienda) as cantidad_productos'))
+                    ->get();
+
+        $nomTiendas = $tiendas->pluck('nombre')->toArray();
+        $CantTiendas = $tiendas->pluck('cantidad_productos')->toArray();
+
+        return view('home.inicio')->with(compact('productos', 'numerosAleatorios', 'vendedor', 'compradores','dato', 'cantidaVentas', 'nomTiendas', 'CantTiendas'));
     }
 }

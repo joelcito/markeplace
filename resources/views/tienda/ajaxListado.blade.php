@@ -26,11 +26,17 @@
             <td>{{ $c->correo }}</td>
             <td>{{ $c->descripcion }}</td>
             <td>
-                <select name="" id="" class="form-control">
-                    <option value="1">Basica</option>
-                    <option value="2">Estandar</option>
-                    <option value="2">Premiun</option>
-                </select>
+                @php
+                    $persona_id = $c->usuario_creacion;
+                    $perfil = App\Models\Perfil::where('idPersona',$persona_id)->first();
+                @endphp
+                @if ($perfil)
+                    <select name="planPago_{{ $c->idTienda }}" id="planPago_{{ $c->idTienda }}" class="form-control" onchange="cambiaPlanPago({{ $c->idTienda }})">
+                        <option {{ $perfil->plandepago === 1? 'selected' : '' }} value="1">Basica</option>
+                        <option {{ $perfil->plandepago === 2? 'selected' : '' }} value="2">Estandar</option>
+                        <option {{ $perfil->plandepago === 3? 'selected' : '' }} value="2">Premiun</option>
+                    </select>
+                @endif
             </td>
             <td>
                 {{-- @if ($c->estado === 1)

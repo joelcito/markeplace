@@ -511,8 +511,9 @@
                     s = {
                         series: [
                             {
-                                name: ["Cantidad de visualizacion"],
-                                data: [0, 55, 57, 56, 61, 58,10, 55, 57, 56, 61, 58],
+                                name: ["Cantidad de Productos"],
+                                // data: [0, 55, 57, 56, 61, 58,10, 55, 57, 56, 61, 58],
+                                data: @json($CantTiendas),
                             },
                             /*
                             {
@@ -542,20 +543,21 @@
                             colors: ["transparent"],
                         },
                         xaxis: {
-                            categories: [
-                                "Ene",
-                                "Feb",
-                                "Mar",
-                                "Abr",
-                                "May",
-                                "Jun",
-                                "Jul",
-                                "Ago",
-                                "Set",
-                                "Oct",
-                                "Nom",
-                                "Dic",
-                            ],
+                            // categories: [
+                            //     "Ene",
+                            //     "Feb",
+                            //     "Mar",
+                            //     "Abr",
+                            //     "May",
+                            //     "Jun",
+                            //     "Jul",
+                            //     "Ago",
+                            //     "Set",
+                            //     "Oct",
+                            //     "Nom",
+                            //     "Dic",
+                            // ],
+                            categories:@json($nomTiendas),
                             axisBorder: {
                                 {{--  show: !1  --}}
                                 show: true,

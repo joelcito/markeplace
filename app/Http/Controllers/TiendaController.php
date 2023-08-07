@@ -294,4 +294,59 @@ class TiendaController extends Controller
         }
         return $data;
     }
+
+    public function cambiaSuscripcion(Request $request){
+        if($request->ajax()){
+            // dd($request->all());
+            $tienda_id  = $request->input('id');
+            $plan       = $request->input('valor');
+
+            $tienda = Tienda::find($tienda_id);
+            $perfil = Perfil::where('idPersona',$tienda->usuario_creacion)->first();
+            $perfil->plandepago = $plan;
+            $perfil->save();
+
+
+
+            $suscripcion = new Suscripcion();
+            $suscripcion->idPerfil          = $perfil->idPerfil;
+            $suscripcion->plan              = $plan;
+
+            // if($plan === '1'){
+            //     $monto = ($modalidad === 'Mensual')? 0 : 0;
+            // }else if($plan === '2'){
+            //     $monto = ($modalidad === 'Mensual')? 200 : 2000;
+            // }else{
+            //     $monto = ($modalidad === 'Mensual')? 500 : 5000;
+            // }
+
+            $fechaIni = date('Y-m-d H:m:s');
+            $fechaFin = date('Y-m-d H:m:s');
+            // if($modalidad === 'Mensual'){
+            //     $tipo_fecha = 1;
+            //     $fechaFin = date('Y-m-d H:i:s', strtotime('+1 month', strtotime($fechaIni)));
+            // }else{
+            //     $tipo_fecha = 2;
+            //     $fechaFin = date('Y-m-d H:i:s', strtotime('+1 year', strtotime($fechaIni)));
+            // }
+
+            // $suscripcion->monto             = $monto;
+            $suscripcion->fecha_inicio      = $fechaIni;
+            $suscripcion->fecha_final       = $fechaFin;
+            // $suscripcion->tipo_fecha        = $tipo_fecha;
+            $suscripcion->estado            = 1;
+            $suscripcion->usuario_creacion  = $perfil->idPerfil;
+            $suscripcion->usuario_update    = $perfil->idPerfil;
+            $suscripcion->save();
+
+
+
+
+            $data['estado'] = 'success';
+        }else{
+            $data['estado'] = 'error';
+        }
+
+        return $data;
+    }
 }

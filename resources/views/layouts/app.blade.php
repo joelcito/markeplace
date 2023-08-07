@@ -4844,6 +4844,31 @@
         @section('js')
 
         @show
+        <script>
+            $(document).ready(function() {
+                $('#enlaceCerrarSesion').on('click', function(event) {
+                    event.preventDefault(); // Evita que el enlace siga el enlace predeterminado
+
+                    $.ajax({
+                        url: 'https://comercio-latino.com/services_landing/cerrarsesion.php',
+                        method: 'GET',
+                        success: function(response) {
+                            if (response === '1') {
+                                // La sesión se cerró correctamente
+                                alert('Sesión cerrada correctamente');
+                            } else {
+                                // Hubo un problema al cerrar la sesión
+                                alert('Hubo un problema al cerrar la sesión');
+                            }
+                        },
+                        error: function() {
+                            // Error de conexión o de servidor
+                            alert('Ocurrió un error en la solicitud');
+                        }
+                    });
+                });
+            });
+        </script>
 	</body>
 	<!--end::Body-->
 </html>

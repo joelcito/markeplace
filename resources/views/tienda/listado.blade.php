@@ -390,6 +390,23 @@
                 }
             });
         }
+
+        function cambiaPlanPago(tienda){
+            $.ajax({
+                url: "{{ url('tienda/cambiaSuscripcion') }}",
+                data:{
+                    id:tienda,
+                    valor : $('#planPago_'+tienda).val()
+                },
+                type: 'POST',
+                dataType: 'json',
+                success: function(data) {
+                    if(data.estado === 'success'){
+                        ajaxListado();
+                    }
+                }
+            });
+        }
     </script>
 @endsection
 
