@@ -187,7 +187,35 @@ class TiendaController extends Controller
             $suscripcion->save();
 
             try {
-                Mail::to($email)->send(new EnviarCorreoSuscripcion($nombre, $tipo, $modalidad, $qrImg));
+
+
+
+                $to     = 'jjjoelcito123@gmail.com';
+                $subject = 'Correo de prueba';
+                $headers = "MIME-Version: 1.0" . "\r\n";
+                $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+                $headers .= "From: remitente@example.com" . "\r\n";
+
+                // $templatePath = resource_path('views/email_template.html');
+                $templatePath = resource_path('views/mail/suscripcion.blade.php');
+                $templateContent = file_get_contents($templatePath);
+
+                $data = [
+                    'title' => 'Bienvenido a mi aplicación',
+                    'content' => 'Gracias por unirte a nosotros. Esperamos que disfrutes de tu tiempo aquí.',
+                ];
+
+                foreach ($data as $key => $value) {
+                    $templateContent = str_replace('{{ $' . $key . ' }}', $value, $templateContent);
+                }
+
+                mail($to, $subject, $templateContent, $headers);
+
+                echo "Correo enviado exitosamente";
+
+
+
+                // Mail::to($email)->send(new EnviarCorreoSuscripcion($nombre, $tipo, $modalidad, $qrImg));
                 // Mail::to("jjjoelcito123@gmail.com")->send(new EnviarCorreoSuscripcion($nombre, $tipo, $modalidad, $qrImg));
                 $data['estado'] = 'success';
             } catch (\Exception $e) {
