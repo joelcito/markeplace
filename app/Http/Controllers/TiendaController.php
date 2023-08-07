@@ -206,7 +206,7 @@ class TiendaController extends Controller
                     'name'      => $nombre,
                     'tipo'      => $tipo,
                     'modalidad' => $modalidad,
-                    'qrImg'      => $qrImg
+                    'qr'      => $qrImg
                 ];
 
                 foreach ($data as $key => $value) {
