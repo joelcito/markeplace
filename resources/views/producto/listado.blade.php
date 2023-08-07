@@ -19,7 +19,7 @@
                 <!--begin::Modal header-->
                 <div class="modal-header" id="kt_modal_add_user_header">
                     <!--begin::Modal title-->
-                    <h2 class="fw-bold">Formulario de producto</h2>
+                    <h2 class="fw-bold">Formulario de producto (PLAN ACTUAL:<span id="plan_actual" class="text-success"></span>)</h2>
                     <!--end::Modal title-->
                     <!--begin::Close-->
                     <div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
@@ -85,8 +85,10 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="fv-row mb-7">
-                                    <label class="fw-semibold fs-6 mb-2">Descuento</label>
-                                    <input type="number" id="descuento" name="descuento" class="form-control form-control-solid mb-3 mb-lg-0">
+                                    <label class="fw-semibold fs-6 mb-2">Descuento %</label>
+                                    {{-- <input type="range" max="100" min="0" id="descuento" name="descuento" class="form-control form-control-solid mb-3 mb-lg-0"> --}}
+                                    <input type="range" id="descuento" min="0" max="100" value="0">
+                                    <div id="valorActual">Valor: <span>0</span>%</div>
                                 </div>
                             </div>
                             <div class="col-md-3">
@@ -131,7 +133,7 @@
                     </form>
                     <div class="row">
                         <div class="col-md-12">
-                            <button class="btn btn-success w-100" onclick="guardarProducto()">Guardar</button>
+                            <button class="btn btn-success w-100" id="btnAgregaProcuto" onclick="guardarProducto()">Guardar</button>
                         </div>
                     </div>
                 </div>
@@ -443,6 +445,7 @@
             $('#precio_unitario').val(preciounitario)
             $('#cantidad').val(cantidad)
             $('#descuento').val(descuento)
+            $('#valorActual span').text(descuento);
             $('#kt_modal_add_user').modal('show')
         }
 
@@ -494,18 +497,51 @@
         }
 
         function nuevoProducto(){
-            $('#nombre').val('')
-            $('#nombre').val('')
-            $('#producto_id').val(0)
-            $('#descripcion').val('')
-            $('#subcategoria_id').val('')
-            $('#precio_unitario').val('')
-            $('#cantidad').val('')
-            $('#descuento').val('')
-            $('#moneda').val(0)
-            $('#categoria_id').val('')
-            $('#vista-previa').html("")
+            $.ajax({
+                url: "{{ url('producto/verificaPlan') }}",
+                type: 'POST',
+                // data:{id:producto},
+                dataType: 'json',
+                success: function(data) {
+                    if(data.estado === 'success'){
+                        $('#nombre').val('')
+                        $('#nombre').val('')
+                        $('#producto_id').val(0)
+                        $('#descripcion').val('')
+                        $('#subcategoria_id').val('')
+                        $('#precio_unitario').val('')
+                        $('#cantidad').val('')
+                        $('#descuento').val(0)
+                        $('#valorActual span').text(0);
+                        $('#moneda').val(0)
+                        $('#categoria_id').val('')
+                        $('#vista-previa').html("")
+
+                        $('#plan_actual').text(data.plan)
+                        if(data.planChe==="Basico"){
+                            if(data.cantidad >= 5){
+                                $('#btnAgregaProcuto').prop('disabled',true)
+                            }else{
+                                $('#btnAgregaProcuto').prop('disabled',false)
+                            }
+                        }else if(data.planChe==="Estandar"){
+                            $('#btnAgregaProcuto').prop('disabled',false)
+                        }else if(data.planChe==="Superior"){
+                            $('#btnAgregaProcuto').prop('disabled',false)
+                        }
+                    }else{
+
+                    }
+                }
+            });
         }
+
+        $(document).ready(function() {
+            $('#descuento').on('input', function() {
+                var valor = $(this).val();
+                $('#valorActual span').text(valor);
+            });
+        });
     </script>
 @endsection
 

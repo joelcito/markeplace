@@ -39,6 +39,7 @@ Route::get('/producto/listado', [ProductoController::class, 'listado']);
 Route::post('/producto/guarda', [ProductoController::class, 'guarda']);
 Route::post('/producto/cambiaEstado', [ProductoController::class, 'cambiaEstado']);
 Route::post('/producto/eliminar', [ProductoController::class, 'eliminar']);
+Route::post('/producto/verificaPlan', [ProductoController::class, 'verificaPlan']);
 
 // CATEGORIAS
 Route::post('/categoria/ajaxListado', [CategoriaController::class, 'ajaxListado']);

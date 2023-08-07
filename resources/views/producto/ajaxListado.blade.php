@@ -42,7 +42,8 @@
                     $subcategoria = App\Models\SubCategoria::find($p->idSubcategoria);
                     echo $subcategoria->nombre;
 
-                    $descuento = $p->preciounitario * $p->descuento;
+                    // $descuento = $p->preciounitario * $p->descuento;
+                    $descuento = 100 * $p->descuento;
                 @endphp
             </td>
             <td>{{ $p->nombre }}</td>

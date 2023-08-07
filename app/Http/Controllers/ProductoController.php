@@ -6,6 +6,7 @@ use App\Models\Categoria;
 use App\Models\Tienda;
 use App\Models\Producto;
 use App\Models\SubCategoria;
+use App\Models\Suscripcion;
 use Illuminate\Http\Request;
 
 class ProductoController extends Controller
@@ -49,6 +50,9 @@ class ProductoController extends Controller
 
     public function guarda(Request $request){
         if($request->ajax()){
+
+            // dd($request->all());
+
             $prodducto_id = $request->input('producto_id');
             if($prodducto_id === "0"){
                 $producto = new Producto();
@@ -69,7 +73,8 @@ class ProductoController extends Controller
             $producto->estado           = 1;
             $producto->usuario_creacion = $perfil->idPersona;
             $producto->moneda           = $request->input('moneda');
-            $producto->descuento        = ((100*$request->input('descuento'))/$request->input('precio_unitario'))/100;
+            // $producto->descuento        = ((100*$request->input('descuento'))/$request->input('precio_unitario'))/100;
+            $producto->descuento        = $request->input('descuento')/100;
             $producto->calificacion     = 0; //momentaneo
             $producto->ubicacion        = "La Paz, Bolivia";
 
@@ -130,6 +135,37 @@ class ProductoController extends Controller
             $producto = Producto::find($request->input('id'));
             $producto->estado = 0;
             $producto->save();
+            $data['estado'] = 'success';
+        }else{
+            $data['estado'] = 'error';
+        }
+
+        return $data;
+    }
+
+    public function verificaPlan(Request $request){
+        if($request->ajax()){
+            $perfil_id      = session('perfil')->idPerfil;
+            $persona_id     = session('perfil')->idPersona;
+            $suscripcion    = Suscripcion::where('idPerfil', $perfil_id)->latest('fecha_creacion')->first();
+            $tienda         = Tienda::where('usuario_creacion', $persona_id)->first();
+            $cantidaProducto = Producto::where('idTienda', $tienda->idTienda)->count();
+            if($suscripcion){
+                if($suscripcion->plan === 2){
+                    $data['plan'] = "Estandar [".$cantidaProducto." / ∞]";
+                    $data['planChe'] = 'Estandar';
+                }elseif($suscripcion->plan === 3){
+                    $data['plan'] = "Superior [".$cantidaProducto." / ∞]";
+                    $data['planChe'] = 'Superior';
+                }else{
+                    $data['plan'] = "Basico [".$cantidaProducto." / 5]";
+                    $data['planChe'] = 'Basico';
+                }
+            }else{
+                $data['plan'] = "Basico [".$cantidaProducto." / 5]";
+                $data['planChe'] = 'Basico';
+            }
+            $data['cantidad'] = $cantidaProducto;
             $data['estado'] = 'success';
         }else{
             $data['estado'] = 'error';

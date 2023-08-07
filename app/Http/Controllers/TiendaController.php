@@ -187,8 +187,6 @@ class TiendaController extends Controller
 
             try {
 
-
-
                 $to         = $email;
                 $subject    = 'CORREO DE SUSCRIPCION';
                 $headers    = "MIME-Version: 1.0" . "\r\n";
