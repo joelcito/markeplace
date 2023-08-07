@@ -1,16 +1,4 @@
-
 <!DOCTYPE html>
-<html>
-<head>
-    <title>{{ $subject }}</title>
-</head>
-<body>
-    <h1>{{ $title }}</h1>
-    <p>{{ $content }}</p>
-</body>
-</html>
-
-{{-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -76,4 +64,4 @@
     </center>
     <p>Al no contar con la confirmacion de pago, la suscripcion sera revertido</p>
 </body>
-</html> --}}
+</html>

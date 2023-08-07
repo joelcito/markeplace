@@ -190,14 +190,14 @@ class TiendaController extends Controller
 
 
 
-                $to     = 'jjjoelcito123@gmail.com';
-                $subject = 'Correo de prueba';
-                $headers = "MIME-Version: 1.0" . "\r\n";
-                $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-                $headers .= "From: remitente@example.com" . "\r\n";
+                $to         = $email;
+                $subject    = 'CORREO DE SUSCRIPCION';
+                $headers    = "MIME-Version: 1.0" . "\r\n";
+                $headers    .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+                $headers    .= "From: admin@comercio-latino.com" . "\r\n";
 
                 // $templatePath = resource_path('views/email_template.html');
-                $templatePath = resource_path('views/mail/suscripcion.blade.php');
+                $templatePath = resource_path('views/mail/nuevoCorreo.blade.php');
                 $templateContent = file_get_contents($templatePath);
 
                 $data = [
