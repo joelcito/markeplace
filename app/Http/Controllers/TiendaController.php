@@ -201,8 +201,12 @@ class TiendaController extends Controller
                 $templateContent = file_get_contents($templatePath);
 
                 $data = [
-                    'title' => 'Bienvenido a mi aplicación',
-                    'content' => 'Gracias por unirte a nosotros. Esperamos que disfrutes de tu tiempo aquí.',
+                    'title'     => 'Bienvenido a mi aplicación',
+                    'content'   => 'Gracias por unirte a nosotros. Esperamos que disfrutes de tu tiempo aquí.',
+                    'name'      => $nombre,
+                    'tipo'      => $tipo,
+                    'modalidad' => $modalidad,
+                    'qrImg'      => $qrImg
                 ];
 
                 foreach ($data as $key => $value) {
