@@ -23,7 +23,7 @@
         </tr>
         <tr>
             <td><b>Fecha de Suscripcion:</b></td>
-            <td>{{ date('d/m/Y H:m:s') }}</td>
+            <td>{{ $fecha }}</td>
         </tr>
     </table>
     <center>

@@ -214,6 +214,8 @@ class TiendaController extends Controller
                         $monto = 5000;
                 }
 
+                $fecha = date('d/m/Y H:m:s');
+
                 $data = [
                     'title'     => 'Bienvenido a mi aplicación',
                     'content'   => 'Gracias por unirte a nosotros. Esperamos que disfrutes de tu tiempo aquí.',
@@ -221,7 +223,8 @@ class TiendaController extends Controller
                     'tipo'      => $tipo,
                     'modalidad' => $modalidad,
                     'qr'        => $qrImg,
-                    'monto'     => $monto
+                    'monto'     => $monto,
+                    'fecha'     => $fecha,
                 ];
 
                 foreach ($data as $key => $value) {
