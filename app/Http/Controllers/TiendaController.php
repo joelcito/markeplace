@@ -148,8 +148,7 @@ class TiendaController extends Controller
             $tipo       = $request->input('tipo');
             $modalidad  = $request->input('modalidad');
 
-            $qr = Informacion::find(14);
-            $qrImg = $qr->descripcion;
+
 
             // CAMBIAMOS EL TIPO DE SUSCRIPCION
             $perfil = Perfil::find($perfil->idPerfil);
@@ -203,15 +202,27 @@ class TiendaController extends Controller
                 if($tipo === "basica"){
                     $monto = 0;
                 }else if($tipo === "estandar"){
-                    if($modalidad === "Mensual")
+                    if($modalidad === "Mensual"){
                         $monto = 200;
-                    else
+                        $qr = Informacion::find(14);
+                        $qrImg = $qr->descripcion;
+                    }
+                    else{
                         $monto = 2000;
+                        $qr = Informacion::find(15);
+                        $qrImg = $qr->descripcion;
+                    }
                 }else if($tipo === "superior"){
-                    if($modalidad === "Mensual")
+                    if($modalidad === "Mensual"){
                         $monto = 500;
-                    else
+                        $qr = Informacion::find(16);
+                        $qrImg = $qr->descripcion;
+                    }
+                    else{
                         $monto = 5000;
+                        $qr = Informacion::find(20);
+                        $qrImg = $qr->descripcion;
+                    }
                 }
 
                 $fecha = date('d/m/Y H:m:s');
