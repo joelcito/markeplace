@@ -19,28 +19,7 @@
     <table>
         <tr>
             <td><b>Importe {{ $modalidad }} Bs:</b></td>
-            <td>
-
-                @if ($tipo === "basica")
-                    @if ($modalidad === "Mensual")
-                        0
-                    @else
-                        0
-                    @endif
-                @elseif($tipo === "estandar")
-                    @if ($modalidad === "Mensual")
-                        200
-                    @else
-                        2.000
-                    @endif
-                @elseif($tipo === "superior")
-                    @if ($modalidad === "Mensual")
-                        500
-                    @else
-                        5.000
-                    @endif
-                @endif
-            </td>
+            <td>{{ $monto }}</td>
         </tr>
         <tr>
             <td><b>Fecha de Suscripcion:</b></td>

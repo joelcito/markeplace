@@ -200,13 +200,28 @@ class TiendaController extends Controller
                 $templatePath = resource_path('views/mail/nuevoCorreo.blade.php');
                 $templateContent = file_get_contents($templatePath);
 
+                if($tipo === "basica"){
+                    $monto = 0;
+                }else if($tipo === "estandar"){
+                    if($modalidad === "Mensual")
+                        $monto = 200;
+                    else
+                        $monto = 2000;
+                }else if($tipo === "superior"){
+                    if($modalidad === "Mensual")
+                        $monto = 500;
+                    else
+                        $monto = 5000;
+                }
+
                 $data = [
                     'title'     => 'Bienvenido a mi aplicación',
                     'content'   => 'Gracias por unirte a nosotros. Esperamos que disfrutes de tu tiempo aquí.',
                     'name'      => $nombre,
                     'tipo'      => $tipo,
                     'modalidad' => $modalidad,
-                    'qr'      => $qrImg
+                    'qr'        => $qrImg,
+                    'monto'     => $monto
                 ];
 
                 foreach ($data as $key => $value) {
