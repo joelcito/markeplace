@@ -225,6 +225,7 @@ class TiendaController extends Controller
                     'qr'        => $qrImg,
                     'monto'     => $monto,
                     'fecha'     => $fecha,
+                    'url'     => url('vendedor/inicio'),
                 ];
 
                 foreach ($data as $key => $value) {

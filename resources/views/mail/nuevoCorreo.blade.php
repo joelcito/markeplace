@@ -39,7 +39,7 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            " href="{{ url('vendedor/inicio') }}">Ir a la Tienda</a>
+            " href="{{ $url }}">Ir a la Tienda</a>
     </center>
     <p>Al no contar con la confirmacion de pago, la suscripcion sera revertido</p>
 </body>
