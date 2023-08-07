@@ -234,10 +234,6 @@ class TiendaController extends Controller
 
                 mail($to, $subject, $templateContent, $headers);
 
-                echo "Correo enviado exitosamente";
-
-
-
                 // Mail::to($email)->send(new EnviarCorreoSuscripcion($nombre, $tipo, $modalidad, $qrImg));
                 // Mail::to("jjjoelcito123@gmail.com")->send(new EnviarCorreoSuscripcion($nombre, $tipo, $modalidad, $qrImg));
                 $data['estado'] = 'success';
