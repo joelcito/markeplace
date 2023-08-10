@@ -104,6 +104,7 @@ class VendedorController extends Controller
                 ->from('producto')
                 ->where('idTienda', $tienda_id);
         })->get();
+        // })->toSql();
 
         dd(
             $ventas,
