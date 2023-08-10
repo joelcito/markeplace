@@ -10,7 +10,6 @@
         </tr>
     </thead>
     <tbody>
-        @dd($ventas)
         @foreach ($ventas as $v)
         <tr>
             <td>{{ $v->pedido }}</td>
