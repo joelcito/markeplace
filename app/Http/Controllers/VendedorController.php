@@ -99,17 +99,18 @@ class VendedorController extends Controller
         $tienda         = Tienda::where('usuario_creacion', $persona_id)->first();
         $tienda_id      = $tienda->idTienda;
 
-        dd(
-            $persona_id,
-            $tienda,
-            $tienda_id
-        );
-
         $ventas = Venta::with('producto')->whereIn('idProducto', function ($query)use ($tienda_id) {
             $query->select('idProducto')
                 ->from('producto')
                 ->where('idTienda', $tienda_id);
         })->get();
+
+        dd(
+            $ventas,
+            $persona_id,
+            $tienda,
+            $tienda_id
+        );
 
         return view("vendedor.ajaxListadoPedido")->with(compact('ventas'))->render();
     }
