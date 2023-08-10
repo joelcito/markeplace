@@ -95,15 +95,16 @@ class VendedorController extends Controller
 
     protected function listadoArray(){
 
-        $persona_id = session('perfil')->idPersona;
-        $tienda = Tienda::where('usuario_creacion', $persona_id)->first();
-        $tienda_id =$tienda->idTienda;
+        $persona_id     = session('perfil')->idPersona;
+        $tienda         = Tienda::where('usuario_creacion', $persona_id)->first();
+        $tienda_id      =$tienda->idTienda;
 
         $ventas = Venta::with('producto')->whereIn('idProducto', function ($query)use ($tienda_id) {
             $query->select('idProducto')
                 ->from('producto')
                 ->where('idTienda', $tienda_id);
         })->get();
+        
         return view("vendedor.ajaxListadoPedido")->with(compact('ventas'))->render();
     }
 

@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    <center><h3>COMERCIO LATINO</h3></center>
+    <center><h5>COMERCIO LATINO</h5></center>
     <h1>Estimad@ : {{ $name }}</h1>
     <br>
     <p>

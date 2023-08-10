@@ -25,9 +25,9 @@
         </tr>
     </thead>
     <tbody>
-        @foreach ($productos as $p)
+        @foreach ($productos as $key => $p)
         <tr style="border-top: 1px solid rgb(78, 77, 77)">
-            <td>{{ $p->idProducto }}</td>
+            <td>{{ $key+1 }}</td>
             <td>
                 @php
                     $p->imagenes;
@@ -73,6 +73,6 @@
 </table>
 <script>
     $('#tabla_producto').DataTable({
-        "order": [[ 0, "desc" ]]
+        // "order": [[ 0, "desc" ]]
     });
 </script>

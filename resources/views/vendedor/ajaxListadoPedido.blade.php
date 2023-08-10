@@ -24,35 +24,12 @@
             <td>{{ $v->fecha_creacion }}</td>
             <td></td>
             <td>
-                @if ($v->estadoproducto == 1)
-                    <select name="estado_pedido_{{ $v->idVenta }}" id="estado_pedido_{{ $v->idVenta }}" class="form-control" onchange="cambiaEstado(this, '{{ $v->idVenta }}')">
-                        <option value="1" selected>Iniciado</option>
-                        <option value="2">En proceso</option>
-                        <option value="3">Finalizado</option>
-                        <option value="4">Finalizado sin entrega</option>
-                    </select>
-                @elseif($v->estadoproducto == 2)
-                    <select name="estado_pedido_{{ $v->idVenta }}" id="estado_pedido_{{ $v->idVenta }}" class="form-control" onchange="cambiaEstado(this, '{{ $v->idVenta }}')">
-                        <option value="1" >Iniciado</option>
-                        <option value="2" selected>En proceso</option>
-                        <option value="3">Finalizado</option>
-                        <option value="4">Finalizado sin entrega</option>
-                    </select>
-                @elseif($v->estadoproducto == 3)
-                    <select name="estado_pedido_{{ $v->idVenta }}" id="estado_pedido_{{ $v->idVenta }}" class="form-control" onchange="cambiaEstado(this, '{{ $v->idVenta }}')">
-                        <option value="1" >Iniciado</option>
-                        <option value="2" >En proceso</option>
-                        <option value="3" selected>Finalizado</option>
-                        <option value="4">Finalizado sin entrega</option>
-                    </select>
-                @elseif($v->estadoproducto == 4)
-                    <select name="estado_pedido_{{ $v->idVenta }}" id="estado_pedido_{{ $v->idVenta }}" class="form-control" onchange="cambiaEstado(this, '{{ $v->idVenta }}')">
-                        <option value="1" >Iniciado</option>
-                        <option value="2" >En proceso</option>
-                        <option value="3" >Finalizado</option>
-                        <option value="4" selected>Finalizado sin entrega</option>
-                    </select>
-                @endif
+                <select name="estado_pedido_{{ $v->idVenta }}" id="estado_pedido_{{ $v->idVenta }}" class="form-control" onchange="cambiaEstado(this, '{{ $v->idVenta }}')">
+                    <option value="1" {{ ($v->estadoproducto == 1)? 'selected' : '' }} >Iniciado</option>
+                    <option value="2" {{ ($v->estadoproducto == 2)? 'selected' : '' }} >En proceso</option>
+                    <option value="3" {{ ($v->estadoproducto == 3)? 'selected' : '' }} >Finalizado</option>
+                    <option value="4" {{ ($v->estadoproducto == 4)? 'selected' : '' }} >Finalizado sin entrega</option>
+                </select>
                 <small class="text-success" style="display: none" id="msg_{{ $v->idVenta }}">Guardado...</small>
             </td>
             {{-- <td>

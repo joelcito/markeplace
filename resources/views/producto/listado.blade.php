@@ -110,7 +110,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="fv-row mb-7">
-                                    <label class="required fw-semibold fs-6 mb-2">Archivo PDF</label>
+                                    <label class="fw-semibold fs-6 mb-2">Archivo PDF</label>
                                     <input type="file" id="archivo" name="archivo" class="form-control form-control-solid mb-3 mb-lg-0" multiple>
                                 </div>
                             </div>
@@ -347,8 +347,8 @@
                     contador++;
                 }
 
-                var archivo = $('#archivo')[0].files;
-                formData.append('archivo', archivo[0]);
+                var file = $('#archivo')[0].files;
+                formData.append('file', file[0]);
 
                 // if(contador >= 2){
                     formData.append('nombre',           $('#nombre').val());
@@ -377,6 +377,13 @@
                                 })
                                 $('#kt_modal_add_user').modal('hide');
                                 ajaxListado();
+                            }else if(data.estado === 'error'){
+                                Swal.fire({
+                                    title:  'Error!',
+                                    text :  data.msg,
+                                    icon:   'error',
+                                    timer:  1500
+                                })
                             }
                         }
                     });

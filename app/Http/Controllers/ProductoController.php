@@ -51,7 +51,28 @@ class ProductoController extends Controller
     public function guarda(Request $request){
         if($request->ajax()){
 
-            // dd($request->all());
+            $perfil = session('perfil');
+            $persona_id = $perfil->idPersona;
+            $perfil_id  = $perfil->idPerfil;
+
+            $suscripcion    = Suscripcion::where('idPerfil', $perfil_id)
+                                            ->latest('fecha_creacion')
+                                            ->first();
+
+            $cantidadPublicados = $this->cantidadProductosSegunPlan($persona_id);
+
+            if($suscripcion){
+                if($suscripcion->plan == 1 && $cantidadPublicados >= 5){
+                   $data['estado']  = 'error';
+                   $data['msg']     = 'ERROR DE SUSCRIPCION';
+                   return $data;
+                }
+            }else if($cantidadPublicados >= 5){
+                $data['estado']  = 'error';
+                $data['msg']     = 'ERROR DE SUSCRIPCION';
+                return $data;
+            }
+
 
             $prodducto_id = $request->input('producto_id');
             if($prodducto_id === "0"){
@@ -60,7 +81,6 @@ class ProductoController extends Controller
                 $producto = Producto::find($prodducto_id);
             }
 
-            $perfil = session('perfil');
             $tienda  = Tienda::where('usuario_creacion', $perfil->idPersona)->first();
 
             $producto->idSubcategoria   = $request->input('categoria_id');
@@ -97,8 +117,8 @@ class ProductoController extends Controller
                 $producto->imagenes = $todo;
             }
 
-            if($request->file('archivo')){
-                $archivos                   = $request->file('archivo');
+            if($request->file('file')){
+                $archivos                   = $request->file('file');
                 $archivo                    = $archivos;
                 $direccion                  = 'imgProducto/';
                 $nombreArchivo              = "a_".date('YmdHis').".".$archivo->getClientOriginalExtension();
@@ -148,8 +168,9 @@ class ProductoController extends Controller
             $perfil_id      = session('perfil')->idPerfil;
             $persona_id     = session('perfil')->idPersona;
             $suscripcion    = Suscripcion::where('idPerfil', $perfil_id)->latest('fecha_creacion')->first();
-            $tienda         = Tienda::where('usuario_creacion', $persona_id)->first();
-            $cantidaProducto = Producto::where('idTienda', $tienda->idTienda)->count();
+
+            $cantidaProducto = $this->cantidadProductosSegunPlan($persona_id);
+
             if($suscripcion){
                 if($suscripcion->plan === 2){
                     $data['plan'] = "Estandar [".$cantidaProducto." / ∞]";
@@ -172,6 +193,16 @@ class ProductoController extends Controller
         }
 
         return $data;
+    }
+
+    protected function cantidadProductosSegunPlan($persona_id){
+        $tienda         = Tienda::where('usuario_creacion', $persona_id)
+                            ->where('estado',1)
+                            ->first();
+
+         return $cantidaProducto = Producto::where('idTienda', $tienda->idTienda)
+                                            ->where('estado',1)
+                                            ->count();
     }
 
 }
