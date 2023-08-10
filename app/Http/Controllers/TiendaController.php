@@ -245,6 +245,7 @@ class TiendaController extends Controller
 
                 // Mail::to($email)->send(new EnviarCorreoSuscripcion($nombre, $tipo, $modalidad, $qrImg));
                 $qrImg = "";
+                
                 Mail::to("jjjoelcito123@gmail.com")->send(new EnviarCorreoSuscripcion($nombre, $tipo, $modalidad, $qrImg));
                 $data['estado'] = 'success';
             } catch (\Exception $e) {
