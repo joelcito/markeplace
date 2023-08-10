@@ -21,13 +21,23 @@ class LoginController extends Controller
         $ext = Perfil::where('usuario', $usuario)->first();
         if($ext){
             if($ext->contrasena === $password){
+
                 $request->session()->put('perfil', $ext);
-                $request->session()->put('rol', $ext->rol);
-                if($ext->rol === 1){
+                $dato = $ext->rol;
+                $f = json_decode($dato, true);
+
+                if(is_array($f))
+                    $rol = $f[0];
+                else
+                    $rol = $f;
+                
+                $request->session()->put('rol', $rol);
+
+                if($rol === 1){
                     return redirect('/');
-                }else if($ext->rol === 2){
+                }else if($rol === 2){
                     return redirect('persona/pedido');
-                }else if($ext->rol === 3){
+                }else if($rol === 3){
                     return redirect('vendedor/inicio');
                 }
             }else{
@@ -44,6 +54,7 @@ class LoginController extends Controller
         $ext = Perfil::where('usuario', $usuario)->first();
         if($ext){
             if($ext->contrasena === $password){
+
                 $request->session()->put('perfil', $ext);
                 $request->session()->put('rol', $ext->rol);
                 if($ext->rol === 1){

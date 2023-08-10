@@ -148,8 +148,6 @@ class TiendaController extends Controller
             $tipo       = $request->input('tipo');
             $modalidad  = $request->input('modalidad');
 
-
-
             // CAMBIAMOS EL TIPO DE SUSCRIPCION
             $perfil = Perfil::find($perfil->idPerfil);
             $perfil->plandepago = (($tipo === 'basica')? 1 : (($tipo === 'estandar')? 2 : 3) );
@@ -187,64 +185,67 @@ class TiendaController extends Controller
 
             try {
 
-                $to         = $email;
-                $subject    = 'CORREO DE SUSCRIPCION';
-                $headers    = "MIME-Version: 1.0" . "\r\n";
-                $headers    .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-                $headers    .= "From: admin@comercio-latino.com" . "\r\n";
+                // ENVIAR CORREO
 
-                // $templatePath = resource_path('views/email_template.html');
-                $templatePath = resource_path('views/mail/nuevoCorreo.blade.php');
-                $templateContent = file_get_contents($templatePath);
+                // $to         = $email;
+                // $subject    = 'CORREO DE SUSCRIPCION';
+                // $headers    = "MIME-Version: 1.0" . "\r\n";
+                // $headers    .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+                // $headers    .= "From: admin@comercio-latino.com" . "\r\n";
 
-                if($tipo === "basica"){
-                    $monto = 0;
-                }else if($tipo === "estandar"){
-                    if($modalidad === "Mensual"){
-                        $monto = 200;
-                        $qr = Informacion::find(14);
-                        $qrImg = $qr->descripcion;
-                    }
-                    else{
-                        $monto = 2000;
-                        $qr = Informacion::find(15);
-                        $qrImg = $qr->descripcion;
-                    }
-                }else if($tipo === "superior"){
-                    if($modalidad === "Mensual"){
-                        $monto = 500;
-                        $qr = Informacion::find(16);
-                        $qrImg = $qr->descripcion;
-                    }
-                    else{
-                        $monto = 5000;
-                        $qr = Informacion::find(20);
-                        $qrImg = $qr->descripcion;
-                    }
-                }
+                // $templatePath = resource_path('views/mail/nuevoCorreo.blade.php');
+                // $templateContent = file_get_contents($templatePath);
 
-                $fecha = date('d/m/Y H:m:s');
+                // if($tipo === "basica"){
+                //     $monto = 0;
+                // }else if($tipo === "estandar"){
+                //     if($modalidad === "Mensual"){
+                //         $monto = 200;
+                //         $qr = Informacion::find(14);
+                //         $qrImg = $qr->descripcion;
+                //     }
+                //     else{
+                //         $monto = 2000;
+                //         $qr = Informacion::find(15);
+                //         $qrImg = $qr->descripcion;
+                //     }
+                // }else if($tipo === "superior"){
+                //     if($modalidad === "Mensual"){
+                //         $monto = 500;
+                //         $qr = Informacion::find(16);
+                //         $qrImg = $qr->descripcion;
+                //     }
+                //     else{
+                //         $monto = 5000;
+                //         $qr = Informacion::find(20);
+                //         $qrImg = $qr->descripcion;
+                //     }
+                // }
 
-                $data = [
-                    'title'     => 'Bienvenido a mi aplicación',
-                    'content'   => 'Gracias por unirte a nosotros. Esperamos que disfrutes de tu tiempo aquí.',
-                    'name'      => $nombre,
-                    'tipo'      => $tipo,
-                    'modalidad' => $modalidad,
-                    'qr'        => $qrImg,
-                    'monto'     => $monto,
-                    'fecha'     => $fecha,
-                    'url'     => url('vendedor/inicio'),
-                ];
+                // $fecha = date('d/m/Y H:m:s');
 
-                foreach ($data as $key => $value) {
-                    $templateContent = str_replace('{{ $' . $key . ' }}', $value, $templateContent);
-                }
+                // $data = [
+                //     'title'     => 'Bienvenido a mi aplicación',
+                //     'content'   => 'Gracias por unirte a nosotros. Esperamos que disfrutes de tu tiempo aquí.',
+                //     'name'      => $nombre,
+                //     'tipo'      => $tipo,
+                //     'modalidad' => $modalidad,
+                //     'qr'        => $qrImg,
+                //     'monto'     => $monto,
+                //     'fecha'     => $fecha,
+                //     'url'     => url('vendedor/inicio'),
+                // ];
 
-                mail($to, $subject, $templateContent, $headers);
+                // foreach ($data as $key => $value) {
+                //     $templateContent = str_replace('{{ $' . $key . ' }}', $value, $templateContent);
+                // }
+
+                // mail($to, $subject, $templateContent, $headers);
+
 
                 // Mail::to($email)->send(new EnviarCorreoSuscripcion($nombre, $tipo, $modalidad, $qrImg));
-                // Mail::to("jjjoelcito123@gmail.com")->send(new EnviarCorreoSuscripcion($nombre, $tipo, $modalidad, $qrImg));
+                $qrImg = "";
+                Mail::to("jjjoelcito123@gmail.com")->send(new EnviarCorreoSuscripcion($nombre, $tipo, $modalidad, $qrImg));
                 $data['estado'] = 'success';
             } catch (\Exception $e) {
                 // Ocurrió un error al enviar el correo, puedes manejar el error aquí.

@@ -49,6 +49,13 @@
 
                                     </div>
                                 </div>
+                                <div class="row mt-6">
+                                    <div class="col-md-12">
+                                        <label for="" class="required">Politicas</label>
+                                        {{-- <input type="text" id="politicas" name="politicas" class="form-control" value="{{ $informacion[7]->descripcion }}"> --}}
+                                        <textarea name="politicas" id="politicas" cols="30" rows="5" class="form-control">{{ $informacion[7]->descripcion }}</textarea>
+                                    </div>
+                                </div>
 
                                 <div class="row mt-6">
                                     <div class="col-md-4">
@@ -66,15 +73,11 @@
                                 </div>
 
                                 <div class="row mt-6">
-                                    <div class="col-md-4">
-                                        <label for="" class="required">Politicas</label>
-                                        <input type="text" id="politicas" name="politicas" class="form-control" value="{{ $informacion[7]->descripcion }}">
-                                    </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <label for="" class="required">Telefono</label>
                                         <input type="text" id="telefono" name="telefono" class="form-control" value="{{ $informacion[8]->descripcion }}">
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <label for="" class="required">Correo</label>
                                         <input type="text" id="correo" name="correo" class="form-control" value="{{ $informacion[9]->descripcion }}">
                                     </div>
@@ -82,7 +85,7 @@
                                 <hr>
                                 <div class="row mt-6">
                                     <div class="col-md-3">
-                                        <label for="" class="required">Estándar mensula</label>
+                                        <label for="" class="required">Estándar mensual</label>
                                         <br>
                                         <center>
                                             <img width="50%" src="{{ asset('qrs/'.$informacion[13]->descripcion) }}" alt="QR1">
@@ -90,7 +93,7 @@
                                         <input type="file" class="form-control" id="qr1" name="qr1">
                                     </div>
                                     <div class="col-md-3">
-                                        <label for="" class="required">Estándar snual</label>
+                                        <label for="" class="required">Estándar anual</label>
                                         <br>
                                         <center>
                                             <img width="50%" src="{{ asset('qrs/'.$informacion[14]->descripcion) }}" alt="QR2">
@@ -98,7 +101,7 @@
                                         <input type="file" class="form-control" id="qr2" name="qr2">
                                     </div>
                                     <div class="col-md-3">
-                                        <label for="" class="required">Premiun mensula</label>
+                                        <label for="" class="required">Premiun mensual</label>
                                         <br>
                                         <center>
                                             <img width="50%" src="{{ asset('qrs/'.$informacion[15]->descripcion) }}" alt="QR3">
