@@ -9,6 +9,7 @@ use App\Models\Persona;
 use App\Models\Suscripcion;
 use App\Models\Tienda;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
 class TiendaController extends Controller
@@ -348,6 +349,54 @@ class TiendaController extends Controller
             $data['estado'] = 'error';
         }
 
+        return $data;
+    }
+
+    public function cambiaSuscripcionAdmin(Request $request){
+        if($request->ajax()){
+
+            $tienda_id  = $request->input('tienda');
+            $tipo       = $request->input('tipo');
+            $plan       = $request->input('plan');
+
+            $tienda = Tienda::find($tienda_id);
+
+            $persona_id = $tienda->usuario_creacion;
+
+            $perfil                 = Perfil::where('idPersona',$persona_id)->first();
+            $perfil->plandepago     = $plan;
+            $perfil->save();
+
+            $suscripcion            = new  Suscripcion();
+            $suscripcion->idPerfil  = $perfil->idPerfil;
+            $suscripcion->plan      = $plan;
+            $fechaIni = date('Y-m-d H:m:s');
+
+            if($plan == 2)
+                $monto = ($tipo == 1)?  200 : 2000;
+            else if($plan == 3)
+                $monto = ($tipo == 1)?  500 : 5000;
+            else
+                $monto = 0;
+
+            if($tipo == 1)
+                $fechaFin = date('Y-m-d H:i:s', strtotime('+1 month', strtotime($fechaIni)));
+            else
+                $fechaFin = date('Y-m-d H:i:s', strtotime('+1 year', strtotime($fechaIni)));
+
+            $suscripcion->monto             = $monto;
+            $suscripcion->fecha_inicio      = $fechaIni;
+            $suscripcion->fecha_final       = $fechaFin;
+            $suscripcion->tipo_fecha        = $tipo;
+            $suscripcion->estado            = 1;
+            // dd(session('perfil'));
+            $suscripcion->usuario_creacion  = session('perfil')->idPersona;
+            $suscripcion->save();
+
+            $data['estado'] = 'success';
+        }else{
+            $data['estado'] = 'error';
+        }
         return $data;
     }
 }

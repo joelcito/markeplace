@@ -125,7 +125,7 @@
                                     <label class="required fw-semibold fs-6 mb-2">Tipo</label>
                                     <select name="suscripcion_tipo" id="suscripcion_tipo" class="form-control">
                                         <option value="1">Mensual</option>
-                                        <option value="0">Anual</option>
+                                        <option value="2">Anual</option>
                                     </select>
                                     <input type="text" id="tienda_id_suscripcion" name="tienda_id">
                                 </div>
@@ -482,7 +482,40 @@
         }
 
         function guardarSuscricion(){
+            Swal.fire({
+                title: 'Esta seguro de cambiar de plan y suscripcion?',
+                text: "No podra revertir esto!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si, Cmabiar!'
+              }).then((result) => {
+                if (result.isConfirmed) {
 
+                    $.ajax({
+                        url: "{{ url('tienda/cambiaSuscripcionAdmin') }}",
+                        data:{
+                            tienda  :   $('#tienda_id_suscripcion').val(),
+                            tipo    :   $('#suscripcion_tipo').val(),
+                            plan   :    $('#suscripcion_plan').val()
+                        },
+                        type: 'POST',
+                        dataType: 'json',
+                        success: function(data) {
+                            if(data.estado === 'success'){
+                                ajaxListado();
+                            }
+                        }
+                    });
+
+                  {{--  Swal.fire(
+                    'Deleted!',
+                    'Your file has been deleted.',
+                    'success'
+                  )  --}}
+                }
+              })
         }
     </script>
 @endsection

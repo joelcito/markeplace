@@ -226,7 +226,11 @@
 
             <div class="menu-item">
                 <!--begin:Menu link-->
-                <a class="menu-link" href="https://comercio-latino.com/">
+                @php
+                    $u = session('perfil')->usuario;
+                    $p = session('perfil')->contrasena;
+                @endphp
+                <a class="menu-link" href="https://comercio-latino.com/services_landing/postSesion2.php?correo={{ $u }}&contrasena={{ $p }}">
                     <span class="menu-icon">
                         <i class="ki-duotone ki-rocket fs-2">
                             <span class="path1"></span>
@@ -241,7 +245,7 @@
                 <!--begin:Menu link-->
                 {{-- <a class="menu-link" href="https://comercio-latino.com/services_landing/cerrarsesion.php"> --}}
                 {{-- <a class="menu-link" id="enlaceCerrarSesion" href="#"> --}}
-                <a class="menu-link" href="https://comercio-latino.com/">
+                <a class="menu-link" href="https://comercio-latino.com/services_landing/cerrarsesion.php">
                     <span class="menu-icon">
                         <i class="ki-duotone ki-rocket fs-2">
                             <span class="path1"></span>
