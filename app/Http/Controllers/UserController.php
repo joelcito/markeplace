@@ -39,24 +39,24 @@ class UserController extends Controller
             $perfil->idPersona  = $persona->idPersona;
             $perfil->usuario    = $request->input('usuario');
             $perfil->contrasena = $request->input('pass');
-            $perfil->rol        = $request->input('rol');
+            // $perfil->rol        = $request->input('rol');
 
             $perfil->save();
 
-            if($perfil->rol === "3"){
-                $tienda                     = new Tienda();
-                $tienda->correo             = $request->input('usuario');
-                $tienda->ubicacion          = "";
-                $tienda->url_facebook       = "";
-                $tienda->url_instagram      = "";
-                $tienda->url_whatsapp       = "";
-                $tienda->url_correo         = "";
-                $tienda->estado             = 1;
-                $tienda->calificacion       = 0;
-                $tienda->usuario_creacion   = $persona->idPersona;
-                $tienda->usuario_update     = $persona->idPersona;
-                $tienda->save();
-            }
+            // if($perfil->rol === "3"){
+            //     $tienda                     = new Tienda();
+            //     $tienda->correo             = $request->input('usuario');
+            //     $tienda->ubicacion          = "";
+            //     $tienda->url_facebook       = "";
+            //     $tienda->url_instagram      = "";
+            //     $tienda->url_whatsapp       = "";
+            //     $tienda->url_correo         = "";
+            //     $tienda->estado             = 1;
+            //     $tienda->calificacion       = 0;
+            //     $tienda->usuario_creacion   = $persona->idPersona;
+            //     $tienda->usuario_update     = $persona->idPersona;
+            //     $tienda->save();
+            // }
 
         }else{
             $persona = Persona::find($persona_id);
@@ -75,7 +75,7 @@ class UserController extends Controller
             if($request->input('pass') != null){
                 $perfil->contrasena = $request->input('pass');
             }
-            $perfil->rol        = $request->input('rol');
+            // $perfil->rol        = $request->input('rol');
             $perfil->save();
 
         }
@@ -105,7 +105,7 @@ class UserController extends Controller
     public function cambiarEstadoPerfil(Request $request){
         if($request->ajax()){
             $id = $request->input('id');
-            
+
             $perfil = Perfil::find($id);
             $perfil->estado = $request->input('estado');
             $perfil->save();

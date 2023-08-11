@@ -62,7 +62,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-4">
+                            {{--  <div class="col-md-4">
                                 <div class="fv-row mb-7">
                                     <label class="required fw-semibold fs-6 mb-2">Rol</label>
                                     <select name="rol" id="rol" class="form-control">
@@ -71,14 +71,14 @@
                                         <option value="2">Comprador</option>
                                     </select>
                                 </div>
-                            </div>
-                            <div class="col-md-4">
+                            </div>  --}}
+                            <div class="col-md-6">
                                 <div class="fv-row mb-7">
                                     <label for="">Usuario</label>
                                     <input type="text" class="form-control" id="usuario" name="usuario">
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <label for="">Contraseña</label>
                                 <input type="password" class="form-control" id="pass" name="pass">
                                 <small id="text_pass" style="display: none" class="text-success">Vuelva a introducir una nueva contraseña si desea cambiar, si no desea cambiar la contraseña deje vacio el campo</small>

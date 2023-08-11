@@ -104,8 +104,13 @@
                                 </div>
                             </div>
                             @php
-                                $perfil_id =session('perfil')->idPerfil;
-                                $perfil = App\Models\Perfil::find($perfil_id);
+                                $perfil_id      = session('perfil')->idPerfil;
+                                $perfil         = App\Models\Perfil::find($perfil_id);
+                                $suscripcion    = App\Models\Suscripcion::where('idPerfil', $perfil_id)->latest('fecha_creacion')->first();
+
+                                //dd($suscripcion);
+
+                                //dd($perfil);
                             @endphp
                             <div class="row w-100" >
                                 <div class="col-md-12">
@@ -119,11 +124,20 @@
                                     </form>
                                 </div>
                             </div>
-                            <button type="button" onclick="enviarCorreo('basica')" class="btn w-100 btn-sm btn-primary mt-5" target="_blank">
+                            <button type="button" onclick="enviarCorreo('basica')" class="btn w-100 btn-sm btn-primary mt-5" target="_blank" disabled>
                                 Solicitar
                             </button>
                             @if ($perfil->plandepago === 1)
                                 <h3 class="text-success mt-2 text-center">PLAN ACTUAL</h3>
+                                <div class="row">
+                                    @if ($suscripcion)
+                                        <div class="col-md-4">TIPO: <span class="text-info">{{ ($suscripcion->tipo_fecha == 1)? 'MENSUAL' : 'ANUAL' }}</span></div>
+                                        <div class="col-md-4">Fecha Inicio: <span class="text-info">{{ $suscripcion->fecha_inicio }}</span></div>
+                                        <div class="col-md-4">Fecha Fin: <span class="text-info">{{ $suscripcion->fecha_final }}</span></div>
+                                    @else
+                                        <div class="col-md-4">TIPO: <span class="text-info">MENSUAL</span></div>
+                                    @endif
+                                </div>
                             @endif
                             <!--end::Select-->
                         </div>
@@ -240,6 +254,11 @@
                             </button>
                             @if ($perfil->plandepago === 2)
                                 <h3 class="text-success mt-2 text-center">PLAN ACTUAL</h3>
+                                <div class="row">
+                                    <div class="col-md-4">TIPO: <span class="text-info">{{ ($suscripcion->tipo_fecha == 1)? 'MENSUAL' : 'ANUAL' }}</span></div>
+                                    <div class="col-md-4">Fecha Inicio: <span class="text-info">{{ $suscripcion->fecha_inicio }}</span></div>
+                                    <div class="col-md-4">Fecha Fin: <span class="text-info">{{ $suscripcion->fecha_final }}</span></div>
+                                </div>
                             @endif
                         </div>
                         <!--end::Option-->
@@ -354,6 +373,11 @@
                                 </button>
                                 @if ($perfil->plandepago === 3)
                                     <h3 class="text-success mt-2 text-center">PLAN ACTUAL</h3>
+                                    <div class="row">
+                                        <div class="col-md-4">TIPO: <span class="text-info">{{ ($suscripcion->tipo_fecha == 1)? 'MENSUAL' : 'ANUAL' }}</span></div>
+                                        <div class="col-md-4">Fecha Inicio: <span class="text-info">{{ $suscripcion->fecha_inicio }}</span></div>
+                                        <div class="col-md-4">Fecha Fin: <span class="text-info">{{ $suscripcion->fecha_final }}</span></div>
+                                    </div>
                                 @endif
                             </div>
                         </div>
@@ -457,6 +481,13 @@
                                 timer: 1500
                             })
                             location.reload();
+                        }else{
+                            Swal.fire({
+                                title:'Error!',
+                                text :'Error al cambio de suscripcion.',
+                                icon: 'Error',
+                                timer: 1500
+                            })
                         }
                     }
                 });

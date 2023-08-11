@@ -20,7 +20,7 @@
                     <h2 class="fw-bold">FORMULARIO DE TIENDA</h2>
                     <!--end::Modal title-->
                     <!--begin::Close-->
-                    <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-users-modal-action="close">
+                    <div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
                         <i class="ki-duotone ki-cross fs-1">
                             <span class="path1"></span>
                             <span class="path2"></span>
@@ -68,7 +68,7 @@
                                     <input type="text" id="descripcion" name="descripcion" class="form-control" required >
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            {{--  <div class="col-md-4">
                                 <div class="fv-row mb-7">
                                     <label class="required fw-semibold fs-6 mb-2">Estdo</label>
                                     <select name="estado" id="estado" class="form-control" required>
@@ -76,12 +76,75 @@
                                         <option value="0">Inactivo</option>
                                     </select>
                                 </div>
-                            </div>
+                            </div>  --}}
                         </div>
                     </form>
                     <div class="row">
                         <div class="col-md-12">
                             <button class="btn btn-success w-100" onclick="guardar()">Guardar</button>
+                        </div>
+                    </div>
+                </div>
+                <!--end::Modal body-->
+            </div>
+            <!--end::Modal content-->
+        </div>
+        <!--end::Modal dialog-->
+    </div>
+    <!--end::Modal - Add task-->
+
+    <!--end::Modal - New Card-->
+    <!--begin::Modal - Add task-->
+    <div class="modal fade" id="modaCambioSsucripcion" tabindex="-1" aria-hidden="true">
+        <!--begin::Modal dialog-->
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <!--begin::Modal content-->
+            <div class="modal-content">
+                <!--begin::Modal header-->
+                <div class="modal-header" id="kt_modal_add_user_header">
+                    <!--begin::Modal title-->
+                    <h2 class="fw-bold">CAMBIO DE SUSCRIPCION A LA TIENDA <span class="text-primary" id="nombreTenda"></span></h2>
+                    <!--end::Modal title-->
+                    <!--begin::Close-->
+                    <div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
+                        <i class="ki-duotone ki-cross fs-1">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                        </i>
+                    </div>
+                    <!--end::Close-->
+                </div>
+                <!--end::Modal header-->
+                <!--begin::Modal body-->
+                <div class="modal-body scroll-y mx-5 mx-xl-15">
+                    <form id="formularioTeinda">
+                        @csrf
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="fv-row mb-7">
+                                    <label class="required fw-semibold fs-6 mb-2">Tipo</label>
+                                    <select name="suscripcion_tipo" id="suscripcion_tipo" class="form-control">
+                                        <option value="1">Mensual</option>
+                                        <option value="0">Anual</option>
+                                    </select>
+                                    <input type="text" id="tienda_id_suscripcion" name="tienda_id">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="fv-row mb-7">
+                                    <label class="required fw-semibold fs-6 mb-2">Plan</label>
+                                    <select name="suscripcion_plan" id="suscripcion_plan" class="form-control">
+                                        <option value="1">Basica</option>
+                                        <option value="2">Estandar</option>
+                                        <option value="3">Superior</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button class="btn btn-success w-100" onclick="guardarSuscricion()">Guardar</button>
                         </div>
                     </div>
                 </div>
@@ -406,6 +469,42 @@
                     }
                 }
             });
+        }
+
+        function editaSuscripcion(tienda, nombre, tipo, plan){
+            $('#nombreTenda').text(nombre)
+            $('#tienda_id_suscripcion').val(tienda)
+            $('#suscripcion_tipo').val(tipo)
+            $('#suscripcion_plan').val(plan)
+
+            $('#modaCambioSsucripcion').modal('show')
+
+        }
+
+        function guardarSuscricion(){
+            if($("#formularioTeinda")[0].checkValidity()){
+                datos = $("#formularioTeinda").serializeArray()
+                $.ajax({
+                    url: "{{ url('tienda/guardaAdmin') }}",
+                    data:datos,
+                    type: 'POST',
+                    dataType: 'json',
+                    success: function(data) {
+                        if(data.estado === 'success'){
+                            ajaxListado();
+                            $('#modaTienda').modal('hide')
+                            Swal.fire({
+                                title: 'Editado',
+                                text: 'Se guardo con exito!',
+                                icon: 'success',
+                                timer: 1500
+                            })
+                        }
+                    }
+                });
+            }else{
+    			$("#formularioTeinda")[0].reportValidity()
+            }
         }
     </script>
 @endsection

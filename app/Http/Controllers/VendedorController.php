@@ -135,37 +135,4 @@ class VendedorController extends Controller
         return $data;
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Vendedor  $vendedor
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Vendedor $vendedor)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Vendedor  $vendedor
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Vendedor $vendedor)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Vendedor  $vendedor
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Vendedor $vendedor)
-    {
-        //
-    }
 }
