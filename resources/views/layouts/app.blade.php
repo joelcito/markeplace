@@ -71,6 +71,12 @@
                                         $persona    = \App\Models\Persona::find($persona_id);
                                         $rol        = session('rol');
 
+                                        //dd($rol);
+
+                                        $roles      = json_decode(session('perfil')->rol, true);
+
+                                        //dd($roles);
+
                                         if($rol===3){
                                             $tienda = \App\Models\Tienda::where('usuario_creacion', $persona_id)->first();
                                             echo '<h3 class="text-white mt-7">'.$tienda->nombre.'</h3>';
@@ -81,7 +87,7 @@
 							<div class="app-navbar flex-shrink-0">
 								<div class="app-navbar-item ms-1 ms-md-3">
 
-									<h4 class="text-white mt-4">{{ $persona->nombres." ".$persona->apellido_paterno." ".$persona->apellido_materno }}</h4>
+									<h4 class="text-white mt-4">{{ $persona->nombres." ".$persona->apellido_paterno." ".$persona->apellido_materno }}&nbsp;</h4>
 									<a href="#" class="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-30px h-30px w-md-40px h-md-40px" data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
 										<i class="ki-duotone ki-night-day theme-light-show fs-2 fs-lg-1">
 											<span class="path1"></span>
@@ -161,11 +167,31 @@
 									</a>
 									<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-title-gray-700 menu-icon-gray-500 menu-active-bg menu-state-color fw-semibold py-4 fs-base w-150px" data-kt-menu="true" data-kt-element="theme-mode-menu">
 										<div class="menu-item px-3 my-0">
-											<a href="#" class="menu-link px-3 py-2" data-kt-element="mode" data-kt-value="light">
-												<span class="menu-title">
-                                                    <a href="{{ url('login/cerrar') }}" class="btn btn-sm btn-danger w-100">Cerrar Session</a>
-												</span>
-											</a>
+
+                                            @if ($rol != 1 && in_array(1,$roles))
+                                                <a href="#" class="menu-link px-3 py-2" data-kt-element="mode" data-kt-value="light">
+                                                    <span class="menu-title">
+                                                        <a href="#" onclick="cambiaRol(1)" class="btn btn-sm btn-primary w-100">ADMINISTRADOR</a>
+                                                    </span>
+                                                </a>
+                                            @endif
+
+                                            @if ($rol != 2 && in_array(2,$roles))
+                                                <a href="#" class="menu-link px-3 py-2" data-kt-element="mode" data-kt-value="light">
+                                                    <span class="menu-title">
+                                                        <a href="#" onclick="cambiaRol(2)" class="btn btn-sm btn-primary w-100">COMPRADOR</a>
+                                                    </span>
+                                                </a>
+                                            @endif
+
+                                            @if ($rol != 3 && in_array(3,$roles))
+                                                <a href="#" class="menu-link px-3 py-2" data-kt-element="mode" data-kt-value="light">
+                                                    <span class="menu-title">
+                                                        <a href="#" onclick="cambiaRol(3)" class="btn btn-sm btn-primary w-100">VENDEDOR</a>
+                                                    </span>
+                                                </a>
+                                            @endif
+
 										</div>
 									</div>
 								</div>
@@ -180,27 +206,6 @@
 						<div class="app-sidebar-logo px-6" id="kt_app_sidebar_logo" style="background: #046cac">
 							<!--begin::Logo image-->
 							<a href="#">
-
-								{{--
-                                @if (session('rol') === 1)
-                                    @php
-                                        $informacion = \App\Models\Informacion::where('codigo',"logo")->first();
-                                    @endphp
-    								<img alt="Logo" src="{{ asset('qrs/'.$informacion->descripcion) }}" class="pl-lg-5 mt-13 h-100px app-sidebar-logo-default" />
-                                @elseif (session('rol') === 2)
-                                    @php
-                                        $persona_id = session('perfil')->idPersona;
-                                        $persona = \App\Models\Persona::find($persona_id);
-                                    @endphp
-                                    <img alt="Logo" src="{{ asset('compradorPerfil/'.$persona->foto) }}" class="pl-lg-5 mt-13 h-100px app-sidebar-logo-default" />
-                                @elseif (session('rol') === 3)
-                                    @php
-                                        $persona_id = session('perfil')->idPersona;
-                                        $tienda     = \App\Models\Tienda::where('usuario_creacion', $persona_id)->first();
-                                    @endphp
-                                    <img alt="Logo" src="{{ asset('imgLogoTienda/'.$tienda->logo) }}" class="pl-lg-5 mt-13 h-100px app-sidebar-logo-default" />
-                                @endif
-								--}}
 							</a>
 							<!--end::Logo image-->
 							<!--begin::Sidebar toggle-->
@@ -4845,29 +4850,29 @@
 
         @show
         <script>
-            $(document).ready(function() {
-                $('#enlaceCerrarSesion').on('click', function(event) {
-                    event.preventDefault(); // Evita que el enlace siga el enlace predeterminado
+            function cambiaRol(rol){
+                $.ajax({
+                    url: "{{ url('login/cambiaRol') }}",
+                    data:{
+                        rol  :   rol
+                    },
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(data) {
+                        if(data.estado === 'success'){
+                            let url;
+                            if(rol == 1)
+                                url = "{{ url('/') }}"
+                            else if(rol == 2)
+                                url = "{{ url('persona/pedido') }}"
+                            else if(rol == 3)
+                                url = "{{ url('vendedor/inicio') }}"
 
-                    $.ajax({
-                        url: 'https://comercio-latino.com/services_landing/cerrarsesion.php',
-                        method: 'GET',
-                        success: function(response) {
-                            if (response === '1') {
-                                // La sesión se cerró correctamente
-                                alert('Sesión cerrada correctamente');
-                            } else {
-                                // Hubo un problema al cerrar la sesión
-                                alert('Hubo un problema al cerrar la sesión');
-                            }
-                        },
-                        error: function() {
-                            // Error de conexión o de servidor
-                            alert('Ocurrió un error en la solicitud');
+                            window.location.href = url;
                         }
-                    });
+                    }
                 });
-            });
+            }
         </script>
 	</body>
 	<!--end::Body-->

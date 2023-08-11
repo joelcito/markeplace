@@ -30,7 +30,7 @@ class LoginController extends Controller
                     $rol = $f[0];
                 else
                     $rol = $f;
-                
+
                 $request->session()->put('rol', $rol);
 
                 if($rol === 1){
@@ -64,7 +64,7 @@ class LoginController extends Controller
                     $rol = $f[0];
                 else
                     $rol = $f;
-                
+
                 $request->session()->put('rol', $rol);
                 if($rol === 1){
                     return redirect('/');
@@ -100,5 +100,20 @@ class LoginController extends Controller
             // header("Location: $url");
             exit;
         }
+    }
+
+    public function cambiaRol(Request $request){
+        if($request->ajax()) {
+            $rolNuevo = $request->input('rol'); // Aquí debes establecer el nuevo valor de $rol
+            $request->session()->put('rol',(int) $rolNuevo);
+
+            // dd(session()->all());
+
+            $data['estado'] = 'success';
+        }else{
+            $data['estado'] = 'error';
+        }
+
+        return $data;
     }
 }
