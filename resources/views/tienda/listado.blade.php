@@ -127,7 +127,7 @@
                                         <option value="1">Mensual</option>
                                         <option value="2">Anual</option>
                                     </select>
-                                    <input type="text" id="tienda_id_suscripcion" name="tienda_id">
+                                    <input type="hidden" id="tienda_id_suscripcion" name="tienda_id">
                                 </div>
                             </div>
                             <div class="col-md-6">

@@ -24,7 +24,7 @@
                                     <div class="col-md-3">
                                         <div style="height: 250px; width: 250px;">
                                             {{-- <img src="{{ asset('imgLogoTienda/20230621015635.jpg') }}" alt="la imae" width="100%"> --}}
-                                            <img src="{{ asset('qrs/'.$informacion[16]->descripcion) }}" alt="la imae" width="100%">
+                                            <img src="{{ asset('qrs/'.$informacion[17]->descripcion) }}" alt="la imae" width="100%">
                                         </div>
                                         <input type="file" class="form-control mt-5" id="logo" name="logo">
                                     </div>
@@ -113,7 +113,7 @@
                                         <label for="" class="required">Premiun anual</label>
                                         <br>
                                         <center>
-                                            <img width="50%" src="{{ asset('qrs/'.$informacion[18]->descripcion) }}" alt="QR3">
+                                            <img width="50%" src="{{ asset('qrs/'.$informacion[16]->descripcion) }}" alt="QR3">
                                         </center>
                                         <input type="file" class="form-control" id="qr4" name="qr4">
                                     </div>
@@ -124,7 +124,7 @@
                                         <label for="" class="text-center">IMAGEN PUBLICITARIO</label>
                                         <br>
                                         <center>
-                                            <img width="20%" src="{{ asset('qrs/'.$informacion[17]->descripcion) }}" alt="QR3">
+                                            <img width="20%" src="{{ asset('qrs/'.$informacion[18]->descripcion) }}" alt="QR3">
                                         </center>
                                         <input type="file" class="form-control" id="logopublicitario" name="logopublicitario">
                                     </div>
