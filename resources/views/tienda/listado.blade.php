@@ -482,29 +482,7 @@
         }
 
         function guardarSuscricion(){
-            if($("#formularioTeinda")[0].checkValidity()){
-                datos = $("#formularioTeinda").serializeArray()
-                $.ajax({
-                    url: "{{ url('tienda/guardaAdmin') }}",
-                    data:datos,
-                    type: 'POST',
-                    dataType: 'json',
-                    success: function(data) {
-                        if(data.estado === 'success'){
-                            ajaxListado();
-                            $('#modaTienda').modal('hide')
-                            Swal.fire({
-                                title: 'Editado',
-                                text: 'Se guardo con exito!',
-                                icon: 'success',
-                                timer: 1500
-                            })
-                        }
-                    }
-                });
-            }else{
-    			$("#formularioTeinda")[0].reportValidity()
-            }
+
         }
     </script>
 @endsection
