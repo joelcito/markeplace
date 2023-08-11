@@ -453,6 +453,7 @@
             $('#cantidad').val(cantidad)
             $('#descuento').val(descuento)
             $('#valorActual span').text(descuento);
+            $('#vista-previa').empty();
             $('#kt_modal_add_user').modal('show')
         }
 
@@ -522,7 +523,7 @@
                         $('#valorActual span').text(0);
                         $('#moneda').val(0)
                         $('#categoria_id').val('')
-                        $('#vista-previa').html("")
+                        $('#vista-previa').empty();
 
                         $('#plan_actual').text(data.plan)
                         if(data.planChe==="Basico"){
