@@ -200,6 +200,31 @@ class TiendaController extends Controller
             $templatePath = resource_path('views/mail/nuevoCorreo.blade.php');
             $templateContent = file_get_contents($templatePath);
             // ... Configura los datos del correo y la plantilla ...
+            if($tipo === "basica"){
+                $monto = 0;
+            }else if($tipo === "estandar"){
+                if($modalidad === "Mensual"){
+                    $monto = 200;
+                    $qr = Informacion::find(14);
+                    $qrImg = $qr->descripcion;
+                }
+                else{
+                    $monto = 2000;
+                    $qr = Informacion::find(15);
+                    $qrImg = $qr->descripcion;
+                }
+            }else if($tipo === "superior"){
+                if($modalidad === "Mensual"){
+                    $monto = 500;
+                    $qr = Informacion::find(16);
+                    $qrImg = $qr->descripcion;
+                }
+                else{
+                    $monto = 5000;
+                    $qr = Informacion::find(17);
+                    $qrImg = $qr->descripcion;
+                }
+            }
             $fecha = date('d/m/Y H:m:s');
             $data = [
                 'title'     => 'Bienvenido a mi aplicación',
