@@ -221,7 +221,7 @@ class TiendaController extends Controller
                 // ... Configura los parámetros SMTP ...
 
                 // $mail->setFrom('admin@example.com', 'Admin');
-                $mail->setFrom('jfloresq2@fcpn.edu.bo', 'Admin');
+                $mail->setFrom('suscripcion@comercio-latino.com', 'Admin');
                 $mail->addAddress($to);
 
                 $mail->isHTML(true);
