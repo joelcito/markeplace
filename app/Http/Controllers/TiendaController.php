@@ -192,8 +192,9 @@ class TiendaController extends Controller
 
             // ESTE ES OTRO CORREO 
 
-            $to = 'jjjoelcito123@gmail.com';
-            $subject = 'Asunto del correo';
+            // $to = 'jjjoelcito123@gmail.com';
+            $to         = 'jfloresq2@fcpn.edu.bo';
+            $subject = 'CORREO DE SUSCRIPCION';
 
             // Cargar el contenido de la vista del correo
             $templatePath = resource_path('views/mail/nuevoCorreo.blade.php');
