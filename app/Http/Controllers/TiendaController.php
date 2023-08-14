@@ -216,10 +216,12 @@ class TiendaController extends Controller
                 $mail->SMTPAuth     = true;
                 $mail->Username     = $smtpUsername;
                 $mail->Password     = $smtpPassword;
-                $mail->SMTPSecure   = PHPMailer::ENCRYPTION_STARTTLS;
+                // $mail->SMTPSecure   = PHPMailer::ENCRYPTION_STARTTLS;
+                $mail->SMTPSecure   = PHPMailer::ENCRYPTION_SMTPS;
                 // ... Configura los parámetros SMTP ...
 
-                $mail->setFrom('admin@example.com', 'Admin');
+                // $mail->setFrom('admin@example.com', 'Admin');
+                $mail->setFrom('jfloresq2@fcpn.edu.bo', 'Admin');
                 $mail->addAddress($to);
 
                 $mail->isHTML(true);
