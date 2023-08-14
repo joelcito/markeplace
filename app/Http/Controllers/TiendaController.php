@@ -12,6 +12,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
 class TiendaController extends Controller
 {
     public function listado(Request $request){
@@ -186,81 +190,126 @@ class TiendaController extends Controller
             $suscripcion->usuario_update    = $perfil->idPerfil;
             $suscripcion->save();
 
+            // ESTE ES OTRO CORREO 
+
+            $to = 'jjjoelcito123@gmail.com';
+            $subject = 'Asunto del correo';
+
+            // Cargar el contenido de la vista del correo
+            $templatePath = resource_path('views/mail/nuevoCorreo.blade.php');
+            $templateContent = file_get_contents($templatePath);
+
+            // ... Configura los datos del correo y la plantilla ...
+
+            $mail = new PHPMailer(true);
+
+            // Configuración de los parámetros SMTP
+            $smtpHost       = 'mail.comercio-latino.com';
+            $smtpPort       =  465;
+            $smtpUsername   = 'suscripcion@comercio-latino.com';
+            $smtpPassword   = 'Fc;D&0@A7(T%';
+
             try {
+                $mail->isSMTP();
+                $mail->Host         = $smtpHost;
+                $mail->Port         = $smtpPort;
+                $mail->SMTPAuth     = true;
+                $mail->Username     = $smtpUsername;
+                $mail->Password     = $smtpPassword;
+                $mail->SMTPSecure   = PHPMailer::ENCRYPTION_STARTTLS;
+                // ... Configura los parámetros SMTP ...
 
-                // ENVIAR CORREO
+                $mail->setFrom('admin@example.com', 'Admin');
+                $mail->addAddress($to);
 
-                // $to         = $email;
-                $to         = 'jfloresq2@fcpn.edu.bo';
-                // $to         = 'jjjoelcito123@gmail.com';
-                $subject    = 'CORREO DE SUSCRIPCION';
-                $headers    = "MIME-Version: 1.0" . "\r\n";
-                $headers    .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-                $headers    .= "From: admin@comercio-latino.com" . "\r\n";
+                $mail->isHTML(true);
+                $mail->Subject = $subject;
+                $mail->Body = $templateContent;
 
-                $templatePath = resource_path('views/mail/nuevoCorreo.blade.php');
-                $templateContent = file_get_contents($templatePath);
+                $mail->send();
 
-                if($tipo === "basica"){
-                    $monto = 0;
-                }else if($tipo === "estandar"){
-                    if($modalidad === "Mensual"){
-                        $monto = 200;
-                        $qr = Informacion::find(14);
-                        $qrImg = $qr->descripcion;
-                    }
-                    else{
-                        $monto = 2000;
-                        $qr = Informacion::find(15);
-                        $qrImg = $qr->descripcion;
-                    }
-                }else if($tipo === "superior"){
-                    if($modalidad === "Mensual"){
-                        $monto = 500;
-                        $qr = Informacion::find(16);
-                        $qrImg = $qr->descripcion;
-                    }
-                    else{
-                        $monto = 5000;
-                        $qr = Informacion::find(20);
-                        $qrImg = $qr->descripcion;
-                    }
-                }
-
-                $fecha = date('d/m/Y H:m:s');
-
-                $data = [
-                    'title'     => 'Bienvenido a mi aplicación',
-                    'content'   => 'Gracias por unirte a nosotros. Esperamos que disfrutes de tu tiempo aquí.',
-                    'name'      => $nombre,
-                    'tipo'      => $tipo,
-                    'modalidad' => $modalidad,
-                    'qr'        => $qrImg,
-                    'monto'     => $monto,
-                    'fecha'     => $fecha,
-                    'url'     => url('vendedor/inicio'),
-                ];
-
-                foreach ($data as $key => $value) {
-                    $templateContent = str_replace('{{ $' . $key . ' }}', $value, $templateContent);
-                }
-
-                // mail($to, $subject, $templateContent, $headers);
-
-                if (mail($to, $subject, $templateContent, $headers))
-                    $data['msg'] = 'Correo enviado correctamente.';
-                else 
-                    $data['msg'] = 'No se pudo enviar el correo.';
-
-
-                // Mail::to($email)->send(new EnviarCorreoSuscripcion($nombre, $tipo, $modalidad, $qrImg));
-                // $qrImg = "";
-                // Mail::to("jjjoelcito123@gmail.com")->send(new EnviarCorreoSuscripcion($nombre, $tipo, $modalidad, $qrImg));
-                $data['estado'] = 'success';
-            } catch (\Exception $e) {
-                // Ocurrió un error al enviar el correo, puedes manejar el error aquí.
-                $data['estado'] = 'error';
+                return 'Correo enviado correctamente';
+            } catch (Exception $e) {
+                return 'No se pudo enviar el correo: ' . $mail->ErrorInfo;
             }
+
+            // ESTE ES OTRO CORREO 
+
+            // try {
+
+            //     // ENVIAR CORREO
+
+            //     // $to         = $email;
+            //     $to         = 'jfloresq2@fcpn.edu.bo';
+            //     // $to         = 'jjjoelcito123@gmail.com';
+            //     $subject    = 'CORREO DE SUSCRIPCION';
+            //     $headers    = "MIME-Version: 1.0" . "\r\n";
+            //     $headers    .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+            //     $headers    .= "From: admin@comercio-latino.com" . "\r\n";
+
+            //     $templatePath = resource_path('views/mail/nuevoCorreo.blade.php');
+            //     $templateContent = file_get_contents($templatePath);
+
+            //     if($tipo === "basica"){
+            //         $monto = 0;
+            //     }else if($tipo === "estandar"){
+            //         if($modalidad === "Mensual"){
+            //             $monto = 200;
+            //             $qr = Informacion::find(14);
+            //             $qrImg = $qr->descripcion;
+            //         }
+            //         else{
+            //             $monto = 2000;
+            //             $qr = Informacion::find(15);
+            //             $qrImg = $qr->descripcion;
+            //         }
+            //     }else if($tipo === "superior"){
+            //         if($modalidad === "Mensual"){
+            //             $monto = 500;
+            //             $qr = Informacion::find(16);
+            //             $qrImg = $qr->descripcion;
+            //         }
+            //         else{
+            //             $monto = 5000;
+            //             $qr = Informacion::find(20);
+            //             $qrImg = $qr->descripcion;
+            //         }
+            //     }
+
+            //     $fecha = date('d/m/Y H:m:s');
+
+            //     $data = [
+            //         'title'     => 'Bienvenido a mi aplicación',
+            //         'content'   => 'Gracias por unirte a nosotros. Esperamos que disfrutes de tu tiempo aquí.',
+            //         'name'      => $nombre,
+            //         'tipo'      => $tipo,
+            //         'modalidad' => $modalidad,
+            //         'qr'        => $qrImg,
+            //         'monto'     => $monto,
+            //         'fecha'     => $fecha,
+            //         'url'     => url('vendedor/inicio'),
+            //     ];
+
+            //     foreach ($data as $key => $value) {
+            //         $templateContent = str_replace('{{ $' . $key . ' }}', $value, $templateContent);
+            //     }
+
+            //     // mail($to, $subject, $templateContent, $headers);
+
+            //     if (mail($to, $subject, $templateContent, $headers))
+            //         $data['msg'] = 'Correo enviado correctamente.';
+            //     else 
+            //         $data['msg'] = 'No se pudo enviar el correo.';
+
+
+            //     // Mail::to($email)->send(new EnviarCorreoSuscripcion($nombre, $tipo, $modalidad, $qrImg));
+            //     // $qrImg = "";
+            //     // Mail::to("jjjoelcito123@gmail.com")->send(new EnviarCorreoSuscripcion($nombre, $tipo, $modalidad, $qrImg));
+            //     $data['estado'] = 'success';
+            // } catch (\Exception $e) {
+            //     // Ocurrió un error al enviar el correo, puedes manejar el error aquí.
+            //     $data['estado'] = 'error';
+            // }
         }else{
             $data['estado'] = 'error';
         }
