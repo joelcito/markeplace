@@ -22,10 +22,8 @@
                                 @csrf
                                 <div class="row mt-6">
                                     <div class="col-md-3">
-                                        <div style="height: 250px; width: 250px;">
-                                            {{-- <img src="{{ asset('imgLogoTienda/20230621015635.jpg') }}" alt="la imae" width="100%"> --}}
-                                            <img src="{{ asset('qrs/'.$informacion[17]->descripcion) }}" alt="la imae" width="100%">
-                                        </div>
+                                        {{-- <img src="{{ asset('imgLogoTienda/20230621015635.jpg') }}" alt="la imae" width="100%"> --}}
+                                        <img src="{{ asset('qrs/'.$informacion[17]->descripcion) }}" alt="la imae" width="100%">
                                         <input type="file" class="form-control mt-5" id="logo" name="logo">
                                     </div>
                                     <div class="col-md-9">

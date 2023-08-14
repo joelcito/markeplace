@@ -351,7 +351,7 @@ class TiendaController extends Controller
             //         $data['msg'] = 'No se pudo enviar el correo.';
 
 
-            //     // Mail::to($email)->send(new EnviarCorreoSuscripcion($nombre, $tipo, $modalidad, $qrImg));
+                // Mail::to($email)->send(new EnviarCorreoSuscripcion($nombre, $tipo, $modalidad, $qrImg));
             //     // $qrImg = "";
             //     // Mail::to("jjjoelcito123@gmail.com")->send(new EnviarCorreoSuscripcion($nombre, $tipo, $modalidad, $qrImg));
             //     $data['estado'] = 'success';

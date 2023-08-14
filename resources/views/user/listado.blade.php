@@ -239,13 +239,31 @@
                             <td>{{ $persona->nombres }}</td>
                             <td>{{ $persona->apellido_paterno." ".$persona->apellido_materno }}</td>
                             <td>
-                                @if ($p->rol === 1)
+                                @php
+                                    $cadenaJson = $p->rol;
+                                    $miArray = json_decode($cadenaJson);
+
+                                    // dd($miArray, $p->rol);
+                                @endphp
+                                @if (in_array(1, $miArray))
+                                    <span class="badge badge-success">Administrador</span>
+                                @endif
+                                
+                                @if (in_array(2, $miArray))
+                                    <br><span class="badge badge-dark">Comprador</span>
+                                @endif
+                                
+                                @if (in_array(3, $miArray))
+                                    <br><span class="badge badge-warning">Vendedor</span>
+                                @endif
+
+                                {{-- @if ($p->rol === 1)
                                     <span class="badge badge-success">Administrador</span>
                                 @elseif($p->rol === 2)
                                     <span class="badge badge-dark">Comprador</span>
                                 @elseif($p->rol === 3)
                                         <span class="badge badge-warning">Vendedor</span>
-                                @endif
+                                @endif --}}
                             </td>
                             <td>{{ $p->usuario }}</td>
                             <td>{{ $p->fecha_creacion }}</td>
