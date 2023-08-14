@@ -199,8 +199,22 @@ class TiendaController extends Controller
             // Cargar el contenido de la vista del correo
             $templatePath = resource_path('views/mail/nuevoCorreo.blade.php');
             $templateContent = file_get_contents($templatePath);
-
             // ... Configura los datos del correo y la plantilla ...
+            $fecha = date('d/m/Y H:m:s');
+            $data = [
+                'title'     => 'Bienvenido a mi aplicación',
+                'content'   => 'Gracias por unirte a nosotros. Esperamos que disfrutes de tu tiempo aquí.',
+                'name'      => $nombre,
+                'tipo'      => $tipo,
+                'modalidad' => $modalidad,
+                'qr'        => $qrImg,
+                'monto'     => $monto,
+                'fecha'     => $fecha,
+                'url'     => url('vendedor/inicio'),
+            ];
+            foreach ($data as $key => $value)
+                $templateContent = str_replace('{{ $' . $key . ' }}', $value, $templateContent);
+
 
             $mail = new PHPMailer(true);
 
@@ -222,7 +236,7 @@ class TiendaController extends Controller
                 // ... Configura los parámetros SMTP ...
 
                 // $mail->setFrom('admin@example.com', 'Admin');
-                $mail->setFrom('suscripcion@comercio-latino.com', 'Admin');
+                $mail->setFrom('suscripcion@comercio-latino.com', 'CORREO DE SUSCRIPCION');
                 $mail->addAddress($to);
 
                 $mail->isHTML(true);
