@@ -247,13 +247,10 @@ class TiendaController extends Controller
 
                 // mail($to, $subject, $templateContent, $headers);
 
-                if (mail($to, $subject, $templateContent, $headers)) {
-                    // echo 'Correo enviado correctamente.';
-                    dd('Correo enviado correctamente.');
-                } else {
-                    dd('No se pudo enviar el correo.');
-                    // echo 'No se pudo enviar el correo.';
-                }
+                if (mail($to, $subject, $templateContent, $headers))
+                    $data['msg'] = 'Correo enviado correctamente.';
+                else 
+                    $data['msg'] = 'No se pudo enviar el correo.';
 
 
                 // Mail::to($email)->send(new EnviarCorreoSuscripcion($nombre, $tipo, $modalidad, $qrImg));
