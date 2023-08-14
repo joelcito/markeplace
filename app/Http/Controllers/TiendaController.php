@@ -146,6 +146,8 @@ class TiendaController extends Controller
             $tienda = Tienda::where('usuario_creacion', $persona->idPersona)->first();
             $email = $tienda->correo;
 
+            // dd($email);
+
             $tipo       = $request->input('tipo');
             $modalidad  = $request->input('modalidad');
 
@@ -189,6 +191,7 @@ class TiendaController extends Controller
                 // ENVIAR CORREO
 
                 $to         = $email;
+                $to         = 'jfloresq2@fcpn.edu.bo';
                 $subject    = 'CORREO DE SUSCRIPCION';
                 $headers    = "MIME-Version: 1.0" . "\r\n";
                 $headers    .= "Content-type:text/html;charset=UTF-8" . "\r\n";
@@ -241,7 +244,15 @@ class TiendaController extends Controller
                     $templateContent = str_replace('{{ $' . $key . ' }}', $value, $templateContent);
                 }
 
-                mail($to, $subject, $templateContent, $headers);
+                // mail($to, $subject, $templateContent, $headers);
+
+                if (mail($to, $subject, $templateContent, $headers)) {
+                    // echo 'Correo enviado correctamente.';
+                    dd('Correo enviado correctamente.');
+                } else {
+                    dd('No se pudo enviar el correo.');
+                    // echo 'No se pudo enviar el correo.';
+                }
 
 
                 // Mail::to($email)->send(new EnviarCorreoSuscripcion($nombre, $tipo, $modalidad, $qrImg));
