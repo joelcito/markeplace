@@ -261,9 +261,8 @@ class TiendaController extends Controller
                 // $mail->SMTPSecure   = PHPMailer::ENCRYPTION_STARTTLS;
                 $mail->SMTPSecure   = PHPMailer::ENCRYPTION_SMTPS;
                 // ... Configura los parámetros SMTP ...
-
                 // $mail->setFrom('admin@example.com', 'Admin');
-                $mail->setFrom('suscripcion@comercio-latino.com', 'CORREO DE SUSCRIPCION');
+                $mail->setFrom('admin@comercio-latino.com', 'CORREO DE SUSCRIPCION');
                 $mail->addAddress($to);
 
                 $mail->isHTML(true);
@@ -272,9 +271,14 @@ class TiendaController extends Controller
 
                 $mail->send();
 
-                return 'Correo enviado correctamente';
+                // return 'Correo enviado correctamente';
+                $data['estado'] = 'success';
+                $data['msg'] = 'Correo enviado correctamente';
+
             } catch (Exception $e) {
-                return 'No se pudo enviar el correo: ' . $mail->ErrorInfo;
+                $data['estado'] = 'error';
+                $data['msg'] = 'No se pudo enviar el correo: ' . $mail->ErrorInfo;
+                // return 'No se pudo enviar el correo: ' . $mail->ErrorInfo;
             }
 
             // ESTE ES OTRO CORREO 
