@@ -191,8 +191,8 @@ class TiendaController extends Controller
                 // ENVIAR CORREO
 
                 // $to         = $email;
-                $to         = 'jfloresq2@fcpn.edu.bo';
-                // $to         = 'jjjoelcito123@gmail.com';
+                // $to         = 'jfloresq2@fcpn.edu.bo';
+                $to         = 'jjjoelcito123@gmail.com';
                 $subject    = 'CORREO DE SUSCRIPCION';
                 $headers    = "MIME-Version: 1.0" . "\r\n";
                 $headers    .= "Content-type:text/html;charset=UTF-8" . "\r\n";
