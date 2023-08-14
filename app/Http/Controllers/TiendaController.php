@@ -246,8 +246,10 @@ class TiendaController extends Controller
             // Configuración de los parámetros SMTP
             $smtpHost       = 'mail.comercio-latino.com';
             $smtpPort       =  465;
-            $smtpUsername   = 'suscripcion@comercio-latino.com';
-            $smtpPassword   = 'Fc;D&0@A7(T%';
+            // $smtpUsername   = 'suscripcion@comercio-latino.com';
+            // $smtpPassword   = 'Fc;D&0@A7(T%';
+            $smtpUsername   = 'admin@comercio-latino.com';
+            $smtpPassword   = '1234567LP1234567LP.';
 
             try {
                 $mail->isSMTP();
