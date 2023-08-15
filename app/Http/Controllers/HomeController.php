@@ -40,12 +40,12 @@ class HomeController extends Controller
             $mes = (($i<10)? '0'.$i : $i);
             $fechaFin = $anio."-".(($i<10)? '0'.$i : $i)."-".$numberOfDays;
 
-            $vendedores = Perfil::where('rol',3)
+            $vendedores = Perfil::where('rol', 'LIKE', '%3%')
                             ->whereBetween('fecha_creacion', [$anio."-".$mes."-01", $fechaFin])
                             ->count();
 
 
-            $comprador = Perfil::where('rol',2)
+            $comprador = Perfil::where('rol', 'LIKE', '%2%')
                                     ->whereBetween('fecha_creacion', [$anio."-".$mes."-01", $fechaFin])
                                     ->count();
 

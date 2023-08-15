@@ -211,7 +211,7 @@
                 <thead>
                     <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
                         <th>Nro Pedido</th>
-                        <th>Cliente</th>
+                        <th>Razon Social</th>
                         <th>Precio</th>
                         <th>Doc Pedido</th>
                         <th>Fecha de Pedido</th>

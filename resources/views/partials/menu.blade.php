@@ -25,10 +25,13 @@
                     <!--begin:Menu link-->
                     <a class="menu-link" href="{{ url('informacion/perfil') }}">
                         <span class="menu-icon">
-                            <i class="ki-duotone ki-rocket fs-2">
+                            {{-- <i class="ki-duotone ki-rocket fs-2">
                                 <span class="path1"></span>
                                 <span class="path2"></span>
-                            </i>
+                            </i> --}}
+                            
+                            <i class="fa-solid fa-house"></i>
+                            
                         </span>
                         <span class="menu-title" {{ Request::is('informacion/perfil') ? "style=color:orange" : 'style=color:white' }}>PERFIL</span>
                     </a>
@@ -38,10 +41,11 @@
                     <!--begin:Menu link-->
                     <a class="menu-link" href="{{ url('users') }}">
                         <span class="menu-icon">
-                            <i class="ki-duotone ki-rocket fs-2">
+                            {{-- <i class="ki-duotone ki-rocket fs-2">
                                 <span class="path1"></span>
                                 <span class="path2"></span>
-                            </i>
+                            </i> --}}
+                            <i class="fa-solid fa-user-plus"></i>
                         </span>
                         <span class="menu-title" {{ Request::is('users') ? "style=color:orange" : 'style=color:white' }}>USUARIOS</span>
                     </a>
@@ -51,10 +55,11 @@
                     <!--begin:Menu link-->
                     <a class="menu-link" href="{{ url('tienda/listado') }}">
                         <span class="menu-icon">
-                            <i class="ki-duotone ki-rocket fs-2">
+                            {{-- <i class="ki-duotone ki-rocket fs-2">
                                 <span class="path1"></span>
                                 <span class="path2"></span>
-                            </i>
+                            </i> --}}
+                            <i class="fa-solid fa-store"></i>
                         </span>
                         <span class="menu-title" {{ Request::is('tienda/listado') ? "style=color:orange" : 'style=color:white' }}>TIENDAS</span>
                     </a>
@@ -64,10 +69,11 @@
                     <!--begin:Menu link-->
                     <a class="menu-link" href="{{ url('categoria/listado') }}">
                         <span class="menu-icon">
-                            <i class="ki-duotone ki-rocket fs-2">
+                            {{-- <i class="ki-duotone ki-rocket fs-2">
                                 <span class="path1"></span>
                                 <span class="path2"></span>
-                            </i>
+                            </i> --}}
+                            <i class="fa-solid fa-folder"></i>
                         </span>
                         <span class="menu-title" {{ Request::is('categoria/listado') ? "style=color:orange" : 'style=color:white' }}>CATEGORIAS</span>
                     </a>
@@ -77,10 +83,11 @@
                     <!--begin:Menu link-->
                     <a class="menu-link" href="{{ url('subcategoria/listado') }}">
                         <span class="menu-icon">
-                            <i class="ki-duotone ki-rocket fs-2">
+                            {{-- <i class="ki-duotone ki-rocket fs-2">
                                 <span class="path1"></span>
                                 <span class="path2"></span>
-                            </i>
+                            </i> --}}
+                            <i class="fa-solid fa-shapes"></i>
                         </span>
                         <span class="menu-title" {{ Request::is('subcategoria/listado') ? "style=color:orange" : 'style=color:white' }}>SUB CATEGORIAS</span>
                     </a>
@@ -90,10 +97,11 @@
                     <!--begin:Menu link-->
                     <a class="menu-link" href="{{ url('/') }}">
                         <span class="menu-icon">
-                            <i class="ki-duotone ki-rocket fs-2">
+                            {{-- <i class="ki-duotone ki-rocket fs-2">
                                 <span class="path1"></span>
                                 <span class="path2"></span>
-                            </i>
+                            </i> --}}
+                            <i class="fa-solid fa-chart-simple"></i>
                         </span>
                         <span class="menu-title" {{ Request::is('/') ? "style=color:orange" : 'style=color:white' }}>PANEL INFORMATIVO</span>
                     </a>
@@ -116,10 +124,11 @@
                     <!--begin:Menu link-->
                     <a class="menu-link" href="{{ url('tienda/perfil') }}">
                         <span class="menu-icon">
-                            <i class="ki-duotone ki-rocket fs-2">
+                            {{-- <i class="ki-duotone ki-rocket fs-2">
                                 <span class="path1"></span>
                                 <span class="path2"></span>
-                            </i>
+                            </i> --}}
+                            <i class="fa-solid fa-house"></i>
                         </span>
                         <span class="menu-title" {{ Request::is('tienda/perfil') ? "style=color:orange" : 'style=color:white' }}>PERFIL DE EMPRESA</span>
                     </a>
@@ -130,10 +139,11 @@
                     <!--begin:Menu link-->
                     <a class="menu-link" href="{{ url('producto/listado') }}" >
                         <span class="menu-icon">
-                            <i class="ki-duotone ki-rocket fs-2">
+                            {{-- <i class="ki-duotone ki-rocket fs-2">
                                 <span class="path1"></span>
                                 <span class="path2"></span>
-                            </i>
+                            </i> --}}
+                            <i class="fa-solid fa-calendar-week"></i>
                         </span>
                         <span class="menu-title" {{ Request::is('producto/listado') ? "style=color:orange" : 'style=color:white' }}>MIS PRODUCTOS</span>
                     </a>
@@ -144,10 +154,11 @@
                     <!--begin:Menu link-->
                     <a class="menu-link" href="{{ url('vendedor/pedido') }}">
                         <span class="menu-icon">
-                            <i class="ki-duotone ki-rocket fs-2">
+                            {{-- <i class="ki-duotone ki-rocket fs-2">
                                 <span class="path1"></span>
                                 <span class="path2"></span>
-                            </i>
+                            </i> --}}
+                            <i class="fa-regular fa-rectangle-list"></i>
                         </span>
                         <span class="menu-title" {{ Request::is('vendedor/pedido') ? "style=color:orange" : 'style=color:white' }}>PEDIDOS</span>
                     </a>
@@ -158,10 +169,11 @@
                     <!--begin:Menu link-->
                     <a class="menu-link" href="{{ url('subcripcion/subcripcion') }}">
                         <span class="menu-icon">
-                            <i class="ki-duotone ki-rocket fs-2">
+                            {{-- <i class="ki-duotone ki-rocket fs-2">
                                 <span class="path1"></span>
                                 <span class="path2"></span>
-                            </i>
+                            </i> --}}
+                            <i class="fa-solid fa-book-bookmark"></i>
                         </span>
                         <span class="menu-title" {{ Request::is('subcripcion/subcripcion') ? "style=color:orange" : 'style=color:white' }}>SUSCRIPCION</span>
                     </a>
@@ -172,10 +184,11 @@
                     <!--begin:Menu link-->
                     <a class="menu-link" href="{{ url('vendedor/inicio') }}">
                         <span class="menu-icon">
-                            <i class="ki-duotone ki-rocket fs-2">
+                            {{-- <i class="ki-duotone ki-rocket fs-2">
                                 <span class="path1"></span>
                                 <span class="path2"></span>
-                            </i>
+                            </i> --}}
+                            <i class="fa-solid fa-chart-simple"></i>
                         </span>
                         <span class="menu-title" {{ Request::is('vendedor/inicio') ? "style=color:orange" : 'style=color:white' }}>PANEL INFORMATIVO</span>
                     </a>
@@ -200,10 +213,11 @@
                     <!--begin:Menu link-->
                     <a class="menu-link" href="{{ url('persona/perfil') }}">
                         <span class="menu-icon">
-                            <i class="ki-duotone ki-rocket fs-2">
+                            {{-- <i class="ki-duotone ki-rocket fs-2">
                                 <span class="path1"></span>
                                 <span class="path2"></span>
-                            </i>
+                            </i> --}}
+                            <i class="fa-solid fa-house"></i>
                         </span>
                         <span class="menu-title" {{ Request::is('persona/perfil') ? "style=color:orange" : 'style=color:white' }}>PERFIL</span>
                     </a>
@@ -213,10 +227,11 @@
                     <!--begin:Menu link-->
                     <a class="menu-link" href="{{ url('persona/pedido') }}">
                         <span class="menu-icon">
-                            <i class="ki-duotone ki-rocket fs-2">
+                            {{-- <i class="ki-duotone ki-rocket fs-2">
                                 <span class="path1"></span>
                                 <span class="path2"></span>
-                            </i>
+                            </i> --}}
+                            <i class="fa-regular fa-rectangle-list"></i>
                         </span>
                         <span class="menu-title" {{ Request::is('persona/pedido') ? "style=color:orange" : 'style=color:white' }}>PEDIDOS</span>
                     </a>
@@ -233,10 +248,11 @@
                 @endphp
                 <a class="menu-link" href="https://comercio-latino.com/services_landing/postSesion2.php?correo={{ $u }}&contrasena={{ $p }}">
                     <span class="menu-icon">
-                        <i class="ki-duotone ki-rocket fs-2">
+                        {{-- <i class="ki-duotone ki-rocket fs-2">
                             <span class="path1"></span>
                             <span class="path2"></span>
-                        </i>
+                        </i> --}}
+                        <i class="fa-solid fa-bag-shopping"></i>
                     </span>
                     <span class="menu-title text-white">IR A LA TIENDA</span>
                 </a>
@@ -248,12 +264,13 @@
                 {{-- <a class="menu-link" id="enlaceCerrarSesion" href="#"> --}}
                 <a class="menu-link" href="https://comercio-latino.com/services_landing/cerrarsesion.php">
                     <span class="menu-icon">
-                        <i class="ki-duotone ki-rocket fs-2">
+                        {{-- <i class="ki-duotone ki-rocket fs-2">
                             <span class="path1"></span>
                             <span class="path2"></span>
-                        </i>
+                        </i> --}}
+                        <i class="fa-solid fa-right-from-bracket"></i>
                     </span>
-                    <span class="menu-title text-white">CERRAR CESSION</span>
+                    <span class="menu-title text-white">CERRAR SESION</span>
                 </a>
                 <!--end:Menu link-->
             </div>

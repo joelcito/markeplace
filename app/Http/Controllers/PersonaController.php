@@ -22,14 +22,14 @@ class PersonaController extends Controller
         // $ventas = Venta::all();
         $perfil_id = session('perfil')->idPerfil;
 
-        $ventas = Venta::
-        // $ventas = Venta::select('pedido', 'usuario_creacion',DB::raw('SUM(preciounitario) as total_precio'),'fecha_creacion', 'estadoproducto')
+        // $ventas = Venta::
+        $ventas = Venta::select('pedido', 'usuario_creacion',DB::raw('SUM(preciounitario) as total_precio'),'fecha_creacion', 'estadoproducto')
                         // ->where('idPerfil', $perfil_id)
-                        where('idPerfil', $perfil_id)
-                        // ->groupBy('pedido', 'usuario_creacion','fecha_creacion', 'estadoproducto')
-                        ->get();
-        //                 ->toSql();
-        // dd($ventas, $perfil_id);
+                        ->where('idPerfil', $perfil_id)
+                        ->groupBy('pedido', 'usuario_creacion','fecha_creacion', 'estadoproducto')
+                        // ->get();
+                        ->toSql();
+        dd($ventas, $perfil_id);
 
         return view('persona.venta')->with(compact('ventas'));
     }

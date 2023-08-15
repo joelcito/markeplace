@@ -475,12 +475,12 @@
                     success: function(data) {
                         if(data.estado === 'success'){
                             Swal.fire({
-                                title:'Guardado!',
-                                text :'Se guardo con exito.',
+                                title:'Exito!',
+                                text :'La solicitud fue procesada, por favor dirijase a su correo para realizar su pago',
                                 icon: 'success',
-                                timer: 1500
-                            })
-                            location.reload();
+                            }).then(() => {
+                                location.reload();
+                            });
                         }else{
                             Swal.fire({
                                 title:'Error!',
