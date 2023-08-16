@@ -128,14 +128,22 @@
                                 Solicitar
                             </button>
                             @if ($perfil->plandepago === 1)
-                                <h3 class="text-success mt-2 text-center">PLAN ACTUAL</h3>
+                                <h3 class="text-success mt-2 text-center">PLAN ACTUAL: <span class="text-info">{{ ($suscripcion->tipo_fecha == 1)? 'MENSUAL' : 'ANUAL' }}</span></h3>
                                 <div class="row">
                                     @if ($suscripcion)
-                                        <div class="col-md-4">TIPO: <span class="text-info">{{ ($suscripcion->tipo_fecha == 1)? 'MENSUAL' : 'ANUAL' }}</span></div>
-                                        <div class="col-md-4">Fecha Inicio: <span class="text-info">{{ $suscripcion->fecha_inicio }}</span></div>
-                                        <div class="col-md-4">Fecha Fin: <span class="text-info">{{ $suscripcion->fecha_final }}</span></div>
+                                    @php
+                                        $fechaOriginalIni = $suscripcion->fecha_inicio;
+                                        $fechaOriginalFin = $suscripcion->fecha_final;
+                                        $fechaCarbonIni = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $fechaOriginalIni);
+                                        $fechaCarbonFin = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $fechaOriginalFin);
+                                        $fechaFormateadaIni = $fechaCarbonIni->format('d/m/Y');
+                                        $fechaFormateadaFin = $fechaCarbonFin->format('d/m/Y');
+                                    @endphp
+                                        {{-- <div class="col-md-4">TIPO: <span class="text-info">{{ ($suscripcion->tipo_fecha == 1)? 'MENSUAL' : 'ANUAL' }}</span></div> --}}
+                                        <div class="col-md-6">Fecha Inicio: <span class="text-info">{{ $fechaFormateadaIni }}</span></div>
+                                        <div class="col-md-6">Fecha Fin: <span class="text-info">{{ $fechaFormateadaFin }}</span></div>
                                     @else
-                                        <div class="col-md-4">TIPO: <span class="text-info">MENSUAL</span></div>
+                                        <div class="col-md-12">TIPO: <span class="text-info">MENSUAL</span></div>
                                     @endif
                                 </div>
                             @endif
@@ -253,11 +261,19 @@
                                 Solicitar
                             </button>
                             @if ($perfil->plandepago === 2)
-                                <h3 class="text-success mt-2 text-center">PLAN ACTUAL</h3>
+                                <h3 class="text-success mt-2 text-center">PLAN ACTUAL: <span class="text-info">{{ ($suscripcion->tipo_fecha == 1)? 'MENSUAL' : 'ANUAL' }}</span></h3>
                                 <div class="row">
-                                    <div class="col-md-4">TIPO: <span class="text-info">{{ ($suscripcion->tipo_fecha == 1)? 'MENSUAL' : 'ANUAL' }}</span></div>
-                                    <div class="col-md-4">Fecha Inicio: <span class="text-info">{{ $suscripcion->fecha_inicio }}</span></div>
-                                    <div class="col-md-4">Fecha Fin: <span class="text-info">{{ $suscripcion->fecha_final }}</span></div>
+                                    @php
+                                        $fechaOriginalIni = $suscripcion->fecha_inicio;
+                                        $fechaOriginalFin = $suscripcion->fecha_final;
+                                        $fechaCarbonIni = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $fechaOriginalIni);
+                                        $fechaCarbonFin = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $fechaOriginalFin);
+                                        $fechaFormateadaIni = $fechaCarbonIni->format('d/m/Y');
+                                        $fechaFormateadaFin = $fechaCarbonFin->format('d/m/Y');
+                                    @endphp
+                                    {{-- <div class="col-md-4">TIPO: <span class="text-info">{{ ($suscripcion->tipo_fecha == 1)? 'MENSUAL' : 'ANUAL' }}</span></div> --}}
+                                    <div class="col-md-6 text-center">Fecha Inicio: <span class="text-info">{{ $fechaFormateadaIni }}</span></div>
+                                    <div class="col-md-6 text-center">Fecha Fin: <span class="text-info">{{ $fechaFormateadaFin }}</span></div>
                                 </div>
                             @endif
                         </div>
@@ -372,11 +388,19 @@
                                     Solicitar
                                 </button>
                                 @if ($perfil->plandepago === 3)
-                                    <h3 class="text-success mt-2 text-center">PLAN ACTUAL</h3>
+                                    <h3 class="text-success mt-2 text-center">PLAN ACTUAL: <span class="text-info">{{ ($suscripcion->tipo_fecha == 1)? 'MENSUAL' : 'ANUAL' }}</span></h3>
                                     <div class="row">
-                                        <div class="col-md-4">TIPO: <span class="text-info">{{ ($suscripcion->tipo_fecha == 1)? 'MENSUAL' : 'ANUAL' }}</span></div>
-                                        <div class="col-md-4">Fecha Inicio: <span class="text-info">{{ $suscripcion->fecha_inicio }}</span></div>
-                                        <div class="col-md-4">Fecha Fin: <span class="text-info">{{ $suscripcion->fecha_final }}</span></div>
+                                        @php
+                                            $fechaOriginalIni = $suscripcion->fecha_inicio;
+                                            $fechaOriginalFin = $suscripcion->fecha_final;
+                                            $fechaCarbonIni = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $fechaOriginalIni);
+                                            $fechaCarbonFin = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $fechaOriginalFin);
+                                            $fechaFormateadaIni = $fechaCarbonIni->format('d/m/Y');
+                                            $fechaFormateadaFin = $fechaCarbonFin->format('d/m/Y');
+                                        @endphp
+                                        {{-- <div class="col-md-4">TIPO: <span class="text-info">{{ ($suscripcion->tipo_fecha == 1)? 'MENSUAL' : 'ANUAL' }}</span></div> --}}
+                                        <div class="col-md-6 text-center">Fecha Inicio: <span class="text-info">{{ $fechaFormateadaIni }}</span></div>
+                                        <div class="col-md-6 text-center">Fecha Fin: <span class="text-info">{{ $fechaFormateadaFin }}</span></div>
                                     </div>
                                 @endif
                             </div>
