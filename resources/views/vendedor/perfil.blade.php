@@ -89,12 +89,12 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <label for="">Usuario</label>
-                                        <input type="text" id="usuario" name="usuario" class="form-control" value="{{ $perfil->usuario }}" required>
+                                        <input type="text" id="usuario" name="usuario" class="form-control" value="{{ $perfil->usuario }}" required readonly>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="">Contraseña</label>
                                         <input type="password" id="contrasena" name="contrasena" class="form-control">
-                                        <small class="text-success">Llene el campo si desea cambiar la contraseña, caso contrario deje el campo vacio</small>
+                                        <small class="text-danger">Llene el campo si desea cambiar la contraseña, caso contrario deje el campo vacio.</small>
                                     </div>
                                 </div>
                                 <div class="row mt-10 mb-5">

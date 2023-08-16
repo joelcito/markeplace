@@ -62,18 +62,18 @@
             });
         }
 
-        function cambiaEstado(select, venta){
+        function cambiaEstado(select, pedido){
             $.ajax({
                 url: "{{ url('vendedor/cambiaEstado') }}",
                 type: 'POST',
                 data:{
                     estado:select.value,
-                    venta:venta
+                    pedido:pedido
                 },
                 dataType: 'json',
                 success: function(data) {
                     if(data.estado === 'success')
-                        $('#msg_'+venta).show("toogle");
+                        $('#msg_'+pedido).show("toogle");
                 }
             });
         }

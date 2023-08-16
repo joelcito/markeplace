@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Perfil;
 use App\Models\Persona;
+use App\Models\Informacion;
 use App\Models\Venta;
+use App\Models\Tienda;
+use App\Models\Producto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -23,15 +26,35 @@ class PersonaController extends Controller
         $perfil_id = session('perfil')->idPerfil;
 
         // $ventas = Venta::
-        $ventas = Venta::select('pedido', 'usuario_creacion',DB::raw('SUM(preciounitario) as total_precio'),'fecha_creacion', 'estadoproducto')
+        $ventas = Venta::select('pedido', 'usuario_creacion',DB::raw('SUM(preciounitario*cantidad) as total_precio'),'fecha_creacion', 'estadoproducto')
                         // ->where('idPerfil', $perfil_id)
                         ->where('idPerfil', $perfil_id)
                         ->groupBy('pedido', 'usuario_creacion','fecha_creacion', 'estadoproducto')
-                        // ->get();
-                        ->toSql();
-        dd($ventas, $perfil_id);
+                        ->get();
+                        // ->toSql();
+        // dd($ventas, $perfil_id);
 
-        return view('persona.venta')->with(compact('ventas'));
+        // PARA EL PDF
+        // ************** PARA COMERCIO LATINO ********************
+        $nombre = Informacion::where('codigo','nombre')->first();
+        $datosPdf['nombreCL'] = $nombre->descripcion;
+        $telefono = Informacion::where('codigo','telefono')->first();
+        $datosPdf['telefonoCL'] = $telefono->descripcion;
+        $correo = Informacion::where('codigo','correo')->first();
+        $datosPdf['correoCL'] = $correo->descripcion;
+
+        // ************** PARA EL CLIENTE ********************
+        $persona_id = session('perfil')->idPersona;
+        $persona    = Persona::find($persona_id);
+        $datosPdf['nombreComprador']        = $persona->nombres." ".$persona->apellido_paterno." ".$persona->apellido_materno;
+        $datosPdf['nitComprador']           = $persona->nit;
+        $datosPdf['direccionComprador']     = $persona->direccion;
+        $datosPdf['telefonoComprador']      = $persona->celular;
+        $datosPdf['correoComprador']        = $persona->correo;
+
+        // dd($nombre->descripcion);
+
+        return view('persona.venta')->with(compact('ventas', 'datosPdf'));
     }
 
     public function guarda(Request $request){
@@ -69,5 +92,34 @@ class PersonaController extends Controller
         $perfil->save();
 
         return redirect("persona/perfil");
+    }
+
+    public function califica(Request $request){
+        if($request->ajax()){
+            $pedido         = $request->input('pedido');
+            $calificacion   = (int) $request->input('valor')/100;
+            $ventas         = Venta::where('pedido', $pedido)->get();
+            
+            foreach ($ventas as $key => $v) {
+                $producto                   = Producto::find($v->idProducto);
+                $calAnt                     = $producto->calificacion;
+                $producto->calificacion     = ($calAnt+$calificacion)/2;
+                $producto->save();
+                $tineda_id                  = $producto->idTienda;
+            }
+
+            $tienda                 = Tienda::find($tineda_id);
+            $calAntTineda           = $tienda->calificacion;
+            $tienda->calificacion   = ($calAntTineda+$calificacion)/2;
+            $tienda->save();
+
+            Venta::where('pedido', $pedido)
+                 ->update(['estadoproducto' => 5]);
+            
+            $data['estado'] = 'success' ;
+        }else{
+            $data['estado'] = 'error' ;
+        }
+        return $data;
     }
 }

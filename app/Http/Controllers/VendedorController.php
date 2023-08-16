@@ -6,7 +6,10 @@ use App\Models\Producto;
 use App\Models\Tienda;
 use App\Models\Vendedor;
 use App\Models\Venta;
+use App\Models\Informacion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 class VendedorController extends Controller
 {
@@ -106,28 +109,46 @@ class VendedorController extends Controller
         // })->get();
         // })->toSql();
 
-        $ventas = Venta::whereIn('idProducto', function($query) use ($tienda_id) {
-            $query->select('idProducto')
-                  ->from('producto')
-                  ->where('idTienda', $tienda_id);
-        })->get();
+        // $ventas = Venta::whereIn('idProducto', function($query) use ($tienda_id) {
+        //     $query->select('idProducto')
+        //           ->from('producto')
+        //           ->where('idTienda', $tienda_id);
+        // })->get();
 
-        // dd(
-        //     $ventas,
-        //     $persona_id,
-        //     $tienda,
-        //     $tienda_id
-        // );
+        $ventas = DB::table('venta')
+                    ->select('pedido', DB::raw('sum(preciounitario * cantidad) as total'), 'usuario_creacion', 'estadoproducto')
+                    ->whereIn('idProducto', function ($query) use ($tienda_id) {
+                        $query->select('idProducto')
+                            ->from('producto')
+                            ->where('idTienda', $tienda_id);
+                    })
+                    ->groupBy('pedido', 'usuario_creacion', 'estadoproducto')
+                    ->get();
+        // })->toSql();
 
-        return view("vendedor.ajaxListadoPedido")->with(compact('ventas'))->render();
+        // ************** PARA COMERCIO LATINO ********************
+        $nombre = Informacion::where('codigo','nombre')->first();
+        $datosPdf['nombreCL'] = $nombre->descripcion;
+        $telefono = Informacion::where('codigo','telefono')->first();
+        $datosPdf['telefonoCL'] = $telefono->descripcion;
+        $correo = Informacion::where('codigo','correo')->first();
+        $datosPdf['correoCL'] = $correo->descripcion;
+
+        // dd($ventas, $tienda_id);
+
+        return view("vendedor.ajaxListadoPedido")->with(compact('ventas', 'datosPdf'))->render();
     }
 
     public function cambiaEstado(Request $request)    {
         if($request->ajax()){
-            $venta_id = $request->input('venta');
-            $venta = Venta::find($venta_id);
-            $venta->estadoproducto = $request->input('estado');
-            $venta->save();
+            $pedido = $request->input('pedido');
+            $estado = $request->input('estado');
+            Venta::where('pedido', $pedido)
+                 ->update(['estadoproducto' => $estado]);
+            // $venta_id = $request->input('venta');
+            // $venta = Venta::find($venta_id);
+            // $venta->estadoproducto = $request->input('estado');
+            // $venta->save();
             $data['estado'] = 'success';
         }else{
             $data['estado'] = 'error';

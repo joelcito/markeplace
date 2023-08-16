@@ -216,6 +216,7 @@
                         <th>Doc Pedido</th>
                         <th>Fecha de Pedido</th>
                         <th>Estado</th>
+                        <th>Calificacion</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -224,28 +225,31 @@
                             <td>{{ $v->pedido }}</td>
                             <td>
                                 @php
-                                    $persona = App\Models\Persona::find($v->usuario_creacion);
-                                    echo $persona->nombres." ".$persona->ap_paterno." ".$persona->ap_materno;
+                                    $venta      = App\Models\Venta::where('pedido', $v->pedido)->first();
+                                    $producto   = App\Models\Producto::find($venta->idProducto);
+                                    $tienda     = App\Models\Tienda::find($producto->idTienda);
+                                    echo $tienda->nombre;
+                                    // dd($tienda);
                                 @endphp
                             </td>
-                            <td>{{ $v->total_precio }}</td>
+                            <td>{{ number_format($v->total_precio, 2) }}</td>
                             <td>
                                 <a class="btn btn-danger btn-icon btn-sm" target="_blank" href="https://comercio-latino.com/services_landing/pdfrecibo.php?pedido={{ $v->pedido }}
-                                                                                                    &nombre=LFORES
-                                                                                                    &telefono=77752452
-                                                                                                    &email=jjjoelcito123@gmail.com
-                                                                                                    &pronombre=LFORES
-                                                                                                    &pronit=8401524016
-                                                                                                    &prodireccion=LA%20PAZ
-                                                                                                    &protelefono=77752452
-                                                                                                    &procorreo=jjjoelcito123@gmail.com
-                                                                                                    &clinombre=alfredjose360%20%20
-                                                                                                    &clinit=
-                                                                                                    &clidireccion=
-                                                                                                    &clitelefono=
-                                                                                                    &clicorreo=alfredjose360@gmail.com
+                                                                                                    &nombre={{ $datosPdf['nombreCL'] }}
+                                                                                                    &telefono={{ $datosPdf['telefonoCL'] }}
+                                                                                                    &email={{ $datosPdf['correoCL'] }}
+                                                                                                    &pronombre={{ $tienda->nombre }}
+                                                                                                    &pronit={{ $tienda->nit }}
+                                                                                                    &prodireccion={{ $tienda->ubicacion }}
+                                                                                                    &protelefono={{ $tienda->celular }}
+                                                                                                    &procorreo={{ $tienda->correo }}
+                                                                                                    &clinombre={{ $datosPdf['nombreComprador'] }}
+                                                                                                    &clinit={{ $datosPdf['nitComprador'] }}
+                                                                                                    &clidireccion={{ $datosPdf['direccionComprador'] }}
+                                                                                                    &clitelefono={{ $datosPdf['telefonoComprador'] }}
+                                                                                                    &clicorreo={{ $datosPdf['correoComprador'] }}
                                                                                                     &logoimagen=17-07-20-Elementor-Page-Builder-construye-tu-web-de-forma-fa%CC%81cil-y-eficaz-1-1200x630.jpg
-                                                                                                    &fecha=31/07/2023%2021:09:45">
+                                                                                                    &fecha={{ $venta->fecha_creacion }}">
                                                                                                 <i class="fa fa-file-pdf"></i></a>
                             </td>
                             <td>{{ $v->fecha_creacion }}</td>
@@ -258,6 +262,25 @@
                                     <small class="badge badge-success">Finalizado</small>
                                 @elseif($v->estadoproducto === 4)
                                     <small class="badge badge-danger">Finalizado sin entregar</small>
+                                @elseif($v->estadoproducto === 5)
+                                    <small class="badge badge-success">Calificado</small>
+                                @endif
+                            </td>
+                            <td>
+                                @if ($v->estadoproducto === 3)
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <input type="range" id="descuento_{{$v->pedido}}" min="0" max="100" value="0">
+                                            <div id="valorActual_{{$v->pedido}}">Valor: <span>0</span>%</div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <button class="btn btn-icon btn-sm btn-success mt-1" onclick="calificarPedido({{$v->pedido}})"><i class="fa fa-save"></i></button>
+                                        </div>
+                                    </div>
+                                @elseif($v->estadoproducto === 5)
+                                    <center>
+                                        <small class="badge badge-success">Calificado</small>
+                                    </center>
                                 @endif
                             </td>
                         </tr>
@@ -279,9 +302,68 @@
             }
         })
 
-        $( document ).ready(function() {
-            // ajaxListado();
+
+
+        $(document).ready(function() {
+            $('input[type="range"]').each(function() {
+                var $this = $(this);
+                var id = $this.attr('id');
+                var d = id.split("_");
+                // var $valorActual = $('#valorActual_' + id.slice(-1) + ' span');
+                var $valorActual = $('#valorActual_' + d[1] + ' span');
+
+                $this.on('input', function() {
+                    var valor = $this.val();
+                    $valorActual.text(valor);
+                });
+            });
         });
+
+        function calificarPedido(pedido){
+            Swal.fire({
+            title: 'Esta seguro de realizar la calificacion?',
+            text: "No podra revertir eso!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, Estoy seguro!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+
+                    $.ajax({
+                        url: "{{ url('persona/califica') }}",
+                        data:{
+                            pedido:pedido,
+                            valor :$('#descuento_'+pedido).val()
+                        },
+                        type: 'POST',
+                        dataType: 'json',
+                        success: function(data) {
+                            if(data.estado === 'success'){
+                                Swal.fire({
+                                    title:'Exito!',
+                                    text :'Se califico con exito',
+                                    icon: 'success',
+                                    timer: 3000
+                                })
+                                location.reload();
+                            }
+                        }
+                    });
+
+                    // Swal.fire(
+                    // 'Deleted!',
+                    // 'Your file has been deleted.',
+                    // 'success'
+                    // )
+                }
+            })              
+        }
+
+        function calificaionOmn(pedido){
+            console.log(pedido)
+        }
 
        function guardarVenta(){
             if($("#formularioRol")[0].checkValidity()){

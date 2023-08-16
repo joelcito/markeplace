@@ -85,6 +85,7 @@ Route::post('/informacion/guarda', [InformacionController::class, 'guarda']);
 Route::get('/persona/perfil', [PersonaController::class, 'perfil']);
 Route::get('/persona/pedido', [PersonaController::class, 'pedido']);
 Route::post('/persona/guarda', [PersonaController::class, 'guarda']);
+Route::post('/persona/califica', [PersonaController::class, 'califica']);
 
 // LOGIN
 Route::get('/login', [LoginController::class, 'login']);
