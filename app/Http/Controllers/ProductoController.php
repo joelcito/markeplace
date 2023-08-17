@@ -108,7 +108,8 @@ class ProductoController extends Controller
                     $direccion                          = 'imgProducto/';
                     $nombreArchivo                      = ($key+1).date('YmdHis').".".$archivo->getClientOriginalExtension();
                     $archivo->move($direccion,$nombreArchivo);
-                    $pre = $nombre."/".$nombreArchivo;
+                    // $pre = $nombre."/".$nombreArchivo;
+                    $pre = $nombreArchivo;
                     $todo = $todo.$pre;
                     if($key < (count($archivos)-1))
                         $todo = $todo.",";
