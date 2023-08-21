@@ -152,7 +152,7 @@ class TiendaController extends Controller
             $ubi = [];
 
         // dd($ubi, $tienda->ubicacion);
-        if(count($ubi) > 0){
+        if(count($ubi) == 2){
             $pais = $ubi[0];
             $dap = $ubi[1];
         }
