@@ -46,6 +46,8 @@ class PersonaController extends Controller
         $datosPdf['telefonoCL'] = $telefono->descripcion;
         $correo = Informacion::where('codigo','correo')->first();
         $datosPdf['correoCL'] = $correo->descripcion;
+        $logo = Informacion::where('codigo','logo')->first();
+        $datosPdf['logoCL'] = $logo->descripcion;
 
         // ************** PARA EL CLIENTE ********************
         $persona_id = session('perfil')->idPersona;

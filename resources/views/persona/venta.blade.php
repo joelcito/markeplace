@@ -248,7 +248,7 @@
                                                                                                     &clidireccion={{ $datosPdf['direccionComprador'] }}
                                                                                                     &clitelefono={{ $datosPdf['telefonoComprador'] }}
                                                                                                     &clicorreo={{ $datosPdf['correoComprador'] }}
-                                                                                                    &logoimagen=17-07-20-Elementor-Page-Builder-construye-tu-web-de-forma-fa%CC%81cil-y-eficaz-1-1200x630.jpg
+                                                                                                    &logoimagen={{ $datosPdf['logoCL'] }}
                                                                                                     &fecha={{ $venta->fecha_creacion }}">
                                                                                                 <i class="fa fa-file-pdf"></i></a>
                             </td>
@@ -358,7 +358,7 @@
                     // 'success'
                     // )
                 }
-            })              
+            })
         }
 
         function calificaionOmn(pedido){

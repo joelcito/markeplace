@@ -139,6 +139,8 @@ class VendedorController extends Controller
         $datosPdf['telefonoCL'] = $telefono->descripcion;
         $correo = Informacion::where('codigo','correo')->first();
         $datosPdf['correoCL'] = $correo->descripcion;
+        $logo = Informacion::where('codigo','logo')->first();
+        $datosPdf['logoCL'] = $logo->descripcion;
 
         // dd($ventas, $tienda_id);
 
