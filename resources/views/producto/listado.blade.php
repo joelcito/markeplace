@@ -80,7 +80,7 @@
                             <div class="col-md-3">
                                 <div class="fv-row mb-7">
                                     <label class="required fw-semibold fs-6 mb-2">Prec. Uni.</label>
-                                    <input type="number" id="precio_unitario" name="precio_unitario" class="form-control form-control-solid mb-3 mb-lg-0" required>
+                                    <input type="number" id="precio_unitario" name="precio_unitario" class="form-control form-control-solid mb-3 mb-lg-0" required min="1">
                                 </div>
                             </div>
                             <div class="col-md-3">
@@ -91,7 +91,7 @@
                                     <div id="valorActual">Valor: <span>0</span>%</div>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            {{-- <div class="col-md-3">
                                 <div class="fv-row mb-7">
                                     <label class="required fw-semibold fs-6 mb-2">Tipo M.</label>
                                     <select name="moneda" id="moneda" class="form-control form-control-solid mb-3 mb-lg-0" required>
@@ -99,11 +99,17 @@
                                         <option value="1">$us</option>
                                     </select>
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="col-md-3">
                                 <div class="fv-row mb-7">
                                     <label class="required fw-semibold fs-6 mb-2">Cantidad Disponible</label>
                                     <input type="text" id="cantidad" name="cantidad" class="form-control form-control-solid mb-3 mb-lg-0" required>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="fv-row mb-7">
+                                    <label class="fw-semibold fs-6 mb-2">Agregar Cantidad</label>
+                                    <input type="number" id="agregaCantidad" name="agregaCantidad" class="form-control form-control-solid mb-3 mb-lg-0" value="0">
                                 </div>
                             </div>
                         </div>
@@ -124,6 +130,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <h6 class="text-center">Imagenes subidas</h6>
+                                <small class="text-danger text-center" id="msg_nuevas_img_edit" style="display: none">Si desea subir nuevas imagenes, se remplazara las que subio anteriormente</small>
                                 <div id="vista-previa">
 
                                 </div>
@@ -358,7 +365,7 @@
                     formData.append('precio_unitario',  $('#precio_unitario').val());
                     formData.append('cantidad',         $('#cantidad').val());
                     formData.append('descuento',        $('#descuento').val());
-                    formData.append('moneda',           $('#moneda').val());
+                    formData.append('agregaCantidad',   $('#agregaCantidad').val());
 
                     $.ajax({
                         url: "{{ url('producto/guarda') }}",
@@ -452,8 +459,16 @@
             $('#precio_unitario').val(preciounitario)
             $('#cantidad').val(cantidad)
             $('#descuento').val(descuento)
+            $('#agregaCantidad').val(0)
             $('#valorActual span').text(descuento);
             $('#vista-previa').empty();
+
+            $('#cantidad').prop('readonly', true);
+            $('#agregaCantidad').prop('readonly', false);
+
+            $('#btnAgregaProcuto').prop('disabled',false)
+            $('#msg_nuevas_img_edit').show('toggle')
+
             $('#kt_modal_add_user').modal('show')
         }
 
@@ -525,6 +540,12 @@
                         $('#categoria_id').val('')
                         $('#vista-previa').empty();
 
+                        $('#archivo').val(null);
+                        $('#imagenes').val(null);
+                        $('#cantidad').prop('readonly', false);
+                        $('#agregaCantidad').prop('readonly', true);
+                        $('#msg_nuevas_img_edit').hide('toggle')
+
                         $('#plan_actual').text(data.plan)
                         if(data.planChe==="Basico"){
                             if(data.cantidad >= 5){
@@ -536,6 +557,8 @@
                             $('#btnAgregaProcuto').prop('disabled',false)
                         }else if(data.planChe==="Superior"){
                             $('#btnAgregaProcuto').prop('disabled',false)
+                        }else if(data.planChe==="Suspendido"){
+                            $('#btnAgregaProcuto').prop('disabled',true)
                         }
                     }else{
 

@@ -43,9 +43,24 @@
                                 </div>
 
                                 <div class="row mt-12">
-                                    <div class="col-md-6">
-                                        <label for="" class="required">Ciudad / Pais</label>
-                                        <input type="text" id="ubicacion" name="ubicacion" class="form-control" value="{{ $tienda->ubicacion }}" required>
+                                    <div class="col-md-3">
+                                        <label for="" class="required">Pais</label>
+                                        {{-- @dd($paises[0]['country_name']) --}}
+                                        <select name="pais_perfil" id="pais_perfil" class="form-control" onchange="buscarDepartamentos()">
+                                            @foreach ($paises as $p)
+                                                <option {{ (  $p['country_name'] == $pais)? 'selected': '' }} value="{{ $p['country_name'] }}">{{ $p['country_name'] }}</option>
+                                            @endforeach
+                                        </select>
+                                        {{-- <input type="text" id="ubicacion" name="ubicacion" class="form-control" value="{{ $tienda->ubicacion }}" required> --}}
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="" class="required">Ciudad</label>
+                                        <select name="ciudades_perfil" id="ciudades_perfil" class="form-control">
+                                            @foreach ($departamentos as $d)
+                                                <option {{ (  $d['state_name'] == $dap)? 'selected': '' }} value="{{ $d['state_name'] }}">{{ $d['state_name'] }}</option>
+                                            @endforeach
+                                        </select>
+                                        {{-- <input type="text" id="ubicacion" name="ubicacion" class="form-control" value="{{ $tienda->ubicacion }}" required> --}}
                                     </div>
                                     <div class="col-md-3">
                                         <label for="" class="required">Correo</label>
@@ -150,6 +165,9 @@
                 formData.append('usuario',      $('#usuario').val());
                 formData.append('contrasena',   $('#contrasena').val());
 
+                formData.append('pais_perfil',   $('#pais_perfil').val());
+                formData.append('ciudades_perfil',   $('#ciudades_perfil').val());
+
                 $.ajax({
                     url: "{{ url('tienda/guarda') }}",
                     data:formData,
@@ -184,6 +202,32 @@
                 success: function(data) {
                     if(data.estado === 'success')
                         $('#detalleperfil').html(data.detalle);
+                }
+            });
+        }
+
+        function buscarDepartamentos(){
+            $.ajax({
+                url: "{{ url('tienda/buscarDepartamentos') }}",
+                type: 'POST',
+                data:{
+                    pais:$('#pais_perfil').val(),
+                    tar :"{{ $reste }}",
+                },
+                dataType: 'json',
+                success: function(data) {
+                    if(data.estado === 'success'){
+                        var departamentosArray = data.departamentos;
+                        var selectElement = $('#ciudades_perfil');
+                        selectElement.empty();
+                        for (var i = 0; i < departamentosArray.length; i++) {
+                            var departamento = departamentosArray[i].state_name;
+                            selectElement.append($('<option>', {
+                                value: departamento,
+                                text: departamento
+                            }));
+                        }
+                    }
                 }
             });
         }

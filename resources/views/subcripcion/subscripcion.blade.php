@@ -107,10 +107,6 @@
                                 $perfil_id      = session('perfil')->idPerfil;
                                 $perfil         = App\Models\Perfil::find($perfil_id);
                                 $suscripcion    = App\Models\Suscripcion::where('idPerfil', $perfil_id)->latest('fecha_creacion')->first();
-
-                                //dd($suscripcion);
-
-                                //dd($perfil);
                             @endphp
                             <div class="row w-100" >
                                 <div class="col-md-12">
@@ -128,7 +124,9 @@
                                 Solicitar
                             </button>
                             @if ($perfil->plandepago === 1)
-                                <h3 class="text-success mt-2 text-center">PLAN ACTUAL: <span class="text-info">{{ ($suscripcion->tipo_fecha == 1)? 'MENSUAL' : 'ANUAL' }}</span></h3>
+                                @if ($suscripcion)
+                                    <h3 class="text-success mt-2 text-center">PLAN ACTUAL: <span class="text-info">{{ ($suscripcion->tipo_fecha == 1)? 'MENSUAL' : 'ANUAL' }}</span></h3>
+                                @endif
                                 <div class="row">
                                     @if ($suscripcion)
                                     @php
@@ -143,7 +141,7 @@
                                         <div class="col-md-6">Fecha Inicio: <span class="text-info">{{ $fechaFormateadaIni }}</span></div>
                                         <div class="col-md-6">Fecha Fin: <span class="text-info">{{ $fechaFormateadaFin }}</span></div>
                                     @else
-                                        <div class="col-md-12">TIPO: <span class="text-info">MENSUAL</span></div>
+                                        <div class="col-md-12">PLAN ACTUAL: <span class="text-info">MENSUAL</span></div>
                                     @endif
                                 </div>
                             @endif

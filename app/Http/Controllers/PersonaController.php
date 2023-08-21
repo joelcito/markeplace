@@ -22,6 +22,10 @@ class PersonaController extends Controller
     }
 
     public function pedido(Request $request){
+
+        $logeo = app(LoginController::class);
+        $logeo->verificaLogueo();
+
         // $ventas = Venta::all();
         $perfil_id = session('perfil')->idPerfil;
 
@@ -58,6 +62,10 @@ class PersonaController extends Controller
     }
 
     public function guarda(Request $request){
+
+        $logeo = app(LoginController::class);
+        $logeo->verificaLogueo();
+
 
         $persona_id = $request->input('persona_id');
 
@@ -99,7 +107,7 @@ class PersonaController extends Controller
             $pedido         = $request->input('pedido');
             $calificacion   = (int) $request->input('valor')/100;
             $ventas         = Venta::where('pedido', $pedido)->get();
-            
+
             foreach ($ventas as $key => $v) {
                 $producto                   = Producto::find($v->idProducto);
                 $calAnt                     = $producto->calificacion;
@@ -115,7 +123,7 @@ class PersonaController extends Controller
 
             Venta::where('pedido', $pedido)
                  ->update(['estadoproducto' => 5]);
-            
+
             $data['estado'] = 'success' ;
         }else{
             $data['estado'] = 'error' ;

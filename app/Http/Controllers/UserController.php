@@ -21,6 +21,9 @@ class UserController extends Controller
 
     public function guarda(Request $request){
 
+        $logeo = app(LoginController::class);
+        $logeo->verificaLogueo();
+
         $persona_id = $request->input('persona_id');
         if($persona_id === "0"){
             $persona = new Persona();

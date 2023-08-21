@@ -57,6 +57,24 @@
             </div>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <!--begin::Charts Widget 2-->
+            <div class="card card-xl-stretch mb-5 mb-xl-8">
+                <!--begin::Header-->
+                <div class="card-header border-0 pt-5">
+                    <h3 class="card-title align-items-start flex-column">
+                        <span class="card-label fw-bold fs-3 mb-1">Visualizacion de productos</span>
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <div id="visualizacion_por_mes" style="height: 350px"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     {{-- <div class="row">
         <div class="col-md-12">
             <!--begin::Charts Widget 2-->
@@ -315,7 +333,7 @@
             });
     }
 
-    var e = document.getElementById("visuallizaciones");
+    var e = document.getElementById("visualizacion_por_mes");
     if (e) {
         var t = { self: null, rendered: !1 },
             a = function () {
@@ -325,13 +343,13 @@
                     s = {
                         series: [
                             {
-                                name: ["Cantidad de visualizacion"],
-                                data: [0, 55, 57, 56, 61, 58,0, 55, 57, 56, 61, 58],
+                                name: "Cantidad Visualizacion",
+                                data: @json($cantidadViosualizaciones),
                             },
-                            {
-                                name: "Cantidad de calificacion",
-                                data: [76, 85, 101, 98, 87, 105, 76, 85, 101, 98, 87, 105],
-                            },
+                            {{--  {
+                                name: "Revenue",
+                                data: [76, 85, 101, 98, 87, 105],
+                            },  --}}
                         ],
                         chart: {
                             fontFamily: "inherit",
@@ -343,7 +361,7 @@
                             bar: {
                                 horizontal: !1,
                                 columnWidth: ["30%"],
-                                borderRadius: 4,
+                                borderRadius: [10],
                             },
                         },
                         legend: { show: !1 },
@@ -354,20 +372,15 @@
                             colors: ["transparent"],
                         },
                         xaxis: {
-                            categories: [
-                                "Ene",
+                            categories: @json($productos),
+                            {{--  categories: [
                                 "Feb",
                                 "Mar",
-                                "Abr",
+                                "Apr",
                                 "May",
                                 "Jun",
                                 "Jul",
-                                "Ago",
-                                "Set",
-                                "Oct",
-                                "Nom",
-                                "Dic",
-                            ],
+                            ],  --}}
                             axisBorder: { show: !1 },
                             axisTicks: { show: !1 },
                             labels: {
@@ -404,13 +417,13 @@
                             y: {
                                 formatter: function (e) {
                                     {{--  return "$" + e + " thousands";  --}}
-                                    return e;
+                                    return e + " Visualizacion";
                                 },
                             },
                         },
                         colors: [
                             KTUtil.getCssVariableValue(
-                                "--bs-warning"
+                                "--bs-primary"
                             ),
                             KTUtil.getCssVariableValue(
                                 "--bs-gray-300"
@@ -431,6 +444,123 @@
             t.rendered && t.self.destroy(), a();
         });
     }
+
+    // var e = document.getElementById("visuallizaciones");
+    // if (e) {
+    //     var t = { self: null, rendered: !1 },
+    //         a = function () {
+    //             var a = parseInt(KTUtil.css(e, "height")),
+    //                 o = KTUtil.getCssVariableValue("--bs-gray-500"),
+    //                 r = KTUtil.getCssVariableValue("--bs-gray-200"),
+    //                 s = {
+    //                     series: [
+    //                         {
+    //                             name: ["Cantidad de visualizacion"],
+    //                             data: [0, 55, 57, 56, 61, 58,0, 55, 57, 56, 61, 58],
+    //                         },
+    //                         {
+    //                             name: "Cantidad de calificacion",
+    //                             data: [76, 85, 101, 98, 87, 105, 76, 85, 101, 98, 87, 105],
+    //                         },
+    //                     ],
+    //                     chart: {
+    //                         fontFamily: "inherit",
+    //                         type: "bar",
+    //                         height: a,
+    //                         toolbar: { show: !1 },
+    //                     },
+    //                     plotOptions: {
+    //                         bar: {
+    //                             horizontal: !1,
+    //                             columnWidth: ["30%"],
+    //                             borderRadius: 4,
+    //                         },
+    //                     },
+    //                     legend: { show: !1 },
+    //                     dataLabels: { enabled: !1 },
+    //                     stroke: {
+    //                         show: !0,
+    //                         width: 2,
+    //                         colors: ["transparent"],
+    //                     },
+    //                     xaxis: {
+    //                         categories: [
+    //                             "Ene",
+    //                             "Feb",
+    //                             "Mar",
+    //                             "Abr",
+    //                             "May",
+    //                             "Jun",
+    //                             "Jul",
+    //                             "Ago",
+    //                             "Set",
+    //                             "Oct",
+    //                             "Nom",
+    //                             "Dic",
+    //                         ],
+    //                         axisBorder: { show: !1 },
+    //                         axisTicks: { show: !1 },
+    //                         labels: {
+    //                             style: {
+    //                                 colors: o,
+    //                                 fontSize: "12px",
+    //                             },
+    //                         },
+    //                     },
+    //                     yaxis: {
+    //                         labels: {
+    //                             style: {
+    //                                 colors: o,
+    //                                 fontSize: "12px",
+    //                             },
+    //                         },
+    //                     },
+    //                     fill: { opacity: 1 },
+    //                     states: {
+    //                         normal: {
+    //                             filter: { type: "none", value: 0 },
+    //                         },
+    //                         hover: {
+    //                             filter: { type: "none", value: 0 },
+    //                         },
+    //                         active: {
+    //                             allowMultipleDataPointsSelection:
+    //                                 !1,
+    //                             filter: { type: "none", value: 0 },
+    //                         },
+    //                     },
+    //                     tooltip: {
+    //                         style: { fontSize: "12px" },
+    //                         y: {
+    //                             formatter: function (e) {
+    //                                 {{--  return "$" + e + " thousands";  --}}
+    //                                 return e;
+    //                             },
+    //                         },
+    //                     },
+    //                     colors: [
+    //                         KTUtil.getCssVariableValue(
+    //                             "--bs-warning"
+    //                         ),
+    //                         KTUtil.getCssVariableValue(
+    //                             "--bs-gray-300"
+    //                         ),
+    //                     ],
+    //                     grid: {
+    //                         borderColor: r,
+    //                         strokeDashArray: 4,
+    //                         yaxis: { lines: { show: !0 } },
+    //                     },
+    //                 };
+    //             (t.self = new ApexCharts(e, s)),
+    //                 t.self.render(),
+    //                 (t.rendered = !0);
+    //         };
+    //     a(),
+    //     KTThemeMode.on("kt.thememode.change", function () {
+    //         t.rendered && t.self.destroy(), a();
+    //     });
+    // }
 
 
 </script>

@@ -10,6 +10,7 @@ use App\Models\Suscripcion;
 use App\Models\Tienda;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -18,6 +19,9 @@ use PHPMailer\PHPMailer\Exception;
 
 class TiendaController extends Controller
 {
+
+    public $token;
+
     public function listado(Request $request){
         $logeo = app(LoginController::class);
         $logeo->verificaLogueo();
@@ -57,8 +61,8 @@ class TiendaController extends Controller
             $tienda->celular        = $request->input('celular');
             $tienda->correo         = $request->input('correo');
             $tienda->descripcion    = $request->input('descripcion');
-
-            $tienda->ubicacion      = $request->input('ubicacion');
+            // $tienda->ubicacion      = $request->input('ubicacion');
+            $tienda->ubicacion      = $request->input('pais_perfil')."/".$request->input('ciudades_perfil');
             $tienda->url_facebook   = $request->input('url_facebook');
             $tienda->url_instagram  = $request->input('url_instagram');
             $tienda->url_whatsapp   = $request->input('url_whatsapp');
@@ -120,12 +124,83 @@ class TiendaController extends Controller
     }
 
     public function perfil(Request $request){
+
+        $logeo = app(LoginController::class);
+        $logeo->verificaLogueo();
+
         $persona_id = session('perfil')->idPersona;
         $perfil_id = session('perfil')->idPerfil;
         $tienda = Tienda::where('usuario_creacion', $persona_id)->first();
         $perfil = Perfil::where('idPersona', $perfil_id)->first();
 
-        return view('vendedor.perfil')->with(compact('tienda', 'perfil'));
+        $response = Http::withHeaders([
+            "Accept"    => "application/json",
+            "api-token" => "TS8-1Mk-C64LFdFQ57vUZFQqNYiL2Mtui9YGieNc9EcugfCezaedA2It_dlLHl0I0K0",
+            "user-email"=> "jjjoelcito123@gmail.com"
+        ])->get('https://www.universal-tutorial.com/api/getaccesstoken');
+
+        $this->token = $response->json('auth_token');
+
+        $paises = Http::withHeaders([
+            "Authorization" => "Bearer ".$this->token,
+            "Accept" => "application/json"
+        ])->get('https://www.universal-tutorial.com/api/countries/')->json();
+
+        if(!is_null($tienda->ubicacion))
+            $ubi = explode("/",$tienda->ubicacion);
+        else
+            $ubi = [];
+
+        // dd($ubi, $tienda->ubicacion);
+        if(count($ubi) > 0){
+            $pais = $ubi[0];
+            $dap = $ubi[1];
+        }
+        else{
+            $pais = "Bolivia";
+            $dap = "1";
+        }
+
+        $departamentos = Http::withHeaders([
+            "Authorization" => "Bearer ".$this->token,
+            "Accept" => "application/json"
+        ])->get('https://www.universal-tutorial.com/api/states/'.$pais)->json();
+
+        $reste = $this->token;
+
+        // dd($departamentos, $pais);
+
+        // $ciudades = Http::withHeaders([
+        //     "Authorization" => "Bearer ".$response->json('auth_token'),
+        //     "Accept" => "application/json"
+        // ])->get('https://www.universal-tutorial.com/api/cities/La Paz');
+
+        // $estado = Http::get('https://www.universal-tutorial.com/api/states/United States');
+
+        // dd($estado->json(), $ciudades->json(), $countries->json());
+
+        return view('vendedor.perfil')->with(compact('tienda', 'perfil', 'paises', 'departamentos', 'reste', 'dap', 'pais'));
+    }
+
+    public function buscarDepartamentos(Request $request){
+        if($request->ajax()){
+
+            $pais = $request->input('pais');
+            $toke = $request->input('tar');
+            $this->token =$toke;
+
+            $departamentos = Http::withHeaders([
+                "Authorization" => "Bearer ".$this->token,
+                "Accept" => "application/json"
+            ])->get('https://www.universal-tutorial.com/api/states/'.$pais)->json();
+            // ])->get('https://www.universal-tutorial.com/api/states/Bolivia')->json();
+
+            $data['estado']         = 'success';
+            $data['departamentos']  = $departamentos;
+        }else{
+            $data['estado'] = 'error';
+        }
+        return $data;
     }
 
     public function detallePerfil(Request $request){
@@ -190,7 +265,7 @@ class TiendaController extends Controller
             $suscripcion->usuario_update    = $perfil->idPerfil;
             $suscripcion->save();
 
-            // ESTE ES OTRO CORREO 
+            // ESTE ES OTRO CORREO
 
             // $to = 'jjjoelcito123@gmail.com';
             // $to      = 'jfloresq2@fcpn.edu.bo';
@@ -282,7 +357,7 @@ class TiendaController extends Controller
                 // return 'No se pudo enviar el correo: ' . $mail->ErrorInfo;
             }
 
-            // ESTE ES OTRO CORREO 
+            // ESTE ES OTRO CORREO
 
             // try {
 
@@ -347,7 +422,7 @@ class TiendaController extends Controller
 
             //     if (mail($to, $subject, $templateContent, $headers))
             //         $data['msg'] = 'Correo enviado correctamente.';
-            //     else 
+            //     else
             //         $data['msg'] = 'No se pudo enviar el correo.';
 
 

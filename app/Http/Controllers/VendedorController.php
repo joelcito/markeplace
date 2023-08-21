@@ -27,16 +27,22 @@ class VendedorController extends Controller
         $tienda = Tienda::where('usuario_creacion', $persona_id)->first();
         $tienda_id = $tienda->idTienda;
         // PRODUCTOS MAS VENDIDOS
-        $prodyctosTienda    = Producto::select('*')->where('idTienda', $tienda_id)->get();
-        $productos          = $prodyctosTienda->pluck('nombre')->toArray();
-        $productosId        = $prodyctosTienda->pluck('idProducto')->toArray();
-        $numerosAleatorios  = [];
+        $prodyctosTienda            = Producto::select('*')->where('idTienda', $tienda_id)->get();
+        $productos                  = $prodyctosTienda->pluck('nombre')->toArray();
+        $productosId                = $prodyctosTienda->pluck('idProducto')->toArray();
+        $numerosAleatorios          = [];
+        $cantidadViosualizaciones   = [];
         foreach ($productosId as $key => $value) {
             $cantidad = Venta::where('idProducto', $value)
                                 ->where('estadoproducto',3)
                                 ->count();
 
             $numerosAleatorios[] = $cantidad;
+
+            // para las visualizaciones
+            $cantidad = Producto::find($value);
+
+            $cantidadViosualizaciones[]   = $cantidad->visualizacion;
         }
         $numerosAleatorios = array_values($numerosAleatorios);
 
@@ -58,7 +64,7 @@ class VendedorController extends Controller
         $cnatidaMeses = array_values($cnatidaMeses);
 
 
-        return view('home.inicioVendedor')->with(compact('productos', 'numerosAleatorios', 'cnatidaMeses'));
+        return view('home.inicioVendedor')->with(compact('productos', 'numerosAleatorios', 'cnatidaMeses', 'cantidadViosualizaciones'));
     }
 
     /**

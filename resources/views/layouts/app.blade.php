@@ -71,10 +71,10 @@
                                         $persona    = \App\Models\Persona::find($persona_id);
                                         $rol        = session('rol');
 
-                                        //dd($rol);
-
                                         $roles      = json_decode(session('perfil')->rol, true);
 
+                                        // dd(session('perfil'));
+                                        // dd($rol, $roles, session('perfil')->rol , json_decode(session('perfil')->rol, true));
                                         //dd($roles);
 
                                         if($rol===3){
