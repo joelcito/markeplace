@@ -34,11 +34,14 @@ class LoginController extends Controller
                 $request->session()->put('rol', $rol);
 
                 if($rol === 1){
-                    return redirect('/');
+                        // return redirect('/');
+                    return redirect('informacion/perfil');
                 }else if($rol === 2){
-                    return redirect('persona/pedido');
+                    // return redirect('persona/pedido');
+                    return redirect('persona/perfil');
                 }else if($rol === 3){
-                    return redirect('vendedor/inicio');
+                    // return redirect('vendedor/inicio');
+                    return redirect('tienda/perfil');
                 }
             }else{
                 return redirect('login');
@@ -67,11 +70,14 @@ class LoginController extends Controller
 
                 $request->session()->put('rol', $rol);
                 if($rol === 1){
-                    return redirect('/');
+                    // return redirect('/');
+                    return redirect('informacion/perfil');
                 }else if($rol === 2){
-                    return redirect('persona/pedido');
+                    // return redirect('persona/pedido');
+                    return redirect('persona/perfil');
                 }else if($rol === 3){
-                    return redirect('vendedor/inicio');
+                    // return redirect('vendedor/inicio');
+                    return redirect('tienda/perfil');
                 }
             }else{
                 return redirect('login');

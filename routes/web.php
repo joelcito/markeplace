@@ -68,7 +68,6 @@ Route::post('/tienda/cambiaSuscripcion', [TiendaController::class, 'cambiaSuscri
 Route::post('/tienda/cambiaSuscripcionAdmin', [TiendaController::class, 'cambiaSuscripcionAdmin']);
 Route::post('/tienda/buscarDepartamentos', [TiendaController::class, 'buscarDepartamentos']);
 
-
 // VENDEDOR
 Route::get('/vendedor/inicio', [VendedorController::class, 'index']);
 Route::get('/vendedor/pedido', [VendedorController::class, 'pedido']);
@@ -103,7 +102,6 @@ Route::get('/users', [UserController::class, 'listado']);
 Route::post('/users/guarda', [UserController::class, 'guarda']);
 Route::post('/users/eliminar', [UserController::class, 'eliminar']);
 Route::post('/users/cambiarEstadoPerfil', [UserController::class, 'cambiarEstadoPerfil']);
-
 
 // // EXTERNOS
 // Route::post('/enviarcorreo', [CorreoController::class, 'enviarCorreo']);

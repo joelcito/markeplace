@@ -103,18 +103,10 @@
     <!--begin::Card-->
     <div class="card">
         <!--begin::Card header-->
-        <div class="card-header border-0 pt-6">
+        <div class="card-header border-0 pt-6 bg-light-primary">
             <!--begin::Card title-->
             <div class="card-title">
-                <!--begin::Search-->
-                <div class="d-flex align-items-center position-relative my-1">
-                    <i class="ki-duotone ki-magnifier fs-3 position-absolute ms-5">
-                        <span class="path1"></span>
-                        <span class="path2"></span>
-                    </i>
-                    <input type="text" data-kt-user-table-filter="search" class="form-control form-control-solid w-250px ps-13" placeholder="Buscar Usuario" />
-                </div>
-                <!--end::Search-->
+                <h2>Listado de Usuarios</h2>
             </div>
             <!--begin::Card title-->
             <!--begin::Card toolbar-->
@@ -215,8 +207,8 @@
         </div>
         <!--end::Card header-->
         <!--begin::Card body-->
-        <div class="card-body py-4">
-            <table class="table align-middle table-row-dashed fs-6 gy-5">
+        <div class="card-body py-4 table-responsive">
+            <table class="table align-middle table-row-dashed fs-6 gy-5" id="tabla_usuarios">
                 <thead>
                     <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
                         <th>N</th>
@@ -280,69 +272,15 @@
                             </td>
                         </tr>
                     @endforeach
-                    {{-- <tr>
-                        <td>1</td>
-                        <td>Joel Jonathan</td>
-                        <td>Flores</td>
-                        <td>Quispe</td>
-                        <td>Cedula</td>
-                        <td>Administrador</td>
-                        <td>jjjoelcito123@gmail.com</td>
-                        <td>
-                            <button class="btn btn-warning btn-icon btn-sm"><i class="fa fa-edit"></i></button></button>
-                            <button class="btn btn-danger btn-icon btn-sm"><i class="fa fa-trash"></i></button></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Nayana</td>
-                        <td>Ticona</td>
-                        <td>Quispe</td>
-                        <td>8251245</td>
-                        <td>Vendedor</td>
-                        <td>naya@gmail.com</td>
-                        <td>
-                            <button class="btn btn-warning btn-icon btn-sm"><i class="fa fa-edit"></i></button></button>
-                            <button class="btn btn-danger btn-icon btn-sm"><i class="fa fa-trash"></i></button></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Paucara</td>
-                        <td>Pachecho</td>
-                        <td>Vianle</td>
-                        <td>451422</td>
-                        <td>Cliente</td>
-                        <td>vivis@gmail.com</td>
-                        <td>
-                            <button class="btn btn-warning btn-icon btn-sm"><i class="fa fa-edit"></i></button></button>
-                            <button class="btn btn-danger btn-icon btn-sm"><i class="fa fa-trash"></i></button></button>
-                        </td>
-                    </tr> --}}
+                    
                 </tbody>
             </table>
-            {{--  <div id="table_roles">
-
-            </div>  --}}
         </div>
-        <!--end::Card body-->
     </div>
-    <!--end::Card-->
 @stop()
 
 @section('js')
     <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
-
-    {{--  <script src="{{ asset('assets/js/custom/apps/user-management/users/list/table.js') }}"></script>  --}}
-    {{--  <script src="{{ asset('assets/js/custom/apps/user-management/users/list/export-users.js') }}"></script>  --}}
-    {{--  <script src="{{ asset('assets/js/custom/apps/user-management/users/list/add.js') }}"></script>  --}}
-    {{--  <script src="{{ asset('assets/js/widgets.bundle.js') }}"></script>
-    <script src="{{ asset('assets/js/custom/widgets.js') }}"></script>
-    <script src="{{ asset('assets/js/custom/apps/chat/chat.js') }}"></script>
-    <script src="{{ asset('assets/js/custom/utilities/modals/upgrade-plan.js') }}"></script>
-    <script src="{{ asset('assets/js/custom/utilities/modals/create-app.js') }}"></script>
-    <script src="{{ asset('assets/js/custom/utilities/modals/users-search.js') }}"></script>  --}}
-
     <script type="text/javascript">
 
         $.ajaxSetup({
@@ -353,7 +291,11 @@
         })
 
         $( document ).ready(function() {
-            // ajaxListado();
+
+            $('#tabla_usuarios').DataTable({
+                responsive:true
+            });
+
         });
 
        function guardarVenta(){
