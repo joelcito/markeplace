@@ -146,6 +146,8 @@ class TiendaController extends Controller
             "Accept" => "application/json"
         ])->get('https://www.universal-tutorial.com/api/countries/')->json();
 
+        dd($paises);
+
         if(!is_null($tienda->ubicacion))
             $ubi = explode("/",$tienda->ubicacion);
         else
