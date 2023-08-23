@@ -50,7 +50,6 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="" class="required">APELLIDO MATERNO</label>
-                                                {{--  <textarea name="quienessomos" id="quienessomos" cols="30" rows="5" class="form-control"></textarea>  --}}
                                                 <input type="text" id="ap_materno" name="ap_materno" class="form-control" value="{{ $persona->apellido_materno }}" required>
                                             </div>
                                         </div>
@@ -63,24 +62,16 @@
                                                 <label for="">NIT</label>
                                                 <input type="text" id="nit" name="nit" class="form-control" value="{{ $persona->nit }}">
                                             </div>
-                                            {{-- <div class="col-md-4">
-                                                <label for="" class="required">CEDULA</label>
-                                                <input type="text" id="cedula" name="cedula" class="form-control" value="{{ $persona->ci }}">
-                                            </div> --}}
                                         </div>
                                         <div class="row mt-5">
                                             <div class="col-md-6">
                                                 <label for="" class="required">CORREO / USUARIO</label>
-                                                <input type="email" id="correo" name="correo" class="form-control" value="{{ $persona->correo }}" required>
+                                                <input type="email" id="correo" name="correo" class="form-control" value="{{ $persona->correo }}" required readonly>
                                             </div>
                                             <div class="col-md-6">
                                                 <label for="" class="required">TELEFONO / CELULAR</label>
                                                 <input type="text" id="celular" name="celular" class="form-control" value="{{ $persona->celular }}" required>
                                             </div>
-                                            {{-- <div class="col-md-4">
-                                                <label for="" class="required">FECHA DE NACIMEINTO</label>
-                                                <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" class="form-control" value="{{ $persona->fecha_nacimiento }}">
-                                            </div> --}}
                                         </div>
                                     </div>
                                 </div>

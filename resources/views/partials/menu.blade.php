@@ -111,6 +111,7 @@
             @endif
 
             @if (session('rol') === 3)
+                {{-- @dd($sw, $rol, $tienda) --}}
                 <!--begin:Menu item-->
                 <div class="menu-item pt-5">
                     <!--begin:Menu content-->
@@ -122,12 +123,8 @@
 
                 <div class="menu-item">
                     <!--begin:Menu link-->
-                    <a class="menu-link" href="{{ url('tienda/perfil') }}">
+                    <a class="menu-link" href="{{ ($sw)? url('tienda/perfil') : 'javascript:void(0)' }}">
                         <span class="menu-icon">
-                            {{-- <i class="ki-duotone ki-rocket fs-2">
-                                <span class="path1"></span>
-                                <span class="path2"></span>
-                            </i> --}}
                             <i class="fa-solid fa-house"></i>
                         </span>
                         <span class="menu-title" {{ Request::is('tienda/perfil') ? "style=color:orange" : 'style=color:white' }}>PERFIL DE EMPRESA</span>
@@ -137,7 +134,7 @@
 
                 <div class="menu-item">
                     <!--begin:Menu link-->
-                    <a class="menu-link" href="{{ url('producto/listado') }}" >
+                    <a class="menu-link" href="{{ ($sw)? url('producto/listado') : 'javascript:void(0)' }}" >
                         <span class="menu-icon">
                             {{-- <i class="ki-duotone ki-rocket fs-2">
                                 <span class="path1"></span>
@@ -152,7 +149,7 @@
 
                 <div class="menu-item">
                     <!--begin:Menu link-->
-                    <a class="menu-link" href="{{ url('vendedor/pedido') }}">
+                    <a class="menu-link" href="{{ ($sw)? url('vendedor/pedido') : 'javascript:void(0)' }}">
                         <span class="menu-icon">
                             {{-- <i class="ki-duotone ki-rocket fs-2">
                                 <span class="path1"></span>
@@ -167,12 +164,8 @@
 
                 <div class="menu-item">
                     <!--begin:Menu link-->
-                    <a class="menu-link" href="{{ url('subcripcion/subcripcion') }}">
+                    <a class="menu-link" href="{{ ($sw)? url('subcripcion/subcripcion') : 'javascript:void(0)' }}">
                         <span class="menu-icon">
-                            {{-- <i class="ki-duotone ki-rocket fs-2">
-                                <span class="path1"></span>
-                                <span class="path2"></span>
-                            </i> --}}
                             <i class="fa-solid fa-book-bookmark"></i>
                         </span>
                         <span class="menu-title" {{ Request::is('subcripcion/subcripcion') ? "style=color:orange" : 'style=color:white' }}>SUSCRIPCION</span>
@@ -182,25 +175,18 @@
 
                 <div class="menu-item">
                     <!--begin:Menu link-->
-                    <a class="menu-link" href="{{ url('vendedor/inicio') }}">
+                    <a class="menu-link" href="{{ ($sw)? url('vendedor/inicio') : 'javascript:void(0)' }}">
                         <span class="menu-icon">
-                            {{-- <i class="ki-duotone ki-rocket fs-2">
-                                <span class="path1"></span>
-                                <span class="path2"></span>
-                            </i> --}}
                             <i class="fa-solid fa-chart-simple"></i>
                         </span>
                         <span class="menu-title" {{ Request::is('vendedor/inicio') ? "style=color:orange" : 'style=color:white' }}>PANEL INFORMATIVO</span>
                     </a>
                     <!--end:Menu link-->
                 </div>
-
-
-
-
             @endif
 
             @if (session('rol') === 2)
+                {{-- @dd($sw, $rol) --}}
                 <!--begin:Menu item-->
                 <div class="menu-item pt-5">
                     <!--begin:Menu content-->
@@ -211,7 +197,7 @@
                 </div>
                 <div class="menu-item">
                     <!--begin:Menu link-->
-                    <a class="menu-link" href="{{ url('persona/perfil') }}">
+                    <a class="menu-link" href="{{ ($sw)? url('persona/perfil') : 'javascript:void(0)' }}">
                         <span class="menu-icon">
                             {{-- <i class="ki-duotone ki-rocket fs-2">
                                 <span class="path1"></span>
@@ -225,7 +211,7 @@
                 </div>
                 <div class="menu-item">
                     <!--begin:Menu link-->
-                    <a class="menu-link" href="{{ url('persona/pedido') }}">
+                    <a class="menu-link" href="{{ ($sw)? url('persona/pedido') : 'javascript:void(0)' }}">
                         <span class="menu-icon">
                             {{-- <i class="ki-duotone ki-rocket fs-2">
                                 <span class="path1"></span>

@@ -29,7 +29,7 @@
                                         <input type="hidden" id="tienda_id" name="tienda_id" value="{{ $tienda->idTienda }}">
                                     </div>
                                     <div class="col-md-6">
-                                        <label for="">NIT o CI</label>
+                                        <label for="" class="required">NIT o CI</label>
                                         <input type="text" id="nit" name="nit" class="form-control" value="{{ $tienda->nit }}" required>
                                     </div>
                                 </div>

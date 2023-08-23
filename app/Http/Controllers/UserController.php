@@ -7,6 +7,7 @@ use App\Models\Persona;
 use App\Models\Tienda;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -26,6 +27,7 @@ class UserController extends Controller
 
         $persona_id = $request->input('persona_id');
         if($persona_id === "0"){
+
             $persona = new Persona();
 
             $persona->nombres               = $request->input('nombre');
@@ -42,27 +44,19 @@ class UserController extends Controller
             $perfil->idPersona  = $persona->idPersona;
             $perfil->usuario    = $request->input('usuario');
             $perfil->contrasena = $request->input('pass');
-            // $perfil->rol        = $request->input('rol');
+            $perfil->estado     = 1;
 
+            $roles_enviados = array_map('intval', $request->get('roles_a'));
+            if(in_array(3,$roles_enviados)){
+                $tienda                     = new Tienda();
+                $tienda->correo             = $request->input('usuario');
+                $tienda->estado             = 1;
+                $tienda->usuario_creacion   = $persona->idPersona;
+                $tienda->usuario_update     = $persona->idPersona;
+                $tienda->save();
+            }
+            $perfil->rol = json_encode($roles_enviados);
             $perfil->save();
-
-            // if($perfil->rol === "3"){
-            //     $tienda                     = new Tienda();
-            //     $tienda->correo             = $request->input('usuario');
-            //     $tienda->ubicacion          = "";
-            //     $tienda->url_facebook       = "";
-            //     $tienda->url_instagram      = "";
-            //     $tienda->url_whatsapp       = "";
-            //     $tienda->url_correo         = "";
-            //     $tienda->estado             = 1;
-            //     $tienda->calificacion       = 0;
-            //     $tienda->usuario_creacion   = $persona->idPersona;
-            //     $tienda->usuario_update     = $persona->idPersona;
-            //     $tienda->save();
-            // }
-
-
-
         }else{
             $persona = Persona::find($persona_id);
             $perfil = Perfil::where('idPersona', $persona_id)->first();
@@ -82,36 +76,40 @@ class UserController extends Controller
             }
             // $perfil->rol        = $request->input('rol');
             $perfil->save();
-
-            $string = $perfil->rol;
-            $cleanedString = trim($string, "[]"); // Elimina los corchetes al inicio y al final
-            $elements = explode(",", $cleanedString);
+            
+            $string         = $perfil->rol;
+            $cleanedString  = trim($string, "[]"); // Elimina los corchetes al inicio y al final
+            $elements       = explode(",", $cleanedString);
             // Convierte los elementos en números enteros
-            $array = array_map('intval', $elements);
-
-            // dd($array, $request->get('roles_a'));
-            $roles_enviados = $request->get('roles_a');
-            foreach($roles_enviados as $re){
-                if(!in_array((int)$re,$array)){
-                    dd($re,$array);
-                    $array[] = (int) $re;
-
-                    if($re == 3){
-
+            $roles_actuales = array_map('intval', $elements);
+            $roles_enviados = array_map('intval', $request->get('roles_a'));
+            if(count($roles_actuales) != count($roles_enviados)){
+                if(count($roles_enviados) < count($roles_actuales)){
+                    $elementosFaltantes = collect($roles_actuales)->diff($roles_enviados)->all();
+                    if(in_array(3,$elementosFaltantes)){
+                        $tienda = Tienda::where('usuario_creacion', $persona->idPersona)->first();
+                        $tienda->estado = 2;
+                        $tienda->save();
+                        DB::table('producto as p1')
+                            ->join('producto as p2', 'p1.idProducto', '=', 'p2.idProducto')
+                            ->where('p2.idTienda', $tienda->idTienda)
+                            ->update(['p1.estadoproducto' => 0]);
                     }
                 }else{
-                    // dd($array);
+                    $elementosFaltantes = collect($roles_enviados)->diff($roles_actuales)->all();
+                    if(in_array(3,$elementosFaltantes)){
+                        $tienda = Tienda::where('usuario_creacion', $persona->idPersona)->first();
+                        if(is_null($tienda)){
+                            $tienda = new Tienda();
+                            $tienda->usuario_creacion = $persona->idPersona;
+                        }
+                        $tienda->estado = 1;
+                        $tienda->save();
+                    }
                 }
+                $perfil->rol = $roles_enviados;
+                $perfil->save();
             }
-
-            dd($array);
-
-            if($request->has('roles_a')){
-                dd("si", $request->get('roles_a'), $request->input('roles_a'));
-            }else{
-                dd("no");
-            }
-
         }
         return redirect('users');
     }

@@ -66,20 +66,37 @@
 							<div class="app-header-menu app-header-mobile-drawer align-items-stretch" data-kt-drawer="true" data-kt-drawer-name="app-header-menu" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="250px" data-kt-drawer-direction="end" data-kt-drawer-toggle="#kt_app_header_menu_toggle" data-kt-swapper="true" data-kt-swapper-mode="{default: 'append', lg: 'prepend'}" data-kt-swapper-parent="{default: '#kt_app_body', lg: '#kt_app_header_wrapper'}">
 								<div class="menu menu-rounded menu-column menu-lg-row my-5 my-lg-0 align-items-stretch fw-semibold px-2 px-lg-0" id="kt_app_header_menu" data-kt-menu="true">
                                     @php
+
 										$persona_id = session('perfil')->idPersona;
                                         $persona    = \App\Models\Persona::find($persona_id);
                                         $rol        = session('rol');
-
                                         $roles      = json_decode(session('perfil')->rol, true);
-
-                                        // dd(session('perfil'));
-                                        // dd($rol, $roles, session('perfil')->rol , json_decode(session('perfil')->rol, true));
-                                        //dd($roles);
+										$sw = true;
 
                                         if($rol===3){
                                             $tienda = \App\Models\Tienda::where('usuario_creacion', $persona_id)->first();
+
+											if(
+												is_null($tienda->logo) ||
+												is_null($tienda->nombre) ||
+												is_null($tienda->ubicacion)
+												){
+												$sw = false;
+											}
                                             echo '<h3 class="text-white mt-7">'.$tienda->nombre.'</h3>';
                                         }
+										
+                                        if($rol===2){
+											if(
+												is_null($persona->nombres) ||
+												is_null($persona->apellido_materno) ||
+												is_null($persona->razon_social) ||
+												is_null($persona->direccion) ||
+												is_null($persona->celular)
+												){
+												$sw = false;
+											}
+										}
 									@endphp
 								</div>
 							</div>
@@ -4666,25 +4683,16 @@
 									</div>
 									<!--end::Access menu-->
 								</div>
-								<!--end::User-->
-								<!--begin::User-->
 								<div class="d-flex flex-stack py-4 border-bottom border-gray-300 border-bottom-dashed">
-									<!--begin::Details-->
 									<div class="d-flex align-items-center">
-										<!--begin::Avatar-->
 										<div class="symbol symbol-35px symbol-circle">
 											<img alt="Pic" src="{{ asset('assets/media/avatars/300-13.jpg') }}" />
 										</div>
-										<!--end::Avatar-->
-										<!--begin::Details-->
 										<div class="ms-5">
 											<a href="#" class="fs-5 fw-bold text-gray-900 text-hover-primary mb-2">John Miller</a>
 											<div class="fw-semibold text-muted">miller@mapple.com</div>
 										</div>
-										<!--end::Details-->
 									</div>
-									<!--end::Details-->
-									<!--begin::Access menu-->
 									<div class="ms-2 w-100px">
 										<select class="form-select form-select-solid form-select-sm" data-control="select2" data-dropdown-parent="#kt_modal_invite_friends" data-hide-search="true">
 											<option value="1">Guest</option>
@@ -4692,27 +4700,17 @@
 											<option value="3" selected="selected">Can Edit</option>
 										</select>
 									</div>
-									<!--end::Access menu-->
 								</div>
-								<!--end::User-->
-								<!--begin::User-->
 								<div class="d-flex flex-stack py-4 border-bottom border-gray-300 border-bottom-dashed">
-									<!--begin::Details-->
 									<div class="d-flex align-items-center">
-										<!--begin::Avatar-->
 										<div class="symbol symbol-35px symbol-circle">
 											<span class="symbol-label bg-light-success text-success fw-semibold">L</span>
 										</div>
-										<!--end::Avatar-->
-										<!--begin::Details-->
 										<div class="ms-5">
 											<a href="#" class="fs-5 fw-bold text-gray-900 text-hover-primary mb-2">Lucy Kunic</a>
 											<div class="fw-semibold text-muted">lucy.m@fentech.com</div>
 										</div>
-										<!--end::Details-->
 									</div>
-									<!--end::Details-->
-									<!--begin::Access menu-->
 									<div class="ms-2 w-100px">
 										<select class="form-select form-select-solid form-select-sm" data-control="select2" data-dropdown-parent="#kt_modal_invite_friends" data-hide-search="true">
 											<option value="1">Guest</option>
@@ -4720,27 +4718,17 @@
 											<option value="3">Can Edit</option>
 										</select>
 									</div>
-									<!--end::Access menu-->
 								</div>
-								<!--end::User-->
-								<!--begin::User-->
 								<div class="d-flex flex-stack py-4 border-bottom border-gray-300 border-bottom-dashed">
-									<!--begin::Details-->
 									<div class="d-flex align-items-center">
-										<!--begin::Avatar-->
 										<div class="symbol symbol-35px symbol-circle">
 											<img alt="Pic" src="{{ asset('assets/media/avatars/300-21.jpg') }}" />
 										</div>
-										<!--end::Avatar-->
-										<!--begin::Details-->
 										<div class="ms-5">
 											<a href="#" class="fs-5 fw-bold text-gray-900 text-hover-primary mb-2">Ethan Wilder</a>
 											<div class="fw-semibold text-muted">ethan@loop.com.au</div>
 										</div>
-										<!--end::Details-->
 									</div>
-									<!--end::Details-->
-									<!--begin::Access menu-->
 									<div class="ms-2 w-100px">
 										<select class="form-select form-select-solid form-select-sm" data-control="select2" data-dropdown-parent="#kt_modal_invite_friends" data-hide-search="true">
 											<option value="1" selected="selected">Guest</option>
@@ -4748,27 +4736,17 @@
 											<option value="3">Can Edit</option>
 										</select>
 									</div>
-									<!--end::Access menu-->
 								</div>
-								<!--end::User-->
-								<!--begin::User-->
 								<div class="d-flex flex-stack py-4">
-									<!--begin::Details-->
 									<div class="d-flex align-items-center">
-										<!--begin::Avatar-->
 										<div class="symbol symbol-35px symbol-circle">
 											<img alt="Pic" src="{{ asset('assets/media/avatars/300-9.jpg') }}" />
 										</div>
-										<!--end::Avatar-->
-										<!--begin::Details-->
 										<div class="ms-5">
 											<a href="#" class="fs-5 fw-bold text-gray-900 text-hover-primary mb-2">Francis Mitcham</a>
 											<div class="fw-semibold text-muted">f.mit@kpmg.com</div>
 										</div>
-										<!--end::Details-->
 									</div>
-									<!--end::Details-->
-									<!--begin::Access menu-->
 									<div class="ms-2 w-100px">
 										<select class="form-select form-select-solid form-select-sm" data-control="select2" data-dropdown-parent="#kt_modal_invite_friends" data-hide-search="true">
 											<option value="1">Guest</option>
@@ -4776,75 +4754,29 @@
 											<option value="3" selected="selected">Can Edit</option>
 										</select>
 									</div>
-									<!--end::Access menu-->
 								</div>
-								<!--end::User-->
 							</div>
-							<!--end::List-->
 						</div>
-						<!--end::Users-->
-						<!--begin::Notice-->
 						<div class="d-flex flex-stack">
-							<!--begin::Label-->
 							<div class="me-5 fw-semibold">
 								<label class="fs-6">Adding Users by Team Members</label>
 								<div class="fs-7 text-muted">If you need more info, please check budget planning</div>
 							</div>
-							<!--end::Label-->
-							<!--begin::Switch-->
 							<label class="form-check form-switch form-check-custom form-check-solid">
 								<input class="form-check-input" type="checkbox" value="1" checked="checked" />
 								<span class="form-check-label fw-semibold text-muted">Allowed</span>
 							</label>
-							<!--end::Switch-->
 						</div>
-						<!--end::Notice-->
 					</div>
-					<!--end::Modal body-->
 				</div>
-				<!--end::Modal content-->
 			</div>
-			<!--end::Modal dialog-->
 		</div>
-		<!--end::Modal - Invite Friend-->
-		<!--end::Modals-->
-		<!--begin::Javascript-->
 
         <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
 
 		<script>var hostUrl = "assets/";</script>
-		<!--begin::Global Javascript Bundle(mandatory for all pages)-->
 		<script src="{{ asset('assets/plugins/global/plugins.bundle.js') }}"></script>
 		<script src="{{ asset('assets/js/scripts.bundle.js') }}"></script>
-		<!--end::Global Javascript Bundle-->
-
-		 <!--begin::Vendors Javascript(used for this page only)-->
-		{{--  <script src="assets/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
-		<script src="https://cdn.amcharts.com/lib/5/index.js"></script>
-		<script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
-		<script src="https://cdn.amcharts.com/lib/5/percent.js"></script>
-		<script src="https://cdn.amcharts.com/lib/5/radar.js"></script>
-		<script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
-		<script src="https://cdn.amcharts.com/lib/5/map.js"></script>
-		<script src="https://cdn.amcharts.com/lib/5/geodata/worldLow.js"></script>
-		<script src="https://cdn.amcharts.com/lib/5/geodata/continentsLow.js"></script>
-		<script src="https://cdn.amcharts.com/lib/5/geodata/usaLow.js"></script>
-		<script src="https://cdn.amcharts.com/lib/5/geodata/worldTimeZonesLow.js"></script>
-		<script src="https://cdn.amcharts.com/lib/5/geodata/worldTimeZoneAreasLow.js"></script>
-		<script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>  --}}
-		<!--end::Vendors Javascript-->
-
-		<!--begin::Custom Javascript(used for this page only)-->
-		{{--  <script src="{{ asset('assets/js/widgets.bundle.js') }}"></script>
-		<script src="{{ asset('assets/js/custom/widgets.js') }}"></script>
-		<script src="{{ asset('assets/js/custom/apps/chat/chat.js') }}"></script>
-		<script src="{{ asset('assets/js/custom/utilities/modals/upgrade-plan.js') }}"></script>
-		<script src="{{ asset('assets/js/custom/utilities/modals/create-app.js') }}"></script>
-		<script src="{{ asset('assets/js/custom/utilities/modals/new-target.js') }}"></script>
-		<script src="{{ asset('assets/js/custom/utilities/modals/users-search.js') }}"></script>  --}}
-		<!--end::Custom Javascript-->
-		<!--end::Javascript-->
-
         @section('js')
 
         @show
@@ -4860,12 +4792,17 @@
                     success: function(data) {
                         if(data.estado === 'success'){
                             let url;
-                            if(rol == 1)
-                                url = "{{ url('/') }}"
-                            else if(rol == 2)
-                                url = "{{ url('persona/pedido') }}"
-                            else if(rol == 3)
-                                url = "{{ url('vendedor/inicio') }}"
+                            if(rol == 1){
+                                // url = "{{ url('/') }}"
+                                url = "{{ url('informacion/perfil') }}"
+							}else if(rol == 2){
+                                // url = "{{ url('persona/pedido') }}"
+                                url = "{{ url('persona/perfil') }}"
+							}
+                            else if(rol == 3){
+								// url = "{{ url('vendedor/inicio') }}"
+								url = "{{ url('tienda/perfil') }}"
+							}
 
                             window.location.href = url;
                         }

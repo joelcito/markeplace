@@ -32,32 +32,32 @@
                 <!--begin::Modal body-->
                 <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
 
-                    <form method="POST" action="{{ url('users/guarda') }}">
+                    <form method="POST" action="{{ url('users/guarda') }}" id="formularioUsuarios">
                         @csrf
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="fv-row mb-7">
                                     <label class="required fw-semibold fs-6 mb-2">Nombre</label>
-                                    <input type="text" id="nombre" name="nombre" class="form-control">
+                                    <input type="text" id="nombre" name="nombre" class="form-control" required>
                                     <input type="hidden" id="persona_id" name="persona_id" value="0">
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="fv-row mb-7">
                                     <label class="required fw-semibold fs-6 mb-2">Ap Paterno</label>
-                                    <input type="text" id="ap_paterno" name="ap_paterno" class="form-control" >
+                                    <input type="text" id="ap_paterno" name="ap_paterno" class="form-control" required>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="fv-row mb-7">
                                     <label class="required fw-semibold fs-6 mb-2">Ap Materno</label>
-                                    <input type="text" id="ap_materno" name="pa_maternmo" class="form-control" >
+                                    <input type="text" id="ap_materno" name="pa_maternmo" class="form-control" required>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="fv-row mb-7">
                                     <label class="required fw-semibold fs-6 mb-2">Cedula</label>
-                                    <input type="text" id="cedula" name="cedula" class="form-control">
+                                    <input type="text" id="cedula" name="cedula" class="form-control" required>
                                 </div>
                             </div>
                         </div>
@@ -83,31 +83,26 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="fv-row mb-7">
-                                    <label for="">Usuario</label>
-                                    <input type="text" class="form-control" id="usuario" name="usuario">
+                                    <label for="" class="required fw-semibold fs-6 mb-2">Usuario</label>
+                                    <input type="email" class="form-control" id="usuario" name="usuario" required>
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <label for="">Contraseña</label>
+                                <label for="" class="required fw-semibold fs-6 mb-2">Contraseña</label>
                                 <input type="password" class="form-control" id="pass" name="pass">
                                 <small id="text_pass" style="display: none" class="text-danger">Vuelva a introducir una nueva contraseña si desea cambiar, si no desea cambiar la contraseña deje vacio el campo</small>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <button class="btn btn-success w-100" type="submit">Guardar</button>
+                                <button class="btn btn-success w-100" type="button" onclick="guardarUsuario()">Guardar</button>
                             </div>
                         </div>
                     </form>
                 </div>
-                <!--end::Modal body-->
             </div>
-            <!--end::Modal content-->
         </div>
-        <!--end::Modal dialog-->
     </div>
-    <!--end::Modal - Add task-->
-
 
     <!--begin::Card-->
     <div class="card">
@@ -307,6 +302,24 @@
 
         });
 
+        function guardarUsuario(){
+            if($("#formularioUsuarios")[0].checkValidity()){
+                var checkboxes = document.querySelectorAll('input[name="roles_a[]"]:checked');
+                if (checkboxes.length === 0) {
+                    Swal.fire({
+                        title: 'Error',
+                        text: 'Debe seleccionar al menos un rol!',
+                        icon: 'error',
+                        timer: 2500
+                    })
+                } else {
+        			$("#formularioUsuarios")[0].submit()
+                }
+            }else{
+    			$("#formularioUsuarios")[0].reportValidity()
+            }  
+        }
+
        function guardarVenta(){
             if($("#formularioRol")[0].checkValidity()){
                 datos = $("#formularioRol").serializeArray()
@@ -346,8 +359,8 @@
             $('#cedula').val('')
             $('#rol').val('')
             $('#text_pass').hide('toggle')
+            $('#rol_administrador, #rol_comprador, #rol_vendedor').prop('checked', false);
             $('#kt_modal_add_user').modal('show')
-
         }
 
         function editar(perfil,user ,nombre, ap, am,ci,rol){
@@ -357,8 +370,16 @@
             $('#ap_paterno').val(ap)
             $('#ap_materno').val(am)
             $('#cedula').val(ci)
-            $('#rol').val(rol)
-
+            $('#rol_administrador, #rol_comprador, #rol_vendedor').prop('checked', false);
+            rolesArray = JSON.parse(rol);
+            rolesArray.forEach(function(valor) {
+                if (valor === 1)
+                    $('#rol_administrador').prop('checked', true);
+                else if(valor === 2)
+                    $('#rol_comprador').prop('checked', true);
+                else if(valor === 3)
+                    $('#rol_vendedor').prop('checked', true);
+            });
             $('#text_pass').show('toggle')
 
             $('#kt_modal_add_user').modal('show')
