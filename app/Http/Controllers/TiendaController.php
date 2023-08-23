@@ -170,7 +170,7 @@ class TiendaController extends Controller
             $m = "b";
         }
 
-        dd($departamentos, $m);
+        dd($departamentos, $m, $ubi);
 
 
         $reste = $this->token;
