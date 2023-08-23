@@ -61,6 +61,8 @@ class UserController extends Controller
             //     $tienda->save();
             // }
 
+
+
         }else{
             $persona = Persona::find($persona_id);
             $perfil = Perfil::where('idPersona', $persona_id)->first();
@@ -80,6 +82,35 @@ class UserController extends Controller
             }
             // $perfil->rol        = $request->input('rol');
             $perfil->save();
+
+            $string = $perfil->rol;
+            $cleanedString = trim($string, "[]"); // Elimina los corchetes al inicio y al final
+            $elements = explode(",", $cleanedString);
+            // Convierte los elementos en números enteros
+            $array = array_map('intval', $elements);
+
+            // dd($array, $request->get('roles_a'));
+            $roles_enviados = $request->get('roles_a');
+            foreach($roles_enviados as $re){
+                if(!in_array((int)$re,$array)){
+                    dd($re,$array);
+                    $array[] = (int) $re;
+
+                    if($re == 3){
+
+                    }
+                }else{
+                    // dd($array);
+                }
+            }
+
+            dd($array);
+
+            if($request->has('roles_a')){
+                dd("si", $request->get('roles_a'), $request->input('roles_a'));
+            }else{
+                dd("no");
+            }
 
         }
         return redirect('users');

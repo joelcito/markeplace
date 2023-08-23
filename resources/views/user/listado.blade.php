@@ -11,7 +11,7 @@
     <!--begin::Modal - Add task-->
     <div class="modal fade" id="kt_modal_add_user" tabindex="-1" aria-hidden="true">
         <!--begin::Modal dialog-->
-        <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
             <!--begin::Modal content-->
             <div class="modal-content">
                 <!--begin::Modal header-->
@@ -62,26 +62,35 @@
                             </div>
                         </div>
                         <div class="row">
-                            {{--  <div class="col-md-4">
+                            <div class="col-md-4">
                                 <div class="fv-row mb-7">
-                                    <label class="required fw-semibold fs-6 mb-2">Rol</label>
-                                    <select name="rol" id="rol" class="form-control">
-                                        <option value="1">Administrador</option>
-                                        <option value="3">Vendedor</option>
-                                        <option value="2">Comprador</option>
-                                    </select>
+                                    <label class="required fw-semibold fs-6 mb-2">Roles</label>
+                                    <div class="d-flex align-items-center">
+										<label class="form-check form-check-custom form-check-solid me-3">
+											<input class="form-check-input h-20px w-20px" type="checkbox" name="roles_a[]" value="1" id="rol_administrador" />
+											<span class="form-check-label fw-semibold">Administrador</span>
+										</label>
+										<label class="form-check form-check-custom form-check-solid me-3">
+											<input class="form-check-input h-20px w-20px" type="checkbox" name="roles_a[]" value="3" id="rol_vendedor" />
+											<span class="form-check-label fw-semibold">Vendedor</span>
+										</label>
+										<label class="form-check form-check-custom form-check-solid">
+											<input class="form-check-input h-20px w-20px" type="checkbox" name="roles_a[]" value="2" id="rol_comprador" />
+											<span class="form-check-label fw-semibold">Comprador</span>
+										</label>
+									</div>
                                 </div>
-                            </div>  --}}
-                            <div class="col-md-6">
+                            </div>
+                            <div class="col-md-4">
                                 <div class="fv-row mb-7">
                                     <label for="">Usuario</label>
                                     <input type="text" class="form-control" id="usuario" name="usuario">
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <label for="">Contraseña</label>
                                 <input type="password" class="form-control" id="pass" name="pass">
-                                <small id="text_pass" style="display: none" class="text-success">Vuelva a introducir una nueva contraseña si desea cambiar, si no desea cambiar la contraseña deje vacio el campo</small>
+                                <small id="text_pass" style="display: none" class="text-danger">Vuelva a introducir una nueva contraseña si desea cambiar, si no desea cambiar la contraseña deje vacio el campo</small>
                             </div>
                         </div>
                         <div class="row">
@@ -240,11 +249,11 @@
                                 @if (in_array(1, $miArray))
                                     <span class="badge badge-success">Administrador</span>
                                 @endif
-                                
+
                                 @if (in_array(2, $miArray))
                                     <br><span class="badge badge-dark">Comprador</span>
                                 @endif
-                                
+
                                 @if (in_array(3, $miArray))
                                     <br><span class="badge badge-warning">Vendedor</span>
                                 @endif
@@ -272,7 +281,7 @@
                             </td>
                         </tr>
                     @endforeach
-                    
+
                 </tbody>
             </table>
         </div>
