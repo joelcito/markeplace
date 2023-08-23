@@ -39,22 +39,22 @@
                     {{ $venta->fecha_creacion }}
                 </td>
                 <td>
-                    <a class="btn btn-danger btn-icon btn-sm" target="_blank" href="https://comercio-latino.com/services_landing/pdfrecibo.php?pedido={{ $v->pedido }}
-                        &nombre={{ $datosPdf['nombreCL'] }}
-                        &telefono={{ $datosPdf['telefonoCL'] }}
-                        &email={{ $datosPdf['correoCL'] }}
-                        &pronombre={{ $tienda->nombre }}
-                        &pronit={{ $tienda->nit }}
-                        &prodireccion={{ $tienda->ubicacion }}
-                        &protelefono={{ $tienda->celular }}
-                        &procorreo={{ $tienda->correo }}
-                        &clinombre={{ $nombreComprador }}
-                        &clinit={{ $nitComprador }}
-                        &clidireccion={{ $direccionComprador }}
-                        &clitelefono={{ $telefonoComprador }}
-                        &clicorreo={{ $correoComprador }}
-                        &logoimagen={{ $datosPdf['logoCL'] }}
-                        &fecha={{ $venta->fecha_creacion }}">
+                    <a class="btn btn-success btn-icon btn-sm" target="_blank" href="https://comercio-latino.com/services_landing_esp/pdfrecibo.php?pedido={{ $v->pedido }}
+                        &nombre={{ urlencode($datosPdf['nombreCL']) }}
+                        &telefono={{ urlencode($datosPdf['telefonoCL']) }}
+                        &email={{ urlencode($datosPdf['correoCL']) }}
+                        &pronombre={{ urlencode($tienda->nombre) }}
+                        &pronit={{ urlencode($tienda->nit) }}
+                        &prodireccion={{ urlencode($tienda->ubicacion) }}
+                        &protelefono={{ urlencode($tienda->celular) }}
+                        &procorreo={{ urlencode($tienda->correo) }}
+                        &clinombre={{ urlencode($nombreComprador) }}
+                        &clinit={{ urlencode($nitComprador) }}
+                        &clidireccion={{ urlencode($direccionComprador) }}
+                        &clitelefono={{ urlencode($telefonoComprador) }}
+                        &clicorreo={{ urlencode($correoComprador) }}
+                        &logoimagen={{ urlencode($datosPdf['logoCL']) }}
+                        &fecha={{ urlencode($venta->fecha_creacion) }}">
                     <i class="fa fa-file-pdf"></i></a>
                 </td>
                 <td>

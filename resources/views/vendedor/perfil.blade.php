@@ -47,6 +47,7 @@
                                         <label for="" class="required">Pais</label>
                                         {{-- @dd($paises[0]['country_name']) --}}
                                         <select name="pais_perfil" id="pais_perfil" class="form-control" onchange="buscarDepartamentos()">
+                                            <option value="">SELECCIONE</option>
                                             @foreach ($paises as $p)
                                                 <option {{ (  $p['country_name'] == $pais)? 'selected': '' }} value="{{ $p['country_name'] }}">{{ $p['country_name'] }}</option>
                                             @endforeach
@@ -56,6 +57,7 @@
                                     <div class="col-md-3">
                                         <label for="" class="required">Ciudad</label>
                                         <select name="ciudades_perfil" id="ciudades_perfil" class="form-control">
+                                            <option value="">SELECCIONE</option>
                                             @foreach ($departamentos as $d)
                                                 <option {{ (  $d['state_name'] == $dap)? 'selected': '' }} value="{{ $d['state_name'] }}">{{ $d['state_name'] }}</option>
                                             @endforeach

@@ -10,11 +10,11 @@
     <!--begin::Card-->
     <div class="card">
         <!--begin::Card header-->
-        <div class="card-header border-0 pt-6">
+        <div class="card-header border-0 pt-6 bg-light-primary">
             <!--begin::Card title-->
             <div class="card-title">
                 <!--begin::Search-->
-                <h2>LISTADO DE PEDIDOS</h2>
+                <h2>Listado de Pedidos</h2>
                 <!--end::Search-->
             </div>
             <!--begin::Card title-->

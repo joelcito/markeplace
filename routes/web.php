@@ -76,6 +76,7 @@ Route::post('/vendedor/cambiaEstado', [VendedorController::class, 'cambiaEstado'
 
 // SUBCRIPCION
 Route::get('/subcripcion/subcripcion', [SubcripcionControler::class, 'subcripcion']);
+Route::get('/subcripcion/nuevoCorreo', [SubcripcionControler::class, 'nuevoCorreo']);
 
 // INFORMACION
 Route::get('/informacion/perfil', [InformacionController::class, 'perfil']);

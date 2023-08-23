@@ -11,4 +11,15 @@ class SubcripcionControler extends Controller
         $logeo->verificaLogueo();
         return view('subcripcion.subscripcion');
     }
+
+    public function nuevoCorreo(){
+        $name = "JOEL FLORES";
+        $tipo = "tipo";
+        $modalidad = "modalidad";
+        $qr = "qr";
+        $fecha = "fecha";
+        $monto = "monto";
+        $url = "url";
+        return view('mail.nuevoCorreo')->with(compact('name','tipo','modalidad', 'qr','fecha', 'monto', 'url'));
+    }
 }

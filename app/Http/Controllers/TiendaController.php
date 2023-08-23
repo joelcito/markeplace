@@ -155,16 +155,17 @@ class TiendaController extends Controller
         if(count($ubi) == 2){
             $pais = $ubi[0];
             $dap = $ubi[1];
+            $departamentos = Http::withHeaders([
+                "Authorization" => "Bearer ".$this->token,
+                "Accept" => "application/json"
+            ])->get('https://www.universal-tutorial.com/api/states/'.$pais)->json();
         }
         else{
-            $pais = "Bolivia";
-            $dap = "1";
+            $pais = "";
+            $dap = "";
+            $departamentos = [];
         }
 
-        $departamentos = Http::withHeaders([
-            "Authorization" => "Bearer ".$this->token,
-            "Accept" => "application/json"
-        ])->get('https://www.universal-tutorial.com/api/states/'.$pais)->json();
 
         $reste = $this->token;
 

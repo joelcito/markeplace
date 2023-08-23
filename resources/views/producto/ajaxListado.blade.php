@@ -11,7 +11,7 @@
 <table class="table table-hover align-middle table-row-dashed fs-6 gy-5" id="tabla_producto">
     <thead>
         {{--  <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">  --}}
-        <tr class="text-white bg-primary text-uppercase text-center">
+        <tr class="text-uppercase text-center">
             <th class="text-center">Codigo</th>
             <th class="text-center" width="80px">Imagen</th>
             <th class="text-center">Sub Categoria</th>
