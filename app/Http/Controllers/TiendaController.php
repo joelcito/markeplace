@@ -168,6 +168,8 @@ class TiendaController extends Controller
             $departamentos = [];
         }
 
+        dd($departamentos);
+
 
         $reste = $this->token;
 
