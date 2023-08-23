@@ -161,14 +161,16 @@ class TiendaController extends Controller
                 "Authorization" => "Bearer ".$this->token,
                 "Accept" => "application/json"
             ])->get('https://www.universal-tutorial.com/api/states/'.$pais)->json();
+            $m = "a";
         }
         else{
             $pais = "";
             $dap = "";
             $departamentos = [];
+            $m = "b";
         }
 
-        dd($departamentos);
+        dd($departamentos, $m);
 
 
         $reste = $this->token;
