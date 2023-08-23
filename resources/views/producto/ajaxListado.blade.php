@@ -1,13 +1,3 @@
-<style>
-    .limited-text {
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 2; /* Cambia este valor para establecer el número de líneas visibles */
-        overflow: hidden;
-        line-height: 1.5; /* Ajusta este valor según tus necesidades */
-    }
-</style>
-{{--  <table class="table align-middle table-row-dashed fs-6 gy-5" id="tabla_producto">  --}}
 <table class="table table-hover align-middle table-row-dashed fs-6 gy-5" id="tabla_producto">
     <thead>
         {{--  <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">  --}}
@@ -74,6 +64,6 @@
 </table>
 <script>
     $('#tabla_producto').DataTable({
-        // "order": [[ 0, "desc" ]]
+        responsive:true
     });
 </script>

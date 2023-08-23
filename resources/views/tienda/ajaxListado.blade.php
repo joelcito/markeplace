@@ -15,6 +15,7 @@
         </tr>
     </thead>
     <tbody>
+        {{-- @dd($categorias) --}}
         @foreach ($categorias as $c)
         <tr>
             <td>{{ $c->idTienda }}</td>
@@ -27,6 +28,12 @@
             <td>{{ $c->correo }}</td>
             <td>
                 @php
+                    dd(
+                        $c,
+                        $persona_id,
+                        $perfil,
+                        $suscripcion
+                    );
                     $persona_id     = $c->usuario_creacion;
                     $perfil         = App\Models\Perfil::where('idPersona',$persona_id)->first();
                     $suscripcion    = App\Models\Suscripcion::where('idPerfil', $perfil->idPerfil)->latest('fecha_creacion')->first();

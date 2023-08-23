@@ -68,39 +68,11 @@
                 </td>
             </tr>
         @endforeach
-        {{-- @foreach ($ventas as $v)
-        <tr>
-            <td>{{ $v->pedido }}</td>
-            <td>
-                @php
-                    $perfil = App\Models\Perfil::find($v->idPerfil);
-                    $persona = App\Models\Persona::find($perfil->idPersona);
-                @endphp
-                {{ $persona->nombres." ".$persona->apellido_paterno." ".$persona->apellido_materno }}
-            </td>
-            <td>{{ $v->preciounitario }}</td>
-            <td>{{ $v->fecha_creacion }}</td>
-            <td></td>
-            <td>
-                <select name="estado_pedido_{{ $v->idVenta }}" id="estado_pedido_{{ $v->idVenta }}" class="form-control" onchange="cambiaEstado(this, '{{ $v->idVenta }}')">
-                    <option value="1" {{ ($v->estadoproducto == 1)? 'selected' : '' }} >Iniciado</option>
-                    <option value="2" {{ ($v->estadoproducto == 2)? 'selected' : '' }} >En proceso</option>
-                    <option value="3" {{ ($v->estadoproducto == 3)? 'selected' : '' }} >Finalizado</option>
-                    <option value="4" {{ ($v->estadoproducto == 4)? 'selected' : '' }} >Finalizado sin entrega</option>
-                </select>
-                <small class="text-success" style="display: none" id="msg_{{ $v->idVenta }}">Guardado...</small>
-            </td>
-        </tr>
-        @endforeach --}}
     </tbody>
 </table>
 
 <script>
     $('#tabla_categoria').DataTable({
-        // responsive: true,
-        // language: {
-        //     url: '{{ asset('datatableEs.json') }}',
-        // },
-        // order: [[ 0, "desc" ]]
+        responsive:true
     });
 </script>
