@@ -5,28 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-</head>
-<style>
-    .contenedor{
-        width: 50%;
-        min-height:auto;
-        text-align: center;
-        margin: 0 auto;
-        padding: 40px;
-        background: #ececec;
-        border-top: 3px solid #046cac;
-    }
+    <style>
+        .contenedor{
+            width: 50%;
+            min-height:auto;
+            text-align: center;
+            margin: 0 auto;
+            padding: 40px;
+            background: #ececec;
+            border-top: 3px solid #046cac;
+        }
 
-    body {
-        font-family: 'Roboto', sans-serif;
-        color: #888;
-        background-color:rgba(230, 225, 225, 0.5);
-        text-align: center;
-    }
-    .negro{
-        color: #000000;
-    }
-</style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: #888;
+            background-color:rgba(230, 225, 225, 0.5);
+            text-align: center;
+        }
+        .negro{
+            color: #000000;
+        }
+    </style>
+</head>
 <body>
     <div class="contenedor">
         <center><span style='font-size: 30px;'><strong>Comercio Latino</strong></center>
