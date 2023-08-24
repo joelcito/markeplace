@@ -80,8 +80,8 @@
 												is_null($tienda->logo) ||
 												is_null($tienda->nombre) ||
 												is_null($tienda->ubicacion) ||
-												empty($tienda->logo)
-												empty($tienda->nombre)
+												empty($tienda->logo) ||
+												empty($tienda->nombre) ||
 												empty($tienda->ubicacion)
 												){
 												$sw = false;
