@@ -34,7 +34,7 @@
         <h2 class="negro">Estimad@ : {{ $name }}</h2>
         <br>
         <p class="negro">
-            Gracias por usar nuestro servicio, tu suscripcion <b>{{ strtoupper($tipo) }} {{ strtoupper($modalidad) }}</b>
+            Gracias por usar nuestro servicio, tu suscripcion <b>{{ $tipo }} {{ $modalidad }}</b>
             ha sido aceptada para mantener activo debe realizar el pago por QR y confirmar al siguiente email admin@comercio-latino.com, soporte@comercio-latino.com </p>
         <center>
             <img width="30%" src="https://comercio-latino.com/sistema/public/qrs/{{ $qr }}" alt="aqui la img">
