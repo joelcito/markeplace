@@ -351,8 +351,12 @@ class TiendaController extends Controller
                 $mail->SMTPSecure   = PHPMailer::ENCRYPTION_SMTPS;
                 // ... Configura los parámetros SMTP ...
                 // $mail->setFrom('admin@example.com', 'Admin');
-                $mail->setFrom('admin@comercio-latino.com', 'CORREO DE SUSCRIPCION');
+                $mail->setFrom('admin@comercio-latino.com', 'Comercio Latino');
                 $mail->addAddress($to);
+
+                // Agregar direcciones de correo electrónico en copia (CC)
+                $mail->addCC('admin@comercio-latino.com', 'Nombre Otro Correo');
+                $mail->addCC('soporte@comercio-latino.com', 'Nombre Otro Correo 2');
 
                 $mail->isHTML(true);
                 $mail->Subject = $subject;
