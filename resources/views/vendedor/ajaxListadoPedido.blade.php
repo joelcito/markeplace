@@ -53,7 +53,7 @@
                         &clidireccion={{ urlencode($direccionComprador) }}
                         &clitelefono={{ urlencode($telefonoComprador) }}
                         &clicorreo={{ urlencode($correoComprador) }}
-                        &logoimagen={{ urlencode($datosPdf['logoCL']) }}
+                        &logoimagen={{ urlencode($tienda->logo) }}
                         &fecha={{ urlencode($venta->fecha_creacion) }}">
                     <i class="fa fa-file-pdf"></i></a>
                 </td>
