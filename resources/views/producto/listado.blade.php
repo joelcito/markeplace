@@ -349,7 +349,25 @@
                 var file = $('#archivo')[0].files;
                 formData.append('file', file[0]);
 
-                // if(contador >= 2){
+                console.log($('#producto_id').val())
+
+                let valor = $('#producto_id').val();
+                let sw = false;
+
+                if(valor == 0){
+                    if(contador >= 2)
+                        sw = true;
+                }else{
+                    sw = true;
+                    if(contador != 0){
+                        if(contador >= 2)
+                            sw = true;
+                        else
+                            sw = false;
+                    }
+                }
+
+                if(sw){
                     formData.append('nombre',           $('#nombre').val());
                     formData.append('producto_id',      $('#producto_id').val());
                     formData.append('descripcion',      $('#descripcion').val());
@@ -358,7 +376,6 @@
                     formData.append('cantidad',         $('#cantidad').val());
                     formData.append('descuento',        $('#descuento').val());
                     formData.append('agregaCantidad',   $('#agregaCantidad').val());
-
                     $.ajax({
                         url: "{{ url('producto/guarda') }}",
                         data:formData,
@@ -386,14 +403,14 @@
                             }
                         }
                     });
-                // }else{
-                //     Swal.fire({
-                //         title:'Error!',
-                //         icon:'error',
-                //         text: 'Debe seleccionar al menos 2 fotografias',
-                //         timer: 3000
-                //     })
-                // }
+                }else{
+                    Swal.fire({
+                        title:'Error!',
+                        icon:'error',
+                        text: 'Debe seleccionar al menos 2 fotografias',
+                        timer: 3000
+                    })
+                }
             }else{
     			$("#formularioProducto")[0].reportValidity()
             }
