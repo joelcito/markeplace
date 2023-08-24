@@ -64,7 +64,7 @@ class InformacionController extends Controller
 
             $archivo = $request->file('qr1');
             // $nombreArchivo = $archivo->getClientOriginalName();
-            $nombreArchivo      = date('YmdHis').".".$archivo->getClientOriginalExtension();
+            $nombreArchivo      = "qr1".date('YmdHis').".".$archivo->getClientOriginalExtension();
             $archivo->move(public_path('qrs'), $nombreArchivo);
             $informacion = Informacion::where('codigo',"qr1")->first();
             $informacion->descripcion = $nombreArchivo;
@@ -75,7 +75,7 @@ class InformacionController extends Controller
 
             $archivo = $request->file('qr2');
             // $nombreArchivo = $archivo->getClientOriginalName();
-            $nombreArchivo      = date('YmdHis').".".$archivo->getClientOriginalExtension();
+            $nombreArchivo      = "qr2".date('YmdHis').".".$archivo->getClientOriginalExtension();
             $archivo->move(public_path('qrs'), $nombreArchivo);
 
             $informacion = Informacion::where('codigo',"qr2")->first();
@@ -87,7 +87,7 @@ class InformacionController extends Controller
 
             $archivo = $request->file('qr3');
             // $nombreArchivo = $archivo->getClientOriginalName();
-            $nombreArchivo      = date('YmdHis').".".$archivo->getClientOriginalExtension();
+            $nombreArchivo      = "qr3".date('YmdHis').".".$archivo->getClientOriginalExtension();
             $archivo->move(public_path('qrs'), $nombreArchivo);
 
             $informacion = Informacion::where('codigo',"qr3")->first();
@@ -99,7 +99,7 @@ class InformacionController extends Controller
 
             $archivo = $request->file('qr4');
             // $nombreArchivo = $archivo->getClientOriginalName();
-            $nombreArchivo      = date('YmdHis').".".$archivo->getClientOriginalExtension();
+            $nombreArchivo      = "qr4".date('YmdHis').".".$archivo->getClientOriginalExtension();
             $archivo->move(public_path('qrs'), $nombreArchivo);
             $informacion = Informacion::where('codigo',"qr4")->first();
             $informacion->descripcion = $nombreArchivo;
