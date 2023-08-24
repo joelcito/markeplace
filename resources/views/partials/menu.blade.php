@@ -193,7 +193,19 @@
                     $persona->apellido_materno,
                     $persona->razon_social,
                     $persona->direccion,
-                    $persona->celular
+                    $persona->celular,
+                    is_null($persona->nombres),
+                    is_null($persona->apellido_materno),
+                    is_null($persona->razon_social),
+                    is_null($persona->direccion),
+                    is_null($persona->celular),
+                    empty($persona->nombres),
+                    empty($persona->apellido_materno),
+                    empty($persona->razon_social),
+                    empty($persona->direccion),
+                    empty($persona->celular),
+                    // (isset($persona->razon_social) || trim($persona->razon_social) === ''),
+                    // (isset($persona->direccion) || trim($persona->direccion) === '')
                     ) --}}
                 <!--begin:Menu item-->
                 <div class="menu-item pt-5">

@@ -102,7 +102,7 @@ class ProductoController extends Controller
             // $producto->descuento        = ((100*$request->input('descuento'))/$request->input('precio_unitario'))/100;
             $producto->descuento        = $request->input('descuento')/100;
             $producto->calificacion     = 0; //momentaneo
-            $producto->ubicacion        = "La Paz, Bolivia";
+            $producto->ubicacion        = $tienda->ubicacion;
 
             if($request->file('archivo')){
                 $archivos = $request->file('archivo');

@@ -82,7 +82,7 @@
                                         <input type="text" id="direccion" name="direccion" class="form-control" value="{{ $persona->direccion }}" required>
                                     </div>
                                     <div class="col-md-3">
-                                        <label for="" class="required">FOTO</label>
+                                        <label for="">FOTO</label>
                                         <input type="file" id="foto" name="foto" class="form-control">
                                     </div>
                                     <div class="col-md-3">
@@ -93,7 +93,7 @@
 
                                 <div class="row mt-10 mb-5">
                                     <div class="col-md-12">
-                                        <button type="submit" class="btn btn-success w-100 btn-sm">Guardar</button>
+                                        <button type="submit" class="btn btn-success w-100 btn-sm" onclick="guardar()">Guardar</button>
                                     </div>
                                 </div>
                             </form>
@@ -114,61 +114,75 @@
             }
         })
 
-        {{--  $( document ).ready(function() {
-            detallePerfil();
-        });
-
-        function guardarInformacion(){
+        function guardar(){
             if($("#formularioTienda")[0].checkValidity()){
-
-                var formData = new FormData();
-                var archivo = $('#imagenes')[0].files;
-                //for(let i=0;i<archivo.length;i++){
-                //formData.append('archivo[]', archivo[i]);
-                formData.append('archivo', archivo[0]);
-                //}
-                formData.append('nombre',       $('#nombre').val());
-                formData.append('nit',          $('#nit').val());
-                formData.append('celular',      $('#celular').val());
-                formData.append('correo',       $('#correo').val());
-                formData.append('descripcion',  $('#descripcion').val());
-                formData.append('tienda_id',    $('#tienda_id').val());
-                $.ajax({
-                    url: "{{ url('tienda/guarda') }}",
-                    data:formData,
-                    type: 'POST',
-                    dataType: 'json',
-                    processData: false,
-                    contentType: false,
-                    success: function(data) {
-                        if(data.estado === 'success'){
-                            Swal.fire({
-                                title:'Guardado!',
-                                text :'Se guardo con exito.',
-                                icon: 'success',
-                                timer: 1500
-                            })
-                            $('#detalleperfil').html(data.detalle);
-                        }
-                    }
-                });
-
+                Swal.fire({
+                    title: 'Exito!!',
+                    text: 'Se guardo con exito!',
+                    icon: 'success',
+                    timer: 5500
+                })
+                $("#formularioTienda")[0].submit()
             }else{
     			$("#formularioTienda")[0].reportValidity()
             }
         }
 
-        function detallePerfil(){
-            $.ajax({
-                url: "{{ url('tienda/detallePerfil') }}",
-                type: 'POST',
-                dataType: 'json',
-                success: function(data) {
-                    if(data.estado === 'success')
-                        $('#detalleperfil').html(data.detalle);
-                }
-            });
-        }  --}}
+        // $( document ).ready(function() {
+        //     detallePerfil();
+        // });
+
+        // function guardarInformacion(){
+        //     if($("#formularioTienda")[0].checkValidity()){
+
+        //         var formData = new FormData();
+        //         var archivo = $('#imagenes')[0].files;
+        //         //for(let i=0;i<archivo.length;i++){
+        //         //formData.append('archivo[]', archivo[i]);
+        //         formData.append('archivo', archivo[0]);
+        //         //}
+        //         formData.append('nombre',       $('#nombre').val());
+        //         formData.append('nit',          $('#nit').val());
+        //         formData.append('celular',      $('#celular').val());
+        //         formData.append('correo',       $('#correo').val());
+        //         formData.append('descripcion',  $('#descripcion').val());
+        //         formData.append('tienda_id',    $('#tienda_id').val());
+        //         $.ajax({
+        //             url: "{{ url('tienda/guarda') }}",
+        //             data:formData,
+        //             type: 'POST',
+        //             dataType: 'json',
+        //             processData: false,
+        //             contentType: false,
+        //             success: function(data) {
+        //                 if(data.estado === 'success'){
+        //                     Swal.fire({
+        //                         title:'Guardado!',
+        //                         text :'Se guardo con exito.',
+        //                         icon: 'success',
+        //                         timer: 1500
+        //                     })
+        //                     $('#detalleperfil').html(data.detalle);
+        //                 }
+        //             }
+        //         });
+
+        //     }else{
+    	// 		$("#formularioTienda")[0].reportValidity()
+        //     }
+        // }
+
+        // function detallePerfil(){
+        //     $.ajax({
+        //         url: "{{ url('tienda/detallePerfil') }}",
+        //         type: 'POST',
+        //         dataType: 'json',
+        //         success: function(data) {
+        //             if(data.estado === 'success')
+        //                 $('#detalleperfil').html(data.detalle);
+        //         }
+        //     });
+        // }
 
     </script>
 @endsection

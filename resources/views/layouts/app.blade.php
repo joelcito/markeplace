@@ -100,6 +100,8 @@
 												empty($persona->apellido_materno) ||
 												empty($persona->razon_social) ||
 												empty($persona->direccion) ||
+												// (isset($persona->razon_social) || trim($persona->razon_social) === '') ||
+												// (isset($persona->direccion) || trim($persona->direccion) === '') ||
 												empty($persona->celular)
 												){
 												$sw = false;
