@@ -42,7 +42,20 @@
                 {{ $p->descripcion }}
             </td>
             <td>{{ $p->preciounitario }}</td>
-            <td>{{ $p->cantidad }}</td>
+            <td>
+                @php
+                    $venta = App\Models\Venta::select('idProducto', \DB::raw('sum(cantidad) as vendido'))
+                                    ->where('idProducto', $p->idProducto)
+                                    ->groupBy('idProducto')
+                                    ->first();
+                    if($venta){
+                        echo $p->cantidad - $venta->vendido;
+                    }else{
+                        echo $p->cantidad;
+                    }
+                @endphp
+                {{-- {{ $p->cantidad }} --}}
+            </td>
             <td>
                 <div id="contEstadoProd_{{ $p->idProducto }}">
                     @if ($p->estadoproducto === 1)
