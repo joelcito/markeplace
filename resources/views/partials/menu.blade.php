@@ -186,7 +186,15 @@
             @endif
 
             @if (session('rol') === 2)
-                {{-- @dd($sw, $rol) --}}
+                {{-- @dd(
+                    $sw,
+                    $rol,
+                    $persona->nombres,
+                    $persona->apellido_materno,
+                    $persona->razon_social,
+                    $persona->direccion,
+                    $persona->celular
+                    ) --}}
                 <!--begin:Menu item-->
                 <div class="menu-item pt-5">
                     <!--begin:Menu content-->

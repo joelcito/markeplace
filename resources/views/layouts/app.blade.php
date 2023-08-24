@@ -79,7 +79,10 @@
 											if(
 												is_null($tienda->logo) ||
 												is_null($tienda->nombre) ||
-												is_null($tienda->ubicacion)
+												is_null($tienda->ubicacion) ||
+												empty($tienda->logo)
+												empty($tienda->nombre)
+												empty($tienda->ubicacion)
 												){
 												$sw = false;
 											}
@@ -92,7 +95,12 @@
 												is_null($persona->apellido_materno) ||
 												is_null($persona->razon_social) ||
 												is_null($persona->direccion) ||
-												is_null($persona->celular)
+												is_null($persona->celular) ||
+												empty($persona->nombres) ||
+												empty($persona->apellido_materno) ||
+												empty($persona->razon_social) ||
+												empty($persona->direccion) ||
+												empty($persona->celular)
 												){
 												$sw = false;
 											}
