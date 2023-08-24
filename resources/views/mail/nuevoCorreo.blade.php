@@ -24,16 +24,17 @@
         }
         .negro{
             color: #000000;
+            text-align: left
         }
     </style>
 </head>
 <body>
     <div class="contenedor">
         <center><span style='font-size: 30px;'><strong>Comercio Latino</strong></center>
-        <h2>Estimad@ : {{ $name }}</h2>
+        <h2 class="negro">Estimad@ : {{ $name }}</h2>
         <br>
         <p class="negro">
-            Gracias por usar nuestro servicio, tu suscripcion <b>{{ $tipo }} {{ $modalidad }}</b>
+            Gracias por usar nuestro servicio, tu suscripcion <b>{{ strtoupper($tipo) }} {{ strtoupper($modalidad) }}</b>
             ha sido aceptada para mantener activo debe realizar el pago por QR y confirmar al siguiente email admin@comercio-latino.com, soporte@comercio-latino.com </p>
         <center>
             <img width="30%" src="https://comercio-latino.com/sistema/public/qrs/{{ $qr }}" alt="aqui la img">
