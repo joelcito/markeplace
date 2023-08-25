@@ -45,24 +45,21 @@
                                 <div class="row mt-12">
                                     <div class="col-md-3">
                                         <label for="" class="required">Pais</label>
-                                        {{-- @dd($paises[0]['country_name']) --}}
                                         <select name="pais_perfil" id="pais_perfil" class="form-control" onchange="buscarDepartamentos()">
                                             <option value="">SELECCIONE</option>
                                             @foreach ($paises as $p)
-                                                <option {{ (  $p['country_name'] == $pais)? 'selected': '' }} value="{{ $p['country_name'] }}">{{ $p['country_name'] }}</option>
+                                                <option {{ (  $p->pais == $pais)? 'selected': '' }} value="{{ $p->idPaises }}">{{ $p->pais }}</option>
                                             @endforeach
                                         </select>
-                                        {{-- <input type="text" id="ubicacion" name="ubicacion" class="form-control" value="{{ $tienda->ubicacion }}" required> --}}
                                     </div>
                                     <div class="col-md-3">
                                         <label for="" class="required">Ciudad</label>
                                         <select name="ciudades_perfil" id="ciudades_perfil" class="form-control">
                                             <option value="">SELECCIONE</option>
                                             @foreach ($departamentos as $d)
-                                                <option {{ (  $d['state_name'] == $dap)? 'selected': '' }} value="{{ $d['state_name'] }}">{{ $d['state_name'] }}</option>
+                                                <option {{ (  $d->departamento == $departamento)? 'selected': '' }} value="{{ $d->idDepartamentos }}">{{ $d->departamento }}</option>
                                             @endforeach
                                         </select>
-                                        {{-- <input type="text" id="ubicacion" name="ubicacion" class="form-control" value="{{ $tienda->ubicacion }}" required> --}}
                                     </div>
                                     <div class="col-md-3">
                                         <label for="" class="required">Correo</label>
@@ -72,10 +69,6 @@
                                         <label for="" class="required">Celular</label>
                                         <input type="text" id="celular" name="celular" class="form-control" value="{{ $tienda->celular }}" required>
                                     </div>
-                                    {{-- <div class="col-md-6">
-                                        <label for="" class="required">Direccion de la Tienda</label>
-                                        <input type="text" id="" name="" class="form-control">
-                                    </div> --}}
                                 </div>
 
                                 <div class="row mt-6">
@@ -214,7 +207,6 @@
                 type: 'POST',
                 data:{
                     pais:$('#pais_perfil').val(),
-                    tar :"{{ $reste }}",
                 },
                 dataType: 'json',
                 success: function(data) {
@@ -223,9 +215,10 @@
                         var selectElement = $('#ciudades_perfil');
                         selectElement.empty();
                         for (var i = 0; i < departamentosArray.length; i++) {
-                            var departamento = departamentosArray[i].state_name;
+                            var departamento = departamentosArray[i].departamento;
+                            var iddepartamento = departamentosArray[i].idDepartamentos;
                             selectElement.append($('<option>', {
-                                value: departamento,
+                                value: iddepartamento,
                                 text: departamento
                             }));
                         }

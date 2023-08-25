@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Mail\EnviarCorreoSuscripcion;
 use App\Models\Informacion;
 use App\Models\Perfil;
+use App\Models\Departamento;
 use App\Models\Persona;
+use App\Models\Pais;
 use App\Models\Suscripcion;
 use App\Models\Tienda;
 use Illuminate\Http\Request;
@@ -62,7 +64,11 @@ class TiendaController extends Controller
             $tienda->correo         = $request->input('correo');
             $tienda->descripcion    = $request->input('descripcion');
             // $tienda->ubicacion      = $request->input('ubicacion');
-            $tienda->ubicacion      = $request->input('pais_perfil')."/".$request->input('ciudades_perfil');
+            // $tienda->ubicacion      = $request->input('pais_perfil')."/".$request->input('ciudades_perfil');
+            $pais                   = Pais::find($request->input('pais_perfil'));
+            $departamento           = Departamento::find($request->input('ciudades_perfil'));
+
+            $tienda->ubicacion      = $pais->pais."/".$departamento->departamento;
             $tienda->url_facebook   = $request->input('url_facebook');
             $tienda->url_instagram  = $request->input('url_instagram');
             $tienda->url_whatsapp   = $request->input('url_whatsapp');
@@ -132,79 +138,40 @@ class TiendaController extends Controller
         $perfil_id = session('perfil')->idPerfil;
         $tienda = Tienda::where('usuario_creacion', $persona_id)->first();
         $perfil = Perfil::where('idPersona', $perfil_id)->first();
-
-        $response = Http::withHeaders([
-            "Accept"    => "application/json",
-            "api-token" => "TS8-1Mk-C64LFdFQ57vUZFQqNYiL2Mtui9YGieNc9EcugfCezaedA2It_dlLHl0I0K0",
-            "user-email"=> "jjjoelcito123@gmail.com"
-        ])->get('https://www.universal-tutorial.com/api/getaccesstoken');
-
-        $this->token = $response->json('auth_token');
-
-        $paises = Http::withHeaders([
-            "Authorization" => "Bearer ".$this->token,
-            "Accept" => "application/json"
-        ])->get('https://www.universal-tutorial.com/api/countries/')->json();
+        $paises = Pais::all();
+        $departamentos = Departamento::all();
 
         if(!is_null($tienda->ubicacion))
             $ubi = explode("/",$tienda->ubicacion);
         else
             $ubi = [];
 
-        // dd($ubi, $tienda->ubicacion);
         if(count($ubi) == 2){
             if($ubi[0] != "" && $ubi[1] != ""){
-                $pais = $ubi[0];
-                $dap = $ubi[1];
-                $departamentos = Http::withHeaders([
-                    "Authorization" => "Bearer ".$this->token,
-                    "Accept" => "application/json"
-                ])->get('https://www.universal-tutorial.com/api/states/'.$pais)->json();
-                $m = "a";
+                $pais           = $ubi[0];
+                $departamento   = $ubi[1];
+                $paisBus        = Pais::where('pais', $pais)->first();
+                $departamentos  = Departamento::where('idPaises', $paisBus->idPaises)->get();
             }else{
                 $pais = "";
-                $dap = "";
+                $departamento = "";
                 $departamentos = [];
-                $m = "c";
             }
         }
         else{
             $pais = "";
-            $dap = "";
+            $departamento = "";
             $departamentos = [];
-            $m = "b";
         }
 
-        // dd($departamentos, $m, $ubi);
-
-        $reste = $this->token;
-
-        // dd($departamentos, $pais);
-
-        // $ciudades = Http::withHeaders([
-        //     "Authorization" => "Bearer ".$response->json('auth_token'),
-        //     "Accept" => "application/json"
-        // ])->get('https://www.universal-tutorial.com/api/cities/La Paz');
-
-        // $estado = Http::get('https://www.universal-tutorial.com/api/states/United States');
-
-        // dd($estado->json(), $ciudades->json(), $countries->json());
-
-        return view('vendedor.perfil')->with(compact('tienda', 'perfil', 'paises', 'departamentos', 'reste', 'dap', 'pais'));
+        return view('vendedor.perfil')->with(compact('tienda', 'perfil', 'paises', 'pais', 'departamentos', 'departamento'));
     }
 
     public function buscarDepartamentos(Request $request){
         if($request->ajax()){
 
             $pais = $request->input('pais');
-            $toke = $request->input('tar');
-            $this->token =$toke;
-
-            $departamentos = Http::withHeaders([
-                "Authorization" => "Bearer ".$this->token,
-                "Accept" => "application/json"
-            ])->get('https://www.universal-tutorial.com/api/states/'.$pais)->json();
-            // ])->get('https://www.universal-tutorial.com/api/states/Bolivia')->json();
+            $departamentos = Departamento::where('idPaises', $pais)->get();
 
             $data['estado']         = 'success';
             $data['departamentos']  = $departamentos;

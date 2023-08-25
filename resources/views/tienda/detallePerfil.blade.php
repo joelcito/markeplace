@@ -19,7 +19,7 @@
                         <!--begin::Name-->
                         <div class="d-flex align-items-center mb-2">
                             <a href="#" class="text-gray-900 text-hover-primary fs-2 fw-bold me-1 mt-15"><h1>{{ $tienda->nombre }}</h1></a>
-                            <a href="#" class="mt-15">
+                            {{-- <a href="#" class="mt-15">
                                 <i class="ki-duotone ki-verify fs-1 text-primary">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
@@ -27,7 +27,7 @@
                                 <i class="ki-duotone ki-cross-square fs-1 text-danger">
                                     <i class="path1"></i>
                                     <i class="path2"></i>
-                                </i>
+                                </i> --}}
                             </a>
                         </div>
                         <!--end::Name-->
