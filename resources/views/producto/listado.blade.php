@@ -122,8 +122,8 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="fv-row mb-7">
-                                    <label class="required fw-semibold fs-6 mb-2">Imagenes</label>
-                                    <input type="file" id="imagenes" name="imagenes" class="form-control form-control-solid mb-3 mb-lg-0" multiple accept="image/*">
+                                    <label class="required fw-semibold fs-6 mb-2">Imagenes / Video</label>
+                                    <input type="file" id="imagenes" name="imagenes" class="form-control form-control-solid mb-3 mb-lg-0" multiple accept="image/*,video/*">
                                 </div>
                             </div>
                         </div>

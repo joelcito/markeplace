@@ -94,6 +94,7 @@ Route::post('/login/ingresa', [LoginController::class, 'ingresa']);
 Route::get('/login/ingresaDennis', [LoginController::class, 'ingresaDennis']);
 Route::get('/login/cerrar', [LoginController::class, 'cerrar']);
 Route::get('/login/cambiaRol', [LoginController::class, 'cambiaRol']);
+Route::get('/login/migraPaisDepàrtameto', [LoginController::class, 'migraPaisDepàrtameto']);
 // Route::get('/login/volver', function () {
 //     return redirect()->to('https://www.otro-dominio.com');
 // });

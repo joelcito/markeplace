@@ -8,6 +8,9 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
+use Illuminate\Support\Facades\Http;
+
+
 class LoginController extends Controller
 {
     public function login(Request $request){
@@ -121,5 +124,25 @@ class LoginController extends Controller
         }
 
         return $data;
+    }
+
+    public function migraPaisDepàrtameto(Request $request){
+        $response = Http::withHeaders([
+            "Accept"    => "application/json",
+            "api-token" => "TS8-1Mk-C64LFdFQ57vUZFQqNYiL2Mtui9YGieNc9EcugfCezaedA2It_dlLHl0I0K0",
+            "user-email"=> "jjjoelcito123@gmail.com"
+        ])->get('https://www.universal-tutorial.com/api/getaccesstoken');
+
+        $this->token = $response->json('auth_token');
+
+        $paises = Http::withHeaders([
+            "Authorization" => "Bearer ".$this->token,
+            "Accept" => "application/json"
+        ])->get('https://www.universal-tutorial.com/api/countries/')->json();
+
+        foreach($paises as $p){
+            echo $p['country_name']."<br>";
+        }
+        dd($paises);
     }
 }
