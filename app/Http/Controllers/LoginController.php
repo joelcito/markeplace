@@ -119,8 +119,6 @@ class LoginController extends Controller
             $rolNuevo = $request->input('rol'); // Aquí debes establecer el nuevo valor de $rol
             $request->session()->put('rol',(int) $rolNuevo);
 
-            // dd(session()->all());
-
             $data['estado'] = 'success';
         }else{
             $data['estado'] = 'error';
@@ -11025,4 +11023,14 @@ class LoginController extends Controller
         }
         
     }
+
+    public function enviarCorreo(Request $request, $html){
+        dd($html);
+    }
+
+    public function enviCo(){
+        $dat = urlencode('<p>Contenido HTML que deseas enviar</p>');
+        return redirect("login/enviarCorreo/{$dat}");
+    }
+
 }
