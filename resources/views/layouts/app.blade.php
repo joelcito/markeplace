@@ -77,32 +77,48 @@
                                             $tienda = \App\Models\Tienda::where('usuario_creacion', $persona_id)->first();
 
 											if(
-												is_null($tienda->logo) ||
-												is_null($tienda->nombre) ||
-												is_null($tienda->ubicacion) ||
-												empty($tienda->logo) ||
-												empty($tienda->nombre) ||
-												empty($tienda->ubicacion)
+                                                $tienda->logo === null ||
+                                                $tienda->nombre === null ||
+                                                $tienda->ubicacion === null ||
+                                                $tienda->logo === ''  ||
+                                                $tienda->nombre === ''  ||
+                                                $tienda->ubicacion === ''
+
+												// is_null($tienda->logo) ||
+												// is_null($tienda->nombre) ||
+												// is_null($tienda->ubicacion) ||
+												// empty($tienda->logo) ||
+												// empty($tienda->nombre) ||
+												// empty($tienda->ubicacion)
 												){
 												$sw = false;
 											}
                                             echo '<h3 class="text-white mt-7">'.$tienda->nombre.'</h3>';
                                         }
-										
+
                                         if($rol===2){
 											if(
-												is_null($persona->nombres) ||
-												is_null($persona->apellido_materno) ||
-												is_null($persona->razon_social) ||
-												is_null($persona->direccion) ||
-												is_null($persona->celular) ||
-												empty($persona->nombres) ||
-												empty($persona->apellido_materno) ||
-												empty($persona->razon_social) ||
-												empty($persona->direccion) ||
-												// (isset($persona->razon_social) || trim($persona->razon_social) === '') ||
-												// (isset($persona->direccion) || trim($persona->direccion) === '') ||
-												empty($persona->celular)
+                                                $persona->nombres  === null  ||
+                                                $persona->apellido_materno  === null  ||
+                                                $persona->razon_social  === null  ||
+                                                $persona->direccion  === null  ||
+                                                $persona->celular  === null  ||
+                                                $persona->nombres  === ''  ||
+                                                $persona->apellido_materno  === ''  ||
+                                                $persona->razon_social  === ''  ||
+                                                $persona->direccion  === ''  ||
+                                                $persona->celular  === ''
+
+												// is_null($persona->nombres) ||
+												// is_null($persona->apellido_materno) ||
+												// is_null($persona->razon_social) ||
+												// is_null($persona->direccion) ||
+												// is_null($persona->celular) ||
+												// empty($persona->nombres) ||
+												// empty($persona->apellido_materno) ||
+												// empty($persona->razon_social) ||
+												// empty($persona->direccion) ||
+												// empty($persona->celular)
 												){
 												$sw = false;
 											}
