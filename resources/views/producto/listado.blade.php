@@ -331,85 +331,120 @@
                 lector.readAsDataURL(archivo);
                 }
             });
-
-
-
         });
 
-        function guardarProducto(){
+        // Función para verificar si una imagen o video es horizontal
+        function esHorizontal(file) {
+            return new Promise(resolve => {
+                const img = new Image();
+                img.onload = function() {
+                    const width = img.width;
+                    const height = img.height;
+                    resolve(width >= height); // Se considera horizontal si el ancho es mayor o igual a la altura
+                };
+                img.src = URL.createObjectURL(file);
+            });
+        }
+
+        async function guardarProducto(){
             if($("#formularioProducto")[0].checkValidity()){
+                $('#btnAgregaProcuto').prop('disabled', true);
                 var formData = new FormData();
                 var archivo = $('#imagenes')[0].files;
                 let contador = 0;
+                let maxSizeInBytes = 10 * 1024 * 1024; // 10 MB
+                let arrayLenos = [];
                 for(let i=0;i<archivo.length;i++){
-                    formData.append('archivo[]', archivo[i]);
-                    contador++;
-                }
-
-                var file = $('#archivo')[0].files;
-                formData.append('file', file[0]);
-
-                console.log($('#producto_id').val())
-
-                let valor = $('#producto_id').val();
-                let sw = false;
-
-                if(valor == 0){
-                    if(contador >= 2)
-                        sw = true;
-                }else{
-                    sw = true;
-                    if(contador != 0){
-                        if(contador >= 2)
-                            sw = true;
-                        else
-                            sw = false;
+                    let file = archivo[i];
+                    if (file.size > maxSizeInBytes) {
+                        arrayLenos.push(file.name);
+                    } else {
+                        if (await esHorizontal(file)) {
+                            formData.append('archivo[]', file);
+                            contador++;
+                        } else {
+                            // console.log(`El archivo ${file.name} no es horizontal.`);
+                            arrayLenos.push(file.name);
+                        }
+                        // formData.append('archivo[]', file);
+                        // contador++;
                     }
                 }
 
-                if(sw){
-                    formData.append('nombre',           $('#nombre').val());
-                    formData.append('producto_id',      $('#producto_id').val());
-                    formData.append('descripcion',      $('#descripcion').val());
-                    formData.append('categoria_id',     $('#subcategoria_id').val());
-                    formData.append('precio_unitario',  $('#precio_unitario').val());
-                    formData.append('cantidad',         $('#cantidad').val());
-                    formData.append('descuento',        $('#descuento').val());
-                    formData.append('agregaCantidad',   $('#agregaCantidad').val());
-                    $.ajax({
-                        url: "{{ url('producto/guarda') }}",
-                        data:formData,
-                        type: 'POST',
-                        dataType: 'json',
-                        processData: false,
-                        contentType: false,
-                        success: function(data) {
-                            if(data.estado === 'success'){
-                                Swal.fire({
-                                    title:'Registrado!',
-                                    text :'Se registro con exito.',
-                                    icon: 'success',
-                                    timer: 1500
-                                })
-                                $('#kt_modal_add_user').modal('hide');
-                                ajaxListado();
-                            }else if(data.estado === 'error'){
-                                Swal.fire({
-                                    title:  'Error!',
-                                    text :  data.msg,
-                                    icon:   'error',
-                                    timer:  1500
-                                })
-                            }
+                if(arrayLenos.length == 0){
+                    var file = $('#archivo')[0].files;
+                    formData.append('file', file[0]);
+
+                    let valor = $('#producto_id').val();
+                    let sw = false;
+
+                    if(valor == 0){
+                        if(contador >= 2)
+                            sw = true;
+                    }else{
+                        sw = true;
+                        if(contador != 0){
+                            if(contador >= 2)
+                                sw = true;
+                            else
+                                sw = false;
                         }
-                    });
+                    }
+
+                    if(sw){
+                        formData.append('nombre',           $('#nombre').val());
+                        formData.append('producto_id',      $('#producto_id').val());
+                        formData.append('descripcion',      $('#descripcion').val());
+                        formData.append('categoria_id',     $('#subcategoria_id').val());
+                        formData.append('precio_unitario',  $('#precio_unitario').val());
+                        formData.append('cantidad',         $('#cantidad').val());
+                        formData.append('descuento',        $('#descuento').val());
+                        formData.append('agregaCantidad',   $('#agregaCantidad').val());
+                        $.ajax({
+                            url: "{{ url('producto/guarda') }}",
+                            data:formData,
+                            type: 'POST',
+                            dataType: 'json',
+                            processData: false,
+                            contentType: false,
+                            success: function(data) {
+                                if(data.estado === 'success'){
+                                    Swal.fire({
+                                        title:'Registrado!',
+                                        text :'Se registro con exito.',
+                                        icon: 'success',
+                                        timer: 1500
+                                    })
+                                    $('#kt_modal_add_user').modal('hide');
+                                    ajaxListado();
+                                    $('#btnAgregaProcuto').prop('disabled', false);
+                                }else if(data.estado === 'error'){
+                                    Swal.fire({
+                                        title:  'Error!',
+                                        text :  data.msg,
+                                        icon:   'error',
+                                        timer:  1500
+                                    })
+                                }
+                            }
+                        });
+                    }else{
+                        Swal.fire({
+                            title:'Error!',
+                            icon:'error',
+                            text: 'Debe seleccionar al menos 2 fotografias',
+                            timer: 3000
+                        })
+                        $('#btnAgregaProcuto').prop('disabled', false);
+                    }
                 }else{
                     Swal.fire({
-                        title:'Error!',
-                        icon:'error',
-                        text: 'Debe seleccionar al menos 2 fotografias',
-                        timer: 3000
+                        title   :   'Error!',
+                        icon    :   'error',
+                        html    :   'La(s) imágenes <strong>' + arrayLenos + '</strong> no cumplen los formatos requeridos <br><strong>Las imagenes deben ser menor de 10MB y en formato horizontal</strong>',
+                        timer   :   10000
                     })
+                    $('#btnAgregaProcuto').prop('disabled', false);
                 }
             }else{
     			$("#formularioProducto")[0].reportValidity()

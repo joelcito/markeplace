@@ -72,7 +72,7 @@ class TiendaController extends Controller
             $tienda->url_facebook   = $request->input('url_facebook');
             $tienda->url_instagram  = $request->input('url_instagram');
             $tienda->url_whatsapp   = $request->input('url_whatsapp');
-            $tienda->url_correo     = $request->input('correo');
+            $tienda->url_correo     = "mailto:".$request->input('correo');
 
             if($request->file('archivo')){
                 $archivos           = $request->file('archivo');

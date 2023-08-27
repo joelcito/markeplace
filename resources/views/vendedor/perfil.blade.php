@@ -45,7 +45,7 @@
                                 <div class="row mt-12">
                                     <div class="col-md-3">
                                         <label for="" class="required">Pais</label>
-                                        <select name="pais_perfil" id="pais_perfil" class="form-control" onchange="buscarDepartamentos()">
+                                        <select name="pais_perfil" id="pais_perfil" class="form-control" onchange="buscarDepartamentos()" required>
                                             <option value="">SELECCIONE</option>
                                             @foreach ($paises as $p)
                                                 <option {{ (  $p->pais == $pais)? 'selected': '' }} value="{{ $p->idPaises }}">{{ $p->pais }}</option>
@@ -54,7 +54,7 @@
                                     </div>
                                     <div class="col-md-3">
                                         <label for="" class="required">Ciudad</label>
-                                        <select name="ciudades_perfil" id="ciudades_perfil" class="form-control">
+                                        <select name="ciudades_perfil" id="ciudades_perfil" class="form-control"  required>
                                             <option value="">SELECCIONE</option>
                                             @foreach ($departamentos as $d)
                                                 <option {{ (  $d->departamento == $departamento)? 'selected': '' }} value="{{ $d->idDepartamentos }}">{{ $d->departamento }}</option>

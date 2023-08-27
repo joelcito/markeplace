@@ -29,9 +29,9 @@
                                 <span class="path1"></span>
                                 <span class="path2"></span>
                             </i> --}}
-                            
+
                             <i class="fa-solid fa-house"></i>
-                            
+
                         </span>
                         <span class="menu-title" {{ Request::is('informacion/perfil') ? "style=color:orange" : 'style=color:white' }}>PERFIL</span>
                     </a>
@@ -111,7 +111,28 @@
             @endif
 
             @if (session('rol') === 3)
-                {{-- @dd($sw, $rol, $tienda) --}}
+                {{-- @dd(
+                    $sw,
+                    $rol,
+                    $persona->nombres,
+                    $persona->apellido_materno,
+                    $persona->razon_social,
+                    $persona->direccion,
+                    $persona->celular,
+                    is_null($tienda->logo),
+                    // $tienda->logo,
+                    is_null($tienda->nombre),
+                    // $tienda->nombre,
+                    is_null($tienda->ubicacion),
+                    // $tienda->ubicacion,
+                    empty($tienda->logo),
+                    // $tienda->logo,
+                    empty($tienda->nombre),
+                    // $tienda->nombre,
+                    empty($tienda->ubicacion),
+                    // $tienda->ubicacion,
+                    $tienda->idTienda
+                    ) --}}
                 <!--begin:Menu item-->
                 <div class="menu-item pt-5">
                     <!--begin:Menu content-->
