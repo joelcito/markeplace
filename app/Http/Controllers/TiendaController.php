@@ -312,8 +312,8 @@ class TiendaController extends Controller
                 $mail->SMTPAuth     = true;
                 $mail->Username     = $smtpUsername;
                 $mail->Password     = $smtpPassword;
-                // $mail->SMTPSecure   = PHPMailer::ENCRYPTION_STARTTLS;
-                $mail->SMTPSecure   = PHPMailer::ENCRYPTION_SMTPS;
+                $mail->SMTPSecure   = PHPMailer::ENCRYPTION_STARTTLS;
+                // $mail->SMTPSecure   = PHPMailer::ENCRYPTION_SMTPS;
                 // ... Configura los parámetros SMTP ...
                 // $mail->setFrom('admin@example.com', 'Admin');
                 $mail->setFrom('admin@comercio-latino.com', 'Comercio Latino');
@@ -338,84 +338,6 @@ class TiendaController extends Controller
                 $data['msg'] = 'No se pudo enviar el correo: ' . $mail->ErrorInfo;
                 // return 'No se pudo enviar el correo: ' . $mail->ErrorInfo;
             }
-
-            // ESTE ES OTRO CORREO
-
-            // try {
-
-            //     // ENVIAR CORREO
-
-            //     // $to         = $email;
-            //     $to         = 'jfloresq2@fcpn.edu.bo';
-            //     // $to         = 'jjjoelcito123@gmail.com';
-            //     $subject    = 'CORREO DE SUSCRIPCION';
-            //     $headers    = "MIME-Version: 1.0" . "\r\n";
-            //     $headers    .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-            //     $headers    .= "From: admin@comercio-latino.com" . "\r\n";
-
-            //     $templatePath = resource_path('views/mail/nuevoCorreo.blade.php');
-            //     $templateContent = file_get_contents($templatePath);
-
-            //     if($tipo === "basica"){
-            //         $monto = 0;
-            //     }else if($tipo === "estandar"){
-            //         if($modalidad === "Mensual"){
-            //             $monto = 200;
-            //             $qr = Informacion::find(14);
-            //             $qrImg = $qr->descripcion;
-            //         }
-            //         else{
-            //             $monto = 2000;
-            //             $qr = Informacion::find(15);
-            //             $qrImg = $qr->descripcion;
-            //         }
-            //     }else if($tipo === "superior"){
-            //         if($modalidad === "Mensual"){
-            //             $monto = 500;
-            //             $qr = Informacion::find(16);
-            //             $qrImg = $qr->descripcion;
-            //         }
-            //         else{
-            //             $monto = 5000;
-            //             $qr = Informacion::find(20);
-            //             $qrImg = $qr->descripcion;
-            //         }
-            //     }
-
-            //     $fecha = date('d/m/Y H:m:s');
-
-            //     $data = [
-            //         'title'     => 'Bienvenido a mi aplicación',
-            //         'content'   => 'Gracias por unirte a nosotros. Esperamos que disfrutes de tu tiempo aquí.',
-            //         'name'      => $nombre,
-            //         'tipo'      => $tipo,
-            //         'modalidad' => $modalidad,
-            //         'qr'        => $qrImg,
-            //         'monto'     => $monto,
-            //         'fecha'     => $fecha,
-            //         'url'     => url('vendedor/inicio'),
-            //     ];
-
-            //     foreach ($data as $key => $value) {
-            //         $templateContent = str_replace('{{ $' . $key . ' }}', $value, $templateContent);
-            //     }
-
-            //     // mail($to, $subject, $templateContent, $headers);
-
-            //     if (mail($to, $subject, $templateContent, $headers))
-            //         $data['msg'] = 'Correo enviado correctamente.';
-            //     else
-            //         $data['msg'] = 'No se pudo enviar el correo.';
-
-
-                // Mail::to($email)->send(new EnviarCorreoSuscripcion($nombre, $tipo, $modalidad, $qrImg));
-            //     // $qrImg = "";
-            //     // Mail::to("jjjoelcito123@gmail.com")->send(new EnviarCorreoSuscripcion($nombre, $tipo, $modalidad, $qrImg));
-            //     $data['estado'] = 'success';
-            // } catch (\Exception $e) {
-            //     // Ocurrió un error al enviar el correo, puedes manejar el error aquí.
-            //     $data['estado'] = 'error';
-            // }
         }else{
             $data['estado'] = 'error';
         }
