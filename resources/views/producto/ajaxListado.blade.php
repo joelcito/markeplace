@@ -25,7 +25,15 @@
                 @endphp
                 @if (count($imgs)>0)
                     {{-- <img src="https://comercio-latino.com/{{ $imgs[0] }}" alt="" width="100%"> --}}
-                    <img src="{{ asset('imgProducto/'.$imgs[0]) }}" alt="" width="100%">
+                    @php
+                        $dato = explode(".", $imgs[0]);
+                        $sw = ($dato[1] == "mp4")? true : false;
+                    @endphp
+                    @if ($sw)
+                        <video src="{{ asset('imgProducto/'.$imgs[0]) }}" width="100%" autoplay loop muted></video>                    
+                    @else
+                        <img src="{{ asset('imgProducto/'.$imgs[0]) }}" alt="" width="100%">
+                    @endif
                 @endif
             </td>
             <td>

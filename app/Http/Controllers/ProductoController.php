@@ -8,6 +8,8 @@ use App\Models\Producto;
 use App\Models\SubCategoria;
 use App\Models\Suscripcion;
 use Illuminate\Http\Request;
+use FFMpeg\FFMpeg;
+use FFMpeg\Coordinate\Dimension;
 
 class ProductoController extends Controller
 {
@@ -40,7 +42,6 @@ class ProductoController extends Controller
 
         $logeo = app(LoginController::class);
         $logeo->verificaLogueo();
-
 
         $perfil = session('perfil');
         $tienda  = Tienda::where('usuario_creacion', $perfil->idPersona)->first();

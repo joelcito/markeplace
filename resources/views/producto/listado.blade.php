@@ -1,8 +1,7 @@
 @extends('layouts.app')
 @section('css')
     <link href="{{ asset('assets/plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet" type="text/css" />
-
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
 @endsection
 @section('metadatos')
     <meta name="csrf-token" content="{{ csrf_token() }}" />
@@ -67,6 +66,7 @@
                                     <input type="hidden" id="producto_id" name="producto_id" value="0" >
                                 </div>
                             </div>
+                            <input type="hidden" id="imagenes_seleccionados" name="imagenes_seleccionados">
                         </div>
                         <div class="row">
                             <div class="col-md-12">
@@ -276,6 +276,7 @@
 
 @section('js')
     <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
     <script type="text/javascript">
 
@@ -287,11 +288,28 @@
         })
 
         $( document ).ready(function() {
+            let arryaFoto = [];
+            toastr.options = {
+                "closeButton"       : true,
+                "debug"             : false,
+                "newestOnTop"       : false,
+                "progressBar"       : true,
+                "positionClass"     : "toast-top-right",
+                "preventDuplicates" : false,
+                "onclick"           : null,
+                "showDuration"      : "300",
+                "hideDuration"      : "1000",
+                "timeOut"           : "5000",
+                "extendedTimeOut"   : "1000",
+                "showEasing"        : "swing",
+                "hideEasing"        : "linear",
+                "showMethod"        : "fadeIn",
+                "hideMethod"        : "fadeOut"
+            }
             ajaxListado();
-
             $('#tabla_producto').DataTable({
                 language: {
-                    {{--  url: '{{ asset('datatableEs.json') }}'  --}}
+                    // url: '{{ asset('datatableEs.json') }}'
                 },
 
                 // Opciones de exportación
@@ -300,35 +318,66 @@
                     'copy', 'excel', 'pdf', 'print' // Botones de exportación disponibles (ejemplo: copiar, excel, pdf, imprimir)
                 ]
             });
-
-
             // Detectar cambios en el input de imágenes
             $('#imagenes').on('change', function(e) {
+                arryaFoto = []
                 // Obtener los archivos seleccionados
                 var archivos = e.target.files;
+                let maxSizeInBytes = 10 * 1024 * 1024; // 10 MB
 
                 // Limpiar la vista previa
                 $('#vista-previa').empty();
 
                 // Recorrer los archivos
                 for (var i = 0; i < archivos.length; i++) {
-                var archivo = archivos[i];
-
-                // Crear un objeto FileReader
-                var lector = new FileReader();
-
-                // Cargar la imagen
-                lector.onload = function(e) {
-                    // Crear un elemento <img> para mostrar la imagen
-                    var imagen = $('<img>').attr('src', e.target.result)
-                                           .attr('width', '30%');
-
-                    // Agregar la imagen a la vista previa
-                    $('#vista-previa').append(imagen);
-                }
-
-                // Leer el archivo como una URL de datos
-                lector.readAsDataURL(archivo);
+                    var archivo = archivos[i];
+                    if(archivo.size > maxSizeInBytes){
+                        toastr.error('¡EL ARCHIVO '+archivo.name+' EXEDE LOS 10MB!');
+                    }else{
+                        // Crear un objeto FileReader
+                        var lector = new FileReader();
+                        lector.onload = (function(archivo) {
+                            return function(e) {
+                                var contenido;
+                                var tipo = archivo.type;
+                                if (tipo.startsWith('image/')) {
+                                    contenido = $('<img>').attr('src', e.target.result)
+                                                        .attr('width', '30%');
+                                    arryaFoto.push(archivo.name);
+                                    // arryaFoto.push("┼"+archivo.name);
+                                    // arryaFoto.push(archivo.name+"┼");
+                                } else if (tipo.startsWith('video/')) {
+                                    // Crear un elemento de video temporal para obtener las dimensiones
+                                    var videoTemp = document.createElement('video');
+                                    videoTemp.src = e.target.result;
+                                    videoTemp.addEventListener('loadedmetadata', function() {
+                                        var ancho = videoTemp.videoWidth;
+                                        var alto = videoTemp.videoHeight;
+                                        if (ancho > alto) {
+                                            console.log('Video horizontal');
+                                            contenido = $('<video controls>').attr('src', e.target.result)
+                                                                    .attr('width', '30%');
+                                            // arryaFoto.push("┼"+archivo.name);
+                                            // arryaFoto.push(archivo.name+"┼");
+                                            arryaFoto.push(archivo.name);
+                                        } else if (ancho < alto) {
+                                            console.log('Video vertical');
+                                            toastr.warning('¡EL VIDEO '+archivo.name+' NO CUMPLE CON LAS DIMENCIONES DE HORIZONTAL!');
+                                        } else {
+                                            console.log('Video cuadrado');
+                                        }
+                                        $('#vista-previa').append(contenido);
+                                        $('#imagenes_seleccionados').val(arryaFoto)
+                                    });
+                                }
+                                if (contenido) {
+                                    $('#vista-previa').append(contenido);
+                                }
+                                $('#imagenes_seleccionados').val(arryaFoto)
+                            };
+                        })(archivo);
+                        lector.readAsDataURL(archivo);
+                    }
                 }
             });
         });
@@ -346,103 +395,95 @@
             });
         }
 
-        async function guardarProducto(){
+        function verificarSiEsVideo(file) {
+            if (file.type.startsWith('video/'))
+                return true;
+            else
+                return false;
+        }
+
+        function guardarProducto(){
             if($("#formularioProducto")[0].checkValidity()){
                 $('#btnAgregaProcuto').prop('disabled', true);
                 var formData = new FormData();
                 var archivo = $('#imagenes')[0].files;
                 let contador = 0;
+
                 let maxSizeInBytes = 10 * 1024 * 1024; // 10 MB
                 let arrayLenos = [];
+                // console.log($('#imagenes_seleccionados').val())
+                let cadenaSeleccionados = $('#imagenes_seleccionados').val();
+                var nombresArray = cadenaSeleccionados.split(',');
+                // var nombresArray = cadenaSeleccionados.split(',┼');
                 for(let i=0;i<archivo.length;i++){
                     let file = archivo[i];
-                    if (file.size > maxSizeInBytes) {
-                        arrayLenos.push(file.name);
-                    } else {
-                        if (await esHorizontal(file)) {
-                            formData.append('archivo[]', file);
-                            contador++;
-                        } else {
-                            // console.log(`El archivo ${file.name} no es horizontal.`);
-                            arrayLenos.push(file.name);
-                        }
-                        // formData.append('archivo[]', file);
-                        // contador++;
+                    if(nombresArray.includes(file.name)){
+                        formData.append('archivo[]', file);
+                        contador++;
                     }
                 }
 
-                if(arrayLenos.length == 0){
-                    var file = $('#archivo')[0].files;
-                    formData.append('file', file[0]);
+                var file = $('#archivo')[0].files;
+                formData.append('file', file[0]);
 
-                    let valor = $('#producto_id').val();
-                    let sw = false;
+                let valor = $('#producto_id').val();
+                let sw = false;
 
-                    if(valor == 0){
+                if(valor == 0){
+                    if(contador >= 2)
+                        sw = true;
+                }else{
+                    sw = true;
+                    if(contador != 0){
                         if(contador >= 2)
                             sw = true;
-                    }else{
-                        sw = true;
-                        if(contador != 0){
-                            if(contador >= 2)
-                                sw = true;
-                            else
-                                sw = false;
-                        }
+                        else
+                            sw = false;
                     }
-
-                    if(sw){
-                        formData.append('nombre',           $('#nombre').val());
-                        formData.append('producto_id',      $('#producto_id').val());
-                        formData.append('descripcion',      $('#descripcion').val());
-                        formData.append('categoria_id',     $('#subcategoria_id').val());
-                        formData.append('precio_unitario',  $('#precio_unitario').val());
-                        formData.append('cantidad',         $('#cantidad').val());
-                        formData.append('descuento',        $('#descuento').val());
-                        formData.append('agregaCantidad',   $('#agregaCantidad').val());
-                        $.ajax({
-                            url: "{{ url('producto/guarda') }}",
-                            data:formData,
-                            type: 'POST',
-                            dataType: 'json',
-                            processData: false,
-                            contentType: false,
-                            success: function(data) {
-                                if(data.estado === 'success'){
-                                    Swal.fire({
-                                        title:'Registrado!',
-                                        text :'Se registro con exito.',
-                                        icon: 'success',
-                                        timer: 1500
-                                    })
-                                    $('#kt_modal_add_user').modal('hide');
-                                    ajaxListado();
-                                    $('#btnAgregaProcuto').prop('disabled', false);
-                                }else if(data.estado === 'error'){
-                                    Swal.fire({
-                                        title:  'Error!',
-                                        text :  data.msg,
-                                        icon:   'error',
-                                        timer:  1500
-                                    })
-                                }
+                }
+                if(sw){
+                    formData.append('nombre',           $('#nombre').val());
+                    formData.append('producto_id',      $('#producto_id').val());
+                    formData.append('descripcion',      $('#descripcion').val());
+                    formData.append('categoria_id',     $('#subcategoria_id').val());
+                    formData.append('precio_unitario',  $('#precio_unitario').val());
+                    formData.append('cantidad',         $('#cantidad').val());
+                    formData.append('descuento',        $('#descuento').val());
+                    formData.append('agregaCantidad',   $('#agregaCantidad').val());
+                    $.ajax({
+                        url: "{{ url('producto/guarda') }}",
+                        data:formData,
+                        type: 'POST',
+                        dataType: 'json',
+                        processData: false,
+                        contentType: false,
+                        success: function(data) {
+                            if(data.estado === 'success'){
+                                Swal.fire({
+                                    title:'Registrado!',
+                                    text :'Se registro con exito.',
+                                    icon: 'success',
+                                    timer: 1500
+                                })
+                                $('#kt_modal_add_user').modal('hide');
+                                ajaxListado();
+                                $('#btnAgregaProcuto').prop('disabled', false);
+                            }else if(data.estado === 'error'){
+                                Swal.fire({
+                                    title:  'Error!',
+                                    text :  data.msg,
+                                    icon:   'error',
+                                    timer:  1500
+                                })
                             }
-                        });
-                    }else{
-                        Swal.fire({
-                            title:'Error!',
-                            icon:'error',
-                            text: 'Debe seleccionar al menos 2 fotografias',
-                            timer: 3000
-                        })
-                        $('#btnAgregaProcuto').prop('disabled', false);
-                    }
+                        }
+                    });
                 }else{
                     Swal.fire({
-                        title   :   'Error!',
-                        icon    :   'error',
-                        html    :   'La(s) imágenes <strong>' + arrayLenos + '</strong> no cumplen los formatos requeridos <br><strong>Las imagenes deben ser menor de 10MB y en formato horizontal</strong>',
-                        timer   :   10000
+                        title:'Error!',
+                        icon:'error',
+                        text: 'Debe seleccionar al menos 2 fotografias',
+                        timer: 3000
                     })
                     $('#btnAgregaProcuto').prop('disabled', false);
                 }
