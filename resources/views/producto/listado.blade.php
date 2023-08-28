@@ -514,24 +514,26 @@
                 cancelButtonColor: '#d33',
                 confirmButtonText: 'Si, Eliminar!'
             }).then((result) => {
-                $.ajax({
-                    url: "{{ url('producto/eliminar') }}",
-                    type: 'POST',
-                    data:{id:producto},
-                    dataType: 'json',
-                    success: function(data) {
-                        if(data.estado === 'success'){
-                            if (result.isConfirmed) {
-                                Swal.fire(
-                                'Eliminado!',
-                                'Se elimino el producto.',
-                                'success'
-                                )
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: "{{ url('producto/eliminar') }}",
+                        type: 'POST',
+                        data:{id:producto},
+                        dataType: 'json',
+                        success: function(data) {
+                            if(data.estado === 'success'){
+                                if (result.isConfirmed) {
+                                    Swal.fire(
+                                    'Eliminado!',
+                                    'Se elimino el producto.',
+                                    'success'
+                                    )
+                                }
+                                ajaxListado();
                             }
-                            ajaxListado();
                         }
-                    }
-                });
+                    });
+                }
             })
         }
 
