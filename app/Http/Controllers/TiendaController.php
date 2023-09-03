@@ -302,8 +302,11 @@ class TiendaController extends Controller
             $smtpPort       =  465;
             // $smtpUsername   = 'suscripcion@comercio-latino.com';
             // $smtpPassword   = 'Fc;D&0@A7(T%';
-            $smtpUsername   = 'admin@comercio-latino.com';
-            $smtpPassword   = '1234567LP1234567LP.';
+            // $smtpUsername   = 'admin@comercio-latino.com';
+            // $smtpPassword   = '1234567LP1234567LP.';
+
+            $smtpUsername   = 'sistemas@comercio-latino.com';
+            $smtpPassword   = 'j@xKuZ(65VNK';
 
             try {
                 $mail->isSMTP();
@@ -316,7 +319,7 @@ class TiendaController extends Controller
                 $mail->SMTPSecure   = PHPMailer::ENCRYPTION_SMTPS;
                 // ... Configura los parámetros SMTP ...
                 // $mail->setFrom('admin@example.com', 'Admin');
-                $mail->setFrom('admin@comercio-latino.com', 'Comercio Latino');
+                $mail->setFrom('sistemas@comercio-latino.com', 'Comercio Latino');
                 $mail->addAddress($to);
 
                 // Agregar direcciones de correo electrónico en copia (CC)
