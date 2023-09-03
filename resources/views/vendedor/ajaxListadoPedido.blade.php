@@ -1,19 +1,21 @@
-<table class="table align-middle table-row-dashed fs-6 gy-5" id="tabla_categoria">
+<table class="table align-middle table-hover" id="tabla_categoria">
     <thead>
-        <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
-            <th>Nro Pedido</th>
-            <th>Cliente</th>
-            <th>Importe</th>
-            <th>Fecha de Solicitud</th>
-            <th>Form Pedido</th>
-            <th>Estado</th>
+        <tr class="text-uppercase text-center">
+            <th class="text-center">Nro Pedido</th>
+            <th class="text-center">Cliente</th>
+            <th class="text-center">Importe</th>
+            <th class="text-center">Fecha de Solicitud</th>
+            <th class="text-center">Form Pedido</th>
+            <th class="text-center" style="width: 200px">Estado</th>
         </tr>
     </thead>
     <tbody>
         @foreach ($ventas as $v)
-            <tr>
+            <tr style="border-top: 1px solid rgb(78, 77, 77); height: 50px;">
                 <td>
-                    {{ $v->pedido }}
+                    <center>
+                        {{ $v->pedido }}
+                    </center>
                 </td>
                 <td>
                     @php
@@ -30,32 +32,40 @@
                         $telefonoComprador      = $persona->celular;
                         $correoComprador        = $persona->correo;
                     @endphp
-                    {{ $nombreComprador }}
+                    <center>
+                        {{ $nombreComprador }}
+                    </center>
                 </td>
                 <td>
-                    {{ number_format($v->total, 2) }}
+                    <center>
+                        {{ number_format($v->total, 2) }}
+                    </center>
                 </td>
                 <td>
-                    {{ $venta->fecha_creacion }}
+                    <center>
+                        {{ $venta->fecha_creacion }}
+                    </center>
                 </td>
                 <td>
-                    <a class="btn btn-success btn-icon btn-sm" target="_blank" href="https://comercio-latino.com/services_landing_esp/pdfrecibo.php?pedido={{ $v->pedido }}
-                        &nombre={{ urlencode($datosPdf['nombreCL']) }}
-                        &telefono={{ urlencode($datosPdf['telefonoCL']) }}
-                        &email={{ urlencode($datosPdf['correoCL']) }}
-                        &pronombre={{ urlencode($tienda->nombre) }}
-                        &pronit={{ urlencode($tienda->nit) }}
-                        &prodireccion={{ urlencode($tienda->ubicacion) }}
-                        &protelefono={{ urlencode($tienda->celular) }}
-                        &procorreo={{ urlencode($tienda->correo) }}
-                        &clinombre={{ urlencode($nombreComprador) }}
-                        &clinit={{ urlencode($nitComprador) }}
-                        &clidireccion={{ urlencode($direccionComprador) }}
-                        &clitelefono={{ urlencode($telefonoComprador) }}
-                        &clicorreo={{ urlencode($correoComprador) }}
-                        &logoimagen={{ urlencode($tienda->logo) }}
-                        &fecha={{ urlencode($venta->fecha_creacion) }}">
-                    <i class="fa fa-file-pdf"></i></a>
+                    <center>
+                        <a class="btn btn-success btn-icon btn-sm" target="_blank" href="https://comercio-latino.com/services_landing_esp/pdfrecibo.php?pedido={{ $v->pedido }}
+                            &nombre={{ urlencode($datosPdf['nombreCL']) }}
+                            &telefono={{ urlencode($datosPdf['telefonoCL']) }}
+                            &email={{ urlencode($datosPdf['correoCL']) }}
+                            &pronombre={{ urlencode($tienda->nombre) }}
+                            &pronit={{ urlencode($tienda->nit) }}
+                            &prodireccion={{ urlencode($tienda->ubicacion) }}
+                            &protelefono={{ urlencode($tienda->celular) }}
+                            &procorreo={{ urlencode($tienda->correo) }}
+                            &clinombre={{ urlencode($nombreComprador) }}
+                            &clinit={{ urlencode($nitComprador) }}
+                            &clidireccion={{ urlencode($direccionComprador) }}
+                            &clitelefono={{ urlencode($telefonoComprador) }}
+                            &clicorreo={{ urlencode($correoComprador) }}
+                            &logoimagen={{ urlencode($tienda->logo) }}
+                            &fecha={{ urlencode($venta->fecha_creacion) }}">
+                        <i class="fa fa-file-pdf"></i></a>
+                    </center>
                 </td>
                 <td>
                 <select name="estado_pedido_{{ $v->pedido }}" id="estado_pedido_{{ $v->pedido }}" class="form-control" onchange="cambiaEstado(this, '{{ $v->pedido }}')">

@@ -105,11 +105,11 @@
         <!--end::Card header-->
         <!--begin::Card body-->
         <div class="card-body py-4 table-responsive">
-            <table class="table align-middle table-row-dashed fs-6 gy-5" id="tabla_pedidos">
+            <table class="table align-middle table-hover" id="tabla_pedidos">
                 <thead>
                     <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
                         <th>Nro Pedido</th>
-                        <th>Razon Social</th>
+                        <th>Razon Social del Vendedor</th>
                         <th>Precio</th>
                         <th>Doc Pedido</th>
                         <th>Fecha de Pedido</th>
@@ -119,7 +119,7 @@
                 </thead>
                 <tbody>
                     @foreach ( $ventas as $v)
-                        <tr>
+                        <tr style="border-top: 1px solid rgb(78, 77, 77);">
                             <td>{{ $v->pedido }}</td>
                             <td>
                                 @php

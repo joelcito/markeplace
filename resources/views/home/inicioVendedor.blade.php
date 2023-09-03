@@ -117,10 +117,10 @@
                                 name: "Cantidad Vendido",
                                 data: @json($numerosAleatorios),
                             },
-                            {{--  {
-                                name: "Revenue",
-                                data: [76, 85, 101, 98, 87, 105],
-                            },  --}}
+                            // {
+                            //     name: "Revenue",
+                            //     data: [76, 85, 101, 98, 87, 105],
+                            // },
                         ],
                         chart: {
                             fontFamily: "inherit",
@@ -144,14 +144,14 @@
                         },
                         xaxis: {
                             categories: @json($productos),
-                            {{--  categories: [
-                                "Feb",
-                                "Mar",
-                                "Apr",
-                                "May",
-                                "Jun",
-                                "Jul",
-                            ],  --}}
+                            // categories: [
+                            //     "Feb",
+                            //     "Mar",
+                            //     "Apr",
+                            //     "May",
+                            //     "Jun",
+                            //     "Jul",
+                            // ],
                             axisBorder: { show: !1 },
                             axisTicks: { show: !1 },
                             labels: {
@@ -229,10 +229,10 @@
                                 name: ["Son"],
                                 data: @json($cnatidaMeses),
                             },
-                            {{--  {
-                                name: "Revenue",
-                                data: [76, 85, 101, 98, 87, 105],
-                            },  --}}
+                            // {
+                            //     name: "Revenue",
+                            //     data: [76, 85, 101, 98, 87, 105],
+                            // },
                         ],
                         chart: {
                             fontFamily: "inherit",
@@ -372,7 +372,7 @@
                             colors: ["transparent"],
                         },
                         xaxis: {
-                            categories: @json($productos),
+                            categories: @json($productos1),
                             {{--  categories: [
                                 "Feb",
                                 "Mar",

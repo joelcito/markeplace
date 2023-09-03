@@ -2,7 +2,7 @@
     <thead>
         <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
             <th>Nª</th>
-            <th>Logo</th>
+            <th width="80px">Logo</th>
             <th>Nombre de la Tienda</th>
             <th>Nit</th>
             <th>Telefono/Celular</th>
@@ -24,7 +24,7 @@
             <tr>
                 <td>{{ $c->idTienda }}</td>
                 <td>
-                    <img src="{{ $c->logo }}" alt="">
+                    <img src="{{ asset('imgLogoTienda/'.$c->logo) }}" alt="" width="100%">
                 </td>
                 <td>{{ $c->nombre }}</td>
                 <td>{{ $c->nit }}</td>

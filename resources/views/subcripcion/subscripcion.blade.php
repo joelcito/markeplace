@@ -14,7 +14,7 @@
         <div class="d-flex flex-column">
             <!--begin::Heading-->
             <div class="mb-13 text-center">
-                <h1 class="fs-2hx fw-bold mb-5">Plan de suscripcion</h1>
+                <h1 class="fs-2hx fw-bold mb-5">Plan de suscripción</h1>
             </div>
             <div class="row g-10">
                 <!--begin::Col-->
@@ -25,7 +25,7 @@
                             <!--begin::Heading-->
                             <div class="mb-7 text-center">
                                 <!--begin::Title-->
-                                <h1 class="text-dark mb-5 fw-bolder">Basica</h1>
+                                <h1 class="text-dark mb-5 fw-bolder">Básica</h1>
                                 <div class="row w-100">
                                     <div class="col-md-6">
                                         <div class="text-center">
@@ -60,7 +60,7 @@
                                 <!--end::Item-->
                                 <!--begin::Item-->
                                 <div class="d-flex align-items-center mb-5">
-                                    <span class="fw-semibold fs-6 text-gray-800 flex-grow-1 pe-3">Exhibicion y alcance al publico (Baja)</span>
+                                    <span class="fw-semibold fs-6 text-gray-800 flex-grow-1 pe-3">Exhibición y alcance al publico (Baja)</span>
                                     <i class="ki-duotone ki-check-circle fs-1 text-success">
                                         <span class="path1"></span>
                                         <span class="path2"></span>
@@ -78,7 +78,7 @@
                                 <!--end::Item-->
                                 <!--begin::Item-->
                                 <div class="d-flex align-items-center mb-5">
-                                    <span class="fw-semibold fs-6 text-gray-400 flex-grow-1">Creacion de documentos (Ninguno)</span>
+                                    <span class="fw-semibold fs-6 text-gray-400 flex-grow-1">Creación de documentos (Ninguno)</span>
                                     <i class="ki-duotone ki-cross-circle fs-1">
                                         <span class="path1"></span>
                                         <span class="path2"></span>
@@ -87,7 +87,7 @@
                                 <!--end::Item-->
                                 <!--begin::Item-->
                                 <div class="d-flex align-items-center mb-5">
-                                    <span class="fw-semibold fs-6 text-gray-800 flex-grow-1">Verificacion Comercial (Si)</span>
+                                    <span class="fw-semibold fs-6 text-gray-800 flex-grow-1">Verificación Comercial (Si)</span>
                                     <i class="ki-duotone ki-check-circle fs-1 text-success">
                                         <span class="path1"></span>
                                         <span class="path2"></span>
@@ -96,7 +96,7 @@
                                 <!--end::Item-->
                                 <!--begin::Item-->
                                 <div class="d-flex align-items-center mb-5">
-                                    <span class="fw-semibold fs-6 text-gray-800 flex-grow-1">Soporte y Atencion al cliente (Si)</span>
+                                    <span class="fw-semibold fs-6 text-gray-800 flex-grow-1">Soporte y Atención al cliente (Si)</span>
                                     <i class="ki-duotone ki-check-circle fs-1 text-success">
                                         <span class="path1"></span>
                                         <span class="path2"></span>
@@ -200,7 +200,7 @@
                                 <!--end::Item-->
                                 <!--begin::Item-->
                                 <div class="d-flex align-items-center mb-5">
-                                    <span class="fw-semibold fs-6 text-gray-800 flex-grow-1 pe-3">Exhibicion y alcance al publico <br> ( Intermedia )</span>
+                                    <span class="fw-semibold fs-6 text-gray-800 flex-grow-1 pe-3">Exhibición y alcance al publico <br> ( Intermedia )</span>
                                     <i class="ki-duotone ki-check-circle fs-1 text-success">
                                         <span class="path1"></span>
                                         <span class="path2"></span>
@@ -218,7 +218,7 @@
                                 <!--end::Item-->
                                 <!--begin::Item-->
                                 <div class="d-flex align-items-center mb-5">
-                                    <span class="fw-semibold fs-6 text-gray-800 flex-grow-1">Creacion de documentos (Pedido en Pdf)</span>
+                                    <span class="fw-semibold fs-6 text-gray-800 flex-grow-1">Creación de documentos (Pedido en Pdf)</span>
                                     <i class="ki-duotone ki-check-circle fs-1 text-success">
                                         <span class="path1"></span>
                                         <span class="path2"></span>
@@ -227,7 +227,7 @@
                                 <!--end::Item-->
                                 <!--begin::Item-->
                                 <div class="d-flex align-items-center mb-5">
-                                    <span class="fw-semibold fs-6 text-gray-800 flex-grow-1">Verificacion Comercial (Si)</span>
+                                    <span class="fw-semibold fs-6 text-gray-800 flex-grow-1">Verificación Comercial (Si)</span>
                                     <i class="ki-duotone ki-check-circle fs-1 text-success">
                                         <span class="path1"></span>
                                         <span class="path2"></span>
@@ -236,7 +236,7 @@
                                 <!--end::Item-->
                                 <!--begin::Item-->
                                 <div class="d-flex align-items-center mb-5">
-                                    <span class="fw-semibold fs-6 text-gray-800 flex-grow-1">Soporte y Atencion al cliente (Si)</span>
+                                    <span class="fw-semibold fs-6 text-gray-800 flex-grow-1">Soporte y Atención al cliente (Si)</span>
                                     <i class="ki-duotone ki-check-circle fs-1 text-success">
                                         <span class="path1"></span>
                                         <span class="path2"></span>
@@ -328,7 +328,7 @@
                                 <!--end::Item-->
                                 <!--begin::Item-->
                                 <div class="d-flex align-items-center mb-5">
-                                    <span class="fw-semibold fs-6 text-gray-800 flex-grow-1 pe-3">Exhibicion y alcance al publico <br> ( Alta )</span>
+                                    <span class="fw-semibold fs-6 text-gray-800 flex-grow-1 pe-3">Exhibición y alcance al publico <br> ( Alta )</span>
                                     <i class="ki-duotone ki-check-circle fs-1 text-success">
                                         <span class="path1"></span>
                                         <span class="path2"></span>
@@ -346,7 +346,7 @@
                                 <!--end::Item-->
                                 <!--begin::Item-->
                                 <div class="d-flex align-items-center mb-5">
-                                    <span class="fw-semibold fs-6 text-gray-800 flex-grow-1">Creacion de documentos (Pedido y cotizaciones PDF)</span>
+                                    <span class="fw-semibold fs-6 text-gray-800 flex-grow-1">Creación de documentos (Pedido y cotizaciones PDF)</span>
                                     <i class="ki-duotone ki-check-circle fs-1 text-success">
                                         <span class="path1"></span>
                                         <span class="path2"></span>
@@ -355,7 +355,7 @@
                                 <!--end::Item-->
                                 <!--begin::Item-->
                                 <div class="d-flex align-items-center mb-5">
-                                    <span class="fw-semibold fs-6 text-gray-800 flex-grow-1">Verificacion Comercial (Si)</span>
+                                    <span class="fw-semibold fs-6 text-gray-800 flex-grow-1">Verificación Comercial (Si)</span>
                                     <i class="ki-duotone ki-check-circle fs-1 text-success">
                                         <span class="path1"></span>
                                         <span class="path2"></span>
@@ -364,7 +364,7 @@
                                 <!--end::Item-->
                                 <!--begin::Item-->
                                 <div class="d-flex align-items-center mb-5">
-                                    <span class="fw-semibold fs-6 text-gray-800 flex-grow-1">Soporte y Atencion al cliente (Si)</span>
+                                    <span class="fw-semibold fs-6 text-gray-800 flex-grow-1">Soporte y Atención al cliente (Si)</span>
                                     <i class="ki-duotone ki-check-circle fs-1 text-success">
                                         <span class="path1"></span>
                                         <span class="path2"></span>
