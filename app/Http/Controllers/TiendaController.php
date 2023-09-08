@@ -251,7 +251,7 @@ class TiendaController extends Controller
 
             $data['estado'] = 'success';
 
-            Mail::to('destinatario@example.com')->send(new EnviarCorreoSuscripcion('joel', 'tipo', 'modalidad', 'qr'));
+            Mail::to('jjjoelcito123@gmail.com')->send(new EnviarCorreoSuscripcion('joel', 'tipo', 'modalidad', 'qr'));
 
             // ESTE ES OTRO CORREO
             // $to         = $email;
