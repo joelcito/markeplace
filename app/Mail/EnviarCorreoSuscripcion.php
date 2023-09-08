@@ -40,9 +40,10 @@ class EnviarCorreoSuscripcion extends Mailable
      */
     public function envelope()
     {
-        return new Envelope(
-            subject: 'CORREO DE SUSCRIPCION',
-        );
+        return new Envelope('CORREO DE SUSCRIPCION');
+        // return new Envelope(
+        //     subject: 'CORREO DE SUSCRIPCION',
+        // );
     }
 
     /**
@@ -52,9 +53,10 @@ class EnviarCorreoSuscripcion extends Mailable
      */
     public function content()
     {
-        return new Content(
-            view: 'mail.suscripcion',
-        );
+        return new Content('mail.suscripcion');
+        // return new Content(
+        //     view: 'mail.suscripcion',
+        // );
     }
 
     /**
