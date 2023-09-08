@@ -295,8 +295,8 @@ class TiendaController extends Controller
                 'title'     => 'Bienvenido a mi aplicación',
                 'content'   => 'Gracias por unirte a nosotros. Esperamos que disfrutes de tu tiempo aquí.',
                 'name'      => $nombre,
-                'tipo'      => $tipo,
-                'modalidad' => $modalidad,
+                'tipo'      => strtoupper($tipo),
+                'modalidad' => strtoupper($modalidad),
                 'qr'        => $qrImg,
                 'monto'     => $monto,
                 'fecha'     => $fecha,
@@ -334,7 +334,7 @@ class TiendaController extends Controller
 
                 // Agregar direcciones de correo electrónico en copia (CC)
                 // $mail->addCC('admin@comercio-latino.com', 'Administracion Comercio Latino');
-                // $mail->addCC('soporte@comercio-latino.com', 'Soporte Comercio Latino');
+                $mail->addCC('soporte@comercio-latino.com', 'Soporte Comercio Latino');
 
                 $mail->isHTML(true);
                 $mail->Subject = $subject;
