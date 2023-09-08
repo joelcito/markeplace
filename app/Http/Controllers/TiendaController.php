@@ -352,9 +352,9 @@ class TiendaController extends Controller
         //         $data['msg'] = 'No se pudo enviar el correo: ' . $mail->ErrorInfo;
         //         // return 'No se pudo enviar el correo: ' . $mail->ErrorInfo;
         //     }
-        // }else{
-        //     $data['estado'] = 'error';
-        // }
+        }else{
+            $data['estado'] = 'error';
+        }
 
         return $data;
     }
