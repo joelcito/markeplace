@@ -337,7 +337,7 @@ class TiendaController extends Controller
 
                 // Agregar direcciones de correo electrónico en copia (CC)
                 // $mail->addCC('admin@comercio-latino.com', 'Administracion Comercio Latino');
-                $mail->addCC('soporte@comercio-latino.com', 'Soporte Comercio Latino');
+                // $mail->addCC('soporte@comercio-latino.com', 'Soporte Comercio Latino');
 
                 $mail->isHTML(true);
                 $mail->Subject = $subject;
