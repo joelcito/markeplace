@@ -205,6 +205,8 @@ class TiendaController extends Controller
 
             // dd($email);
 
+            // ANTIGUO MENSAJE
+
             $tipo       = $request->input('tipo');
             $modalidad  = $request->input('modalidad');
 
@@ -243,104 +245,109 @@ class TiendaController extends Controller
             $suscripcion->usuario_update    = $perfil->idPerfil;
             $suscripcion->save();
 
+            // $data = [
+            //     'message' => 'Este es un mensaje de prueba.',
+            // ];
+
+            $data['estado'] = 'success';
+
+            Mail::to('destinatario@example.com')->send(new EnviarCorreoSuscripcion('joel', 'tipo', 'modalidad', 'qr'));
+
             // ESTE ES OTRO CORREO
+            // $to         = $email;
+            // $subject    = 'CORREO DE SUSCRIPCION';
 
-            // $to = 'jjjoelcito123@gmail.com';
-            // $to      = 'jfloresq2@fcpn.edu.bo';
-            $to         = $email;
-            $subject    = 'CORREO DE SUSCRIPCION';
-
-            // Cargar el contenido de la vista del correo
-            $templatePath = resource_path('views/mail/nuevoCorreo.blade.php');
-            $templateContent = file_get_contents($templatePath);
-            // ... Configura los datos del correo y la plantilla ...
-            if($tipo === "basica"){
-                $monto = 0;
-            }else if($tipo === "estandar"){
-                if($modalidad === "Mensual"){
-                    $monto = 200;
-                    $qr = Informacion::find(14);
-                    $qrImg = $qr->descripcion;
-                }
-                else{
-                    $monto = 2000;
-                    $qr = Informacion::find(15);
-                    $qrImg = $qr->descripcion;
-                }
-            }else if($tipo === "superior"){
-                if($modalidad === "Mensual"){
-                    $monto = 500;
-                    $qr = Informacion::find(16);
-                    $qrImg = $qr->descripcion;
-                }
-                else{
-                    $monto = 5000;
-                    $qr = Informacion::find(17);
-                    $qrImg = $qr->descripcion;
-                }
-            }
-            $fecha = date('d/m/Y H:m:s');
-            $data = [
-                'title'     => 'Bienvenido a mi aplicación',
-                'content'   => 'Gracias por unirte a nosotros. Esperamos que disfrutes de tu tiempo aquí.',
-                'name'      => $nombre,
-                'tipo'      => $tipo,
-                'modalidad' => $modalidad,
-                'qr'        => $qrImg,
-                'monto'     => $monto,
-                'fecha'     => $fecha,
-                'url'     => url('vendedor/inicio'),
-            ];
-            foreach ($data as $key => $value)
-                $templateContent = str_replace('{{ $' . $key . ' }}', $value, $templateContent);
+            // // Cargar el contenido de la vista del correo
+            // $templatePath = resource_path('views/mail/nuevoCorreo.blade.php');
+            // $templateContent = file_get_contents($templatePath);
+            // // ... Configura los datos del correo y la plantilla ...
+            // if($tipo === "basica"){
+            //     $monto = 0;
+            // }else if($tipo === "estandar"){
+            //     if($modalidad === "Mensual"){
+            //         $monto = 200;
+            //         $qr = Informacion::find(14);
+            //         $qrImg = $qr->descripcion;
+            //     }
+            //     else{
+            //         $monto = 2000;
+            //         $qr = Informacion::find(15);
+            //         $qrImg = $qr->descripcion;
+            //     }
+            // }else if($tipo === "superior"){
+            //     if($modalidad === "Mensual"){
+            //         $monto = 500;
+            //         $qr = Informacion::find(16);
+            //         $qrImg = $qr->descripcion;
+            //     }
+            //     else{
+            //         $monto = 5000;
+            //         $qr = Informacion::find(17);
+            //         $qrImg = $qr->descripcion;
+            //     }
+            // }
+            // $fecha = date('d/m/Y H:m:s');
+            // $data = [
+            //     'title'     => 'Bienvenido a mi aplicación',
+            //     'content'   => 'Gracias por unirte a nosotros. Esperamos que disfrutes de tu tiempo aquí.',
+            //     'name'      => $nombre,
+            //     'tipo'      => $tipo,
+            //     'modalidad' => $modalidad,
+            //     'qr'        => $qrImg,
+            //     'monto'     => $monto,
+            //     'fecha'     => $fecha,
+            //     'url'     => url('vendedor/inicio'),
+            // ];
+            // foreach ($data as $key => $value)
+            //     $templateContent = str_replace('{{ $' . $key . ' }}', $value, $templateContent);
 
 
-            $mail = new PHPMailer(true);
+            // $mail = new PHPMailer(true);
 
-            // Configuración de los parámetros SMTP
-            $smtpHost       = 'mail.comercio-latino.com';
-            $smtpPort       =  465;
-            // $smtpUsername   = 'suscripcion@comercio-latino.com';
-            // $smtpPassword   = 'Fc;D&0@A7(T%';
-            // $smtpUsername   = 'admin@comercio-latino.com';
-            // $smtpPassword   = '1234567LP1234567LP.';
+            // // Configuración de los parámetros SMTP
+            // $smtpHost       = 'mail.comercio-latino.com';
+            // $smtpPort       =  465;
+            // // $smtpUsername   = 'suscripcion@comercio-latino.com';
+            // // $smtpPassword   = 'Fc;D&0@A7(T%';
+            // // $smtpUsername   = 'admin@comercio-latino.com';
+            // // $smtpPassword   = '1234567LP1234567LP.';
 
-            $smtpUsername   = 'sistemas@comercio-latino.com';
-            $smtpPassword   = 'j@xKuZ(65VNK';
+            // $smtpUsername   = 'sistemas@comercio-latino.com';
+            // $smtpPassword   = 'j@xKuZ(65VNK';
 
-            try {
-                $mail->isSMTP();
-                $mail->Host         = $smtpHost;
-                $mail->Port         = $smtpPort;
-                $mail->SMTPAuth     = true;
-                $mail->Username     = $smtpUsername;
-                $mail->Password     = $smtpPassword;
-                // $mail->SMTPSecure   = PHPMailer::ENCRYPTION_STARTTLS;
-                $mail->SMTPSecure   = PHPMailer::ENCRYPTION_SMTPS;
-                // ... Configura los parámetros SMTP ...
-                // $mail->setFrom('admin@example.com', 'Admin');
-                $mail->setFrom('sistemas@comercio-latino.com', 'Comercio Latino');
-                $mail->addAddress($to);
+            // try {
+            //     $mail->isSMTP();
+            //     $mail->Host         = $smtpHost;
+            //     $mail->Port         = $smtpPort;
+            //     $mail->SMTPAuth     = true;
+            //     $mail->Username     = $smtpUsername;
+            //     $mail->Password     = $smtpPassword;
+            //     // $mail->SMTPSecure   = PHPMailer::ENCRYPTION_STARTTLS;
+            //     $mail->SMTPSecure   = PHPMailer::ENCRYPTION_SMTPS;
+            //     // ... Configura los parámetros SMTP ...
+            //     // $mail->setFrom('admin@example.com', 'Admin');
+            //     $mail->setFrom('sistemas@comercio-latino.com', 'Comercio Latino');
+            //     $mail->addAddress($to);
 
-                // Agregar direcciones de correo electrónico en copia (CC)
-                // $mail->addCC('admin@comercio-latino.com', 'Administracion Comercio Latino');
-                $mail->addCC('soporte@comercio-latino.com', 'Soporte Comercio Latino');
+            //     // Agregar direcciones de correo electrónico en copia (CC)
+            //     // $mail->addCC('admin@comercio-latino.com', 'Administracion Comercio Latino');
+            //     $mail->addCC('soporte@comercio-latino.com', 'Soporte Comercio Latino');
 
-                $mail->isHTML(true);
-                $mail->Subject = $subject;
-                $mail->Body = $templateContent;
+            //     $mail->isHTML(true);
+            //     $mail->Subject = $subject;
+            //     $mail->Body = $templateContent;
 
-                $mail->send();
+            //     $mail->send();
 
-                // return 'Correo enviado correctamente';
-                $data['estado'] = 'success';
-                $data['msg'] = 'Correo enviado correctamente';
+            //     // return 'Correo enviado correctamente';
+            //     $data['estado'] = 'success';
+            //     $data['msg'] = 'Correo enviado correctamente';
 
-            } catch (Exception $e) {
-                $data['estado'] = 'error';
-                $data['msg'] = 'No se pudo enviar el correo: ' . $mail->ErrorInfo;
-                // return 'No se pudo enviar el correo: ' . $mail->ErrorInfo;
-            }
+            // } catch (Exception $e) {
+            //     $data['estado'] = 'error';
+            //     $data['msg'] = 'No se pudo enviar el correo: ' . $mail->ErrorInfo;
+            //     // return 'No se pudo enviar el correo: ' . $mail->ErrorInfo;
+            // }
         }else{
             $data['estado'] = 'error';
         }

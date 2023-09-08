@@ -144,7 +144,8 @@
 
                 <div class="menu-item">
                     <!--begin:Menu link-->
-                    <a class="menu-link" href="{{ ($sw)? url('tienda/perfil') : 'javascript:void(0)' }}">
+                    {{-- <a class="menu-link" href="{{ ($sw)? url('tienda/perfil') : 'javascript:void(0)' }}"> --}}
+                    <a class="menu-link" {{ ($sw)? 'href='.url('tienda/perfil').'' : 'onclick=verificar()' }} >
                         <span class="menu-icon">
                             <i class="fa-solid fa-house"></i>
                         </span>
@@ -155,7 +156,8 @@
 
                 <div class="menu-item">
                     <!--begin:Menu link-->
-                    <a class="menu-link" href="{{ ($sw)? url('producto/listado') : 'javascript:void(0)' }}" >
+                    {{-- <a class="menu-link" href="{{ ($sw)? url('producto/listado') : 'javascript:void(0)' }}" > --}}
+                    <a class="menu-link" {{ ($sw)? 'href='.url('producto/listado').'' : 'onclick=verificar()' }} >
                         <span class="menu-icon">
                             {{-- <i class="ki-duotone ki-rocket fs-2">
                                 <span class="path1"></span>
@@ -170,7 +172,8 @@
 
                 <div class="menu-item">
                     <!--begin:Menu link-->
-                    <a class="menu-link" href="{{ ($sw)? url('vendedor/pedido') : 'javascript:void(0)' }}">
+                    {{-- <a class="menu-link" href="{{ ($sw)? url('vendedor/pedido') : 'javascript:void(0)' }}"> --}}
+                    <a class="menu-link" {{ ($sw)? 'href='.url('vendedor/pedido').'' : 'onclick=verificar()' }} >
                         <span class="menu-icon">
                             {{-- <i class="ki-duotone ki-rocket fs-2">
                                 <span class="path1"></span>
@@ -185,7 +188,8 @@
 
                 <div class="menu-item">
                     <!--begin:Menu link-->
-                    <a class="menu-link" href="{{ ($sw)? url('subcripcion/subcripcion') : 'javascript:void(0)' }}">
+                    {{-- <a class="menu-link" href="{{ ($sw)? url('subcripcion/subcripcion') : 'javascript:void(0)' }}"> --}}
+                    <a class="menu-link" {{ ($sw)? 'href='.url('subcripcion/subcripcion').'' : 'onclick=verificar()' }} >
                         <span class="menu-icon">
                             <i class="fa-solid fa-book-bookmark"></i>
                         </span>
@@ -196,7 +200,8 @@
 
                 <div class="menu-item">
                     <!--begin:Menu link-->
-                    <a class="menu-link" href="{{ ($sw)? url('vendedor/inicio') : 'javascript:void(0)' }}">
+                    {{-- <a class="menu-link" href="{{ ($sw)? url('vendedor/inicio') : 'javascript:void(0)' }}"> --}}
+                    <a class="menu-link" {{ ($sw)? 'href='.url('vendedor/inicio').'' : 'onclick=verificar()' }} >
                         <span class="menu-icon">
                             <i class="fa-solid fa-chart-simple"></i>
                         </span>
@@ -248,7 +253,8 @@
                 </div>
                 <div class="menu-item">
                     <!--begin:Menu link-->
-                    <a class="menu-link" href="{{ ($sw)? url('persona/perfil') : 'javascript:void(0)' }}">
+                    {{-- <a class="menu-link" href="{{ ($sw)? url('persona/perfil') : 'javascript:void(0)' }}"> --}}
+                    <a class="menu-link" {{ ($sw)? 'href='.url('persona/perfil').'' : 'onclick=verificar()' }} >
                         <span class="menu-icon">
                             {{-- <i class="ki-duotone ki-rocket fs-2">
                                 <span class="path1"></span>
@@ -262,7 +268,8 @@
                 </div>
                 <div class="menu-item">
                     <!--begin:Menu link-->
-                    <a class="menu-link" href="{{ ($sw)? url('persona/pedido') : 'javascript:void(0)' }}">
+                    {{-- <a class="menu-link" href="{{ ($sw)? url('persona/pedido') : 'javascript:void(0)' }}"> --}}
+                    <a class="menu-link" {{ ($sw)? 'href='.url('persona/pedido').'' : 'onclick=verificar()' }} >
                         <span class="menu-icon">
                             {{-- <i class="ki-duotone ki-rocket fs-2">
                                 <span class="path1"></span>

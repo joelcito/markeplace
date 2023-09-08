@@ -4835,6 +4835,15 @@
                     }
                 });
             }
+
+            function verificar(){
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Debe llenar los datos del formulario para continuar!',
+                    icon: 'error',
+                    timer: 5000
+                })
+            }
         </script>
 	</body>
 	<!--end::Body-->
