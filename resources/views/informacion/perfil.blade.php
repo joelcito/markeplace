@@ -130,7 +130,7 @@
 
                                 <div class="row mt-10 mb-5">
                                     <div class="col-md-12">
-                                        <button type="submit" class="btn btn-success w-100 btn-sm">Guardar</button>
+                                        <button type="submit" class="btn btn-primary w-100 btn-sm">Guardar</button>
                                     </div>
                                 </div>
                             </form>

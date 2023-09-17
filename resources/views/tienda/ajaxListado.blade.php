@@ -4,7 +4,7 @@
             <th>Nª</th>
             <th width="80px">Logo</th>
             <th>Nombre de la Tienda</th>
-            <th>Nit</th>
+            {{--  <th>Nit</th>  --}}
             <th>Telefono/Celular</th>
             <th>Correo</th>
             <th>Fecha de suscripcion Inicio</th>
@@ -27,7 +27,7 @@
                     <img src="{{ asset('imgLogoTienda/'.$c->logo) }}" alt="" width="100%">
                 </td>
                 <td>{{ $c->nombre }}</td>
-                <td>{{ $c->nit }}</td>
+                {{--  <td>{{ $c->nit }}</td>  --}}
                 <td>{{ $c->celular }}</td>
                 <td>{{ $c->correo }}</td>
                 <td>

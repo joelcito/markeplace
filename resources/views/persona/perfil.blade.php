@@ -12,19 +12,11 @@
     <div id="kt_app_content" class="app-content flex-column-fluid">
         <!--begin::Content container-->
         <div id="kt_app_content_container" class="app-container container-xxl">
-
-            {{--  <div id="detalleperfil">
-
-            </div>  --}}
-
             <div class="row g-5 g-xxl-8">
                 <div class="col-xl-12">
                     <div class="card mb-5 mb-xxl-8">
                         <div class="card-body pb-0">
                             <h1>EDICION DE PERFIL</h1>
-
-                            {{--  @dd($informacion)  --}}
-
                             <form action="{{ url('persona/guarda') }}" id="formularioTienda" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row mt-6">
@@ -44,19 +36,19 @@
                                                 <input type="hidden" id="persona_id" name="persona_id" value="{{ $persona->idPersona }}">
                                             </div>
                                             <div class="col-md-4">
-                                                <label for="" class="required">APELLIDO PATERNO</label>
+                                                <label for="" class="required">PRIMER APELLIDO</label>
                                                 {{--  <textarea name="quienessomos" id="quienessomos" cols="30" rows="5" class="form-control"></textarea>  --}}
                                                 <input type="text" id="ap_paterno" name="ap_paterno" class="form-control" value="{{ $persona->apellido_paterno }}" required>
                                             </div>
                                             <div class="col-md-4">
-                                                <label for="" class="required">APELLIDO MATERNO</label>
-                                                <input type="text" id="ap_materno" name="ap_materno" class="form-control" value="{{ $persona->apellido_materno }}" required>
+                                                <label for="">SEGUNDO APELLIDO</label>
+                                                <input type="text" id="ap_materno" name="ap_materno" class="form-control" value="{{ $persona->apellido_materno }}">
                                             </div>
                                         </div>
                                         <div class="row mt-5">
                                             <div class="col-md-6">
-                                                <label for="" class="required">RAZON SOCIAL</label>
-                                                <input type="text" id="razon_social" name="razon_social" class="form-control" value="{{ $persona->razon_social }}" required>
+                                                <label for="">RAZON SOCIAL</label>
+                                                <input type="text" id="razon_social" name="razon_social" class="form-control" value="{{ $persona->razon_social }}">
                                             </div>
                                             <div class="col-md-6">
                                                 <label for="">NIT</label>

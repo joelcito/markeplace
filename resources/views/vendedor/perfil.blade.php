@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('css')
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
 @endsection
 @section('metadatos')
     <meta name="csrf-token" content="{{ csrf_token() }}" />
@@ -122,6 +122,7 @@
 </div>
 @stop
 @section('js')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script>
         $.ajaxSetup({
             // definimos cabecera donde estarra el token y poder hacer nuestras operaciones de put,post...
@@ -132,6 +133,7 @@
 
         $( document ).ready(function() {
             detallePerfil();
+            verificaPedidos();
         });
 
         function guardarTienda(){
@@ -222,6 +224,46 @@
                                 text: departamento
                             }));
                         }
+                    }
+                }
+            });
+        }
+
+        function verificaPedidos(){
+            $.ajax({
+                url: "{{ url('tienda/verificaPedidos') }}",
+                type: 'POST',
+                dataType: 'json',
+                success: function(data) {
+                    if(data.estado === 'success'){
+
+                        toastr.options = {
+                            "closeButton": true,
+                            "debug": false,
+                            "newestOnTop": false,
+                            "progressBar": false, // Desactiva la barra de progreso
+                            "positionClass": "toast-top-right",
+                            "preventDuplicates": false,
+                            "onclick": null,
+                            "timeOut": 0, // Configura timeOut a 0 para que no se cierre automáticamente
+                            "extendedTimeOut": 0, // Configura extendedTimeOut a 0 para que no se cierre automáticamente
+                            "showEasing": "swing",
+                            "hideEasing": "linear",
+                            "showMethod": "fadeIn",
+                            "hideMethod": "fadeOut"
+                        }
+
+                        var toastHtml = '<div class="custom-toast">' +
+                            '<div class="custom-toast-header">' +
+                                '<span class="custom-toast-title ">MENSAJE</span>' +
+                            '</div>' +
+                            '<div class="custom-toast-body">'+
+                                'TIENES '+data.cantidad+' PEDIDOS INICIADOS</div>' +
+                            '</div>';
+
+                        toastr.warning(toastHtml, '',{
+                            "closeButton": true
+                        });
                     }
                 }
             });

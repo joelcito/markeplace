@@ -10,6 +10,7 @@ use App\Models\Persona;
 use App\Models\Pais;
 use App\Models\Suscripcion;
 use App\Models\Tienda;
+use App\Models\Venta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
@@ -493,6 +494,27 @@ class TiendaController extends Controller
             $suscripcion->save();
 
             $data['estado'] = 'success';
+        }else{
+            $data['estado'] = 'error';
+        }
+        return $data;
+    }
+
+    public function verificaPedidos(Request $request){
+        if($request->ajax()){
+            $persona_id = session('perfil')->idPersona;
+            $tienda = Tienda::where('usuario_creacion', $persona_id)->first();
+            $tienda_id = $tienda->idTienda;
+
+            $cantidad = Venta::whereIn('idProducto', function ($query) use($tienda_id) {
+                $query->select('idProducto')
+                    ->from('producto')
+                    ->where('idTienda', $tienda_id)
+                    ->where('estadoproducto', 1);
+            })->count();
+
+            $data['estado'] = 'success';
+            $data['cantidad'] = $cantidad;
         }else{
             $data['estado'] = 'error';
         }

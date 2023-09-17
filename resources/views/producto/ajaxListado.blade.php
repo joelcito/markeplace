@@ -4,7 +4,7 @@
         <tr class="text-uppercase text-center">
             <th class="text-center">Numero</th>
             <th class="text-center" width="80px">Imagen</th>
-            <th class="text-center">Sub Categoria</th>
+            {{--  <th class="text-center">Sub Categoria</th>  --}}
             <th class="text-center">Titulo</th>
             <th class="text-center">Descripcion</th>
             <th class="text-center">Precio Unitario</th>
@@ -23,6 +23,7 @@
                     @php
                         $p->imagenes;
                         $imgs = explode(",", $p->imagenes);
+                        $descuento = 100 * $p->descuento;
                     @endphp
                     @if (count($imgs)>0)
                         @php
@@ -37,13 +38,12 @@
                     @endif
                 </center>
             </td>
-            <td>
+            {{--  <td>
                 @php
                     $subcategoria = App\Models\SubCategoria::find($p->idSubcategoria);
                     echo $subcategoria->nombre;
-                    $descuento = 100 * $p->descuento;
                 @endphp
-            </td>
+            </td>  --}}
             <td>
                 <div style="height: 50px; overflow: hidden;">
                     {{ $p->nombre }}
@@ -82,8 +82,7 @@
             </td>
             <td>{{ number_format($p->calificacion, 2) }}</td>
             <td>
-                <button class="btn btn-warning btn-icon btn-sm" onclick="edita('{{ $p->idProducto }}','{{ $subcategoria->idCategoria }}', '{{ $p->idSubcategoria }}','{{ $p->nombre }}','{{ json_encode($p->descripcion) }}','{{ $p->preciounitario }}','{{ $p->cantidad }}','{{ $p->estado }}','{{ $p->calificacion }}','{{ $p->ubicacion }}', '{{ $descuento }}')"><i class="fa fa-edit"></i></button></button>
-
+                <button class="btn btn-warning btn-icon btn-sm" onclick="edita('{{ $p->idProducto }}', '{{ $p->idSubcategoria }}','{{ $p->nombre }}','{{ json_encode($p->descripcion) }}','{{ $p->preciounitario }}','{{ $p->cantidad }}','{{ $p->estado }}','{{ $p->calificacion }}','{{ $p->ubicacion }}', '{{ $descuento }}')"><i class="fa fa-edit"></i></button></button>
                 <button class="btn btn-danger btn-icon btn-sm" onclick="eliminar('{{ $p->idProducto }}')"><i class="fa fa-trash"></i></button></button>
             </td>
         </tr>

@@ -15,7 +15,7 @@
 		<meta property="og:site_name" content="Keenthemes | Metronic" />
 		<link rel="canonical" href="https://preview.keenthemes.com/metronic8" />
 
-		<link rel="shortcut icon" href="{{ asset('assets/media/logos/icono.jpeg') }}" />
+		<link rel="shortcut icon" href="{{ asset('assets/media/logos/icono1.png') }}" />
 
 		<!--begin::Fonts(mandatory for all pages)-->
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
@@ -99,13 +99,13 @@
                                         if($rol===2){
 											if(
                                                 $persona->nombres  === null  ||
-                                                $persona->apellido_materno  === null  ||
+                                                $persona->apellido_paterno  === null  ||
+                                                //$persona->apellido_materno  === ''  ||
                                                 $persona->razon_social  === null  ||
                                                 $persona->direccion  === null  ||
                                                 $persona->celular  === null  ||
                                                 $persona->nombres  === ''  ||
-                                                $persona->apellido_materno  === ''  ||
-                                                $persona->razon_social  === ''  ||
+                                                //$persona->razon_social  === ''  ||
                                                 $persona->direccion  === ''  ||
                                                 $persona->celular  === ''
 

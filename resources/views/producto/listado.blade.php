@@ -127,6 +127,13 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row" id="img_cargando_bloque" style="display: none">
+                            <div class="col-md-12">
+                                <center>
+                                    <img src="{{ asset('assets/cargandoPro.gif') }}" width="40%" alt="">
+                                </center>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-md-12">
                                 <h6 class="text-center">Imagenes subidas</h6>
@@ -457,6 +464,9 @@
                         dataType: 'json',
                         processData: false,
                         contentType: false,
+                        beforeSend: function() {
+                            $('#img_cargando_bloque').show('toogle')
+                        },
                         success: function(data) {
                             if(data.estado === 'success'){
                                 Swal.fire({
@@ -476,6 +486,9 @@
                                     timer:  1500
                                 })
                             }
+                        },
+                        complete: function() {
+                            $('#img_cargando_bloque').hide('toogle')
                         }
                     });
                 }else{
@@ -537,7 +550,7 @@
             })
         }
 
-        function edita(idProducto,categoria,idSubcategoria,nombre,descripcion,preciounitario,cantidad,estado,calificacion, ubicacion, descuento){
+        function edita(idProducto,categoria,nombre,descripcion,preciounitario,cantidad,estado,calificacion, ubicacion, descuento){
             $('#nombre').val(nombre)
             $('#producto_id').val(idProducto)
             $('#descripcion').val(descripcion.replaceAll('"',''))
