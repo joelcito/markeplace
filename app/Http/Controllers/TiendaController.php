@@ -339,13 +339,13 @@ class TiendaController extends Controller
 
                 $mail->isHTML(true);
                 $mail->Subject = $subject;
-                $mail->Body = $templateContent;
+                $mail->Body    = $templateContent;
 
                 $mail->send();
 
                 // return 'Correo enviado correctamente';
                 $data['estado'] = 'success';
-                $data['msg'] = 'Correo enviado correctamente';
+                $data['msg']    = 'Correo enviado correctamente';
 
             } catch (Exception $e) {
                 $data['estado'] = 'error';
@@ -506,12 +506,16 @@ class TiendaController extends Controller
             $tienda = Tienda::where('usuario_creacion', $persona_id)->first();
             $tienda_id = $tienda->idTienda;
 
-            $cantidad = Venta::whereIn('idProducto', function ($query) use($tienda_id) {
-                $query->select('idProducto')
-                    ->from('producto')
-                    ->where('idTienda', $tienda_id)
-                    ->where('estadoproducto', 1);
-            })->count();
+            $cantidad = Venta::select('pedido', 'estadoproducto')
+                            ->whereIn('idProducto', function ($query) use($tienda_id){
+                                $query->select('idProducto')
+                                    ->from('producto')
+                                    ->where('idTienda', $tienda_id)
+                                    ->where('estado', 1);
+                            })
+                            ->where('estadoproducto', 1)
+                            ->groupBy('pedido', 'estadoproducto')
+                            ->get()->count();
 
             $data['estado'] = 'success';
             $data['cantidad'] = $cantidad;

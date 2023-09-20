@@ -1,6 +1,12 @@
 @extends('layouts.app')
 @section('css')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+    <style>
+        .toast {
+            color: #000000;
+            opacity: 1 !important;
+        }
+    </style>
 @endsection
 @section('metadatos')
     <meta name="csrf-token" content="{{ csrf_token() }}" />
@@ -12,11 +18,9 @@
     <div id="kt_app_content" class="app-content flex-column-fluid">
         <!--begin::Content container-->
         <div id="kt_app_content_container" class="app-container container-xxl">
-
             <div id="detalleperfil">
 
             </div>
-
             <div class="row g-5 g-xxl-8">
                 <div class="col-xl-12">
                     <div class="card mb-5 mb-xxl-8">
@@ -241,12 +245,12 @@
                             "closeButton": true,
                             "debug": false,
                             "newestOnTop": false,
-                            "progressBar": false, // Desactiva la barra de progreso
+                            "progressBar": false,
                             "positionClass": "toast-top-right",
                             "preventDuplicates": false,
                             "onclick": null,
-                            "timeOut": 0, // Configura timeOut a 0 para que no se cierre automáticamente
-                            "extendedTimeOut": 0, // Configura extendedTimeOut a 0 para que no se cierre automáticamente
+                            "timeOut": 0,
+                            "extendedTimeOut": 0,
                             "showEasing": "swing",
                             "hideEasing": "linear",
                             "showMethod": "fadeIn",

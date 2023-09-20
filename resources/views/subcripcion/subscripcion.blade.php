@@ -130,10 +130,10 @@
                                 <div class="row">
                                     @if ($suscripcion)
                                     @php
-                                        $fechaOriginalIni = $suscripcion->fecha_inicio;
-                                        $fechaOriginalFin = $suscripcion->fecha_final;
-                                        $fechaCarbonIni = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $fechaOriginalIni);
-                                        $fechaCarbonFin = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $fechaOriginalFin);
+                                        $fechaOriginalIni   = $suscripcion->fecha_inicio;
+                                        $fechaOriginalFin   = $suscripcion->fecha_final;
+                                        $fechaCarbonIni     = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $fechaOriginalIni);
+                                        $fechaCarbonFin     = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $fechaOriginalFin);
                                         $fechaFormateadaIni = $fechaCarbonIni->format('d/m/Y');
                                         $fechaFormateadaFin = $fechaCarbonFin->format('d/m/Y');
                                     @endphp
