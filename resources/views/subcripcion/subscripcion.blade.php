@@ -120,7 +120,7 @@
                                     </form>
                                 </div>
                             </div>
-                            <button type="button" onclick="enviarCorreo('basica')" class="btn w-100 btn-sm btn-primary mt-5" target="_blank" disabled>
+                            <button type="button" onclick="enviarCorreo('basica')" id="boton_basica" class="btn w-100 btn-sm btn-primary mt-5" target="_blank" disabled>
                                 Solicitar
                             </button>
                             @if ($perfil->plandepago === 1)
@@ -255,7 +255,7 @@
                                     </form>
                                 </div>
                             </div>
-                            <button type="button" onclick="enviarCorreo('estandar')" class="btn btn-sm btn-primary mt-5 w-100" target="_blank">
+                            <button type="button" onclick="enviarCorreo('estandar')" id="boton_estandar" class="btn btn-sm btn-primary mt-5 w-100" target="_blank">
                                 Solicitar
                             </button>
                             @if ($perfil->plandepago === 2)
@@ -382,7 +382,7 @@
                                         </form>
                                     </div>
                                 </div>
-                                <button type="button" onclick="enviarCorreo('superior')" class="btn w-100 btn-sm btn-primary mt-5" target="_blank">
+                                <button type="button" onclick="enviarCorreo('superior')" id="boton_superior" class="btn w-100 btn-sm btn-primary mt-5" target="_blank">
                                     Solicitar
                                 </button>
                                 @if ($perfil->plandepago === 3)
@@ -486,6 +486,8 @@
             let f = "form_"+tipo;
             // let dato = $('#'+f).serialize()
             if($("#"+f)[0].checkValidity()){
+                $('#boton_'+tipo).prop("disabled", true);
+                console.log(tipo,'#boton_'+tipo )
                 $.ajax({
                     url: "{{ url('tienda/enviarCorreo') }}",
                     type: 'POST',
