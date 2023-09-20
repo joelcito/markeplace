@@ -30,12 +30,13 @@
 </head>
 <body>
     <div class="contenedor">
+        <center><span style='font-size: 35px;'><strong>CORREO DE SUSCRIPCION</strong></center>
         <center><span style='font-size: 30px;'><strong>Comercio Latino</strong></center>
         <h2 class="negro">Estimad@ : {{ $name }}</h2>
         <br>
         <p class="negro">
             Gracias por usar nuestro servicio, tu suscripcion <b>{{ $tipo }} {{ $modalidad }}</b>
-            ha sido aceptada para mantener activo debe realizar el pago por QR y confirmar al siguiente email admin@comercio-latino.com, soporte@comercio-latino.com </p>
+            ha sido aceptada para mantener activo debe realizar el pago por QR o solicitar otro medio de pago y confirmar al siguiente email admin@comercio-latino.com, soporte@comercio-latino.com </p>
         <center>
             <img width="30%" src="https://comercio-latino.com/sistema/public/qrs/{{ $qr }}" alt="aqui la img">
         </center>
