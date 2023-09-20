@@ -111,7 +111,7 @@
             @endif
 
             @if (session('rol') === 3)
-                {{-- @dd(
+                {{--  @dd(
                     $sw,
                     $rol,
                     $persona->nombres,
@@ -132,7 +132,7 @@
                     empty($tienda->ubicacion),
                     // $tienda->ubicacion,
                     $tienda->idTienda
-                    ) --}}
+                    )  --}}
                 <!--begin:Menu item-->
                 <div class="menu-item pt-5">
                     <!--begin:Menu content-->
@@ -212,7 +212,7 @@
             @endif
 
             @if (session('rol') === 2)
-                {{-- @dd(
+                {{--  @dd(
                     $sw,
                     $rol,
                     $persona->nombres,
@@ -220,7 +220,7 @@
                     $persona->razon_social,
                     $persona->direccion,
                     $persona->celular,
-                    $persona->nombres  === null,
+                    $persona->nombres  === null,w
                     $persona->apellido_materno  === null,
                     $persona->razon_social  === null,
                     $persona->direccion  === null,
@@ -242,7 +242,7 @@
                     // empty($persona->celular),
                     // (isset($persona->razon_social) || trim($persona->razon_social) === ''),
                     // (isset($persona->direccion) || trim($persona->direccion) === '')
-                    ) --}}
+                    )  --}}
                 <!--begin:Menu item-->
                 <div class="menu-item pt-5">
                     <!--begin:Menu content-->

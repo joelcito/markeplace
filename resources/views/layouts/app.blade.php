@@ -101,7 +101,7 @@
                                                 $persona->nombres  === null  ||
                                                 $persona->apellido_paterno  === null  ||
                                                 //$persona->apellido_materno  === ''  ||
-                                                $persona->razon_social  === null  ||
+                                                //$persona->razon_social  === null  ||
                                                 $persona->direccion  === null  ||
                                                 $persona->celular  === null  ||
                                                 $persona->nombres  === ''  ||
