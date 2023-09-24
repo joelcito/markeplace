@@ -550,7 +550,7 @@
             })
         }
 
-        function edita(idProducto,categoria,nombre,descripcion,preciounitario,cantidad,estado,calificacion, ubicacion, descuento){
+        function edita(idProducto,idSubcategoria,categoria,nombre,descripcion,preciounitario,cantidad,estado,calificacion, ubicacion, descuento){
             $('#nombre').val(nombre)
             $('#producto_id').val(idProducto)
             $('#descripcion').val(descripcion.replaceAll('"',''))
